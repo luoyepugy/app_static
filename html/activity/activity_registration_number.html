@@ -1,0 +1,26 @@
+
+<meta charset="UTF-8">
+<!-- 报名人数 -->
+<section ng-controller="activity_registration_number">
+<p class="cen zc fz14 pt20 cen bgff pm20" ng-if="enrollment_list.sign_up.length==0">
+  	暂无数据，赶紧来报名吧!
+</p>
+<ul class="mui-table-view">
+        <li class="mui-table-view-cell fz12 act_list_bm" ng-repeat="ms in enrollment_list.sign_up">
+            <section class="box_a dian">
+            	 <img ng-src="{{ms.user_icon}}" class="act_enrollment yj fl" />
+            	<p class="ov pl10" ng-bind="ms.nick_name"></p>
+            </section>
+            <section class="box_a cen" ng-bind="ms.phone">
+            </section>
+               <section class="box_a tr" ng-bind="ms.timestamp|getDateDiff:''"></section>
+        </li>
+         
+       
+    </ul>
+    <p class=" bgff pt10 pm10 cen paging_list" ng-click="enrollment_list.paging()">
+		<a class="ls">
+			查看更多 <span class="mui-icon mui-icon-arrowdown fz16"></span>
+		</a>
+	</p>
+	</section>

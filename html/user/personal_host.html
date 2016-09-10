@@ -1,0 +1,141 @@
+<!-- 个人主办方详情 -->
+<meta charset="UTF-8">
+<section class="bgff">
+	<img class="person_host_bg"  src="/img/personhost_bg.jpg"/>
+	<section class="person_host_detail">
+		<img class="person_host_detail_l yj fl" width="60" height="60" ng-src="{{perDeta.sponsor_icon}}" />
+		<section class="person_host_detail_r ov pl10 pt10">
+			<p class="cf fz18" ng-bind="perDeta.name">
+				
+			</p>
+			<p class="cf mt5">
+				<span>
+					活动<span ng-bind="perDeta.activitySize"></span>场
+				</span>
+				<span class="pl10">
+					参与<span ng-bind="perDeta.signSize"></span>人
+				</span>
+			</p>
+		</section>
+		<section class="qc">
+			
+		</section>
+	</section>
+	<section class="box pd cen pt10">
+		<p class="box_a bgls cf yj4 fz16 pt5 pm5 pr attent_change" ng-click="attentHost()"  data-x="1">
+			<i class="fa fa-plus-circle" ></i>&nbsp;<span class="attent_text">关注TA</span>
+		</p>
+		<p class="box_a bgls cf yj4 ml10 fz16 pt5 pm5">
+			<a class="cf" data-x="{{perDeta.contacter_phone}}" ng-href="tel:{{perDeta.contacter_phone}}">
+			   <i class="fa fa-commenting-o"></i>&nbsp;联系TA
+			</a>
+			
+		</p>
+	</section>
+	<p class="c57 pd mt10 fz14 person_host_j pm10" ng-bind="perDeta.introduction">
+	</p>
+	
+</section>
+<section class=" bgff pt10 pm10 mt5 cen bbm btm act_tble_a pr">
+		<p class="person_host_tab act_poi" ui-sref=".personal_host_activity">
+			TA发起的({{perDeta.activitySize}})
+		</p>
+		<p id="asdsad" class="person_host_tab" ui-sref=".personal_host_message">
+			留言板({{p_resu}})
+		</p>
+		<p class="qc"></p>
+		<p class="person_progress_of gd" style="left: 0%;"> 
+		</p>
+</section>
+	
+<section ui-view>
+	<section>
+           <ul style="background:#EFEFF4">  
+             <li  class="mb10" ng-repeat="y in perList" ui-sref="activity_detail({id:y.id})">
+                         <section class="pd  bgff  pt10 pm10">
+              <img ng-src="{{y.activity_first_face}}" class="fl act_user_a">
+               <section class="ov pl10 zc fz14">
+                   <p class="dianer zd b tile_poiu_a" ng-bind="y.activity_title"></p>
+                    
+                <p class="fz12 dian">
+                <i  class="f_i map_icon"></i><span ng-bind="y.activity_address"></span><span class="fr" ng-if="y.person_limit==0">不限名额</span>
+                <span class="fr" ng-if="y.person_limit>0">限{{y.person_limit}}名</span>
+                </p>
+                   
+                   <section class="fz12 dian zc">
+                <p class="fl"><i class="f_i time_icon"></i><span ng-bind="y.activity_time"></span> </p>
+                  <a class="fr" ng-if="y.is_free!=1">免费</a>
+                       <span class="fr hs" ng-if="y.is_free==1">收费</span>
+                  <p class="qc"></p>
+                </section>
+               
+                
+               </section>
+               <p class="qc"></p>
+           </section>
+            <section class="box btm pt5 pm5 fz12 cen zc schedule_p bgff">
+                   <section class="box_a" ng-class="x.skjhg_s">
+                      <i class="f_i zmkjf_a" ></i>目标金额{{y.target_money}}元
+                   </section>
+                    <section class="box_a" ng-class="list.skjhg_s">
+                     <i class="f_i zmkjf_b"></i>已筹{{y.now_money}}元
+                   </section>
+                    <section class="box_a" ng-class="list.skjhg_s">
+                     <i class="f_i zmkjf_c"></i>进度{{y.schedule}}
+                   </section>
+                </section>
+                
+                    </li>
+        </ul>
+    
+    </section> 
+    <!--查看过期活动-->
+	<section>
+		
+		<ul style="background:#EFEFF4">  
+             <li  class="mb10" ng-repeat="y in overDateList" ui-sref="activity_detail({id:y.id})">
+                         <section class="pd  bgff  pt10 pm10">
+              <img ng-src="{{y.activity_first_face}}" class="fl act_user_a">
+               <section class="ov pl10 zc fz14">
+                   <p class="dianer zd b tile_poiu_a" ng-bind="y.activity_title"></p>
+                    
+                <p class="fz12 dian">
+                <i  class="f_i map_icon"></i><span ng-bind="y.activity_address"></span><span class="fr" ng-if="y.person_limit==0">不限名额</span>
+                <span class="fr" ng-if="y.person_limit>0">限{{y.person_limit}}名</span>
+                </p>
+                   
+                   <section class="fz12 dian zc">
+                <p class="fl"><i class="f_i time_icon"></i><span ng-bind="y.activity_time"></span> </p>
+                  <a class="fr" ng-if="y.is_free!=1">免费</a>
+                       <span class="fr hs" ng-if="y.is_free==1">收费</span>
+                  <p class="qc"></p>
+                </section>
+               
+                
+               </section>
+               <p class="qc"></p>
+           </section>
+            <section class="box btm pt5 pm5 fz12 cen zc schedule_p bgff">
+                   <section class="box_a" ng-class="x.skjhg_s">
+                      <i class="f_i zmkjf_a" ></i>目标金额{{y.target_money}}元
+                   </section>
+                    <section class="box_a" ng-class="list.skjhg_s">
+                     <i class="f_i zmkjf_b"></i>已筹{{y.now_money}}元
+                   </section>
+                    <section class="box_a" ng-class="list.skjhg_s">
+                     <i class="f_i zmkjf_c"></i>进度{{y.schedule}}
+                   </section>
+                </section>
+                
+                    </li>
+        </ul>
+        <p class="bgff green cen" ng-click="checkoverdue()" style="line-height:30px;">
+			查看过期活动
+		</p>
+		
+	</section>
+	
+</section>
+
+	
+     

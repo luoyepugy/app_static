@@ -1,0 +1,76 @@
+<!-- 修改个人昵称 --><!--//1为昵称，2为性别，3为修改密码，4为个性签名，5为行业-->
+<meta charset="UTF-8">
+
+    <section ng-if="type==1">
+      <input class="border_left_right_none mt20" type="text"  id="nichen" value="{{pass_m.user_name}}" />
+    <p class="pd cen zd mt180">
+           <a class="mui-btn register_button fz16 " ng-click="save_personsal()" >保存</a>
+    </p>
+    </section>
+    <section ng-if="type==2">
+      <ul class="mui-table-view mt10">
+
+                <li class="mui-table-view-cell pr  modify_sex j-sexInput">
+                <p class="ov dianer pr mui-col-xs-8 mui-col-sm-9">
+                       <input type="tex" class="max_klabel_a" dara-sex="{{pass_m.user_sex}}" placeholder="{{pass_m.ehg_a}}" id="modify_sex" >
+                </p>
+                 <span class="mui-icon mui-icon-arrowdown zc map_icon_a"></span>
+          </li>
+    </ul>
+      <p class="pd cen zd mt180">
+             <a class="mui-btn register_button fz16" ng-click="save_personsal()">保存</a>
+      </p>
+    </section>
+    
+    <section ng-if="type==3">
+      <ul class="mui-table-view mt20 pr">
+          <li class="mui-table-view-cell">
+                <span class="act_title fz16">原密码：</span>
+                <p class="ov">
+                  <input type="password" class="max_klabel_a passord_normal"  id="old_pass">
+                </p>
+          </li>
+          <li class="mui-table-view-cell">
+                <span class="act_title fz16">新密码：</span>
+                <p class="ov">
+                  <input type="password" class="max_klabel_a passord_normal"  id="new_pass">
+                </p>
+          </li>
+           <li class="mui-table-view-cell">
+                <span class="act_title fz16">确认密码：</span>
+                <p class="ov">
+                  <input type="password" class="max_klabel_a passord_normal"  id="confirm_pass">
+                </p>
+          </li> 
+                
+        </ul>
+    <p class="pd cen zd mt180">
+           <a class="mui-btn register_button fz16" ng-click="modify_passord()">确认修改</a>
+    </p>
+      
+    </section>
+    
+    <section ng-if="type==4">
+       <textarea class="act_poiiu_tr mt20 border_left_right_none" maxlength="50"   id="modify_signinature">{{pass_m.Individuality_signaturedata}}</textarea>
+     <p class="mt80 pd cen zd">
+          <a class="mui-btn register_button fz16" ng-click="save_personsal()">保存</a>
+     </p>
+    </section>
+
+    <section ng-if="type==5">
+      <ul class="mui-table-view mt10">
+
+                <li class="mui-table-view-cell pr  modify_industry j-industryInput">
+                <p class="ov dianer pr mui-col-xs-8 mui-col-sm-9">
+                       <input type="tex" class="max_klabel_a" placeholder="{{industry_a[pass_m.industry+1].text}}" id="modify_industry">
+                </p>
+                 <span class="mui-icon mui-icon-arrowdown zc map_icon_a"></span>
+          </li>
+    </ul>
+      <p class="pd cen zd mt180">
+             <a class="mui-btn register_button fz16" ng-click="save_personsal()">保存</a>
+      </p>
+    </section>
+	
+	
+

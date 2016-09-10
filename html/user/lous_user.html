@@ -1,0 +1,55 @@
+<!-- 我的白条 -->
+<meta charset="UTF-8">
+
+    <section class="pd bgff pt10 pm10  box cen bbm user_poi">
+        <p class="box_a fz16 act_p_o" ng-click="ious_p.iou_state(1)">
+           <span>审核中</span>
+        </p>
+          <p class="box_a fz16" ng-click="ious_p.iou_state(2)">
+           <span>审核成功</span>
+        </p>
+          <p class="box_a fz16" ng-click="ious_p.iou_state(3)">
+           <span>审核失败</span>
+        </p>
+          <p class="box_a fz16" ng-click="ious_p.iou_state(4)">
+           <span>已放款    </span>
+        </p>
+    </section>
+ 
+
+    <section class="mt10 user_act_pii user_act_pii_p"> 
+     <section id="wrapper" class="my_activities">
+           <ul id="scroll">  
+               <li class="blank_note_p pd bgff pt10 pm10 btm  mt5" ng-repeat="arr in ious_p.date_arr" finish ui-sref="lous_user_detail(arr)"> 
+            <section class="woiu_poi_a">
+                <p class="dian zd" ><span ng-bind="arr.name"></span><br>
+                <span class="zc" ng-bind="arr.phone"></span>
+                </p>
+            </section>
+            
+               <section class="woiu_poi_a">
+                <p class="dian zd"><span  ng-bind="arr.create_time|date:' MM/dd EEE HH:mm'"></span><br>
+               	 <span class="zc" ng-bind="arr.periods"></span>
+                </p>
+            </section>
+            
+               <section class="woiu_poi_a tr">
+                <p class="dian zd"><span class="yj4 cf  opiuy_sd {{arr.bg}}"  ng-bind="arr.con_text" ></span><br>
+                <span class="zc" ng-bind="'额度：'+arr.apply_money+'元'"></span>
+                </p>
+            </section>
+            
+            <p class="qc"></p>
+        </li>
+    </ul>
+  </section>
+
+             
+             
+             
+
+     
+    
+        
+
+</section>

@@ -1,0 +1,41 @@
+<!-- 注册 -->
+<meta charset="UTF-8">
+<section class="mt20"> 
+    <section class="df_poi_ze bgff pr mui-input-row">  
+        <span class="fg_poi_s"><i class="f_i  tkjhg_opiu_a"></i></span>
+        <input type="tel"  placeholder="手机号码" id="rit_phone" eliminate >
+        <span class="mui-icon mui-icon-clear mui-hidden"></span>
+    </section>
+       <section class="df_poi_ze bgff mt20 pr">
+        <span class="fg_poi_s"><i class="f_i  tkjhg_opiu_b"></i></span>
+        <input type="text"  placeholder="请输入识别码" class="fg_poiu_input" id="valueCode" eliminate>
+           <img src="/validateImageServlet" class="verification_code" ng-click="register.replace()">
+           <button class="fz12 yj4 df_poiu_a" ng-click="register.verification_code()">
+                  获取验证码
+           </button>
+    </section>
+         <section class="df_poi_ze bgff mt20">
+        <span class="fg_poi_s"><i class="f_i  tkjhg_opiu_c"></i></span>
+        <input type="text"  placeholder="短信验证码" id="rit_code" eliminate>
+    </section>
+         <section class="df_poi_ze bgff mt20 pr">
+        <span class="fg_poi_s"><i class="f_i  tkjhg_opiu_d"></i></span>
+        <input type="password"  placeholder="密码" id="rit_pwd" eliminate>
+    </section>
+         <section class="df_poi_ze bgff mt20 pr">
+        <span class="fg_poi_s"><i class="f_i  tkjhg_opiu_e"></i></span>
+        <input type="password"  placeholder="确认密码" id="rit_pwdT" eliminate>
+    </section>
+    
+    <p class="mt20 pd cen zd">
+       <a  class="mui-btn register_button" ng-click="register.register_event()">点击注册</a>
+      
+       <br>  <br>
+        
+         
+    </p>
+    <p class="pd zd cen registration_prompt">
+    点击“立即注册”表示同意并遵守 <span class="ls" ui-sref="agreement">服务协议</span><br>
+        如有疑问请咨询<a ng-href="tel:4000461388" class="ls">400-046-1388</a>
+    </p>
+</section>   

@@ -1,0 +1,20 @@
+	
+	<link href="/css/pages/user.css" rel="stylesheet">
+	<!-- 我的银行卡-添加 -->
+	<form class="mui-input-group j-addBankCardForm">
+	    <div class="mui-input-row">
+	        <label>开户名</label>
+	        <input type="text" name="holder" class="mui-input-clear" placeholder="持卡人签名" data-empty="请输入持卡人签名">
+	    </div>
+	    <div class="mui-input-row">
+	        <label>银行卡号</label>
+	        <input type="text" name="bank_account" ng-model="card.bank_account"  class="mui-input-clear" placeholder="请输入银行卡号" data-empty="请输入银行卡号" format-bankCard>
+	    </div>
+	    <div class="mui-input-row">
+	        <label>开户银行</label>
+	        <input type="text" name="bank_name" type="text" ng-model="card.bank_name" ng-focus="getBankName()" class="mui-input-clear" placeholder="请输入开户银行" data-empty="请输入开户银行">
+	    </div>
+	</form>
+	<p class="tips">温馨提示：请保证您的姓名与身份证一致.</p>
+	<submit-button action="/bankAccount/add" text="确定" form=".j-addBankCardForm" state="bankcard"></submit-button>
+	<!-- /我的银行卡-添加 -->

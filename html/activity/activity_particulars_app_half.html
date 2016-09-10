@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta http-equiv="Cache-Control" content="no-transform "> 
+<link href="/css/common/mui.min.css" rel="stylesheet">  
+<link href="/css/common/mui.picker.min.css" rel="stylesheet"/>
+<link href="/css/common/mui_user.css" rel="stylesheet">
+<link href="/css/common/base.css" rel="stylesheet">
+<link href="/css/common/style.css?v=6" rel="stylesheet">
+<style>
+body{
+  background: #fff
+}
+  .poiu_on{
+     height:300px;
+     overflow: scroll;
+  }
+</style>
+</head>
+<body>
+<section class="pd pt10 pm10 bgff fz14 poiu_on" id="detail_date_o">
+
+</section>
+ <script src="/js/common/jquery-1.11.3.min.js"></script>
+ <script>
+ var act_id=window.location.search.split("?")[1]
+  $.ajax({
+     type : 'get',
+     url : '/activity/activity_detail',
+     data : {'activity_id':act_id},
+     contentType : 'application/x-www-form-urlencoded; charset=UTF-8',
+     dataType : 'json',
+     success : function(data) {
+    	 $("#detail_date_o").html(data.info.details)
+     },
+     error : function(res) {
+
+     }
+ }); 
+ </script>
+</body>
+</html>

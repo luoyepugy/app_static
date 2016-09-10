@@ -1,0 +1,23 @@
+<!-- 赞助单页--参与人数 -->
+<meta charset="UTF-8">
+<section ng-controller="sponsorship_participate">
+<p class="cen zc fz14 pt20 cen bgff pm20" ng-if="sppr.s_date_t.length==0">
+  	暂无数据，赶紧来报名吧!
+</p>
+   <section class="pd pt10 pm10 bgff bbm"  ng-repeat="sp in sppr.s_date_t">
+        <img ng-src="{{sp.user_icon}}" class="act_let_icon fl hj_poi_i"/>
+        <section class="ov pl10 zd fz14 diansan">
+         		  <p><span class="fr" ng-bind="sp.timestamp|getDateDiff:''"></span> {{sp.nick_name}}</p>
+         		   <p class="mt5">
+         		   	赞助<span class="hs fz16" ng-bind="sp.unit_price"></span>元
+         		   </p>
+        </section>
+        <p class="qc"></p>
+        
+    </section>  
+       <p class=" bgff pt10 pm10 cen paging_list" ng-click="sppr.paging_a()" ng-if="sppr.s_date_t.length>9">
+		<a class="ls">
+			查看更多 <span class="mui-icon mui-icon-arrowdown fz16"></span>
+		</a>
+	</p>
+</section>

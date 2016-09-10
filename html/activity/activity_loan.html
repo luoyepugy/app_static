@@ -1,0 +1,110 @@
+<!-- 活动白条-->
+<meta charset="UTF-8">
+   <section ng-controller="loan_co"  style="background: #fff;">
+	<section class="loan_img">
+		
+	</section>
+<img   src="/img/activity_loan_nav.png" style="width:100%;margin-top:5%">
+	<section class="loan_content">
+		<p class=" fz16 f-color-141414">
+		姓名*
+	    </p>
+	    <p> 
+	      <input class="loan_name" type="text"  placeholder="请输入您的姓名" />
+	    </p>
+	   <p class=" fz16 f-color-141414">
+		性别*
+	    </p>
+	    <p class=" fz16 f-color-141414">
+	    	<input type="radio" name="sex" id="sex1" checked="checked" style="display:inline-block" />
+	    	<label for="sex1" style="display:inline-block">男</label>
+	    	<input type="radio" name="sex" id="sex2"  style="display:inline-block"/>
+	    	<label for="sex2" style="display:inline-block">女</label>
+	    </p>
+	     <p class=" fz16 f-color-141414">
+		手机号码*
+	    </p>
+	    <p> 
+	      <input class="loan_tel" type="text"  placeholder="请输入您的手机号码" />
+	    </p>
+	     <p class=" fz16 f-color-141414">
+		申请活动金额*
+	    </p>
+	    <p> 
+	      <input  class="loan_money" type="text"  placeholder="请输入金额" />
+	    
+	     <p class=" fz16 f-color-141414">
+		还款期数*
+	    </p>
+	    <p class="pr">
+	    	<button id="showUserPicker" style="padding:0;color:#a9a9a9;height: 40px;text-align: left;text-indent: 15px;font-size: 16px;" class="mui-btn mui-btn-block" type="button" ng-click="divideMoney()">
+	    	<span   class="mui-icon mui-icon-arrowdown zc loan_down"></span>
+	    	请选择还款期数
+	    	</button>
+	    </p>
+	     <p class=" fz16 f-color-141414">
+		备注
+	    </p>
+	    <p>
+	    	<textarea  style="height:65px;text-indent: 0;" class="loan_remark" placeholder="请填写资金用途及申请原因"></textarea>
+	    </p>
+	    <p>
+	    	<a class="now_check" ng-click="answerPup()">立即申请</a>
+	    </p>
+	    <p>
+	    	<a style="display:block;width:100%;height:40px;text-align: center;line-height: 40px;color:#fff;background: #4FA45D;border-radius:4px;" ng-href="http://daikuan.sdhcredit.com">录单系统(渠道入口)</a>
+	    </p>
+	    <p style="position:relative">
+	   <label class="loan_tel_bg f_i"></label>
+	    	<a  ng-href="tel:400-046-1388" style="display:block;width:100%;height:40px;text-align: center;line-height: 40px;color:#fff;background: #4FA45D;border-radius:4px;">联系电话400-046-1388</a>
+	    </p>
+	    <p class="loan_bar_wrap">
+	    	<span class="loan_bar">
+	    		
+	    	</span>
+	    	<span class="answer_btn" ng-click="showAnswer()">常见问题</span>
+	    </p>
+	</section>
+	<ul class="answer_wrap"> 
+		<li >
+			<p class="f-color-141414 b">
+			1、什么是活动白条
+		</p>
+		<p class="f-color-141414">
+			活动白条是由深圳前海易居购商业保理和e场景活动平台联手打造的活动贷款互联网平台。
+		</p>
+		</li>
+		<li>
+			<p class="f-color-141414 b">
+			2、为什么在网上做活动白条贷款？
+		</p>
+		<p class="f-color-141414">
+			互联网为广大活动主办方提供了一个轻松便捷、活动资金借款的
+平台，用户可以根据自己的需求，任意选择金融机构以及不同的
+金融产品。
+		</p>
+		</li>
+		<li>
+			<p class="f-color-141414 b">
+			3、能贷多少额度？
+		</p>
+		<p class="f-color-141414">
+			根据用户的资质（信用记录、收入、住房情况等），以及活动规模及
+影响，立即计算出贷款额度。
+		</p>
+		</li>
+		<li>
+			<p class="f-color-141414 b">
+			4、如何申请活动白条？
+		</p>
+		<p class="f-color-141414">
+			您可以通过电脑www.apptown.cn/手机m.apptown.cn线上预约申请活动
+白条，申请后e场景平台公司人员会尽快联系您确认活动需求，协助您
+提交审批资料，申请成功后即可打白条支付活动款。
+		</p>
+		</li>
+				
+	</ul>
+
+  
+</section>

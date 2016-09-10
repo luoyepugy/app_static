@@ -1,0 +1,104 @@
+<!-- 收费活动报名 -->
+<meta charset="UTF-8">
+<section ng-controller="activity_charge_p">
+    		
+	<section class="pd pt10 pm10 bgff">
+		<img ng-src="{{act_d.images_po[0]}}" class="act_let_icon fl"/>
+		<p class="ov pl10 zd fz18 diansan" ng-bind="act_d.title">
+		</p>
+		<p class="qc"></p>
+	</section>	
+	
+	
+		
+		
+
+    <section class="pd pt10 pm10 bgff btm mt5 bbm df_pooiiuu_s"  ng-repeat="tc in act_d.ticket_list"  ng-click="charge.act_list($index,tc.price,tc.id,(tc.sum_num-tc.use_num))">
+        <p class="fz18 zd">
+            {{tc.name}}
+            <span class="yj ls fr mui-hidden">
+                <i class="mui-icon mui-icon-checkmarkempty fz26"></i>
+            </span>
+        </p>
+        <p class="qc mt5">
+            <span class="hs" ng-bind="tc.price"></span>元
+            <span class="ml100">还剩余{{tc.sum_num-tc.use_num}}张</span>  
+        </p>
+        <h6 class="bgf2 pt10 pm10 pd mui-hidden">
+            票种说明：{{tc.remark}}
+        </h6>
+        
+    </section>
+    
+       
+    
+    
+    <section class="pd pt10 pm10 bgff mt5 ssd_poiou_num">
+    	购买张数
+    <div class="mui-numbox fr" data-numbox-step='1' data-numbox-min='0' data-numbox-max='10'>
+        <button class="mui-btn mui-btn-numbox-minus" type="button" ng-click="charge.add_charge(0)">-</button>
+        <input class="mui-input-numbox fz12" type="number" id="number_sddf" value="{{ticket}}"/>
+        <button class="mui-btn mui-btn-numbox-plus" type="button" ng-click="charge.add_charge(1)">+</button>
+    </div>
+    	
+    </section>
+    
+   
+       <section class="bgff mt5">
+            <p class="pt10  pd">
+    	主购买人
+    </p>
+          <ul class="mui-table-view apply_p mt10 pm10">
+                      <li class="mui-table-view-cell"   ng-repeat="f in form_p" style="padding-bottom:0">
+                 <input  type="text" placeholder="{{'请输入'+f.name}}"  data-is="{{f.necessary}}" data-yu="{{f.name}}" class="form_po_ipnut"/>
+              </li>
+                  
+              </ul>
+        
+       </section>
+       
+       <section class="bgff mt5">
+      <p class="pt10  pd">
+    		选择支付方式
+      </p>
+       <ul class="mui-table-view mt10">
+               <li class="mui-table-view-cell we_pay_oi" ng-click="charge.we_pay_oi(0)">
+                 <i class="fl bgebzf"></i>
+                 <p class="pl20 ov mui-col-xs-8" >
+                 	<span class="zd fz16 zd">e币支付</span><br />
+                 	<span class="fz12">1e币等于1元</span>
+                 </p> 
+                 
+                  <span class="yj ls fr poiuy_poi">
+                		<i class="mui-icon mui-icon-checkmarkempty fz26 mui-hidden"></i>
+           		 </span>
+               </li>
+               
+               <li class="mui-table-view-cell we_pay_oi" ng-click="charge.we_pay_oi(1)">
+                 <i class="fl bgwxzf"></i>
+                 <p class="pl20 ov mui-col-xs-8" >
+                 	<span class="zd fz16 zd">微信支付</span><br />
+                 	<span class="fz12">第三方微信安全支付</span>
+                 </p>
+                 
+                  <span class="yj ls fr poiuy_poi">
+                		<i class="mui-icon mui-icon-checkmarkempty fz26 mui-hidden show_a"></i>
+           		 </span>
+               </li>
+            
+           </ul>
+       
+       </section>
+       
+       
+       
+              <section class="act_bottom box cen bgff btm">
+	 <a class="box_a zc fz14 mui-col-xs-4 mui-btn  bot_poiy_a fz18 hs " >
+	 		合计:{{charge.the_price}}
+	 </a>
+	 <a class="box_a zc fz14 mui-col-xs-4 mui-btn mui-btn-success bot_poiy_a fz18 yj0" ng-click="charge.act_pay()">
+	 		我要报名
+	 </a>
+</section>
+       
+</section>

@@ -1,0 +1,66 @@
+<!-- 我的活动-->
+<meta charset="UTF-8">
+<section class="pd mt10">
+       <p  class="box cen user_ad_top  bgff yj4">
+       <a class="box_a act_a" ui-sref="activity_user({type: 1})">
+        参与的
+        </a>
+         <a class="box_a" ui-sref="activity_user({type: 2})">
+        发起的
+        </a>
+         <a class="box_a" ui-sref="activity_user({type: 3})">
+        收藏的
+        </a>
+    </p>
+    
+    </section>
+    
+    <p class="pt10 pm10 bgff pd act_use_p mt10">
+          <a class="cat_poo" ng-click="my_activities.category(0)">全部</a>
+          <a ng-if="type_p==1" class="ml20 " ng-click="my_activities.category(1)">待参与</a> 
+          <a ng-if="type_p==2" class="ml20 " ng-click="my_activities.category(1)">未开始</a>      
+          <a class="ml20" ng-click="my_activities.category(3)">已结束</a>
+    </p>
+ 
+    <section class="mt10 user_act_pii "> 
+     <section id="wrapper" class="my_activities">
+           <ul id="scroll">  
+             <li  ng-repeat="list in my_activities.activity_list" finish >
+             
+            <!--  data-href="/activity/activityShowSkip?activity_id={{list.id}}" -->
+                         <section class="pd  bgff bbm pt10 pm10">
+                         <section ui-sref="activity_detail({id:list.id})">
+              <img ng-src="{{list.poster}}" class="fl act_user_a">
+               <section class="ov pl10 zc fz14">
+                   <p class="dianer zd b tile_poiu_a" ng-bind="list.name"></p>
+                    
+                <p class="fz12 dian">
+                <i  class="f_i map_icon"></i><span ng-bind="list.city_name"></span>
+                   <!--  <span class="fr">限50名额</span> -->
+                </p>
+                   
+                   <section class="fz12 dian zc">
+                <p class="fl"><i class="f_i time_icon"></i><span ng-bind="list.start_time_str"></span> </p>
+                 	    <a class="fr" ng-class="list.acc_class" ng-bind="list.act_way"></a>
+                  <p class="qc"></p>
+                </section>
+               </section>
+               <p class="qc"></p>  
+               </section>
+                    <p class="pt10  btm mt10 tr"  ng-if="type_p==1">
+           <a class="sponsorship_details yj4 fz12" data-href="http://www.apptown.cn/activity/short_view/{{list.order_id}}"> 
+         	    票卷详情
+             </a>  
+               <p class="pt10  btm mt10 tr"  ng-if="type_p==2">
+           <a class="sponsorship_details yj4 fz12"  ui-sref="ticket_user_detail({id:list.id})" > 
+         	    报名详情
+             </a>
+         </p>
+               
+           </section>
+                    </li>
+        </ul>
+    </section> 
+    
+  </section>
+    

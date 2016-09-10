@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html ng-app="ticket_volume_list">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta http-equiv="Cache-Control" content="no-transform "> 
+<meta charset="UTF-8">
+ <title>e场景活动</title>
+<link href="/css/common/swiper3.07.min.css" rel="stylesheet">  
+<link href="/css/common/mui.min.css" rel="stylesheet">  
+<link href="/css/common/base.css?v=9" rel="stylesheet">
+<link href="/css/common/style.css?v=9" rel="stylesheet">
+<link href="/css/pages/launched_campaign.css?v=9" rel="stylesheet"/>
+<link href="//at.alicdn.com/t/font_1473320592_963984.css" rel="stylesheet">
+<link href="/css/common/font-awesome.css?v=9" rel="stylesheet">
+</head>
+<body ng-controller="mode_Controller"> 
+      <header class="header_mml pr pt10 pm10 cf cen ">
+           <a class="f_i retreat_icon j-backBtn" back></a>
+      	 <a class="cf fz16 ds_poiu_a" ng-href="/html/common/common.html" >
+     			  {{city_name}}
+        		 <i class="f_i index_select"></i>
+    		 </a>
+            <i class="f_i logo_icon"></i>
+            <img class="icon-search j-navSearchIcon" src="/img/icon-search.png" ui-sref="search" alt="搜索图标" style="display: none;">
+            <i class="f_i  side_menu_icon" ng-click="mode.the_menu()"></i>
+          
+          <section class="filiuyt_o" ng-click="mode.the_menu()">
+          
+          </section>
+     <ul class="bgff yj4 menu_pup">
+        <li class="pr" ui-sref="index">
+        <i class="f_i joiuyr_icon_a"></i> 
+            <a>首页</a></li>
+          <li ui-sref="sponsor_list"><a>赞助</a></li>
+          <li ui-sref="ticket_user"><a>票券</a></li>
+          <li ui-sref="signin" ng-click="mySignin()"><a>我的</a></li>
+          <li ui-sref="activity_user({type: 2})"><a>发起的</a></li>
+          <li ui-sref="activity_user({type: 1})"><a>参与的</a></li>
+          <li ui-sref="activity_loan"><a>活动白条</a></li>
+     </ul>
+     
+</header>
+  <section  data-ui-view>
+  
+  </section>
+  
+ <section id="form_success" class="sys-loading">
+	<p><img src="/img/system_loading.gif">&nbsp;<span>请求正在处理,请稍等...</span></p>
+</section>
+  <footer class="mml_bottom box cen pm5" id="mml_bottom">
+       <a class="zc fz14 box_a " ui-sref="index">
+          <i class="f_i discover_icon"></i><br> 
+           发现
+           
+        </a>
+           <a class="zc fz14 box_a " ui-sref="sponsor_list">
+          <i class="f_i sponsor_icon"></i><br>
+           赞助
+        </a>
+        <a ui-sref="add_activities">
+          <i class="f_i add_icon"></i>
+        </a>
+         <a class="zc fz14 box_a " ui-sref="ticket_user">
+               <i class="f_i vouchers_icon"></i><br>
+           票券
+           
+        </a>
+           <a class="zc fz14 box_a" ng-click="mySignin()" ui-sref="signin"> 
+          <i class="f_i mine_icon"></i><br>
+           我的
+           
+        </a>
+    </footer>
+
+    <script src="/js/common/jquery-1.11.3.min.js?v=9"></script>
+    <script src="/js/common/jquery.qrcode.min.js?v=9"></script>
+    <script src="/js/common/angular.min.js?v=9"></script>
+    <script src="/js/common/angular-ui-router.min.js?v=9"></script>
+    <script src="/js/common/angular-animate.js?v=9"></script>
+    <script src="/js/common/swiper3.07.min.js?v=9"></script>
+    <script src="/js/common/jweixin-1.0.0.js?v=9"></script>
+    <script src="/js/common/aes-min.js?v=9"></script>
+    <script src="/js/common/pad-iso10126-min.js?v=9"></script>
+    <script src="/js/common/city.data.js?v=9"></script>
+    <script src="/js/common/mui.min.js?v=9"></script>
+    <script src="/js/common/mui.zoom.js?v=9"></script>
+    <script src="/js/common/mui.previewimage.js?v=9"></script>
+    <script src="/js/common/mui.picker.min.js?v=9"></script>
+    <script src="/js/common/iscroll.js?v=9"></script>
+    <script src="/js/common/is_from.js?v=9"></script>
+    <script src="/js/mode/directive.js?v=9"></script>
+    <script src="/js/service/service_activity.js?v=11?v=9"></script> 
+    <script src="/js/entity/entity_phone.js?v=12"></script>
+    <script src="/js/router.js?v=9" ></script> 
+    <script src="/js/mode/methods_jq.js?v=9" ></script>
+    <script src="/js/controller/controller_viwe.js?v=9" ></script>
+    <script src="/js/controller/controller_pay.js?v=9" ></script>
+    <script src="/js/controller/controller_sponsor.js?v=9" ></script>
+    <script src="/js/controller/controller_event_details.js?v=9" ></script> 
+    <!-- 模块 -->
+    <script src="/js/common/modules.js?v=9"></script>
+    <!-- 用户控制器 -->
+    <script src="/js/controller/controller_user.js?v=9" ></script>
+
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!-- 赞助列表 -->
+<meta charset="UTF-8">
+ <section ng-controller="sponsor_listController">
+    <section class="pt10 pm10 bgff pd fz16 zd pr acr_poui_x" style="z-index:100">
+         <span class="ls" ng-click="sponsor_list.sp_sort(1,1)">
+       	   最新
+        </span>
+          <span class="ml10" ng-click="sponsor_list.sp_sort(2,1)">
+       	   最热
+        </span>
+        
+        <p class="fr pl10 asddf_poiu">
+          行业类别
+        </p>
+        
+    <ul class="bgff yj4   cen menu_pup_p">
+      	 <li ng-repeat="maker_title in classification.maker_title"><a ng-bind="maker_title.name" ng-click="sponsor_list.sp_sort(maker_title.id,2)"></a></li>  
+ 
+     </ul>
+    </section>
+    <section id="dfds_po"></section>
+ 
+    <section  id="sponsor_list" pulllist='paging()'  class="ulact_p ulact_p_sp" ng-click="">
+           <ul id="scroll">  
+             <li ng-repeat="list in sponsor_list.activitySupport_list" finish >
+                   <section class="details_case mt10 bgff pm10 btm details_case_z"  >
+          <section class="banner_top_a banner_top_c  bgff prefecture_a">
+           <section class="banner_top_b">
+              <a ui-sref="sp_details({'id':list.id})">
+               <img  ng-src="{{list.cover}}">
+               </a>
+            </section>
+        </section>
+        <section class="pd">
+            <p class="dianer zd fz16 mt10" ng-bind="list.name"></p>
+               
+            <p class="mt10">
+               目标金额：￥<span class="hs fz18" ng-bind="list.target_amount"></span>
+                <span class="yj4 cf bgls prompt_o fr" ng-class="list.oi_p" ng-bind="list.st_name">
+                
+                </span>
+            </p>
+            <p class="mt10 progress_bar pr yj4 ov">
+               <span class="oiuy_po_n" style="width:{{list.progress_of}}">
+                
+                </span>
+            </p>
+            <section class="box mt5 ">
+              <p class="box_a tl">
+                   <span class="fz14">赞助进度</span><br>
+                    <span class="hs fz12" ng-class="list.c_colour" ng-bind="list.progress_of"></span>
+                  
+                </p>
+                    <p class="box_a cen">
+                   <span class="fz14">已筹金额</span><br>
+                    <span class="hs fz12" ng-class="list.c_colour" ng-bind="list.all_amount"></span>
+                  
+                </p>
+                    <p class="box_a tr">
+                   <span class="fz14">剩余天数</span><br>
+                    <span class="hs fz12" ng-class="list.c_colour" ng-bind="list.entime|reduce_time:''"></span>
+                  
+                </p>
+            </section>
+        </section>  
+    </section>
+             
+             </li>
+           </ul>
+           
+           </section>
+
+  
+     
+     
+     
+     </section>

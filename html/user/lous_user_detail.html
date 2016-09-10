@@ -1,0 +1,40 @@
+<!-- 白条详情 -->
+<meta charset="UTF-8">
+   <p class="zd fz18 cen mt30">
+      <img ng-src="{{review.img_src}}" class="success_icon_p">
+    </p>
+    
+    <section class="pd bgff mt10 btm bbm">
+      <div class="mui-input-row success_poi_a">
+						<label class=" zc">白条流水号</label>
+						<input type="text" value="{{review.id}}"  class=" tr"  readonly   >
+					</div>
+         <div class="mui-input-row success_poi_a">
+						<label class=" zc">申请时间</label>
+						<input type="text" value="{{review.create_time|date:' MM/dd EEE HH:mm'}}"  class=" tr" readonly   >
+					</div>
+         <div class="mui-input-row success_poi_a">
+						<label class=" zc">申请金额</label>
+						<input type="text" value="{{review.apply_money}}元"  class=" tr">
+					</div>
+            <div class="mui-input-row success_poi_a">
+						<label class=" zc">还款期数</label>
+						<input type="text" value="{{review.periods}}"  class=" tr" readonly   >
+					</div>
+        
+        
+         <div class="mui-input-row success_poi_a"> 
+						<label class=" zc">资金用途</label>
+						<input type="text" value="{{review.user_remark}}"  class=" tr" readonly   >
+					</div>
+    </section>
+    
+    <p class="mt10 fz12 cen "> 平台将于三天内放款，请时刻注意提供的银行卡是否到帐</p>
+    
+  
+    <p class="qc"></p>
+    
+    <p class="mt20 pd cen zd">
+       <a class="mui-btn register_button fz16" back>确定</a>
+  
+    </p>

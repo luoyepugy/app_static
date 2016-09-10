@@ -1,0 +1,138 @@
+<!-- 活动主页 -->
+<meta charset="UTF-8">
+<section ng-controller="index_controller">
+<section class="banner_top_a">
+<section class="swiper-container banner_top_b banner_top_b_banner">
+  <section class="swiper-wrapper">
+    <section class="swiper-slide" ng-repeat="banner in act_index.banner_index">
+      <a   ui-sref="activity_detail({id:banner.id})">
+              <img ng-src="{{banner.banner_url[0]}}"  class="lazy"></a>
+      </section> 
+  </section>
+  <section class="swiper-pagination"></section>
+</section>
+ </section>
+    
+    <section class="box cen pt5 pm5 bgff">
+       <p class="box_a ls">
+          <span class="fz16">赞助金额</span><br>
+           <span ng-bind="act_index.activity_sum.sum | number : 0"></span>
+        </p>
+         <p class="box_a ls">
+          <span class="fz16">会员</span><br>
+               <span ng-bind="act_index.activity_sum.count | number : 0"></span>
+        </p>
+         <p class="box_a ls">
+          <span class="fz16">活动数</span><br>
+           <span ng-bind="act_index.activity_sum.activity_sum"></span>
+        </p>
+    </section>
+    
+
+    <section class="box home_page_icon pt10 pm10 mt10">
+        <a class="box_a" ui-sref="activities_list({activityTypeId:1})">
+           <i class="f_i home_page_icon_a"></i><br>
+           路演场馆
+        </a>
+         <a class="box_a" ui-sref="activities_list({activityTypeId:2})">
+           <i class="f_i home_page_icon_b"></i><br>
+           置业装修
+        </a>
+         <a class="box_a" ui-sref="activities_list({activityTypeId:3})">
+           <i class="f_i home_page_icon_c"></i><br>
+           汽车活动
+        </a>
+         <a class="box_a" ui-sref="activities_list({activityTypeId:9})">
+           <i class="f_i home_page_icon_d"></i><br>
+           保险投资
+        </a>
+        
+    </section> 
+    
+        <section class="box home_page_icon pt10 pm10">
+        <a class="box_a" ui-sref="activities_list({activityTypeId:6,reload:true})">
+           <i class="f_i home_page_icon_e"></i><br>
+           精品课程
+        </a>
+         <a class="box_a" ui-sref="activities_list({activityTypeId:7})">
+           <i class="f_i home_page_icon_f"></i><br>
+           户外运动
+        </a>
+         <a class="box_a" ui-sref="activities_list({activityTypeId:5})">
+           <i class="f_i home_page_icon_g"></i><br>
+           商家促销
+        </a>
+         <a class="box_a" ui-sref="activities_list({activityTypeId:0})">
+           <i class="f_i home_page_icon_h"></i><br>
+           全部活动
+        </a>
+        
+    </section>
+
+    <section class="indexAd box">
+      <p class="box_a mr10">
+      	         <img src="/img/ad_lous.png" alt="广告白条" ng-click="adLoan()">
+      </p>
+       <p class="box_a pl5">
+       <img  src="/img/ad_insurance.png" alt="广告保险"  data-href="http://ihxlife.com/weChat/numen/shareSeed?para=86bc9e99256c96481a102b381a144582&amp;name=付新华&amp;jobNumber=470001983&amp;mobile=18903022899">
+
+       </p>
+     
+  </section>
+    
+    
+    
+    <section class="details_case mt10 bgff " ng-repeat="hot in act_index.activity_hot">
+
+         <section class="name_icon pd">
+             <img ng-src="{{hot.sponsorImageUrl}}">
+             <p class="pd dian ng-binding" ng-bind="hot.sponsorName"></p>
+        </section>
+          <section class="banner_top_a banner_top_c mt10 bgff prefecture_a">
+           <section class="banner_top_b">
+              <a ui-sref="activity_detail({id:hot.id})">
+              	 <img  ng-src="{{hot.activity_first_face}}">
+               </a>
+            </section>
+        </section>
+        <section class="pd">
+            <p class="dianer zd fz16 mt10" ng-bind="hot.activity_title"></p>
+               <p class="fz12 dian mt10">
+                <i class="f_i map_icon"></i>{{hot.activity_address}}
+                </p>
+              <section class="fz12 dian zc pm5">
+                <span class="fl"><i class="f_i time_icon"></i><span ng-bind="hot.activity_time"></span> </span>
+                  <p class="fr"><span class="hs">{{hot.activity_number}}</span>报名</p>
+                  <p class="qc"></p>
+                </section>
+                
+                
+        </section>
+   <section class="box btm pt5 pm5 fz12 cen zc schedule_p">
+                   <section class="box_a" ng-class="hot.skjhg_s">
+                      <i class="f_i zmkjf_a"></i>目标金额{{hot.target_money}}元
+                   </section>
+                    <section class="box_a" ng-class="hot.skjhg_s">
+                     <i class="f_i zmkjf_b"></i>已筹{{hot.now_money}}元
+                   </section>
+                    <section class="box_a" ng-class="hot.skjhg_s">
+                     <i class="f_i zmkjf_c"></i>进度{{hot.schedule}}
+                   </section>
+                </section>
+        
+    </section>
+        
+
+<p class=" bgff pt10 pm10 cen paging_list mt10"  ng-click="Hot_load()" ng-if="load_l">
+		<a class="ls">
+			查看更多 <span class="mui-icon mui-icon-arrowdown fz16"></span>
+		</a>
+	</p>
+<p class=" bgff pt10 pm10 cen paging_list mt10"  ng-click="Hot_load()" ng-if="!load_l">
+		<a class="zc">
+			没有数据了...
+		</a>
+	</p>
+    
+    </section>
+    

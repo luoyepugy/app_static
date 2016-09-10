@@ -1,0 +1,27 @@
+
+@import "mixin/block";         			// 块状元素
+@import "mixin/clearfix";      			// 清除浮动
+@import "mixin/clip";      				// 裁剪
+@import "mixin/color";         			// 颜色
+@import "mixin/corner";         		// 切角
+@import "mixin/form";          			// 表单元素
+@import "mixin/gradient";          		// 渐变
+@import "mixin/link";					// 超链接
+@import "mixin/overflow";      			// 文本溢出
+@import "mixin/position";      			// 定位
+//@import "mixin/quantity-queries";		// 数字查询
+@import "mixin/shadow";          		// 阴影
+@import "mixin/shape";          		// 形状
+@import "mixin/size";          			// 尺寸
+@import "mixin/skin";          			// 外观
+@import "mixin/table";					// 表格
+
+
+// 变量
+$main-green: #4ea45d;	
+$main-red: #e86062;
+$text-normal: #575757;
+$text-dark: #141414;
+$text-light: #878787;
+$bg: #f8f8f8;
+$border: #e0e0e0;

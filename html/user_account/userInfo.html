@@ -1,0 +1,57 @@
+<!--//1为昵称，2为性别，3为修改密码，4为个性签名，5为行业-->
+<!-- 个人信息 -->
+<meta charset="UTF-8">
+
+<section id="account" class="mui-page mui-page-center mt80">
+			
+			<section class="mui-page-content">
+				<section class="mui-scroll-wrapper" data-scroll="3" style="top:50px;overflow: visible;">
+					<section class="mui-scroll" style="transform: translate3d(0px, 0px, 0px) translateZ(0px); transition-duration: 0ms; padding-bottom: 50px;">
+						<ul class="mui-table-view person_rip">
+							<li class="mui-table-view-cell ico_person">
+								<a id="head" class="mui-navigate-right f">头像
+								<span class="mui-pull-right head">
+									<img class="head-img mui-action-preview" id="head-img1" ng-src="{{pe_er.user_icon_o.user_icon}}" data-preview-src="" data-preview-group="1">
+								</span>
+							</a>
+							</li>
+							<li class="mui-table-view-cell"  ng-click="deteail_a(pe_er.user_icon_o)">
+								<a ui-sref="userInfo_edit({type: 1})"  class="mui-navigate-right">昵称<span class="mui-pull-right" ng-bind="pe_er.user_icon_o.user_name"></span></a>
+							</li>
+							<li class="mui-table-view-cell">
+								<a>账户ID<span class="mui-pull-right" ng-bind="'000'+pe_er.user_icon_o.user_id"></span></a>
+							</li>
+                            <li class="mui-table-view-cell">
+								<a  >手机号码<span class="mui-pull-right" ng-bind="pe_er.user_icon_o.contact_info"></span></a>
+							</li>
+                            <li class="mui-table-view-cell"  ng-click="deteail_a(pe_er.user_icon_o)">
+								<a ui-sref="userInfo_edit({type: 2})" class="mui-navigate-right">性别<span class="mui-pull-right" ng-bind="pe_er.user_icon_o.ehg_a"></span></a>
+							</li>
+                            <li class="mui-table-view-cell"  ng-click="deteail_a(pe_er.user_icon_o)">
+								<a ui-sref="userInfo_edit({type: 5})"  class="mui-navigate-right">所处行业</a>
+							</li>
+                            <li class="mui-table-view-cell"  ng-click="deteail_a(pe_er.user_icon_o)">
+								<a ui-sref="userInfo_edit({type: 4})"  class="mui-navigate-right">个性签名</a>
+							</li>
+						</ul>
+						<ul class="mui-table-view">
+						<!--	<li class="mui-table-view-cell">
+								<a>实名认证<span class="mui-pull-right">88888888</span></a>
+							</li>-->
+							<li class="mui-table-view-cell">
+								<a ui-sref="sponsor_auth({'status': status})">主办方认证<span class="mui-pull-right" ng-class="{true: 'sponsorSuccIcon', false: 'sponsorFailIcon'}[sponsorStatus]"><i class="iconfont icon-vip mr5"></i><b ng-if="{true: false, false: true}[sponsorStatus]">未认证</b><b ng-if="{true: true, false: false}[sponsorStatus]">已认证</b></span></a>
+							</li>
+							<li class="mui-table-view-cell person_rip">
+								<a ui-sref="userInfo_edit({type: 3})"  class="mui-navigate-right"   ng-click="deteail_a(pe_er.user_icon_o)" >修改密码</a>
+							</li>
+						</ul>
+						<ul class="mui-table-view">
+							<li class="mui-table-view-cell tc" ng-click="pe_er.logged_out()">
+								<a>退出登录</a>
+							</li>
+						</ul>
+					</section>
+				
+                </section>
+			</section>	
+		</section>

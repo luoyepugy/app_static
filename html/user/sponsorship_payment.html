@@ -1,0 +1,58 @@
+<!-- 个人中心众筹-支付详情 -->
+<meta charset="UTF-8">
+  <section class="pd pt10 pm10">
+      <p class="dianer fz18 zd" ng-bind="act_d.title">
+      </p>
+      <p class="fz16 mt10 zd">
+        <span>支付总额：</span>
+          <span class="hs" ng-bind="(act_d.num*act_d.my_pay_money)+'元'"></span>
+      </p>
+      <p class="mt10">
+        <span>单价金额：</span>{{act_d.my_pay_money+'元'}}
+      </p>
+        <p class="mt10">
+        <span>支付数量：</span><span ng-bind="act_d.num"></span>
+      </p>
+        <p class="mt10">
+        <span>订单编号：</span><span ng-bind="act_d.order_id"></span>
+      </p>
+         <p class="mt10">
+        <span>支付时间：</span><span ng-if="act_d.pay_time!=null" ng-bind="act_d.pay_time|date:'yyyy-MM-dd hh:mm'"></span>
+      </p>
+      
+         <p class="mt20">
+        <span>姓名：</span><span ng-bind="act_d.content_detail.name"></span>
+      </p>
+         <p class="mt5">
+        <span>电话：</span><span ng-bind="act_d.content_detail.tel"></span>
+      </p>
+        <p class="mt5 dianer">
+        <span>地址：</span><span ng-bind="act_d.content_detail.address"></span>
+      </p>      
+        <p class="dianer fz18 zd mt20" ng-bind="act_d.repay_title">
+      </p>
+      
+      <p class="pd pt10 pm10 bgf8 mt10 zc" ng-bind="act_d.repay_content">
+
+      </p>
+       
+      <p class="mt20">
+        <span>回报时间：</span><span ng-bind="act_d.repay_time|date:'MM/dd EEE  HH:mm '"></span>
+      </p>
+         <p class="mt5">
+        <span>发起人：</span><span ng-bind="act_d.create_support_user_name"></span>
+      </p>
+        <p class="mt5 dianer">
+        <span>联系电话：</span><span ng-bind="act_d.create_support_phone"></span>
+      </p>
+           <p class="sp_act_button mt20">
+                    <button class="yj4 fl ">
+                        <i class="f_i assd_icon"></i>
+                        发私信
+                      </button>
+                        <button class="yj4 fr" data-href="tel:{{my_sponsorship.payment.telephone}}">
+                        <i class="f_i phone_icon"></i>
+                        打电话
+                      </button>
+                  </p>
+    </section>

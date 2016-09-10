@@ -1,0 +1,34 @@
+	
+	<link href="/css/pages/user.css" rel="stylesheet">
+	<!-- 我的e币-充值 -->
+	<form class="mui-input-group">
+	    <div class="mui-input-row">
+	        <label>金额 (元)</label>
+	        <input id="jq_e_coin"  type="number"  ng-model="e_coin_num"  class="mui-input-clear" placeholder="请输入金额">
+	    </div>
+	    <div class="form-row">
+	        <label class="inline-left">充值方式</label>
+	        <div class="inline-right">
+	        	<p class="mb10"><input class="w-auto mr5" type="radio" name="chongzhi" value="weixin" checked="checked" /><b class="green">微信支付</b></p>
+	        	<p>获得e币数量:<b class="red" ng-bind="e_coin_num">0</b>(1元=1e币)</p>
+	        </div>
+	    </div>
+
+	</form>
+	<button class="mui-btn mui-btn-green mui-btn-block" ng-click="e_coin_btn()">确认支付</button>
+
+<!-- 	<section>
+		<ul class="amount">
+			<li><span>金额 (元)</span><input id="pay_money" type="text" placeholder="请输入金额" onblur="clearNoNum(this)"/></li>
+		</ul>
+		<ul class="top-up">
+			<li class="way">充值方式 </li>
+			<li class="pay"><input type="radio" name="chongzhi" value="weixin" checked="checked">微信支付</li> -->
+			<!-- <li class="pay"><input type="radio" name="chongzhi" value="baofoo">宝付支付</li> -->
+<!-- 			<li class="eb_number">获得e币数量:<span id="pay_money_shoe" style="color:#D55645;">0</span>(1元=1e币)</li>
+		</ul>
+			<p class="all-btn">
+				<button class="e-recharge-btn pay_button">确认支付</button>
+			</p>
+	</section> -->
+	<!-- /我的e币-充值 -->

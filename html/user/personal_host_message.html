@@ -1,0 +1,54 @@
+<!-- 个人主办方留言板-->
+<meta charset="UTF-8">
+<section ng-controller="personal_host_message">
+
+<ul class="mui-table-view" style="margin-top: 0;">
+<li class="mui-table-view-cell tr fz14 mess_list_a pt20 zc" ng-click="leave_message.message(0)">
+  <span class="mui-icon mui-icon-chatbubble ls  fz20 "></span>请输入你的留言
+</li>
+        <li class="mui-table-view-cell " ng-repeat="list in leave_message.message_date">
+            <img ng-src="{{list.user_icon}}" class="yj act_message fl"/>
+            <section class="ov pl10">
+            	<h5 class="zd" ng-bind="list.user_name"></h5>
+            	<p class="fz12">
+            	      {{list.create_time|getDateDiff:''}}
+            		<span class="mui-icon mui-icon-chat ls fr fz18" ng-click="leave_message.message(list.id)"></span>
+            	</p>
+            	<p class="zd fz14 mt10" ng-bind="list.comment_content">
+            		
+            	</p>
+            	
+            	<section class="bgf2 pd pt10 pm10 yj4 mt10" ng-if="list.childsComment.length>0">
+            		<p ng-repeat="lt in list.childsComment">
+            			<span class="ls" ng-bind="lt.user_name"></span>
+            			<span ng-bind="lt.comment_content"></span>
+            		</p>
+            	
+            	</section>
+            	
+            </section>
+        </li>
+    </ul>
+    
+    
+     <section id="message" class="mui-popover mui-popover-bottom mui-popover-action " style="z-index:99999">
+                  <section class="modal-content clearfix bgff mek_oiiy_p mek_oiiy_p">
+                    <p class="bgls cf fz18 cf cen pt10 pm10 pd">
+                       评论
+                       <a class="mui-icon mui-icon-close fr cf" href="#message"></a>
+                     
+                    </p>
+                    <textarea class="me_text_area" maxlength="140" placeholder="发表新的评论"   ng-model="leave_message.me_txt_length">
+                     
+                     
+                    </textarea>
+                    
+                    <p class="tr pd pm20">
+                       <span class="mr10 poiuu_oo">{{140-leave_message.me_txt_length.length}}</span>
+                       <button type="button" class="mui-btn  cf bgls fz16" ng-click="leave_message.comment()">发表</button>
+                     
+                    </p>
+                    
+                  </section>
+            </section>
+</section>

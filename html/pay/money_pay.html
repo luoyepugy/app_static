@@ -1,0 +1,39 @@
+<!-- 支付_页面 -->
+<meta charset="UTF-8">
+<section class="e_pay" ng-controller="e_money_pay">
+ <header class="header_mml pr pt10 pm10 cf cen">
+           <i class="f_i retreat_icon" back></i>
+            {{act_d.type}}
+        </header>
+        
+        <section class="pd">
+           <p class="cen mt30 pm20 muiuyt_a">
+              <span class="fz30" ng-bind="act_d.the_price"></span>元
+            </p>
+            
+            <p class="mt20">
+            
+              <span class="fl">收款方</span>
+                <span class="fr">e场景活动</span>
+            </p>
+            <p class="qc"></p>
+            <p class="mt10">
+              <span>活动标题</span>
+                <span class="fr poiuyt_dff" ng-bind="act_d.title">
+                </span>
+            </p>
+            
+            
+            <p class="qc"></p>
+            <p class="mt20 fz14 zc">
+              <i class="f_i check_icon_e yj4 check_icon_act"></i>
+                我已阅读并同意<a>《e场景支付协议》</a>
+            </p>
+            
+            <p class="mt20 paiements_andPublicit">
+           		 <button ng-click="pay.sum(act_d.play)">确定支付</button>
+            </p>
+            
+        </section>
+        
+</section>

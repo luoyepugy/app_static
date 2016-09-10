@@ -1,0 +1,35 @@
+
+    <link href="/css/pages/user.css" rel="stylesheet">
+    <!-- 登录 -->
+    <div class="signin j-signinForm">
+        <form action="" ng-if="{'phone': true,'weixin':false}[signinType]">
+            <input type="text" name="user_phone" value="" placeholder="输入手机账号" data-empty="请输入手机账号" format-phone  />
+            <input type="password" name="user_password" value=""  placeholder="输入密码" data-empty="请输入密码" encrypt />
+            <input type="hidden" name="activity_id" value="{{activityData.activity_id}}" />
+            <input type="hidden" name="conDetail_name" value="{{activityData.conDetail.name}}" />
+            <input type="hidden" name="conDetail_tel" value="{{activityData.conDetail.tel}}" />
+            <submit-button style="padding: 7px;" action="/user/phone_login" text="登录" form=".j-signinForm" callback="route(arg1)"></submit-button>
+            <p class="mb20 tl"><a ui-sref="register">用户注册</a><a class="fr" ng-click="forgetPwd()">忘记密码？</a></p>
+        </form>
+
+        <section class="mb40" ng-if="{'weixin': true,'phone':false}[signinType]">
+            <button class="mui-btn mui-btn-block btn-green" data-href="/user/h5_wechat_login_page?key={{form_login}}">
+                <i class="iconfont icon-weixin inline-left"></i>
+                <span class="inline-right">微信登录</span>
+            </button>
+        </section>
+        <p class="division"><i></i><span>其他方式</span></p>
+        <button ng-if="{'phone': true,'weixin':false}[signinType]" class="mui-btn mui-btn-block btn-green" data-href="/user/h5_wechat_login_page?key={{form_login}}">
+            <i class="iconfont icon-weixin inline-left"></i>
+            <span class="inline-right">微信登录</span>
+        </button>
+        <button ng-if="{'weixin': true,'phone':false}[signinType]" class="mui-btn mui-btn-block btn-red" ng-click="changeSigninType()">
+            <i class="iconfont icon-mobile inline-left"></i>
+            <span class="inline-right">手机登录</span>
+        </button>
+        <button class="mui-btn mui-btn-block btn-blue" data-href="/QQConnect/h5_login?key={{form_login}}">
+            <i class="iconfont icon-QQ inline-left"></i>
+            <span class="inline-right">QQ登录</span>
+        </button>
+    </div>
+    <!-- /登录 -->

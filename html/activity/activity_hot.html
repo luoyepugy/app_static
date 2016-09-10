@@ -1,0 +1,35 @@
+<!-- 推荐活动 -->
+<meta charset="UTF-8">
+
+<section class="mt10 bgff" ng-controller="activity_hotr">
+	  <h4 class="pm10 pd pt20 bbm" >推荐活动</h4>
+	
+ <ul id="scroll">  
+             <li   ng-repeat="hot in dte"  ui-sref="activity_detail({id:hot.id})">
+                  <section class="pd  bgff bbm pt10 pm10">
+              <img ng-src="{{hot.activity_first_face}}" class="fl act_user_a">
+               <section class="ov pl10 zc fz14">
+                   <p class="dianer zd b tile_poiu_a" ng-bind="hot.activity_title"></p>
+                    
+                <p class="fz12 dian">
+                <i  class="f_i map_icon"></i>
+                <span ng-bind="hot.activity_address"></span>
+                </p>
+                   
+                   <section class="fz12 dian zc">
+                <p class="fl"><i class="f_i time_icon"></i>
+                	<span ng-bind="hot.activity_time"></span> </p>
+                  <a class="fr {{hot.cla}}" ng-bind="hot.wyyt"> </a>  
+                  <p class="qc"></p>
+                </section>
+               </section>
+               <p class="qc"></p>
+           </section>
+                    </li>
+        </ul>
+         
+        <section class="pd mt10" ng-click="down_po()">
+           <img class="w100 yj4" src="/img/download_bg.png">
+        </section>
+        
+</section>

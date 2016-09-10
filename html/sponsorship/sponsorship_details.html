@@ -1,0 +1,173 @@
+<!-- 赞助详情 -->
+<meta charset="UTF-8">
+<section  ng-controller="sp_details">
+   	<section class="bgff"> 
+			<section class="banner_top_a act_banner_top_a ">
+		    <section class="swiper-container banner_top_b banner_top_b_banner" >
+		      <section class="swiper-wrapper">
+		        <section class="swiper-slide"  ng-repeat="sp in sp_detail.sp_data.poster">
+		 
+		                  <img ng-src="{{sp}}">
+		          </section>
+		          
+		        
+		      </section>
+		    
+		      <section class="swiper-pagination"></section>
+		    </section>
+		    
+		     </section>
+		   
+		   <section class="pd pm10">
+            <p class="dianer zd fz16 mt10 " ng-bind="sp_detail.sp_data.name"></p>
+               
+            <p class="mt10">
+               目标金额：￥<span class="hs fz16 ng-binding" ng-bind="sp_detail.sp_data.target_amount"></span>
+                <span class="yj4 cf bgls prompt_o fr ng-binding" ng-bind="sp_detail.sp_data.st_name" ng-class="sp_detail.sp_data.oi_p"></span>
+            </p>
+            <p class="mt10 progress_bar pr yj4 ov">
+               <span class="oiuy_po_n" style="width:{{sp_detail.sp_data.schedule}}">
+                
+                </span>
+            </p>
+            <section class="box mt5 ">
+              <p class="box_a tl"> 
+                   <span class="fz14">赞助进度</span><br>
+                    <span class="hs fz12 " ng-class="sp_detail.sp_data.c_colour"  ng-bind="sp_detail.sp_data.schedule"></span>
+                  
+                </p>
+                    <p class="box_a cen">
+                   <span class="fz14">已筹金额</span><br>
+                    <span class="hs fz12 "  ng-class="sp_detail.sp_data.c_colour" ng-bind="sp_detail.sp_data.now_money"></span>
+                  
+                </p>
+                    <p class="box_a tr">
+                   <span class="fz14">剩余天数</span><br>
+                    <span class="hs fz12 " ng-class="sp_detail.sp_data.c_colour" ng-bind="sp_detail.sp_data.end_time|reduce_time:''"></span>
+                  
+                </p>
+            </section>
+        </section>
+        
+       <ul class="mui-table-view mt20">
+               <li class="mui-table-view-cell">
+                     <span class="act_title">所属行业：</span>
+                     <p class="ov" ng-bind="industry">
+                       
+                     </p>
+               </li>
+               <li class="mui-table-view-cell">
+                     <span class="act_title">开始时间：</span>
+                     <p class="ov" ng-bind="sp_detail.sp_data.start_time_fm">
+                       
+                     </p>
+               </li>
+               <li class="mui-table-view-cell">
+                     <span class="act_title">结束时间：</span>
+                     <p class="ov" ng-bind="sp_detail.sp_data.end_time_fm">
+                     </p>
+               </li>
+                  
+           </ul>
+        
+		</section>
+		<section class="pt10 pm10 bgff mt10 bbm btm pr pd">
+		    <section class="mui-col-xs-11 dian ">
+		        <img ng-src="{{sp_detail.sp_data.sponsor_head}}" class="sponsor_act_icon fl"/>
+		        <p class="ov sp_act_title pl20">
+		            <span class="ls" ng-bind="sp_detail.sp_data.sponsor_name"></span>
+		            <span class="fr">主办方</span>
+		        </p>
+		    </section>
+		    
+		    <span class="mui-icon mui-icon-arrowright right_icon zc right_icon_p"></span>
+		</section>
+		
+		<section class=" bgff pt10 pm10 mt10 cen bbm btm act_tble_a pr">
+	<p class="zd act_poi"  ui-sref=".sponsorship_deta_date" >
+		活动详情
+	</p>
+	<p class="zd" ui-sref=".sponsorship_participate" >
+		参与人数
+	</p>
+	<p class="zd br0" ui-sref=".sponsor_message">
+		活动留言
+	</p>
+	<p class="qc"></p>
+	<p class="progress_of gd"> 
+	</p>
+</section>
+
+<section data-ui-view id="tracing_point">
+	<section class="pd pt10 pm10 bgff fz14" ng-bind-html="sp_detail.sp_data.content_details|to_trusted:''"  id="tab-centen">
+
+	</section> 
+</section>
+		
+		
+		<section id="sponsor_poi"></section>
+		 <section class="bgff pd pt10 pm10 mt10"  ng-repeat="re in sp_detail.sp_data.support_repay_array" ng-click="sp_detail.select_sponsor(re.repay_content,re.id,re.support_amount,re.surplus_num,re.person_limit,$index,re.repay_title,re.repay_time)">
+      		<p class="ls fz14 fr tyut_po_a tr">      			
+      			<!-- <a class="mui-btn mui-btn-success br0"  ng-click="sp_detail.to_sponsor(re.repay_content,re.id,re.support_amount,re.surplus_num,re.person_limit)" >去赞助</a> -->
+      		 
+      		    <i class="fa fa-circle-thin fz26 check_spons" data-f="1" ></i> 
+<!--       		    <i class="fa fa-circle-thin fz26"></i>  -->
+      		</p>
+      		<section class="mui-col-xs-9  fz14 zd tyut_po">
+      		<span class="yj4" style="border:1px solid #4ea45d;padding:2px 8px;" ng-bind="re.repay_title"></span>
+      			赞助<span class="hs fz16 pl10" ng-bind="re.support_amount+'元'"></span>
+      		</section>
+      		
+      		<p class="fz12 mt10">
+      			回报详情：
+      			{{re.repay_content}}
+      		</p>
+      		<p class="fz12">
+      		   回报时间：{{re.repay_time}}之前发放
+      		</p>
+      		<p class="fz12" ng-if="re.person_limit>0">
+      		剩余份数：{{re.surplus_num}}位（共{{re.person_limit}}位）
+      		</p>
+      		<p class="fz12" ng-if="re.person_limit<=0">
+      		不限额
+      		</p>
+      		
+      	
+      	</section>
+      	
+      	
+      	
+      	
+      	<section class="act_bottom box cen bgff ">
+	<a class="box_a zc fz14 pt5 collection_p {{detail.detail_date.act_cl}}" ng-click="detail.collection()" >
+	 		<span class="mui-icon mui-icon-star volume_button fz24"></span><br />
+	 	收藏
+	 </a>
+	 <a class="box_a zc fz14 mui-col-xs-4 mui-btn mui-btn-success bot_poiy_a"  ng-click="sp_detail.sponsor_poi()" >
+	 		我要赞助
+	 </a> 
+	  <a class="box_a zc fz14 pt5" ng-href="#share_pp"> 
+	 	<span class="mui-icon mui-icon-redo volume_button fz28"></span><br />
+	 	分享
+	 </a>
+</section>
+    <section id="share_pp" class="mui-popover mui-popover-bottom mui-popover-action " style="z-index:9999">
+        <section class="modal-content clearfix bgff">
+            <section class="modal-header text-center pb0" >分享给好友</div>
+            <section class="modal-body mt20">
+                <section class="share-row clearfix box">
+                     <a  id="qrcode" class="box_a"><i class="icon icon-qrcode"></i>二维码</a>
+                     <a class="box_a" ng-click="sharep_a.Qzone()"><i class="icon icon-qqzone"></i>QQ空间</a> 
+                     <a class="box_a" ng-click="sharep_a.qqweibo()"><i class="icon icon-qqweibo"></i>腾讯微博</a> 
+                     <a class="box_a" ng-click="sharep_a.qq()"><i class="icon icon-qq"></i>QQ好友</a>
+                </section>
+            </section>
+            <section class="modal-footer">
+                <a class="mui-btn resu_poi_s" ng-href="#share_pp">取消</a>
+                
+            </section> 
+        </section>
+    </section>
+    </section>
+		   
+</section>

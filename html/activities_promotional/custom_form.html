@@ -1,0 +1,46 @@
+<!-- 自定义表单 -->
+<meta charset="UTF-8">
+<section  ng-controller="custom_form_controller">
+ <section class="bgff" >
+	       <h4 class="pm10 pd pt20 ">自定义表单设置</h4>
+	      <ul class="mui-table-view apply_p">
+	              <li class="mui-table-view-cell ">
+	                 <input  type="text" placeholder="姓名"/>
+	              </li>
+	                  <li class="mui-table-view-cell " >
+	                 <input  type="text" placeholder="手机"/>
+	              </li>
+	              
+	         </ul>
+	   </section>
+	       <a class="pt10 pm10 ls cen mt20 bgff bbm btm fz16 mui-block"  href="#share_pp">
+	          	+自定义表单
+	          </a>
+	
+	<p class="mt30 pd cen zd box">
+	       <a class="mui-btn register_button fz18 box_a mr10" >确定</a>  
+	       <a class="mui-btn register_button fz18 box_a ml10 bgff ls brls" >取消</a> 
+	    </p>
+	    
+	    
+	    
+	    
+<section id="share_pp" class="mui-popover mui-popover-bottom mui-popover-action ">
+      <section class="modal-content clearfix bgff">
+                    <p class="bgls cf fz18 cf cen pt10 pm10 pd">
+                       自定义表单
+                       <a class="mui-icon mui-icon-close fr cf" href="#share_pp"></a>
+                     
+                    </p>
+                    <textarea class="me_text_area ng-pristine ng-valid ng-empty ng-valid-maxlength ng-touched" maxlength="140" placeholder="发表新的评论" ng-model="leave_message.me_txt_length">                     
+                     
+                    </textarea>
+                    
+                    <p class="tr pd pm20">
+                       <button type="button" class="mui-btn  cf bgls fz16" >确认</button>
+                      <a type="button" class="mui-btn  cf bgls fz16 bgff brls ls ml10" href="#share_pp">取消</a>
+                    </p>
+                    
+                  </section>
+</section>
+</section>

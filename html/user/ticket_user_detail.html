@@ -1,0 +1,42 @@
+<!-- 票卷详情 -->
+<meta charset="UTF-8">
+
+  <section class="box pd pt10 pm10 bgff">
+      <p class="box_a fz16">
+           已报名：<span ng-bind="volume_details.dat_po.results+'人'"></span>
+         </p>
+         <p class="box_a fz16 cen">
+           已验票：<span ng-bind="volume_details.dat_po.already_sign+'人'"></span>
+         </p>
+         <p class="box_a fz16 tr">
+           未验票：<span ng-bind="volume_details.dat_po.not_sign+'人'"></span>
+         </p>
+    </section>
+    
+    <section class=" bgff">
+         <section class="bgff pd pt10 pm10 box pr ov user_li_s mt10"     ng-repeat="list in volume_details.data_p" >
+            <section class="box_a pl10">
+                <img ng-src="{{list.user_icon}}" class="yj user_icon_p fl">
+                <p class="ov mt5 pl10">
+                  <span class="zd fz16" ng-bind="list.name"></span><br>
+                    <span ng-bind="list.tel"></span>
+                </p>
+             </section>
+                <section class="box_a">
+                     <p class="mt20">
+                      ￥<span class="hs" ng-bind="list.price"></span>|<span ng-bind="list.ticket_name"></span>
+                    </p>
+             </section>
+             <section class="box_a">
+               <p class="tr mt20" ng-bind="list.sign_status"></p>
+             </section>
+             <span class="d_dian_a yj"></span>
+              <span class="d_dian_a d_dian_b yj"></span>
+              <span class="d_dian_a d_dian_c yj"></span>
+             <span class="d_dian_a d_dian_d yj"></span>
+             <span class="d_dian_a d_dian_e yj"></span>
+             <span class="d_dian_a d_dian_f yj"></span>
+            <span class="d_dian_a d_dian_g yj"></span>
+        </section>
+    
+    </section>

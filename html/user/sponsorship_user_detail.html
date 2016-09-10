@@ -1,0 +1,64 @@
+<!-- 我的赞助详情 -->
+<meta charset="UTF-8">
+  <p class="pd pt10 pm10 bgff fz16">
+    <span class="fl" ng-bind="'已筹金额￥'+my_sponsorship.money"></span> 
+      <span class="ml20" ng-bind="'参与'+my_sponsorship.peo_num+'人'"></span>
+    </p>
+  <ul class="mui-table-view mt10">
+    <li class="mui-table-view-cell mui-collapse" ng-repeat="data in my_sponsorship.data_array">
+        <a class="mui-navigate-right ds" href="#">
+          <p class="zd fz16 username_sp dian fl" ng-bind="data.nick_name">
+   
+            </p>
+            <p class="ov">
+              赞助 <span class="hs" ng-bind="data.amount"></span>元
+            </p>
+        </a>
+        
+          <section class="mui-collapse-content">
+              <ul class="sponsor_drop_down">
+                 <li class="fz14"   >
+                   <span class="title_oiu">回报标题：</span>
+                    
+                      <p class="ov" ng-bind="data.repay_title"></p>
+                  </li>
+                    <li class="fz14"   >
+                   <span class="title_oiu">单价金额：</span>
+                    
+                      <p class="ov" ng-bind="data.unit_price"></p>
+                  </li>
+                      <li class="fz14">
+                   <span class="title_oiu">支持数量：</span>
+                           <p class="ov" ng-bind="data.num"></p>
+                  </li>
+                      <li class="fz14">
+                   <span class="title_oiu">订单编号：</span>
+                           <p class="ov" ng-bind="data.order_id"> </p>
+                  </li>
+                      <li class="fz14">
+                   <span class="title_oiu">姓名：</span>
+                           <p class="ov" ng-bind="data.from_info.name"></p>
+                  </li>
+                      <li class="fz14">
+                   <span class="title_oiu">电话：</span>
+                           <p class="ov" ng-bind="data.from_info.tel"> </p>
+                  </li>
+                    <li class="fz14">
+                   <span class="title_oiu">地址：</span>
+                           <p class="ov" ng-bind="data.from_info.address"> </p>
+                  </li>
+                  <li class="sp_act_button mt20">
+                    <button class="yj4 fl ">
+                        <i class="f_i assd_icon"></i>
+                        发私信
+                      </button>
+                        <button class="yj4 fr" data-href="tel:{{data.from_info.tel}}">
+                        <i class="f_i phone_icon"></i>
+                        打电话
+                      </button>
+                  </li>
+              </ul>
+				
+           </section>
+       </li>
+    </ul>

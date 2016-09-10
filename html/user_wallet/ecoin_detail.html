@@ -1,0 +1,33 @@
+	<link href="/css/pages/user.css" rel="stylesheet">
+	<ul class="mui-table-view">
+		<li class="mui-table-view-cell" ng-repeat="x in data_e">
+            <p class="qc">
+            	<span class="fl" ng-bind="x.trade_time">
+            		
+            	</span>
+            	<span class="fr hs" ng-if="x.trade_type==0" ng-bind="'+'+x.trade_balance">
+            		
+            	</span>
+            	<span class="fr" ng-if="x.trade_type==1" ng-bind="'-'+x.trade_balance">
+            		
+            	</span>
+            </p>
+             <p class="qc">
+            	<span class="fl" ng-bind="'订单号：'+x.order_id">
+            		
+            	</span>
+            	<span class="fr" ng-bind="'备注：'+x.re_remark">
+            		
+            	</span>
+            </p>
+            <p class="qc">
+            	<span class="fl" ng-bind="x.trade_source">
+            		
+            	</span>
+            	<span class="fr" ng-bind="'余额：'+x.trade_amount">
+            		
+            	</span>
+            </p>
+            
+        </li>
+	</ul>

@@ -1,0 +1,23 @@
+<!-- 免费报名表单 -->
+<meta charset="UTF-8">
+  <section ng-controller="activity_sign_ree_c">
+  	<section class="pd pt10 pm10 bgff">
+		<img ng-src="{{img_p}}" class="act_let_icon fl"/>
+		<p class="ov pl10 zd fz18 diansan" ng-bind="title">
+		</p>
+		<p class="qc"></p>
+	</section>	
+   <section class="bgff mt10">
+       <p class=" pd pt10 ">填写报名表单</p>
+      <ul class="mui-table-view apply_p mt10">
+              <li class="mui-table-view-cell"   ng-repeat="f in form_p">
+                 <input  type="text" placeholder="{{'请输入'+f.name}}"  data-is="{{f.necessary}}" data-yu="{{f.name}}" class="form_po_ipnut"/>
+              </li>
+              
+          </ul>
+   </section>
+
+	<p class="mt30 pd cen zd" ng-click="form_te.submit()">
+     	  <a class="mui-btn register_button fz18" >完成</a>   
+  	 </p>
+    </section>

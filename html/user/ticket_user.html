@@ -1,0 +1,89 @@
+<!--  票券列表 -->
+<meta charset="UTF-8">
+ <section class="cen mt130" ng-if="!pload_p">
+          <p >您还没有登录哦！</p>
+          <p class="mt40 cf"><a class="mui-btn prefecture" ui-sref='signin'>登录</a></p>
+    </section>
+    
+   <section class="cen mt130" ng-if="volume_list.v_data.length==0&&pload_p">
+          <p >你没有活动票券</p>
+          <p class="mt40 cf"><a class="mui-btn prefecture" ui-sref="activities_list({activityTypeId:1})">去活动专区逛逛</a></p>
+    </section>
+    
+	<!--下拉刷新容器-->
+	<section>
+	 <section class="volume_list bgff mt10"  ng-repeat="v_data in volume_list.v_data" data-href="http://www.apptown.cn/activity/short_view/{{v_data.order_id}}">
+         <section class="pd bbm" >
+             <p class="dian zd pt5 pm5 poioiuyt_ad fl">
+                 <i class="f_i poiu_icon"></i>
+                 <span ng-bind="v_data.name"></span>
+                
+             </p>
+            
+              <span class="fz14 ls fr mt5 " ng-bind="v_data.activity_status"></span>
+                  <p class="qc"></p>
+           </section>
+           
+           <section class="pd pt10 pm10">
+              <img ng-src="{{v_data.poster}}" class="fl act_user_a">
+               <section class="ov pl10 zc fz14">
+                 
+                    主办方：<span ng-bind="v_data.sponsor"></span><br>
+                   开始时间:<span ng-bind="v_data.start_time|date:'MM/dd EEE HH:mm:ss'"></span><br>
+                   票种：<span ng-bind="v_data.ticket_name"></span><br>
+                   总价：<span class="hs" ng-bind="'￥'+v_data.price"></span>
+                   <span class="ml20">张数：<i ng-bind="v_data.count"></i> 张</span>
+                  
+               </section>
+               <p class="qc"></p>
+           </section>
+      
+      </section>
+     
+	</section>
+    
+   
+   
+    <p class="pt10 pm10 bgff mt10 cen volume_button" ng-click="volume_list.ticket_volume()" ng-if="volume_list.v_data.length>0"> 
+      查看过期票券
+        <i class="f_i drop_down_icon"></i>
+    </p>
+    <section class="expired_ticket_volume">
+        <p class="pd mt10">
+      <img  src="/img/deferred_sight.png" class="w100">
+    </p>
+    
+    
+        
+         <section class="volume_list bgff mt10"  ng-repeat="v_data in volume_list.over_data"  data-href="http://www.apptown.cn/activity/short_view/{{v_data.order_id}}">
+         <section class="pd bbm" >
+             <p class="dian zd pt5 pm5 poioiuyt_ad fl">
+                 <i class="f_i poiu_icon"></i>
+                 <span ng-bind="v_data.name"></span>
+                
+             </p>
+            
+              <span class="fz14 zc fr mt5 " ng-bind="v_data.activity_status"></span>
+                  <p class="qc"></p>
+           </section>
+           
+           <section class="pd pt10 pm10">
+              <img ng-src="{{v_data.poster}}" class="fl act_user_a">
+               <section class="ov pl10 zc fz14">
+                 
+                    主办方：<span ng-bind="v_data.sponsor"></span><br>
+                   开始时间:<span ng-bind="v_data.start_time|date:'MM/dd EEE HH:mm:ss'"></span><br>
+                   票种：<span ng-bind="v_data.ticket_name"></span><br>
+                   总价：<span class="hs" ng-bind="'￥'+v_data.price"></span>
+                   <span class="ml20">张数：<i ng-bind="v_data.count"></i> 张</span>
+                  
+               </section>
+               <p class="qc"></p>
+           </section>
+      
+      </section>
+
+      
+      
+ </section>
+

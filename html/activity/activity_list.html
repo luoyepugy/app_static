@@ -1,0 +1,69 @@
+<!-- 活动列表 -->
+<meta charset="UTF-8">
+<section ng-controller="activities_list">
+     <section class=" list_activities pr" style="z-index:1001">
+      <section class="sdf_poi_oiiuy box cen pt10 pm10 bgff pr">
+        <p class="box_a" ng-click="act_list.title_p(1)">
+         	  <span>创客</span><i class="f_i xiala_icon"></i>
+        </p>
+         <p class="box_a" ng-click="act_list.title_p(2)">
+          	 <span>行业</span><i class="f_i xiala_icon"></i>
+        </p>
+         <p class="box_a" ng-click="act_list.title_p(3)">
+          	<span> 时间</span><i class="f_i xiala_icon"></i>
+        </p>
+         <p class="box_a" ng-click="act_list.title_p(4)">
+       	    <span>不限</span><i class="f_i xiala_icon"></i>
+        </p>
+        </section>
+        <section class="dfg_poi" ng-click="act_list.hdoe_sdf()"></section>
+        <ul class="list_active">
+              <li   ng-repeat="select in act_list.select_data.maker_title" ng-bind="select.text" ng-click="act_list.se_function(act_list.select_data.title,select.id,select.text)"></li>
+        </ul>
+        
+        
+    </section>
+    
+    
+
+    <section id="act_list" pulllist='paging()'   class="ulact_p" ng-click="">
+           <ul id="scroll" style="background:#EFEFF4">  
+             <li  class="mb10" ng-repeat="list in act_list.activity_list" finish ui-sref="activity_detail({id:list.id})" >
+                         <section class="pd  bgff  pt10 pm10">
+              <img ng-src="{{list.poster}}" class="fl act_user_a">
+               <section class="ov pl10 zc fz14">
+                   <p class="dianer zd b tile_poiu_a" ng-bind="list.name"></p>
+                    
+                <p class="fz12 dian">
+                <i  class="f_i map_icon"></i><span ng-bind="list.city_name"></span>
+                </p>
+                   
+                   <section class="fz12 dian zc">
+                <p class="fl"><i class="f_i time_icon"></i><span ng-bind="list.start_time_str"></span> </p>
+                  <a class="fr" ng-if="list.activity_way!=1">免费</a>
+                       <span class="fr hs" ng-if="list.activity_way==1">收费</span>
+                  <p class="qc"></p>
+                </section>
+               
+                
+               </section>
+               <p class="qc"></p>
+           </section>
+            <section class="box btm pt5 pm5 fz12 cen zc schedule_p bgff">
+                   <section class="box_a" ng-class="list.skjhg_s">
+                      <i class="f_i zmkjf_a" ></i>目标金额{{list.target_money}}元
+                   </section>
+                    <section class="box_a" ng-class="list.skjhg_s">
+                     <i class="f_i zmkjf_b"></i>已筹{{list.now_money}}元
+                   </section>
+                    <section class="box_a" ng-class="list.skjhg_s">
+                     <i class="f_i zmkjf_c"></i>进度{{list.schedule}}
+                   </section>
+                </section>
+                
+                    </li>
+        </ul>
+    </section> 
+    
+
+</section>

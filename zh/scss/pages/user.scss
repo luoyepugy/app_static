@@ -1,0 +1,136 @@
+
+@import "../common";
+@import "../custom/mixin";
+
+
+// ============= 我的钱包 ===============
+.redpacket {
+	background: url("/img/bg_red_packet.jpg") no-repeat;
+	@include position();
+	@include size(100%);
+	background-size: 100% 100%;
+}
+
+
+// ================ 登录 ===============
+.signin {
+	width: 80%;
+	margin: 40px auto 0;
+	@include display-inline(30%, calc(70% - 10px));
+	text-align: center;
+	.iconfont {
+		color: #fff;
+		font-size: 30px;
+	}
+	.icon-QQ {
+		font-size: 24px;
+	}
+	.inline-left {
+		padding-left: 10px;
+		line-height: 45px;
+	}
+	.inline-right {
+		line-height: 45px;
+		font-size: 16px;
+		border-left: 1px solid #fff;
+		
+	}
+	.mui-btn {
+		width: 100%;
+		padding: 0;
+		transition-duration: 0s;
+	}
+	input {
+		border: 1px solid $main-green;
+	}
+	// 分割线
+	.division {
+		text-align: center;
+		i {
+			display: block;
+			border-bottom: 1px solid #ccc;
+		}
+		span {
+			background: $bg;
+			position: relative;
+			bottom: 10px;
+			padding: 0 10px;
+		}
+	}
+}
+
+// ================= 搜索 ==============
+.search {
+	padding: 15px 5px;
+	.searchType,
+	.searchInput,
+	.searchBtn {
+		@include inline-block;
+	}
+	.searchType {
+		width: 22%;
+		@include skin-bgfg(#c7c7c7, #fff);
+		position: relative;
+		@include line-height(40px);
+		text-align: center;
+		border-bottom: 1px solid #fff;
+		&:after {
+			content: '\e610';
+		}
+		margin-right: 0;
+	}
+	.searchTypeList {
+		@include position-basic(absolute, left, 5px, top, 105px);
+		width: calc(22% - 2px);
+		z-index: 100;
+		li {
+			text-align: center;
+			line-height: 40px;
+			border-bottom: 1px solid #fff;
+			@include skin-bgfg(#c7c7c7, #fff);
+		}
+	}
+	.searchInput {
+		width: 57%;
+		position: relative;
+		vertical-align: top;
+		input {
+			padding-left: 25px;
+		}
+	}
+	.searchBtn {
+		width: 17%;
+		height: 40px;
+	}
+	.itemFirst {
+		order: 1;
+	}
+	.icon-search {
+		@include position-basic(absolute, left, 10px, top, 7px);
+		color: $text-light;
+		width: 15px;
+	}
+	.mui-icon-clear {
+		position: absolute;
+    	right: 5px;
+    	top: 10px;
+	}    
+}
+.searchResutWrap {
+	position: fixed;
+    left: 0px;
+    top: 110px;
+    width: 100%;
+    height: 100%;
+    .sponsorTitle {
+    	font-size: 15px;
+    	color: $text-dark;
+    	margin-bottom: 10px;
+    }
+    .sponsorImg {
+    	@include size(60px);
+    }
+    .mui-table-view .mui-media-object {
+    	max-width: none;
+    }
+}

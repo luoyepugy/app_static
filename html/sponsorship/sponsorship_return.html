@@ -1,0 +1,85 @@
+<!-- 赞助回报 -->
+<meta charset="UTF-8">
+<section ng-controller="sponsorship_return">
+		   <section class="pd pt10 pm10 bgff">
+		      <div>
+		          <p class="ov  zd fz18 diansan yj4" style="float:left;border:1px solid #4ea45d;padding:2px 8px;" ng-bind="date_p.re_t">
+		        	
+		        </p>
+		        <p  style="float:left;padding:2px 8px;" >
+		                               赞助<span  class="green" ng-bind="date_p.amount"></span>元
+		        </p>
+		        
+		        <p class="qc"></p>
+		      </div>
+		      <p class="mt10">
+		                 回报详情：{{date_p.repay_content}}
+		      </p>
+		       <p class="mt10">
+		                 回报时间：{{date_p.re_time}}之前发放
+		      </p>
+		       
+		    </section>  
+		    <ul class="mui-table-view mt10">
+		            <li class="mui-table-view-cell">
+		                  <span class="act_title">所属行业：</span>
+		                  <p class="ov"  ng-bind="date_p.industry">
+		                    
+		                  </p>
+		            </li>
+		              <li class="mui-table-view-cell">
+		                  <span class="act_title">回报时间：</span>
+		                  <p class="ov" ng-bind="date_p.name">
+		                    
+		                  </p>
+		            </li>
+		            <li class="mui-table-view-cell">
+		                  <span class="act_title">发起人：</span>
+		                  <p class="ov" ng-bind="date_p.sponsor_name">
+		                    
+		                  </p>
+		            </li>
+		              <li class="mui-table-view-cell">
+		                  <span class="act_title">联系电话：</span>
+		                  <p class="ov"  ng-bind="date_p.sponsor_phone">
+		                    
+		                  </p>
+		            </li>
+		        </ul>
+		       <section class="bgff mt10">
+		         <p class="pt10  pd pm10 zd">
+    	赞助人基本信息
+    </p>
+		          <ul class="mui-table-view apply_p mt0">
+		          	
+		                  <li class="mui-table-view-cell">
+		                     <input  type="text" placeholder="请填写姓名" id="name"/>
+		                  </li>
+		                    <li class="mui-table-view-cell">
+		                     <input  type="text" placeholder="请填写手机号码" id="tel"/>
+		                  </li>
+		                 
+		              </ul>
+		        
+		       </section>
+
+		    
+		<section class="pd pt10 pm10 bgff mt5 ssd_poiou_num">
+    	<span class="fz16">赞助数量</span>
+    <div class="mui-numbox fr" >
+        <button class="mui-btn mui-btn-numbox-minus" type="button" ng-click="ticket_types.add_poi(2)">-</button>
+        <input class="mui-input-numbox fz12" type="number" id="number_sddf" value="{{ticket_types.number_of}}">
+        <button class="mui-btn mui-btn-numbox-plus" type="button" ng-click="ticket_types.add_poi(1)">+</button>
+    </div>
+    	
+    </section>
+    
+    
+    
+    <div class="mt30 pd cen zd" style="background:#fff;border:1px solid #e0e0e0;padding:5px 5px;" ng-click="ticket_types.submit()">
+          <p class="fl fz18" style="line-height:40px;">合计<span class="re_amount" style="color:#ff0000;" ></span>元</p>
+     	  <a class="mui-btn register_button fz18 fr" style="width:40%">立即支付</a> 
+     	  <div class="qc"></div>  
+  	 </div>
+</section>
+

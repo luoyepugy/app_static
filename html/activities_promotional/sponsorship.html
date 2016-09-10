@@ -1,0 +1,135 @@
+<!-- 发起赞助 -->
+<meta charset="UTF-8">
+<section ng-controller="sponsorship_controller">
+  <div class="j-sponsorshipForm">
+  <ul class="mui-table-view mt20">
+          <li class="mui-table-view-cell">
+                <span class="act_title fz16">项目名称：</span>
+                <p class="ov">
+                  <input type="text" class="max_klabel_a" name="activitySupport.name" placeholder="请输入项目名称" maxlength="50" data-empty="请输入项目名称" />
+                </p>
+          </li>
+         </ul>
+          <ul class="mui-table-view mt10">
+             <li class="mui-table-view-cell pr" time>
+                <span class="act_title fz16">开始时间：</span>
+                <p class="ov dianer pr mui-col-xs-8 mui-col-sm-9">
+                       <input type="text" class="max_klabel_a time" name="start_time" placeholder="请选择开始时间" data-empty="请选择开始时间" timestamp />
+                </p>
+                 <span class="mui-icon mui-icon-arrowdown zc map_icon_a"></span>
+          </li>
+          <li class="mui-table-view-cell pr" time>
+                <span class="act_title fz16">结束时间：</span>
+                <p class="ov dianer pr mui-col-xs-8 mui-col-sm-9">
+                       <input type="text" class="max_klabel_a time" name="end_time" placeholder="请选择结束时间" data-empty="请选择结束时间" timestamp />
+                </p>
+                 <span class="mui-icon mui-icon-arrowdown zc map_icon_a"></span>
+          </li>
+               <li class="mui-table-view-cell pr">
+                <span class="act_title fz16">目标金额：</span>
+                <p class="ov dianer pr mui-col-xs-8 mui-col-sm-9">
+                       <input type="number" class="max_klabel_a " name="activitySupport.target_amount" placeholder="请输入目标金额" data-empty="请输入项标金额" format-number />
+                </p>
+                
+          </li>
+          
+                <li class="mui-table-view-cell pr" industry>
+                <span class="act_title fz16">项目行业：</span>
+                <p class="ov dianer pr mui-col-xs-8 mui-col-sm-9">
+                       <input  type="text" class="max_klabel_a select_po" name="activitySupport.industry_id" placeholder="请选择项目行业" data-empty="请选择项目行业" />
+                </p>
+                 <span class="mui-icon mui-icon-arrowdown zc map_icon_a"></span>
+          </li>
+          <li class="mui-table-view-cell pr">
+                <span class="act_title fz16">项目简介：</span>
+                <p class="ov dianer pr mui-col-xs-8 mui-col-sm-9">
+                       <input  type="text" class="max_klabel_a select_po" name="activitySupport.introduction" placeholder="请输入项目简介" data-empty="请输入项目简介" />
+                </p>
+          </li>
+      </ul>
+      <p class="pt10 pm10 pd fz16">
+      	  赞助详情
+      	
+      </p>
+      <p>
+      	  <textarea class="act_poiiu_tr" placeholder="请输入赞助详情" name="activitySupport.content_details" data-empty="请输入赞助详情"></textarea>
+      	</p>
+        <input type="hidden" name="activitySupport.status" value="3">
+      	
+      	<section ng-if="repayList.length>0" class="bgff pd pt10 pm10 mb10" ng-repeat="item in repayList">
+      		<p class="ls fz14 fr tyut_po_a tr"><span ng-click="deleteRepay($index)">删除</span><br>
+      			<span class="zc">限制{{item.person_limit}}人</span>
+      		</p>
+      		<p class="mui-col-xs-9 dian fz16 zd tyut_po">
+      			赞助<span class="hs fz18 pl10">{{item.support_amount}}元</span><br />
+      			<span class="zc">{{item.repay_title}}</span>
+      		</p>
+      		
+      		<p class="fz12 mt10">
+      			{{item.repay_content}}
+      		</p>
+      	</section>
+      	
+      	<a class="pt10 pm10 ls cen mt20 bgff bbm btm fz16 mui-block" ng-click="addRepay()">
+	          	+添加回报
+	          </a>
+	          <p class="pd">  <a class="mui-btn register_button fz16 mt40" ng-click="submitSponsor()">立即发布</a></p>
+        </div>
+
+          <div ng-if="repayForm" class="j-repayForm">
+             <ul class="mui-table-view mt10">
+                   <li class="mui-table-view-cell pr">
+                      <span class="act_title fz16">赞助金额：</span>
+                      <p class="ov dianer pr mui-col-xs-8 mui-col-sm-9">
+                             <input type="number" class="max_klabel_a " name="support_amount" placeholder="请输入赞助金额" data-empty="请输入赞助金额" format-number />
+                      </p>
+                   
+                   </li>
+                    <li class="mui-table-view-cell pr">
+                      <span class="act_title fz16">人数限制：</span>
+                      <p class="ov dianer pr mui-col-xs-8 mui-col-sm-9">
+                             <input type="number" class="max_klabel_a " name="person_limit" placeholder="默认无人数限制" format-number />
+                      </p>
+                   
+                   </li>
+                    <li class="mui-table-view-cell pr" select data-ar="{{repayType}}">
+                      <span class="act_title fz16">回报方式：</span>
+                      <p class="ov dianer pr mui-col-xs-8 mui-col-sm-9">
+                             <input class="max_klabel_a" name="repay_title" placeholder="请选择回报方式"  data-empty="请选择回报方式" />
+                      </p>
+                       <span class="mui-icon mui-icon-arrowdown zc map_icon_a"></span>
+                   
+                   </li>
+                    <li class="mui-table-view-cell pr">
+                      <span class="act_title fz16">回报时间：</span>
+                      <p class="ov dianer pr mui-col-xs-8 mui-col-sm-9">
+                             <input type="text" class="max_klabel_a" name="repay_time" placeholder="请输入回报时间"  data-empty="请输入回报时间"/>
+                      </p>
+                </li>
+               </ul>
+        
+                <p class="pt10 pm10 pd fz16">
+                回报内容
+              
+                </p>
+                <p>
+                <textarea class="act_poiiu_tr" placeholder="请输入回报内容" name="repay_content"  data-empty="请输入回报内容" max-length="100"></textarea>
+              </p>
+              
+               <p class="mt30 pd cen zd box">
+                   <a class="mui-btn register_button fz18 box_a mr10" ng-click="saveRepayForm()">确定</a>  
+                   <a class="j-backBtn mui-btn register_button fz18 box_a ml10 bgff ls brls">取消</a> 
+                </p>
+          </div>
+
+    <!-- 等待审核 -->
+    <div ng-if="repayWaiting">
+      <div class="tc mt30 fz20"><img class="mr20" src="/img/waiting.png" alt="成功">审核中...</div>
+      <p class="tc mt30 fz16">申请结果将会在24小时内反馈。请耐心等待！</p>
+      <p class="mt30 pd cen zd">
+          <a class="mui-btn register_button fz18" ui-sref="add_activities">确定</a>     
+      </p>
+    </div>
+    <!-- /等待审核 -->
+	         
+</section>

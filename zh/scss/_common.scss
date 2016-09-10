@@ -1,0 +1,93 @@
+
+@import "custom/reset/custom-reset";
+@import "custom/base/default-base";
+@import "custom/base/custom-base";
+@import "custom/mixin";
+
+
+// ============ 默认iconfont修改 ===========
+.iconfont {
+	color: $main-green;
+	margin-right: 5px;
+}
+
+// ============= mui默认样式修改 ============
+.mui-btn-green {
+	@include skin-bgbd($main-green);
+}
+.mui-btn-block {
+	width: 90%;
+	display: block;
+	margin: 15px auto;
+}
+
+
+
+// =============== 原子 =================
+
+// 宽度自动
+.w-auto {
+	width: auto;
+}
+
+// ============== 按钮 =============
+.btn-green {
+	@include skin-basic(#01bb0f, #fff);
+}
+.btn-red {
+	@include skin-basic($main-red, #fff);
+}
+.btn-blue {
+	@include skin-basic(#3eb0d8, #fff);
+}
+
+
+
+// =============== 模块 ==================
+
+// 表单左右结构
+.form-row {
+	@include display-inline(35%, 50%);
+	.inline-left {
+    	padding: 11px 15px;
+	}
+	.inline-right {
+		padding: 11px 0;
+	}
+}
+
+// mui-list列表靠右标签
+.list-fr {
+	@include position-basic(absolute, right, 35px, top, 10px);
+}
+
+// 提示，辅助文本样式
+.tips {
+	font-size: 14px;
+	color: $text-light;
+	margin: 10px 15px;
+}
+
+
+
+
+
+// ================= 媒介查询 ==============
+@media (max-width: 360px) {
+	body {
+		font-size: 15px;
+	}
+}
+
+
+// 图标
+@include size-icon(130,90);
+
+
+// 颜色
+@include color('text-dark', "#141414");
+@include color('text-light', "#878787");
+@include color('text-normal', "#575757");
+@include color('green', quote($main-green));
+@include color('red', quote($main-red));
+@include color('white', '#fff');

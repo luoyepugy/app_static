@@ -1,0 +1,67 @@
+@CHARSET "UTF-8";
+/* 城市选择css  bg cgq   2016 3 4*/
+@CHARSET "UTF-8";
+
+body {
+	background: #fff;
+}
+
+.ptm4 {
+	padding-top: 4px;
+	padding-bottom: 4px;
+}
+
+.ptm_8_14 {
+	padding-top: 16px;
+	padding-bottom: 16px;
+}
+
+.mb0 {
+	margin-bottom: 0px;
+}
+
+.brte0 {
+	border-bottom: 1px solid #e0e0e0;
+}
+
+.municipalities span {
+	margin-right: 20px;
+}
+
+p {
+	margin-bottom: 0px;
+}
+
+h4 {
+	margin-top: 0;
+}
+
+h4:hover {
+	background: #f8f8f8;
+}
+
+.right_ctay {
+	position: fixed;
+	right: 16px;
+	top: 0px;
+	height: 100%;
+	padding-top: 20px;
+	z-index: 10
+}
+
+.right_ctay a {
+	display: block;
+	height: 7.1%;
+}
+
+.ctay_po_a {
+	width: 70%;
+	height: 100%;
+	position: fixed;
+	right: 0;
+	top: 0;
+	z-index: 20;
+	background: #fff;
+	border-left: 1px solid #e0e0e0;
+	display: none;
+}

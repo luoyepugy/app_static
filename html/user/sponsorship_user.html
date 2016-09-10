@@ -1,0 +1,74 @@
+<!-- 赞助 -->
+<meta charset="UTF-8">
+<section class="mt10"> 
+ <section class="pd ">
+       <p  class="box cen user_ad_top  bgff yj4">
+       <a class="box_a act_a" ng-click="sponsorship.sponsored_title(1)" ui-sref="sponsorship_user({type: 1})">
+        发起的
+        </a>
+         <a class="box_a" ng-click="sponsorship.sponsored_title(2)" ui-sref="sponsorship_user({type: 2})">
+        赞助的
+        </a>
+         <a class="box_a" ng-click="sponsorship.sponsored_title(3)" ui-sref="sponsorship_user({type: 3})">
+        收藏的
+        </a>
+    </p>
+    
+    </section>
+    
+    <p class="pt10 pm10 bgff pd act_use_p mt10">
+          <a class="cat_poo" ng-click="sponsorship.status('')">全部</a>
+          <a class="ml20 " ng-click="sponsorship.status(5)">赞助中</a>
+          <a class="ml20" ng-click="sponsorship.status(6)">已成功</a>
+          <a class="ml20" ng-click="sponsorship.status(7)">已失败</a>
+    </p>
+ 
+<section class="mt10 user_act_pii">
+     <section id="wrapper">
+           <ul id="scroll"> 
+              <li  class="pd pt10 pm10 bgff  fdf_poiuy fdf_poiuy_poo" ng-repeat="list in sponsorship.sp_list" finish>
+              <section ui-sref="sp_details({'id':list.id})">
+         <p class=""><i class="f_i time_icon"></i><span  ng-bind="list.start_time_fm"></span>
+         <span class="ls fr" ng-bind="list.st"></span>
+         </p>
+         <p class="qc pm5"></p>
+              <img ng-src="{{list.covers}}" class="fl act_user_a">
+               <section class="ov pl10 zc fz14">
+                   <p class="dianer zd b"  ng-bind="list.title"></p>
+                    
+                <p class="box mt20 tl">
+                     <span class="box_a dian fz12">
+                    已筹<span class="hs" ng-bind="'￥'+list.now_money"></span>
+                    </span>
+                     <span class="box_a dian fz12">
+                   参与<span class="ls" ng-bind="list.join_num"></span>人
+                    </span>
+                     <span class="box_a dian fz12">
+                留言<span class="hs" ng-bind="list.com_num"></span>条
+                    </span>
+                   </p>
+                   
+                 
+               </section>
+               <p class="qc"></p>
+               </section>
+         <p class="pt10  btm mt10 tr">
+            <a class="sponsorship_details yj4 fz12"  ui-sref="sponsorship_user_detail({id:list.id,money:list.now_money,peo_num:list.com_num})" ng-if="type==1">
+         	    赞助详情
+             </a> 
+               <a class="sponsorship_details yj4 fz12"  ng-click="sponsorship.deteail_a(list) " ng-if="type==2">
+         	    支付详情
+             </a>
+         </p>
+         
+          
+              </li>
+           
+           </ul>
+           </section>
+           </section>
+
+
+
+
+</section>

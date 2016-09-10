@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html ng-app="big_machine">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta http-equiv="Cache-Control" content="no-transform "> 
+<title>活动签到</title>
+<link href="/css/common/swiper3.07.min.css" rel="stylesheet">  
+<link href="/css/common/mui.min.css" rel="stylesheet">  
+<link href="/css/common/base.css" rel="stylesheet">  
+<link href="/css/common/font-awesome.css" rel="stylesheet">  
+<link href="/css/big_machine/big_machine.css" rel="stylesheet"/>
+</head>
+<body ng-controller="big_machine_controller">
+
+<section class="swiper-container big_switch">
+  <section class="swiper-wrapper">
+    <section class="swiper-slide"     ng-repeat="bg_b in big_sign.banner" >
+        <img ng-src="{{bg_b}}" class="big_mimg">
+    </section>
+  </section>
+     <section class="swiper-pagination"></section>
+</section>
+<section class="big_bg_poi ">
+   <section class="big_pd">
+ <section class="pt30">
+   <section class="mui-col-sm-9 fl">
+    <p class="dianer fz42 yellow  pt10 lg1_3 " ng-bind="big_sign.act_title">
+
+    </p>
+      <p class="cf fz34 mt40">主办方：<span ng-bind="big_sign.sponsor"></span></p> 
+   </section>
+ 
+      <section class="mui-col-sm-3 ov">
+           <section class="bg_qc_icon">
+           <img ng-src="{{big_sign.sponsor_image_url}}">
+           </section>
+      </section>
+         
+     </section>
+     
+     <section class="mt40">
+         <section class="mui-col-sm-4 fl">
+           <section class="pr40">
+             <p class="cen cf fz30">
+                 <span class="fz42 yellow" ng-bind="big_sign.cons_p.length"></span>
+                 人签到
+             </p>
+             <section class="big_qc_sing mt30">
+                <img src="http://www.2d-code.cn/2dcode/api.php?key=c_e170d93zzNkfW4eEg0KMr0oYZvO8ZIkR47oRRwUkt4&text=http://apptown.cn/scan/scanActivityCode?activityId=6680&logo=http://resource.apptown.cn/share/share_activity.png">
+                 
+             </section>
+             <p class="fz30 cf cen mt30">
+                  微信扫一扫 完成签到
+             </p>
+
+         
+             </section>
+         </section>
+         
+          <section class="mui-col-sm-8 ov  dff_poiu">
+             <section class="sddf_poiou fl"  ng-repeat="bg_c in big_sign.cons_p">
+                 <section class="user_pooi big_uswer_s yj ov ml20 pr">
+                      <img ng-src="{{bg_c.user_icon}}">
+                     <p class="cen fz20 dsd_poiui cf pt10 pm10 dian" ng-bind="bg_c.name"></p>
+                 </section>
+             </section>
+         
+
+                
+         </section>
+         
+     </section>
+     <section class=" mt60 big_pd  mnbv_ssd fz36 cf pr" ng-click="v_pay()">
+  <i class="fa fa-volume-off mr20 fz62"></i>
+      <marquee class="df_poi">   
+           
+     		 <span class="dfd_po">扫描上方签到码，即可参加活动互动</span>
+      </marquee>
+     </section>
+  
+       
+   </section>
+  
+    
+</section>
+
+<footer class="box bottm_poi">
+     <section class="box_a cen act">
+         <i class="fa fa-home fz62"></i>
+         <p class="fz30">签到</p>
+     </section>
+     <section class="box_a cen">
+         <i class="fa fa-comments  fz62"></i>
+         <p class="fz30">留言</p>
+     </section>
+     <section class="box_a cen">
+         <i class="fa fa-bar-chart fz62"></i>
+         <p class="fz30">投票</p>
+     </section>
+     <section class="box_a cen">
+         <i class="fa fa-houzz fz62"></i>
+         <p class="fz30">抽奖</p>
+     </section>
+     <section class="box_a cen">
+         <i class="fa fa-television fz62"></i>
+         <p class="fz30">签到</p>
+     </section>
+</footer>
+
+<section id="share_pp" class="mui-popover mui-popover-bottom mui-popover-action ">
+   <section class="yj4 bgff dsf_pooi">
+         <section class="user_pooi big_uswer_s yj ov ml20 pr big_uswer_s_pup">
+                      <img ng-src={{big_sign.cons_p[0].user_icon}}>
+                     <p class="cen fz30 dsd_poiui cf pt10 pm10 dian ng-binding" ng-bind="big_sign.cons_p[0].name"></p>
+                 </section>
+                 <p class="fz42 ls cen pt10 pm30 mt30">签到成功</p>
+   </section>
+</section>
+
+ <audio controls="controls" style="width:1px;height:1px;display:none" id="player_p" >
+  <source src="http://resource.apptown.cn/share/success.mp3" type="audio/mp3" />
+</audio>
+
+ <audio controls="controls" style="width:1px;height:1px;display:none" id="player_q" >
+  <source src="http://resource.apptown.cn/share/activity_welcome.mp3" type="audio/mp3" />
+</audio>
+<script src="/js/common/jquery-1.11.3.min.js"></script>
+<script src="/js/common/swiper3.07.min.js"></script>
+<script src="/js/common/angular.min.js?v=9"></script>
+ <script src="/js/common/mui.min.js?v=9"></script>
+<script src="/js/common/angular-ui-router.min.js?v=9"></script>
+<script src="/js/mode/directive.js?v=9"></script>
+<script src="/js/service/service_activity.js?v=11?v=9"></script> 
+<script src="/js/entity/entity_phone.js?v=12"></script>
+<script src="/js/controller/controller_big_machine.js"></script>
+</body>
+</html>
