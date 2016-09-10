@@ -17,7 +17,7 @@ angular.module('form', ['request', 'common', 'ui.router'])
         };
         return validate;
 
-        // 验证输入框是否为空
+        // ------------------------ 验证输入框是否为空 -----------------------
         function isEmpty(form) {
             var eles = $(form).find('input[data-empty], textarea[data-empty]'),
                 num = 0,
@@ -38,7 +38,7 @@ angular.module('form', ['request', 'common', 'ui.router'])
             return valid;
         };
 
-        // 验证格式是否正确
+        // ---------------------- 验证格式是否正确 --------------------------
         function isCorrectFormat(form) {
             var valid = true,
                 formatEles = {
@@ -48,99 +48,19 @@ angular.module('form', ['request', 'common', 'ui.router'])
                     'confirmPwd': $(form).find('input[format-confirmPwd]'),
                     'minLength': $(form).find('input[min-length]'),
                     'maxLength': $(form).find('input[max-length]'),
-                    'number': $(form).find('input[format-number]')
+                    'number': $(form).find('input[format-number]'),
+                    'email': $(form).find('input[format-email]'),
+                    'idCard': $(form).find('input[format-idCard]')
                 },
                 formatRegexp = {
                     'phone': /^((145|147)|(15[^4])|(17[6-8])|((13|18)[0-9]))\d{8}$/,
+                    'idCard': /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/,
+                    'email': /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
                     'number': /^[0-9]*$/
                 };
 
-
-            var _format = function(eles, type) {
-                var errorNum = 0, 
-                    typeNum = 0;
-                if(eles.length > 0) {
-                    eles.each(function() {
-
-                        if(type == 'phone') {
-                            if(!formatRegexp.phone.test($(this).val())) {
-                                typeNum++;
-                                messageService.show($(this).data('empty').slice(3) + '格式不正确');
-                            }
-                        }
-                        if(type == 'number') {
-                            if(!formatRegexp.number.test($(this).val())) {
-                                typeNum++;
-                                messageService.show('请输入数字格式');
-                            }
-                        }
-                        if(type == 'minLength') {
-                            var minlen = $(this).attr('min-length');
-                            if($(this).val().length < minlen) {
-                                typeNum++;
-                                messageService.show($(this).data('empty').slice(3) + '最小长度为' + minlen);
-                            }
-                        }
-                        if(type == 'maxLength') {
-                            var maxlen = $(this).attr('max-length');
-                            if($(this).val().length > maxlen) {
-                                typeNum++;
-                                messageService.show($(this).data('empty').slice(3) + '最大长度为' + maxlen);
-                            }
-                        }
-                        if(type == 'bankCard') {
-                            if(!isBankCard($(this).val())) {
-                                typeNum++;
-                                messageService.show($(this).data('empty').slice(3) + '格式不正确');
-                            }
-                        }
-
-                        // 类型
-                        if(typeNum != 0) {
-                            $(this).focus();
-                            errorNum++;
-                            valid = false;
-                            return false;
-                        }
-
-                    });
-                    if(errorNum == 0) {
-                        valid = true; 
-                    } else {
-                        return false;
-                    }
-                }
-                return true;
-            }
-
-            // 验证手机号码格式
-            if(!_format(formatEles.phone, 'phone')) {
-                return false;
-            };
-
-            // 验证字符最小长度
-            if(!_format(formatEles.minLength, 'minLength')) {
-                return false;
-            };
-
-            // 验证字符最大长度
-            if(!_format(formatEles.maxLength, 'maxLength')) {
-                return false;
-            };
-
-            // 验证银行卡号格式
-            if(!_format(formatEles.bankCard, 'bankCard')) {
-                return false;
-            };
-
-            // 验证数字格式
-            if(!_format(formatEles.number, 'number')) {
-                return false;
-            };
-
-
-
-            function isBankCard(value) {
+            // 验证银行卡号码格式
+            var _isBankCard = function(value) {
                 if(/[^0-9 \-]+/.test(value)){
                     return false;
                 }
@@ -162,44 +82,71 @@ angular.module('form', ['request', 'common', 'ui.router'])
                 return (nCheck % 10) ===0;
             }
 
-            // 验证银行卡号格式
-            // if(formatEles.bankCard.length > 0) {
-            //     var errorNum = 0;
-            //     formatEles.bankCard.each(function() {
-            //         var val = $(this).val();
-            //         if(!isBankCard(val)) {
-            //             $(this).focus();
-            //             messageService.show($(this).data('empty').slice(3) + '格式不正确');
-            //             errorNum++;
-            //             valid = false;
-            //             return false;
-            //         }
-            //     });
-            //     if(errorNum == 0) {
-            //         valid = true;
-            //     } else {
-            //         return false;
-            //     }
-            // }
+            var _format = function(type) {
+                var errorNum = 0, 
+                    typeNum = 0;
+                if(formatEles[type].length > 0) {
+                    formatEles[type].each(function() {
+                        var tips = ($(this).data('empty')) ? $(this).data('empty').slice(3) : '';
+                            val = $(this).val();
+                        var formatTip = function () {
+                            typeNum++;
+                            if(tips) {
+                                messageService.show(tips + '格式不正确');
+                            } else {
+                                messageService.show('请输入正确的格式');
+                            } 
+                        }
+                        // 格式
+                        if(type == 'phone' || type == 'number' || type == 'idCard' || type == 'email') {
+                            if(!formatRegexp[type].test(val)) {
+                                formatTip();
+                            }
+                        }
+                        if(type == 'bankCard') {
+                            if(!_isBankCard(val)) {
+                                formatTip();
+                            }
+                        }
+                        // 最小长度和最大长度字符
+                        if(type == 'minLength') {
+                            var minlen = $(this).attr('min-length');
+                            if(val.length < minlen) {
+                                typeNum++;
+                                messageService.show($(this).data('empty').slice(3) + '最小长度为' + minlen);
+                            }
+                        }
+                        if(type == 'maxLength') {
+                            var maxlen = $(this).attr('max-length');
+                            if(val.length > maxlen) {
+                                typeNum++;
+                                messageService.show($(this).data('empty').slice(3) + '最大长度为' + maxlen);
+                            }
+                        }
+                        
+                        // 类型
+                        if(typeNum != 0) {
+                            $(this).focus();
+                            errorNum++;
+                            valid = false;
+                            return false;
+                        }
+                    });
+                    if(errorNum == 0) {
+                        valid = true; 
+                    } else {
+                        return false;
+                    }
+                }
+                return true;
+            }
 
-            // 验证手机号码格式
-            // if(formatEles.phone.length > 0) {
-            //     var errorNum = 0;
-            //     formatEles.phone.each(function() {
-            //         if(!formatRegexp.phone.test($(this).val())) {
-            //             $(this).focus();
-            //             messageService.show($(this).data('empty').slice(3) + '格式不正确');
-            //             errorNum++;
-            //             valid = false;
-            //             return false;
-            //         }
-            //     });
-            //     if(errorNum == 0) {
-            //         valid = true;
-            //     } else {
-            //         return false;
-            //     }
-            // }
+            // ------手机号码-------------最小字符长度------------最大字符长度-----------银行卡号码----------------数字---------------电子邮箱----------身份证号码----
+            if(_format('phone') && _format('minLength') && _format('maxLength') && _format('bankCard') && _format('number') && _format('email') && _format('idCard')) {
+                return true;
+            } else {
+                return false;
+            };
 
             // 验证两次密码是否输入一致
             if(formatEles.confirmPwd.length > 0 && formatEles.confirmPwd.length > 0) {
@@ -213,69 +160,10 @@ angular.module('form', ['request', 'common', 'ui.router'])
                 }
             }
 
-            // 验证输入最小长度
-            // if(formatEles.minLength.length > 0) {
-            //     var errorNum = 0;
-            //     formatEles.minLength.each(function() {
-            //         var len = $(this).attr('min-length');
-            //         if($(this).val().length < len) {
-            //             $(this).focus();
-            //             messageService.show($(this).data('empty').slice(3) + '最小长度为' + len);
-            //             errorNum++;
-            //             valid = false;
-            //             return false;
-            //         }
-            //     });
-            //     if(errorNum == 0) {
-            //         valid = true;
-            //     } else {
-            //         return false;
-            //     }
-            // }
-
-            // 验证输入最大长度
-            // if(formatEles.maxLength.length > 0) {
-            //     var errorNum = 0;
-            //     formatEles.maxLength.each(function() {
-            //         var len = $(this).attr('max-length');
-            //         if($(this).val().length > len) {
-            //             $(this).focus();
-            //             messageService.show($(this).data('empty').slice(3) + '最大长度为' + len);
-            //             errorNum++;
-            //             valid = false;
-            //             return false;
-            //         }
-            //     });
-            //     if(errorNum == 0) {
-            //         valid = true;
-            //     } else {
-            //         return false;
-            //     }
-            // }
-
-            // 验证数字
-            // if(formatEles.number.length > 0) {
-            //     var errorNum = 0;
-            //     formatEles.number.each(function() {
-            //         if(!formatRegexp.number.test($(this).val())) {
-            //             $(this).focus();
-            //             messageService.show($(this).data('empty').slice(3) + '格式不正确');
-            //             errorNum++;
-            //             valid = false;
-            //             return false;
-            //         }
-            //     });
-            //     if(errorNum == 0) {
-            //         valid = true;
-            //     } else {
-            //         return false;
-            //     }
-            // }
-
             return valid;
         }
 
-        // 验证是否为空与格式是否正确
+        // --------------------- 验证是否为空与格式是否正确 ------------------
         function emptyAndFormat(form) {
             if(!validate.isEmpty(form) || !validate.isCorrectFormat(form)) {
                 return false;
@@ -283,7 +171,7 @@ angular.module('form', ['request', 'common', 'ui.router'])
             return true;
         }
 
-        // 提交表单数据
+        // --------------------------- 提交表单数据 --------------------------
         function submitData(form) {
             var datas = {};
             $(form).find('input[name],textarea[name],select[name]').each(function() {
@@ -341,9 +229,6 @@ angular.module('form', ['request', 'common', 'ui.router'])
         function link(scope, element, attrs) {
             scope.text = attrs.text || '提交保存';
             scope.btnClass = attrs.btnClass || '';
-            var resultsIsEmpty,
-                resultsDatas,
-                resultIsCorrectFormat;
 
             element.bind('click', function() {
 
@@ -353,8 +238,9 @@ angular.module('form', ['request', 'common', 'ui.router'])
                 }
 
                 // 提交表单数据
-                resultsDatas = validateService.submitData(attrs.form);
-                if(resultsDatas) {
+                var resultsDatas = validateService.submitData(attrs.form);
+
+                if(!jQuery.isEmptyObject(resultsDatas)) {
                     var method = attrs.method || 'POST';
 
                     // console.log(resultsDatas);
