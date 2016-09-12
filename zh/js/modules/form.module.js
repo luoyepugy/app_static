@@ -46,8 +46,8 @@ angular.module('form', ['request', 'common', 'ui.router'])
                     'bankCard': $(form).find('input[format-bankCard]'),
                     'newPwd': $(form).find('input[new-password]'),
                     'confirmPwd': $(form).find('input[confirm-password]'),
-                    'minLength': $(form).find('input[min-length]'),
-                    'maxLength': $(form).find('input[max-length]'),
+                    'minLength': $(form).find('[min-length]'),
+                    'maxLength': $(form).find('[max-length]'),
                     'number': $(form).find('input[format-number]'),
                     'email': $(form).find('input[format-email]'),
                     'idCard': $(form).find('input[format-idCard]')
@@ -139,9 +139,8 @@ angular.module('form', ['request', 'common', 'ui.router'])
                             return false;
                         }
                     });
-                    if(errorNum == 0) {
-                        valid = true; 
-                    } else {
+                    if(errorNum != 0) {
+                        valid = false;
                         return false;
                     }
                 }
@@ -149,10 +148,9 @@ angular.module('form', ['request', 'common', 'ui.router'])
             }
 
             // ---------手机号码-------------最小字符长度------------最大字符长度-----------银行卡号码----------------数字---------------电子邮箱------------身份证号码---------------确认密码---------
-            if(!_format('phone') || !_format('minLength') || !_format('maxLength') || !_format('bankCard') || !_format('number') || !_format('email') || !_format('idCard') || !_format('confirmPwd')) {
-                return false;
+            if(_format('phone') && _format('minLength') && _format('maxLength') && _format('bankCard') && _format('number') && _format('email') && _format('idCard') && _format('confirmPwd')) {
+                return true;
             }
-
             return valid;
         }
 
