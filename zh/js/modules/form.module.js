@@ -25,7 +25,7 @@ angular.module('form', ['request', 'common', 'ui.router'])
             eles.each(function() {
                 var key = $(this).attr('name');
                 var val = $.trim($(this).val());
-                if(val == '' || val == null) {
+                if(val == '' || val == null || val == '[]') {
                     $(this).focus();
                     messageService.show($(this).data('empty'));
                     num++;
@@ -44,8 +44,8 @@ angular.module('form', ['request', 'common', 'ui.router'])
                 formatEles = {
                     'phone': $(form).find('input[format-phone]'),
                     'bankCard': $(form).find('input[format-bankCard]'),
-                    'password': $(form).find('input[format-password]'),
-                    'confirmPwd': $(form).find('input[format-confirmPwd]'),
+                    'newPwd': $(form).find('input[new-password]'),
+                    'confirmPwd': $(form).find('input[confirm-password]'),
                     'minLength': $(form).find('input[min-length]'),
                     'maxLength': $(form).find('input[max-length]'),
                     'number': $(form).find('input[format-number]'),
@@ -108,6 +108,13 @@ angular.module('form', ['request', 'common', 'ui.router'])
                                 formatTip();
                             }
                         }
+                        // 确认密码
+                        if(type == 'confirmPwd') {
+                            if(formatEles['newPwd'].val() != val) {
+                                typeNum++;
+                                messageService.show('两次密码输入不一致');
+                            }
+                        }
                         // 最小长度和最大长度字符
                         if(type == 'minLength') {
                             var minlen = $(this).attr('min-length');
@@ -141,23 +148,9 @@ angular.module('form', ['request', 'common', 'ui.router'])
                 return true;
             }
 
-            // ------手机号码-------------最小字符长度------------最大字符长度-----------银行卡号码----------------数字---------------电子邮箱----------身份证号码----
-            if(_format('phone') && _format('minLength') && _format('maxLength') && _format('bankCard') && _format('number') && _format('email') && _format('idCard')) {
-                return true;
-            } else {
+            // ---------手机号码-------------最小字符长度------------最大字符长度-----------银行卡号码----------------数字---------------电子邮箱------------身份证号码---------------确认密码---------
+            if(!_format('phone') || !_format('minLength') || !_format('maxLength') || !_format('bankCard') || !_format('number') || !_format('email') || !_format('idCard') || !_format('confirmPwd')) {
                 return false;
-            };
-
-            // 验证两次密码是否输入一致
-            if(formatEles.confirmPwd.length > 0 && formatEles.confirmPwd.length > 0) {
-                if(formatEles.confirmPwd.val() !== formatEles.password.val()) {
-                    formatEles.confirmPwd.focus();
-                    messageService.show('两次密码输入不一致');
-                    valid = false;
-                    return false;
-                } else {
-                    valid = true;
-                }
             }
 
             return valid;
@@ -177,14 +170,17 @@ angular.module('form', ['request', 'common', 'ui.router'])
             $(form).find('input[name],textarea[name],select[name]').each(function() {
                 var key = $(this).attr('name');
                 var val = $.trim($(this).val());
-                if(key.indexOf('.') == -1) {
-                    datas[key] = val;
-                } else {
+                if(key.indexOf('.') != -1) {
                     var arr = key.split('.');
                     if(!datas[arr[0]]) {
                         datas[arr[0]] = {};
                     }
-                    datas[arr[0]][arr[1]] = val;
+                    datas[arr[0]][arr[1]] = val;                 
+                } else if (key.indexOf('[]') != -1) {
+                    var arr = key.split('[]');
+                    datas[arr[0]] = JSON.parse(val);
+                } else {
+                    datas[key] = val;
                 }
                 
             });

@@ -118,9 +118,7 @@
       			赞助<span class="hs fz16 pl10" ng-bind="re.support_amount+'元'"></span>
       		</section>
       		
-      		<p class="fz12 mt10">
-      			回报详情：
-      			{{re.repay_content}}
+      		<p class="fz12 mt10" ng-bind="'回报详情：'+re.repay_content" style="word-wrap: break-word;">
       		</p>
       		<p class="fz12">
       		   回报时间：{{re.repay_time}}之前发放

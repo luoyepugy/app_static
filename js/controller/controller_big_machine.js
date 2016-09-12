@@ -1,9 +1,11 @@
 /**
  * 大机器签到墙展示
  */
+	
 (function(){
-	angular.module('big_machine', ["directive_mml","activity_servrt","ui.router" ])
-	.controller('big_machine_controller',function($scope,activity_data) { //签到机		
+	angular.module('big_machine', ["directive_mml","activity_servrt","ui.router","common", "request"])
+	.controller('big_machine_controller',function($scope,activity_data,messageService) { //签到机	
+	
 		var act_id=window.location.search.split("=")[1],
 	     act_consumption_list={};//签到人数传过去的数据	
 		 act_consumption_list.activity_id=act_id;
@@ -12,8 +14,10 @@
 		 act_consumption_list.pageSize=500;//1页显示多少数据
 		 act_consumption_list.sort=1;// 1:根据签到时间倒序排 2，根据报名时间倒序排
 		 $scope.big_sign={};//签到机数据
+	
 		 activity_data.getDatas('GET', '/activity/get_activity_ad_urls/'+act_id)
 		 .then(function(data) {
+			
 			 $scope.big_sign.banner=data.info.ad_urls;//获取广告图片
 			 $scope.big_sign.act_title=data.info.activity_info.name;//获取活动名称
 			 $scope.big_sign.sponsor=data.info.activity_info.sponsor;//获取主办名称

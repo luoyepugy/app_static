@@ -50,7 +50,6 @@ angular.module('sponsor', ["directive_mml","activity_servrt","ui.router", "commo
 .controller('sponsorship_controller',function($scope,activity_data,messageService,validateService,httpService,$state,act_date) { //发起赞助
 	$scope.repayForm = false;
 	$scope.repayWaiting = false;
-	$scope.suportNoLimit = false;
 	// 回报列表
 	$scope.repayList = [];
 	// 选择回报方式
@@ -89,23 +88,11 @@ angular.module('sponsor', ["directive_mml","activity_servrt","ui.router", "commo
 			return false;
 		}
 		var datas = validateService.submitData('.j-sponsorshipForm');
-		if(datas['activitySupport']['industry_id']) {
-			datas['activitySupport']['industry_id'] = $('.j-sponsorshipForm').find('input[name="activitySupport.industry_id"]').data('id');
-		}
-		datas.supportRepay = $scope.repayList;
 		// console.log(datas);
-		if($scope.repayList.length <= 0) {
-			messageService.show('请添加回报');
-		} else {
-			httpService.getDatas('POST', '/support/simple_create_support', datas).then(function(data) {
-				if(data.code == 0) {
-					$scope.repayWaiting = true;
-					$('.j-sponsorshipForm').hide();
-				} else {
-					messageService.show(data.msg);
-				}
-			});
-		}
+		httpService.getDatas('POST', '/support/simple_create_support', datas, 'msg').then(function(data) {
+			$scope.repayWaiting = true;
+			$('.j-sponsorshipForm').hide();
+		});
 	}
 
 	// 提交回报表单

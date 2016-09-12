@@ -537,7 +537,6 @@ angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.rou
 	var activityIndex = 1,
 		suportIndex = 1,
 		sponsorIndex = 1;
-	var selectType;
 	
 	// 选择类型
 	$scope.selectType = function() {
@@ -551,38 +550,34 @@ angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.rou
 	});
 	
 	// 下拉加载
-	$scope.paging = function() {
-		// 1是主办方， 2是活动，3是赞助
-		if(selectType == 1) {
-			sponsorIndex++;
-			searchSponsor(true);
-		} else if(selectType == 2) {
-			activityIndex++;
-			searchActivity(true);
-		} else if(selectType == 3) {
-			suportIndex++;
-			searchSuport(true);
-		}
+	$scope.sponsorMore = function() {
+		sponsorIndex++;
+		searchSponsor(true);
 	}
+	$scope.activityMore = function() {
+		activityIndex++;
+		searchActivity(true);
+	}
+	$scope.supportMore = function() {
+		suportIndex++;
+		searchSupport(true);
+	}
+
 	// 搜索结果
 	$scope.searchResult = function() {
 		name = $('.j-searchForm').find('input[name="searchName"]').val();
 		var type = $('.j-searchType').text();
-
+		
 		if(type == '主办方') {
-			selectType = 1;
 			$('#sponsorList').show().siblings().hide();
 			searchSponsor();
 		} else if(type == '活动') {
-			selectType = 2;
 			$('#activityList').show().siblings().hide();
 			searchActivity();
 		} else if(type == '赞助') {
-			selectType = 3;
 			$('#suportList').show().siblings().hide();
-			searchSuport(); 
+			searchSupport(); 
 		}
-		
 	}
 	var request = function(url, datas, array, push) {
 		httpService.getDatas('GET', url, datas).then(function(data) {
@@ -604,19 +599,19 @@ angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.rou
 		var sponsorDatas = {
 			'pageIndex': sponsorIndex,
 			'name': name,
-			'pageSize': 6
+			'pageSize': 7
 		};
 		request('/sponsor/sponsor_search_page', sponsorDatas, 'sponsorList', push);
 	};
 	// 赞助
-	var searchSuport = function(push) {
-		var suportDatas = {
+	var searchSupport = function(push) {
+		var supportDatas = {
 			'pageIndex': suportIndex,
 			'sort': 1,
 			'name': name,
 			'pageSize': 6
 		};
-		request('/support/support_list', suportDatas, 'suportList', push);
+		request('/support/support_list', supportDatas, 'suportList', push);
 	};
 	// 活动
 	var searchActivity = function(push) {

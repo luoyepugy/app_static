@@ -30,7 +30,7 @@ angular.module('request', ['common'])
 
             $http(req)
             .success(function(response,status) {
-                var need = need || 'data';
+                need = need || 'data';
                 if(response.code == 0 || need == 'data') {
                     deferred.resolve(response);
                 } else if(need == 'msg') {

@@ -26,7 +26,7 @@
     
     
 
-    <section id="act_list" pulllist='paging()'   class="ulact_p" ng-click="">
+    <section id="act_list" pulllist callback="paging()"   class="ulact_p" ng-click="">
            <ul id="scroll" style="background:#EFEFF4">  
              <li  class="mb10" ng-repeat="list in act_list.activity_list" finish ui-sref="activity_detail({id:list.id})" >
                          <section class="pd  bgff  pt10 pm10">

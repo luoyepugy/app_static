@@ -2,9 +2,9 @@
 <link rel="stylesheet" href="/css/pages/user.css">
 <!-- 搜索结果页 -->
 <div class="search j-searchForm">
-	<div class="searchType iconfont j-searchType" ng-click="selectType()">主办方</div>
+	<div class="searchType iconfont j-searchType" ng-click="selectType()">活动</div>
 	<ul class="searchTypeList j-searchTypeList" style="display: none;">
-		<li>活动</li>
+		<li>主办方</li>
 		<li>赞助</li>
 	</ul>
 	<p class="searchInput">
@@ -15,10 +15,9 @@
 </div>
 
 
-
 <div >
 <!-- 主办方结果 -->
-<div id="sponsorList" class="searchResutWrap" pulllist="paging()">
+<div id="sponsorList" class="searchResutWrap" pulllist callback="sponsorMore()">
 	<ul class="mui-table-view" style="margin-top:0;">
 	    <li class="mui-table-view-cell mui-media" ng-repeat="item in sponsorList">
 	        <a ui-sref="personal_host({sponsor_user_id:item.user_id})" class="mui-navigate-right">
@@ -33,7 +32,7 @@
 </div>
 <!-- /主办方结果 -->
 <!-- 活动结果 -->
-<div id="activityList" class="searchResutWrap" pulllist="paging()">
+<div id="activityList" class="searchResutWrap" pulllist callback="activityMore()">
    <ul style="background:#EFEFF4">  
      <li  class="mb10" ng-repeat="list in activityList" finish ui-sref="activity_detail({id:list.id})" >
                  <section class="pd  bgff  pt10 pm10">
@@ -74,7 +73,7 @@
 <!-- /活动结果 -->
 
 <!-- 赞助结果 -->
-<div id="suportList" class="searchResutWrap" pulllist="paging()">
+<div id="suportList" class="searchResutWrap" pulllist callback="supportMore()">
 	<ul>  
     <li ng-repeat="list in suportList" finish >
         <section class="details_case mt10 bgff pm10 btm details_case_z"  >

@@ -1116,7 +1116,7 @@ angular.module('user', ['activity_servrt','directive_mml', 'common', 'request', 
 		
 		// ========================= 主办方 =======================
 		/* @ngInject */
-		.controller('personal_host', function($scope,activity_data,$location,$stateParams,httpService,anchorScroll) { 			
+		.controller('personal_host', function($scope,$rootScope,activity_data,messageService,$state,$location,$stateParams,httpService,anchorScroll) { 			
 			$scope.sponsor_user_id=$stateParams.sponsor_user_id;//用户ID
 			$(".mml_bottom ").show()
 			$(".person_host_tab").removeClass("act_poi")
@@ -1126,7 +1126,7 @@ angular.module('user', ['activity_servrt','directive_mml', 'common', 'request', 
 			activity_data.person_detail_info({"user_id":$scope.sponsor_user_id}).then(//主办方详情
 					function success(data) {
 	                         $scope.perDeta= new secrchH(data.info);	                         
-	                         if($scope.perDeta.attention_sponsor==0){
+	                         if($scope.perDeta.attention_sponsor==0||$scope.perDeta.attention_sponsor==null){
 	                        	 $(".attent_change").css("background","#4FA45D").attr("data-x",1);
 	                        	 $(".attent_text").text("关注TA")
 	                         }else {	                        	 
@@ -1224,13 +1224,17 @@ angular.module('user', ['activity_servrt','directive_mml', 'common', 'request', 
 		
         //关注主办方操作
 		$scope.attentHost=function(){	
+			httpService.getDatas('GET', '/user/verifyUserLogin').then(function(data) {
+	            if(data.code!=0&&data.code!=-1){
+	                messageService.show('您还未登录！');
+	                $state.go("signin");
+	            }
+	        });
 		    if($(".attent_change").attr("data-x")==1){
 		    	httpService.getDatas('GET', '/activity/exec_attention?resources_id='+$scope.sponsor_user_id+'&type=4').then(function(data) {
 					if(data.code==0){
 						$(".attent_change").css("background","#a9a9a9").attr("data-x",2);
 						$(".attent_text").text("取消关注")
-					}else {
-						mui.alert("执行失败")
 					}
 				})
 		    }else if($(".attent_change").attr("data-x")==2){
@@ -1238,8 +1242,6 @@ angular.module('user', ['activity_servrt','directive_mml', 'common', 'request', 
 					if(data.code==0){
 						$(".attent_change").css("background","#4FA45D").attr("data-x",1);
 						$(".attent_text").text("关注TA")
-					}else {
-						mui.alert("执行失败")
 					}
 				})
 		    }

@@ -37,7 +37,7 @@
         });
     } 
 
-	  
+
 
  })
 .directive('finish', function ($timeout) {//轮播图遍历完之后执行
@@ -54,6 +54,9 @@
 }).directive('pulllist', function () { //下拉列表
     return {
         restrict: 'AE',
+        scope: {
+            callback: '&'
+        },
         link: function(scope,ele,attr,ctrl){
         	/*html渲染 最外层div要高度*/
         /*	<div id="test" pulllist='paging()'  class="ulact_p nitialize" ng-click="">
@@ -73,11 +76,11 @@
         		  onScrollEnd: function(){
         		  if(this.y == this.maxScrollY&&poiu_po){
         			  poiu_po=false;
-        			  $(".sys-loading").addClass("show_a")
+        			  $(".sys-loading").addClass("show_a");
         			        setTimeout(function() {
-        			       	 poiu_po=true
-                             scope.paging();
-        			         $("#"+attr.id).click() 
+        			       	 poiu_po=true;
+                             scope.callback();
+        			         $("#"+attr.id).click() ;
         			         $(".sys-loading").removeClass("show_a")
         			      }, 1500);
         		
@@ -126,6 +129,19 @@
              });
          }
      };
+ }).directive('isloadp', function () { //判断是否登录
+     return {
+         restrict: 'AE',
+         link: function(scope,ele,attr){
+             ele.on('click',function(e){
+            	 /*阻止触发时间冒泡*/
+                 e.preventDefault();
+                 e.stopPropagation();
+                 var this_href=$(this).attr("data-href")
+                 window.location.href=this_href;
+             });
+         }
+     };
  }).directive('time', function () { //时间初始化
      return {
          restrict: 'AE',
@@ -158,8 +174,12 @@
                  mjgh=classify[1].maker_title.splice(1,classify[1].maker_title.length); 
             	 picker_c.setData(mjgh);
              	 picker_c.show(function (rl) {
-                     $(ele).find("input").val(rl[0].text) 
-                     $(ele).find("input").attr("data-id",rl[0].id)
+                    $(ele).find("input").val(rl[0].text);
+                    $(ele).find("input").attr("data-id",rl[0].id);
+                    // 判断是否有id值
+                    if(rl[0].id && ($(ele).find('input[type="hidden"]').length > 0)) {
+                        $(ele).find('input[type="hidden"]').val(rl[0].id);
+                    }
              	})
              });
          }
