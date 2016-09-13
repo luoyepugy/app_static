@@ -47,7 +47,7 @@ angular.module('sponsor', ["directive_mml","activity_servrt","ui.router", "commo
 
 }])
 // =================== 发布赞助 begin by zh =================
-.controller('sponsorship_controller',function($scope,activity_data,messageService,validateService,httpService,$state,act_date) { //发起赞助
+.controller('sponsorship_controller',function($scope,messageService,validateService,httpService,$state) { //发起赞助
 	$scope.repayForm = false;
 	$scope.repayWaiting = false;
 	// 回报列表
@@ -80,40 +80,25 @@ angular.module('sponsor', ["directive_mml","activity_servrt","ui.router", "commo
 		}
 	});
 
-
 	// 发布赞助表单
 	$scope.submitSponsor = function() {
-		// 是否为空
-		if(!validateService.emptyAndFormat('.j-sponsorshipForm')) {
-			return false;
-		}
-		var datas = validateService.submitData('.j-sponsorshipForm');
-		// console.log(datas);
-		httpService.getDatas('POST', '/support/simple_create_support', datas, 'msg').then(function(data) {
-			$scope.repayWaiting = true;
-			$('.j-sponsorshipForm').hide();
-		});
+		$scope.repayWaiting = true;
+		$('.j-sponsorshipForm').hide();
 	}
 
 	// 提交回报表单
-	$scope.saveRepayForm = function() {
-		// 是否为空
-		if(!validateService.emptyAndFormat('.j-repayForm')) {
-			return false;
-		}
-		var datas = validateService.submitData('.j-repayForm');
+	$scope.saveRepayForm = function(datas) {
 		if(datas['person_limit'] == '') {
 			datas['person_limit'] = 0;
 		}
 		// 回报数据列表
 		$scope.repayList.push(datas);
 		$('.j-sponsorshipForm').show();
-		$scope.repayForm = false;
+		$scope.$apply(function() {
+			$scope.repayForm = false;
+		});
 	}
-
-
 })
-
 // =================== 发布赞助 end =================
 
 window.onunload = function(){

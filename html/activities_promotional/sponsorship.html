@@ -73,8 +73,8 @@
       		</p>
       	</section>
       	<a class="pt10 pm10 ls cen mt20 bgff bbm btm fz16 mui-block" ng-click="addRepay()">+添加回报</a>
-        <input type="hidden" name="supportRepay[]" ng-model="repayList" value="{{repayList}}" data-empty="请添加回报13">
-	     <p class="pd">  <a class="mui-btn register_button fz16 mt40" ng-click="submitSponsor()">立即发布</a></p>
+        <input type="hidden" name="supportRepay[]" ng-model="repayList" value="{{repayList}}" data-empty="请添加回报">
+        <submit-button action="/support/simple_create_support" btn-class="mainBtn" callback="submitSponsor()" text="立即发布" form=".j-sponsorshipForm"></submit-button>
     </div>
     <!-- /赞助表单 -->
 
@@ -120,7 +120,7 @@
               </p>
               
                <p class="mt30 pd cen zd box">
-                   <a class="mui-btn register_button fz18 box_a mr10" ng-click="saveRepayForm()">确定</a>  
+                   <save-button btn-class="register_button fz18 box_a mr10" callback="saveRepayForm(arg1)" form=".j-repayForm"></save-button>
                    <a class="j-backBtn mui-btn register_button fz18 box_a ml10 bgff ls brls">取消</a> 
                 </p>
           </div>

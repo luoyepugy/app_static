@@ -14,7 +14,7 @@
 		 act_consumption_list.pageSize=500;//1页显示多少数据
 		 act_consumption_list.sort=1;// 1:根据签到时间倒序排 2，根据报名时间倒序排
 		 $scope.big_sign={};//签到机数据
-	
+	     $scope.actid=act_id
 		 activity_data.getDatas('GET', '/activity/get_activity_ad_urls/'+act_id)
 		 .then(function(data) {
 			
@@ -61,7 +61,7 @@
 			  hint.play()//播放
 			  var uiiy=setInterval(function(){
 				  hint.play()//播放
-				  if(lkj++>1){ 
+				  if(lkj++>2){ 
 					  clearTimeout(uiiy)
 					  lkj=0
 				  }
@@ -79,6 +79,7 @@
 		 
 	      /*广告轮播图初始化*/
 		   var mySwiper = new Swiper('.big_switch',{
+			   autoplay : 2000,
 			   observer: true,//修改swiper自己或子元素时，自动初始化swiper
                observeParents: true,//修改swiper的父元素时，自动初始化swiper
 		       loop: true

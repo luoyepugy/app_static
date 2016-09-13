@@ -2,7 +2,8 @@
 
 angular.module('form', ['request', 'common', 'ui.router'])
     .factory('validateService', validateService)
-    .directive('submitButton', submitButton);
+    .directive('submitButton', submitButton)
+    .directive('saveButton', saveButton);
 
 
     // ======================== 验证 ========================
@@ -12,7 +13,6 @@ angular.module('form', ['request', 'common', 'ui.router'])
         var validate = {
             'isEmpty': isEmpty,
             'isCorrectFormat': isCorrectFormat,
-            'emptyAndFormat': emptyAndFormat,
             'submitData': submitData
         };
         return validate;
@@ -46,8 +46,8 @@ angular.module('form', ['request', 'common', 'ui.router'])
                     'bankCard': $(form).find('input[format-bankCard]'),
                     'newPwd': $(form).find('input[new-password]'),
                     'confirmPwd': $(form).find('input[confirm-password]'),
-                    'minLength': $(form).find('[min-length]'),
-                    'maxLength': $(form).find('[max-length]'),
+                    'minLength': $(form).find('input[min-length], textarea[min-length]'),
+                    'maxLength': $(form).find('input[max-length], textarea[max-length]'),
                     'number': $(form).find('input[format-number]'),
                     'email': $(form).find('input[format-email]'),
                     'idCard': $(form).find('input[format-idCard]')
@@ -154,13 +154,6 @@ angular.module('form', ['request', 'common', 'ui.router'])
             return valid;
         }
 
-        // --------------------- 验证是否为空与格式是否正确 ------------------
-        function emptyAndFormat(form) {
-            if(!validate.isEmpty(form) || !validate.isCorrectFormat(form)) {
-                return false;
-            }
-            return true;
-        }
 
         // --------------------------- 提交表单数据 --------------------------
         function submitData(form) {
@@ -227,7 +220,7 @@ angular.module('form', ['request', 'common', 'ui.router'])
             element.bind('click', function() {
 
                 // 验证是否为空与格式
-                if(!validateService.emptyAndFormat(attrs.form)) {
+                if(!validateService.isEmpty(attrs.form) || !validateService.isCorrectFormat(attrs.form)) {
                     return false;
                 }
 
@@ -269,6 +262,43 @@ angular.module('form', ['request', 'common', 'ui.router'])
                             }
                         }
                     });
+                }
+            });
+        }
+    }
+
+
+    // ======================== 保存按钮 ========================
+    /* @ngInject */
+    function saveButton(httpService, messageService, validateService, $state, $window) {
+        var directive = {
+            restrict: 'E',
+            template: '<button name="saveBtn" class="mui-btn mui-btn-green" ng-class="btnClass">{{text}}</button>',
+            replace: true,
+            scope: {
+                callback: '&'
+            },
+            link: link
+        };
+        return directive;
+
+        function link(scope, element, attrs) {
+            scope.text = attrs.text || '确定';
+            scope.btnClass = attrs.btnClass || '';
+
+            element.bind('click', function() {
+                
+                // 验证是否为空与格式
+                if(!validateService.isEmpty(attrs.form) || !validateService.isCorrectFormat(attrs.form)) {
+                    return false;
+                }
+
+                // 提交表单数据
+                var resultsDatas = validateService.submitData(attrs.form);
+
+                // 回调
+                if(attrs.callback) {
+                    scope.callback({arg1: resultsDatas});
                 }
             });
         }

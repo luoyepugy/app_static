@@ -192,6 +192,9 @@ angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.rou
     	list_data.industry_id="";//行业ID
     	list_data.pageIndex=1;//页码
         list_data.pageSize=7;//行数
+        if(screen.width>1000){
+        	list_data.pageSize=12
+        }
         list_data.time_status="";//时间
         list_data.status=0; 
         $scope.act_list={  

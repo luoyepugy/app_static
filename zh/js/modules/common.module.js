@@ -6,13 +6,13 @@ angular.module('common', [])
     .factory('transmitService', transmitService)
     .factory('anchorService', anchorService)
     .directive('backButton', backButton)
-    .filter('suportStatus', suportStatus);
+    .filter('supportStatus', supportStatus);
 
 
 
     // ======================== 消息提示 ========================
     /* @ngInject */
-    function messageService() {
+    function messageService($timeout) {
 
         var messages = {
             'show': show
@@ -23,8 +23,11 @@ angular.module('common', [])
             var type = type || 'alert';
             if(type == 'alert') {
                 mui.alert(tips, 'E场景活动');
-            } else if (type == 'toast') {
-                mui.toast(tips);
+            } else if (type == 'toast' && tips) {
+                $('body').append('<div class="messageBox">' + tips +'</div>').fadeIn();
+                $timeout(function(){
+                    $('.messageBox').fadeOut();
+                }, 3500);
             }
         };
     }
@@ -148,7 +151,7 @@ angular.module('common', [])
 
     // ======================== 赞助状态 ========================
     /* @ngInject */
-    function suportStatus() {
+    function supportStatus() {
         return function(item){
             switch(item) {
                 case 0: return '保存';
@@ -162,6 +165,8 @@ angular.module('common', [])
             }
         }
     }
+
+
 
 
 })();

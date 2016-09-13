@@ -19,6 +19,7 @@
 	width: 90%;
 	display: block;
 	margin: 15px auto;
+	font-size: 17px;
 }
 
 
@@ -67,7 +68,16 @@
 	margin: 10px 15px;
 }
 
-
+// 消息提示
+.messageBox {
+	@include position-basic(fixed, bottom, 15%, left, 50%);
+	@include skin-bgfg(rgba(0,0,0,.6), #fff);
+	padding: 20px;
+	width: 80%;
+    margin-left: -40%;
+    text-align: center;
+    border-radius: 5px;
+}
 
 
 

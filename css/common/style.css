@@ -1957,6 +1957,16 @@ img.yj.user_zz_p {
     height: 22px;
     top: 2px;
 }
+.mainBtn.mui-btn-block {
+    width: 90%;
+    display: block;
+    margin: 15px auto;
+    font-size: 17px;
+}
+.mainBtn.mui-btn-green {
+    background: #4ea45d;
+    border: 1px solid #4ea45d;
+}
 /* 主办方认证 */
 .sponsorSuccIcon b,
 .sponsorFailIcon b {

@@ -51,7 +51,6 @@ angular.module('user', ['activity_servrt','directive_mml', 'common', 'request', 
 				if(data.code == 0) {
 					if($rootScope.mySignin) {
 						$state.go('personal_center');
-
 					} else {
 						$window.history.back();
 					}

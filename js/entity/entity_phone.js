@@ -51,7 +51,7 @@ function preferential(getActivityHot){
 	this.activity_address=getActivityHot.activity_address;//活动地址
 	this.sponsorImageUrl=getActivityHot.sponsor_image_url;//主办方名头像
 	this.sponsorName=getActivityHot.sponsor_name==null?'e场景':getActivityHot.sponsor_name;//主办方名称target_amount
-	this.sbrowse_count=getActivityHot.sbrowse_count;
+	this.browse_count=getActivityHot.browse_count;
 	this.is_free=getActivityHot.is_free;
 	
 		
