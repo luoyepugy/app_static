@@ -39,7 +39,7 @@
                 </p>
                    
                    <section class="fz12 dian zc">
-                <p class="fl"><i class="f_i time_icon"></i><span ng-bind="list.start_time_str"></span> </p>
+                <p class="fl fz12"><i class="f_i time_icon"></i><span ng-bind="list.start_time_str"></span> </p>
                   <a class="fr" ng-if="list.activity_way!=1">免费</a>
                        <span class="fr hs" ng-if="list.activity_way==1">收费</span>
                   <p class="qc"></p>
@@ -49,14 +49,14 @@
                </section>
                <p class="qc"></p>
            </section>
-            <section class="box btm pt5 pm5 fz12 cen zc schedule_p bgff">
-                   <section class="box_a" ng-class="list.skjhg_s">
+            <section class="box btm pt5 pm5 fz12 cen zc schedule_p bgff pd">
+                   <section class="box_a tl" ng-class="list.skjhg_s">
                       <i class="f_i zmkjf_a" ></i>目标金额{{list.target_money}}元
                    </section>
                     <section class="box_a" ng-class="list.skjhg_s">
                      <i class="f_i zmkjf_b"></i>已筹{{list.now_money}}元
                    </section>
-                    <section class="box_a" ng-class="list.skjhg_s">
+                    <section class="box_a tr" ng-class="list.skjhg_s">
                      <i class="f_i zmkjf_c"></i>进度{{list.schedule}}
                    </section>
                 </section>

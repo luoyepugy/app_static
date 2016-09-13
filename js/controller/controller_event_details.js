@@ -8,6 +8,7 @@ angular.module('act_details', [ "directive_mml","activity_servrt","ui.router","p
 	  $(".retreat_icon").removeClass("none");
 	  $scope.id=$stateParams.id
 	  var hjgf=true;//设置取消和收藏关注
+	  
 	  $scope.detail={
 		  "detail_date":{},
 		  "detail_f":function(id){//查看活动详情
@@ -46,22 +47,26 @@ angular.module('act_details', [ "directive_mml","activity_servrt","ui.router","p
 		    		}, function error() {
 						console.log("活动详情获取失败");
 		    }); 
-	    },"collection":function(){//收藏
+	    },"collection":function(){//收藏或关注
 	    	var date_po={}
-	    	date_po.activity_id=$scope.id
+	    	date_po.resources_id=$scope.id
 	    	date_po.type=1;
 	    	if($scope.detail.detail_date.is_collect==1){
-	    		hjgf=false
+	    		hjgf=false;
 	    	}
 	    	if(hjgf){
 	    		activity_data.exec_attention(date_po).then(
 			    		function success(data){    		
 			    		    if(data.code!=0){
+			    		    	 $location.path("signin")
 			    		    	 mui.alert(data.msg, 'E场景活动');
 			    		    	 return
 			    		    }
-			    			$(".collection_p").toggleClass("ls")
-			    			hjgf=false
+			    		    mui.alert("关注成功!");
+			    		    $(".contract_de2").eq(0).addClass("bgdiso")
+			    			//$(".collection_p").toggleClass("ls")
+			    			$("#user_attention").html("取消关注");
+			    			hjgf=false;
 			    		}, function error() {
 							console.log("请求取消收藏接口失败");
 			    }); 
@@ -72,8 +77,12 @@ angular.module('act_details', [ "directive_mml","activity_servrt","ui.router","p
 				    		    	 mui.alert(data.msg, 'E场景活动');
 				    		    	 return
 				    		    }
-				    			$(".collection_p").toggleClass("ls")
-				    			hjgf=false
+				    			//$(".collection_p").toggleClass("ls")
+				    			$("#user_attention").html("关注TA");
+				    			hjgf=true;
+				    			mui.alert("取消关注成功!");
+
+				    		    $(".contract_de2").eq(0).removeClass("bgdiso")
 				    		}, function error() {
 								console.log("请求收藏接口失败");
 				    }); 

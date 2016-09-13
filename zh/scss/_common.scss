@@ -41,6 +41,15 @@
 	@include skin-basic(#3eb0d8, #fff);
 }
 
+.bg-gray {
+	background: $text-light;
+}
+.bg-orange {
+	background: $main-orange;
+}
+.bg-green {
+	background: $main-green;
+}
 
 
 // =============== 模块 ==================

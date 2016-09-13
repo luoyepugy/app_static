@@ -127,12 +127,14 @@
         <img ng-src="{{detail.detail_date.sponsor_head}}" class="sponsor_act_icon fl"/>
         <section class="ov  pl20">
             <p class="ls dian mui-col-xs-8" ng-bind="detail.detail_date.sponsor_name"></p>
-            <p></p>
+            <p ng-bind="detail.detail_date.sponsor_intro" ></p>
         </section>
     </section>
     <section class="box mt10">
-    	<p class="box_a yj4 contract_de2">
-    		关注TA
+    	<p class="box_a yj4 contract_de2" ng-class="detail.detail_date.bgclass">
+    		<a  id="user_attention" ng-click="detail.collection()" >
+    		<span ng-bind="detail.detail_date.collect" ></span>
+    		</a>
     	</p>
     	<p class="box_a yj4 contract_de2 ml5">
     		<a ng-href="tel:{{detail.detail_date.contact_way}}">联系TA</a>
@@ -244,3 +246,4 @@
 
 
 </section>
+

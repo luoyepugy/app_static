@@ -1,6 +1,9 @@
 body{
     padding-bottom: 100px;
 }
+h4 {
+    font-weight: 100;
+}
 /*注册*/
 .df_poi_ze input{
     margin: 0;
@@ -231,7 +234,13 @@ margin-right: 6px;
     top: 6px;
     margin-right: 6px;
 }
-
+@media screen and (min-width: 1000px){
+.act_user_a {
+    min-width: 96px;
+    height: 120px;
+    width: 20%;
+}
+}
 /*报名成功*/
 .success_poi_a{
     padding-top: 0px;
@@ -539,7 +548,7 @@ img {
 }
 .zmkjf_a{
 	
-	 background-position: -302px -17px;
+	 background-position: -300px -17px;
 }
 .zmkjf_b{
 	 background-position: -302px -41px;
@@ -2289,4 +2298,12 @@ background-position: -26px -1119px;
     position: absolute;
     right: 8px;
     top: 13px;
+}
+.bgdiso{
+	background:#ccc!important;
+	
+	border:1px solid #ccc!important;
+}
+.bgdiso a{
+	color:#fff !important;
 }

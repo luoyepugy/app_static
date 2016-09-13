@@ -93,7 +93,34 @@ angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.rou
 	  /*热门三条数据*/
     activity_data.activityIndex().then(
 			function success(data) {
-				$scope.act_index.activity_sum=new activity_sum(data.info)
+				$scope.act_index.activity_sum=new activity_sum(data.info);
+				$('.datanum').each(function(i,e){
+					var o = $(this);
+		            var t = 10;
+		            var changenum = "" ;
+		            if(o.attr('data-param')=='sponsor_sum'){
+		            	changenum = $scope.act_index.activity_sum.sum+"" ;
+		            }
+		            if(o.attr('data-param')=='user_sum'){
+		            	changenum = $scope.act_index.activity_sum.count+"" ;
+		            }
+		            if(o.attr('data-param')=='activity_sum'){
+		            	changenum = $scope.act_index.activity_sum.activity_sum+"" ;
+		            }
+		            console.info(changenum);
+		            var val = parseInt(changenum.replace(/,/g,""))/t;
+		            console.info("val="+val);
+		            var setIntervalId = window.setInterval(function(){
+		              if(t--){
+		                var v = parseInt(val*(10-t)).toString();
+		                var varr = v.split("");
+		                for (var i = varr.length-4; i >= 0; i -= 3) varr[i] += ",";
+		                o.text(varr.join(""));
+		              }
+		              else{clearInterval(setIntervalId);}
+		            },50);
+		           });
+				
 				
 		}, function error() {
 			console.log("获取热门活动失败")

@@ -17,7 +17,10 @@ function query_activity_list(data){
 	this.id=data.id;//活动ID
 	this.poster=data.activity_first_face;//封面
 	this.name=data.activity_title;//活动名称
-	this.city_name=data.activity_address;//活动城市
+	this.city_name=data.city_name+" "+data.activity_address;//活动城市
+	if(data.type==10){
+		this.city_name=data.activity_address;//活动城市 
+	}
 	this.start_time_str=data.activity_time;//活动开始时间
 	this.user_time_str=data.start_time;//活动开始时间
 	this.ticket_array=data.ticket_array; 
@@ -48,7 +51,11 @@ function preferential(getActivityHot){
 	this.activity_time=getActivityHot.activity_time;//活动时间开始时间
 	this.activity_number=getActivityHot.activity_number;//报名人数
 	this.activity_first_face=getActivityHot.activity_first_face;//活动第一张封面
-	this.activity_address=getActivityHot.activity_address;//活动地址
+	this.activity_address=(getActivityHot.city_name==null?"":getActivityHot.city_nam)+getActivityHot.activity_address;//活动地址
+	if(getActivityHot.type==10){
+		this.activity_address=getActivityHot.activity_address;//活动地址
+	}
+	
 	this.sponsorImageUrl=getActivityHot.sponsor_image_url;//主办方名头像
 	this.sponsorName=getActivityHot.sponsor_name==null?'e场景':getActivityHot.sponsor_name;//主办方名称target_amount
 	this.browse_count=getActivityHot.browse_count;
@@ -100,10 +107,14 @@ function sponsor_list(data){
 	this.status=data.status;//赞助状态
 	var st_name="赞助中";
 	if(data.end_time<new Date().getTime()){
-		data.status=8;
+		data.status=7;
 	}	
 	var oi_p="",c_colour='';
 	switch(data.status){
+	  case 0:st_name="保存";oi_p='bg_gray';c_colour="gray";break;
+	  case 1:st_name="通过";oi_p='bg_gray';c_colour="gray";break;
+	  case 2:st_name="拒绝";oi_p='bg_gray';c_colour="gray";break;
+	  case 3:st_name="待审核";oi_p='bg_gray';c_colour="gray";break;
 	  case 4:st_name="预热中";oi_p='ack_button';break;
 	  case 5:st_name="赞助中";break;
 	  case 6:st_name="赞助成功";break;
@@ -138,14 +149,14 @@ function sponsorDetail(data){
 	this.login_user=data.login_user;//登陆状态0没登录 1已登陆
 	var st_name="赞助中"
 		if(data.end_time<new Date().getTime()){
-			data.status=8;
+			data.status=7;
 		}	
 		var oi_p="",c_colour='';
 	
 		switch(data.status){
 		  case 0:st_name="保存";oi_p='bg_gray';c_colour="gray";break;
 		  case 1:st_name="通过";oi_p='bg_gray';c_colour="gray";break;
-		  case 2:st_name=":拒绝";oi_p='bg_gray';c_colour="gray";break;
+		  case 2:st_name="拒绝";oi_p='bg_gray';c_colour="gray";break;
 		  case 3:st_name="待审核";oi_p='bg_gray';c_colour="gray";break;
 		  case 4:st_name="预热中";oi_p='ack_button';break;
 		  case 5:st_name="赞助中";break;
@@ -320,7 +331,10 @@ function ticket_volume_list(data){
 		  this.browse_count=info.scan;//活动详情浏览次数
 		  this.join_count=info.join_count;//活动详情参与人数
 		  this.industry_id=info.industry_id;//活动详情行情ID
-		  this.address=info.address;//活动详情地址
+		  this.address=info.city_name+" "+info.address;//活动详情地址
+		  if(info.type==10){
+			  this.address=info.address;//活动详情地址
+		  }
 		  this.startDate=info.start_time_fm;//活动开始时间
 		  this.endDate=info.end_time_fm;//活动结束时间 
 		  this.sDate_time=info.start_time;//活动开始时间
@@ -374,7 +388,17 @@ function ticket_volume_list(data){
 		  this.act_cl=""
           if(this.is_collect>0){
         	  this.act_cl="ls"
-          }			  
+          }		
+		  var collect="",bgclass="";
+		  if(info.is_collect==null||info.is_collect==1){
+			  collect="取消关注"
+			   bgclass="bgdiso"	   
+		  }else{
+			  collect="关注TA"
+				  bgclass="" 
+		  }
+		  this.collect=collect
+		  this.bgclass=bgclass
 		  $(info.consumption_list).map(function(){
 			  var consump_info_name={}
 			  consump_info_name.order_id=this.order_id //订单号 
@@ -401,7 +425,7 @@ function ticket_volume_list(data){
 			   this.sp_bg="bgred"   
 		   }
 		   this.is_free=info.is_free;//0.免费  1收费
-		  
+		   this.sponsor_intro=info.sponsor_intro;//主办方认证后获得主办方简介
 	  }
 	  
 	   /*签到墙*/

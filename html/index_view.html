@@ -16,15 +16,15 @@
     <section class="box cen pt5 pm5 bgff">
        <p class="box_a ls">
           <span class="fz16">赞助金额</span><br>
-           <span ng-bind="act_index.activity_sum.sum | number : 0"></span>
+           <span class="datanum" data-param="sponsor_sum" ></span>
         </p>
          <p class="box_a ls">
           <span class="fz16">会员</span><br>
-               <span ng-bind="act_index.activity_sum.count | number : 0"></span>
+               <span class="datanum"  data-param="user_sum" ></span>
         </p>
          <p class="box_a ls">
           <span class="fz16">活动数</span><br>
-           <span ng-bind="act_index.activity_sum.activity_sum"></span>
+           <span class="datanum"  data-param="activity_sum" ></span>
         </p>
     </section>
     
