@@ -51,7 +51,7 @@ function preferential(getActivityHot){
 	this.activity_time=getActivityHot.activity_time;//活动时间开始时间
 	this.activity_number=getActivityHot.activity_number;//报名人数
 	this.activity_first_face=getActivityHot.activity_first_face;//活动第一张封面
-	this.activity_address=(getActivityHot.city_name==null?"":getActivityHot.city_nam)+getActivityHot.activity_address;//活动地址
+	this.activity_address=(getActivityHot.city_name==null?"":getActivityHot.city_name)+getActivityHot.activity_address;//活动地址
 	if(getActivityHot.type==10){
 		this.activity_address=getActivityHot.activity_address;//活动地址
 	}
@@ -340,7 +340,8 @@ function ticket_volume_list(data){
 		  this.sDate_time=info.start_time;//活动开始时间
 		  this.eDate=info.end_time;//活动结束时间
 		  this.person_limit=info.person_limit==null?'无限制':info.person_limit;//活动活动席位（人数上限）
-		  this.sponsor_head=info.sponsor_head;//活动主办方头像
+		  
+		  this.sponsor_head=info.sponsor_head;//活动主办方头像  
 		  this.sponsor_name=info.sponsor_name;//主办方姓名
 		  this.sponsor_user_id=info.sponsor_user_id;//主办方id
 		  this.honored_guest=info.honored_guest;//活动嘉宾数据
@@ -390,7 +391,7 @@ function ticket_volume_list(data){
         	  this.act_cl="ls"
           }		
 		  var collect="",bgclass="";
-		  if(info.is_collect==null||info.is_collect==1){
+		  if(info.is_collect==1){
 			  collect="取消关注"
 			   bgclass="bgdiso"	   
 		  }else{

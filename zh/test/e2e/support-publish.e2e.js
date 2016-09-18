@@ -1,31 +1,18 @@
 
 'use strict';
 
-// var $ = require('jquery');
-
-describe('hello', function() {
-	it('test', function() {
-		expect(0).toEqual(0);
-	});
-});	
-
 describe('发布赞助页面', function() {
-	var name = element(by.name('activitySupport.name')),
-		// errorTip = element(by.css('mui-popup-text')),
-		submitBtn = element(by.name('submitBtn'));
+	var name = element(by.name('activitySupport.name'));
+	var submitBtn = element(by.name('submitBtn'));
 
 	describe('验证是否为空', function() {
 		it('输入空的名称', function() {
 			browser.get('/#/sponsorship');
-			name.sendKeys('');
+			name.sendKeys('123');
+			expect(submitBtn.isPresent()).toBe(true);
+			expect(submitBtn.getText()).toEqual('立即发布1');
 			submitBtn.click();
-
-			var driver = browser.driver;
-			driver.isElementPresent(by.css('mui-popup-text')).then(function(present){
-			    expect(present).toBe(true);
-			})
-			// expect(element(by.css('mui-popup-text')).isPresent()).toBe(true);
-			// expect($('.mui-popup-text').getText()).toEqual('请输入项目名称');
+			expect(element(by.css('mui-popup-text')).isPresent()).toBe(true);
 		});
 	});
 });

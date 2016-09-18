@@ -3,7 +3,7 @@
  */
 
 
-angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.router","pay","sponsor","request","form","user", "common","act_details","router"])
+angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.router","pay","sponsor","request","form","user","activity", "common","act_details","router"])
 .controller('mode_Controller',function($scope, $rootScope,activity_data, $location, $state) {//公共方法
 
 	/*分类*/   
@@ -29,8 +29,9 @@ angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.rou
 		open(path)
 	}
 
-	$scope.city_name=localStorage.city_name==undefined?"深圳":localStorage.city_name.split('市')[0]
-
+	$scope.city_name=localStorage.city_name==undefined?"深圳":localStorage.city_name.split('市')[0];
+			
+		
 	// 登录判断是否从底部菜单栏点击
     $scope.mySignin = function() {
     	$rootScope.mySignin = true;
@@ -211,16 +212,18 @@ angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.rou
 	$(".sys-loading").addClass("show_a")
 	$(".list_activities .box_a").eq(0).find("span").text(title_po)
 	
-    var list_data={}
+    var list_data={},
+    	city_name=localStorage.city_name==undefined?"深圳":localStorage.city_name.split("市")[0];//行数
     	list_data.name="";//活动标题
         list_data.type=tio;//活动类型
-    	list_data.cityId="";//城市ID
+    	
     	list_data.freeType="";//收费类型  1免费  2收费
     	list_data.industry_id="";//行业ID
     	list_data.pageIndex=1;//页码
-        list_data.pageSize=7;//行数
+        list_data.pageSize=7;//行数  
+        list_data.city_name=city_name
         if(screen.width>1000){
-        	list_data.pageSize=12
+        	list_data.pageSize=12 
         }
         list_data.time_status="";//时间
         list_data.status=0; 
@@ -255,13 +258,14 @@ angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.rou
     	         activity_data.myLaunchActivity(act_list_data).then(
     	    		function success(data){
     	    			if(data.code!=0){
-    	    				alert(data.msg);
+    	    				mui.alert(data.msg);
+    	    				$(".sys-loading").removeClass("show_a")
     	    				return 
     	    			}
     	    		
     	    			
     	    			$(data.rows).map(function(){
-    	    				var da_info=new query_activity_list(this)
+    	    				var da_info=new query_activity_list(this)  
     	    				$scope.act_list.activity_list.push(da_info)
     	    			})
     	    			$(".sys-loading").removeClass("show_a")
@@ -458,7 +462,14 @@ angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.rou
 					
 				});
 			})(mui, document);
-		  }
+		  };
+		  
+		  var sh_a={};
+		  sh_a.title="【首页】e场景活动";
+		  sh_a.desc='活动白条,让生活更容易';
+		  sh_a.link=window.location.href;
+		  sh_a.imgUrl="http://m.apptown.cn/img/activity_loan_share.jpg";
+		  wx_share(sh_a);
 
 }]).controller('activity_hotr',["$scope","activity_data","$location","$stateParams",function($scope,activity_data,$location,$stateParams) { //推荐活动
 	$scope.dte=[]

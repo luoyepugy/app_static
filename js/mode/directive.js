@@ -77,12 +77,10 @@
         		  if(this.y == this.maxScrollY&&poiu_po){
         			  poiu_po=false;
         			  $(".sys-loading").addClass("show_a");
-        			        setTimeout(function() {
-        			       	 poiu_po=true;
-                             scope.callback();
-        			         $("#"+attr.id).click() ;
-        			         $(".sys-loading").removeClass("show_a")
-        			      }, 1500);
+        			  	poiu_po=true;
+        			  	scope.callback();
+        			  	$("#"+attr.id).click() ;
+        			  	$(".sys-loading").removeClass("show_a")
         		
         		  	}
         		  }

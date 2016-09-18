@@ -114,7 +114,7 @@
         <img ng-src="{{detail.detail_date.sponsor_head}}" class="sponsor_act_icon fl"/>
         <section class="ov  pl20" style="padding-top: 15px;">
         <a class="fr fz14 yj4 contract_de" ng-href="tel:{{detail.detail_date.contact_way}}">联系TA</a>
-            <p class="ls dian mui-col-xs-8" ng-bind="detail.detail_date.sponsor_name"></p>
+            <p class="ls dian mui-col-xs-8 gray" ng-bind="detail.detail_date.sponsor_name"></p>
             
         </section>
     </section>
@@ -123,11 +123,11 @@
 <!--主办方未认证的状态  -->
 <!--主办方已认证的状态  -->
 <section class="pt10 pm10 bgff  bbm  pr pd" ng-if="detail.detail_date.sponsor_auth==1"  >
-    <section class="mui-col-xs-11 dian" ui-sref="personal_host({sponsor_user_id:detail.detail_date.sponsor_user_id})">  
+    <section class="mui-col-xs-11" ui-sref="personal_host({sponsor_user_id:detail.detail_date.sponsor_user_id})">  
         <img ng-src="{{detail.detail_date.sponsor_head}}" class="sponsor_act_icon fl"/>
         <section class="ov  pl20">
             <p class="ls dian mui-col-xs-8" ng-bind="detail.detail_date.sponsor_name"></p>
-            <p ng-bind="detail.detail_date.sponsor_intro" ></p>
+            <p class="dianer" ng-bind="detail.detail_date.sponsor_intro" ></p>
         </section>
     </section>
     <section class="box mt10">
@@ -146,7 +146,7 @@
 
 
 <section class="pd bgff pt10 mt10  pm10 honored_guest">
-   <h4 class="pm5">活动嘉宾</h4>
+   <h4 class="pm5 fz14">活动嘉宾</h4>
    <section class=" bgff  pr btm pm5 pt5 "  ng-repeat="gu in detail.detail_date.honored_guest" >
        <section class="mui-col-xs-11 dian ">
            <img ng-src="{{gu.honored_guest_icon_b}}" class="sponsor_act_icon fl"/>
@@ -158,8 +158,8 @@
        </section> 
    </section>
 
-<p class="btm pt20 cen" ng-if="detail.detail_date.honored_guest==null">
-	暂无活动嘉宾
+<p class="btm pt20" ng-if="detail.detail_date.honored_guest==null">
+	暂无活动嘉宾。
 </p>
    
 </section>
@@ -185,12 +185,15 @@
 	</section>
 </section>
 
-
+<!-- 我要打赏 -->
+<section class="tc bgff mt10 pt10 pm10">
+  <button class="mui-btn mui-btn-green mainBtn" ui-sref="activity_reward">我要打赏</button>
+  <p class="mt10 text-normal">200人打赏，<a ui-sref="activity_reward_detail" class="green">查看他们打赏了多少？</a></p>
+</section>
+<!-- /我要打赏 -->
 
 
 <section ng-include="'/html/activity/activity_hot.html?v=15'"></section>
-
-
 
 
 

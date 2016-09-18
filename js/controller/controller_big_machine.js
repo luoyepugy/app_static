@@ -19,6 +19,10 @@
 		 .then(function(data) {
 			
 			 $scope.big_sign.banner=data.info.ad_urls;//获取广告图片
+			 if(data.info.ad_urls.length==2){
+				 var hhg=$scope.big_sign.banner[0]+"?2"
+				 $scope.big_sign.banner.push(hhg)
+			 }  
 			 $scope.big_sign.act_title=data.info.activity_info.name;//获取活动名称
 			 $scope.big_sign.sponsor=data.info.activity_info.sponsor;//获取主办名称
 			 $scope.big_sign.sponsor_image_url=data.info.activity_info.sponsor_image_url;//获取主办方二维码

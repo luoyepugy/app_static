@@ -548,7 +548,7 @@ img {
 }
 .zmkjf_a{
 	
-	 background-position: -300px -17px;
+	 background-position: -301px -17px;
 }
 .zmkjf_b{
 	 background-position: -302px -41px;
@@ -1718,6 +1718,7 @@ img.yj.user_zz_p {
 	border:1px solid #4ea45d;
 	text-align:center;
 	color:#4ea45d;
+	line-height:28px;
 }
 .ml5 {
 	margin-left:5px;
@@ -1953,6 +1954,9 @@ img.yj.user_zz_p {
 }
 .mr5 {
     margin-right: 5px;
+}
+.text-normal {
+    color: #575757;
 }
 .icon100 {
     width: 100px;

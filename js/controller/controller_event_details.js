@@ -377,6 +377,9 @@ angular.module('act_details', [ "directive_mml","activity_servrt","ui.router","p
 	   this.the_price=this.selected*$scope.ticket
 	 
    },"act_list":function(x,num,id,yu){//选中票种点击时间
+	   if(yu==0){
+		   return;
+	   }
 	   $(".df_pooiiuu_s .mui-hidden").removeClass("show_a")
 	   $(".df_pooiiuu_s").eq(x).find(".mui-hidden").addClass("show_a")
 	   this.selected=num
@@ -448,7 +451,7 @@ angular.module('act_details', [ "directive_mml","activity_servrt","ui.router","p
 			/*	 var date_po="conDetails="+JSON.stringify(datePiu.conDetails)+"&consumption="+JSON.stringify(datePiu.consumption)+"&quantity="+datePiu.quantity
 				*/
 				 var date_po=JSON.stringify(datePiu)
-				     var url="https://open.weixin.qq.com/connect/oauth2/authorize?appid={0}&redirect_uri={1}&data={2}&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect";		
+				     var url="https://open.weixin.qq.com/connect/oauth2/authorize?appid={0}&redirect_uri={1}?data={2}&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect";		
 	    	         url = url.replace('{0}','wxca4f9653c04f3e8d').replace('{1}','http://m.apptown.cn/wechat/wechat_charge_consumption_h5').replace('{2}',date_po);
 	    	         
 	    	         window.location.href=encodeURI(encodeURI(url));

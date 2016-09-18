@@ -1,16 +1,17 @@
 /**
  * 发起活动
  */
+
 angular.module('sponsor', ["directive_mml","activity_servrt","ui.router", "common"])
-.controller('promotional_act_controller',["$scope","activity_data","$location","$stateParams","act_date",function($scope,activity_data,$location,$stateParams,act_date) { //发起活动
+.controller('promotional_act_controller',function($scope,activity_data,$location,$stateParams,act_date) { //发起活动
 	$(".ds_poiu_a").removeClass("show_a");
 	$(".retreat_icon").removeClass("none");
 	var parameter_p={}
-	var kmh=$.parseJSON(localStorage.input_f)
-	input_val(kmh.activity)
+/*	var kmh=$.parseJSON(localStorage.input_f)
+	input_val(kmh.activity)*/
 	$scope.promotional={"initiate":function(parameter_p){
 		var poiy=da_input(1);
-		if(poiy==undefined){
+		if(poiy==undefined){ 
 			return
 		}
 		activity_data.simple_create_activity(poiy).then(
@@ -42,7 +43,7 @@ angular.module('sponsor', ["directive_mml","activity_servrt","ui.router", "commo
         $(".mml_bottom").show()
 	 })
 	 
-}]).controller('custom_form_controller',["$scope","activity_data","$location","$stateParams","act_date",function($scope,activity_data,$location,$stateParams,act_date) { //自定义表单
+}).controller('custom_form_controller',["$scope","activity_data","$location","$stateParams","act_date",function($scope,activity_data,$location,$stateParams,act_date) { //自定义表单
 
 
 }])
