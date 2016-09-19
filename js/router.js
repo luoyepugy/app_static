@@ -81,7 +81,10 @@
 	    	url: '/activity_success?t_id', 
 	    	templateUrl: '/html/activity/activity_success.html',
 	    	controller: 'activity_success'
-	    }) 
+	    }).state('activity_machine_apply',{      
+	    	url: '/activity_machine_apply', 
+	    	templateUrl: '/html/activity/activity_machine_apply.html'
+	    })  
 
 	    // 搜索
 	    .state('search',{

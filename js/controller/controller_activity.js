@@ -11,6 +11,10 @@ angular.module('activity', ['common', 'request', 'ui.router'])
 	.controller('activity_rewardCtrl', function($scope, $stateParams, httpService) {
 		$scope.reward = {};
 		httpService.getDatas('GET', '/activityTip/' + $stateParams.id + '/sponsorApply').then(function(data) {
+			if(!data.info.userName) {
+				$scope.reward.userName = '匿名';
+				return false;
+			}
 			$scope.reward = data.info;
 		});
 		$scope.submitReward = function(data) {

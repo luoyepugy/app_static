@@ -70,16 +70,25 @@
         		  vScrollbar: false,
         		  doubleTapZoom: 10, //双触放大几倍  
         		  onScrollStart:function(){
-        			 
         			  this.refresh();//刷新 
+        			  $(".mml_bottom").css({"opacity":"0"});
+        			  console.log(this.y);
+        			  
         		  },
         		  onScrollEnd: function(){
+        			  $(".mml_bottom").css({"opacity":"1"});
+        			  if(this.y<0){
+        				  $(".return_top").removeClass("mui-hidden");
+        				
+        			  }else{ 
+        				  $(".return_top").addClass("mui-hidden");
+        			  }
         		  if(this.y == this.maxScrollY&&poiu_po){
         			  poiu_po=false;
         			  $(".sys-loading").addClass("show_a");
         			  	poiu_po=true;
         			  	scope.callback();
-        			  	$("#"+attr.id).click() ;
+        			  	$("#"+attr.id).click();
         			  	$(".sys-loading").removeClass("show_a")
         		
         		  	}
@@ -124,6 +133,20 @@
                  e.stopPropagation();
                  var this_href=$(this).attr("data-href")
                  window.location.href=this_href;
+             });
+         }
+     };
+ }).directive('retup', function () { //跳转制定的页面
+     return {
+         restrict: 'AE',
+         link: function(scope,ele,attr){
+             ele.on('click',function(e){
+            	 /*阻止触发时间冒泡*/
+                 e.preventDefault();
+                 e.stopPropagation(); 
+                 $("#scroll").css({"transform": "translate(0px, 0px) scale(1) translateZ(0px)"})
+                 $(this).addClass("mui-hidden")
+                 $("html,body").animate({scrollTop:0},200);
              });
          }
      };

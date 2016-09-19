@@ -23,7 +23,7 @@ angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.rou
 	  }
 	
 	 $(".menu_pup li").on("click",function(){
-		 $(".menu_pup").toggleClass("show_a")
+		 $(".menu_pup,.filiuyt_o ").removeClass("show_a")
 	 })
 	  $scope.open_p=function (path){
 		open(path)
@@ -35,8 +35,6 @@ angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.rou
 	// 登录判断是否从底部菜单栏点击
     $scope.mySignin = function() {
     	$rootScope.mySignin = true;
-    	// window.localStorage.userLogin = true;
-    	console.log(window.localStorage.userLogin);
     	if(window.localStorage.userLogin) {
     		$state.go('personal_center');
     	} else {
@@ -269,12 +267,14 @@ angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.rou
     	    				$(".sys-loading").removeClass("show_a")
     	    				return 
     	    			}
-    	    		
-    	    			
     	    			$(data.rows).map(function(){
     	    				var da_info=new query_activity_list(this)  
     	    				$scope.act_list.activity_list.push(da_info)
     	    			})
+    	    			$(".tikjhg_as").remove()
+    	    			if(data.rows.length==0){
+    	    				$("#scroll").append('<p class="cen pt10 pm10 bgff tikjhg_as">:-) 没有更多活动了</p>')
+    	    			}
     	    			$(".sys-loading").removeClass("show_a")
     	    		}, function error() {
     					console.log("获取活动列表数据失败");
@@ -353,6 +353,10 @@ angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.rou
 			    				  var ticket_volume_list=new sponsor_list(this);
 			    				  $scope.sponsor_list.activitySupport_list.push(ticket_volume_list);
 			    			})
+			    			$(".tikjhg_as").remove()
+	    	    			if(data.rows.length==0){
+	    	    				$("#scroll").append('<p class="cen pt10 pm10 bgff tikjhg_as">:-) 没有更多赞助了</p>')
+	    	    			}
 			    			 
 						  $(".sys-loading").removeClass("show_a")
 			    		}, function error() {
