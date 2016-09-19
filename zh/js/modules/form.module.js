@@ -48,7 +48,10 @@ angular.module('form', ['request', 'common', 'ui.router'])
                     'confirmPwd': $(form).find('input[confirm-password]'),
                     'minLength': $(form).find('input[min-length], textarea[min-length]'),
                     'maxLength': $(form).find('input[max-length], textarea[max-length]'),
+                    'minNumber': $(form).find('input[min-number]'),
+                    'maxNumber': $(form).find('input[max-number]'),
                     'number': $(form).find('input[format-number]'),
+                    'money': $(form).find('input[fomat-money]'),
                     'email': $(form).find('input[format-email]'),
                     'idCard': $(form).find('input[format-idCard]')
                 },
@@ -56,7 +59,8 @@ angular.module('form', ['request', 'common', 'ui.router'])
                     'phone': /^((145|147)|(15[^4])|(17[6-8])|((13|18)[0-9]))\d{8}$/,
                     'idCard': /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/,
                     'email': /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-                    'number': /^[0-9]*$/
+                    'number': /^[0-9]*$/,
+                    'money': /^[\d,]+(\.\d*)?$/
                 };
 
             // 验证银行卡号码格式
@@ -98,7 +102,7 @@ angular.module('form', ['request', 'common', 'ui.router'])
                             } 
                         }
                         // 格式
-                        if(type == 'phone' || type == 'number' || type == 'idCard' || type == 'email') {
+                        if(type == 'phone' || type == 'number' || type == 'idCard' || type == 'email' || type == 'money') {
                             if(!formatRegexp[type].test(val)) {
                                 formatTip();
                             }
@@ -106,6 +110,13 @@ angular.module('form', ['request', 'common', 'ui.router'])
                         if(type == 'bankCard') {
                             if(!_isBankCard(val)) {
                                 formatTip();
+                            }
+                        }
+                        // 金额不能为0 
+                        if(type == 'money') {
+                            if(val == 0) {
+                                typeNum++;
+                                messageService.show(tips + '必须大于0');
                             }
                         }
                         // 确认密码
@@ -130,7 +141,22 @@ angular.module('form', ['request', 'common', 'ui.router'])
                                 messageService.show($(this).data('empty').slice(3) + '最大长度为' + maxlen);
                             }
                         }
-                        
+                        // 最小数值和最大数值
+                        if(type == 'minNumber') {
+                            var minnum = $(this).attr('min-number');
+                            if(Number(val) < Number(minnum)) {
+                                typeNum++;
+                                messageService.show($(this).data('empty').slice(3) + '最小值为' + minnum);
+                            }
+                        }
+                        if(type == 'maxNumber') {
+                            var maxnum = $(this).attr('max-number');
+                            if(Number(val) > Number(maxnum)) {
+                                typeNum++;
+                                messageService.show($(this).data('empty').slice(3) + '最大值为' + maxnum);
+                            }
+                        }
+
                         // 类型
                         if(typeNum != 0) {
                             $(this).focus();
@@ -147,8 +173,8 @@ angular.module('form', ['request', 'common', 'ui.router'])
                 return true;
             }
 
-            // ---------手机号码-------------最小字符长度------------最大字符长度-----------银行卡号码----------------数字---------------电子邮箱------------身份证号码---------------确认密码---------
-            if(_format('phone') && _format('minLength') && _format('maxLength') && _format('bankCard') && _format('number') && _format('email') && _format('idCard') && _format('confirmPwd')) {
+            // ---------手机号码-------------最小字符长度------------最大字符长度-----------银行卡号码----------------数字---------------电子邮箱------------身份证号码---------------确认密码---------金额-----------------最小数值---------------最大数值--------
+            if(_format('phone') && _format('minLength') && _format('maxLength') && _format('bankCard') && _format('number') && _format('email') && _format('idCard') && _format('confirmPwd') && _format('money') && _format('minNumber') && _format('maxNumber')) {
                 return true;
             }
             return valid;

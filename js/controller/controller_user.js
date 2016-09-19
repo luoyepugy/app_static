@@ -22,17 +22,26 @@ angular.module('user', ['activity_servrt','directive_mml', 'common', 'request', 
 		}
 
 		// 获取用户登录状态
-		httpService.getDatas('GET', '/user/verifyUserLogin', {}, 'data').then(function(data) {
-			if(data.code!=0&&data.code!=-1){
-				$state.go("signin");
-				return false;
-			}
-			if($stateParams.url!=null){
-                $location.path($scope.url);
-            } else {
-                $state.go("personal_center");
-            }
-		});
+		if($stateParams.url!=null){
+            $location.path($scope.url);
+        }
+		// if(window.localStorage.userLogin) {
+		// 	$state.go("personal_center");
+		// } else {
+		// 	$state.go("signin");
+		// }
+
+		// httpService.getDatas('GET', '/user/verifyUserLogin').then(function(data) {
+		// 	if(data.code!=0&&data.code!=-1){
+		// 		$state.go("signin");
+		// 		return false;
+		// 	}
+		// 	if($stateParams.url!=null){
+  //               $location.path($scope.url);
+  //           } else {
+  //               $state.go("personal_center");
+  //           }
+		// });
 
 		// 忘记密码
 		$scope.forgetPwd = function() {
@@ -48,6 +57,7 @@ angular.module('user', ['activity_servrt','directive_mml', 'common', 'request', 
 
 		// 跳转
 		$scope.route = function(data) {
+			window.localStorage.userLogin = true;
 			if(data.code == 0) {
 				if($rootScope.mySignin) {
 					$state.go('personal_center');
@@ -59,6 +69,7 @@ angular.module('user', ['activity_servrt','directive_mml', 'common', 'request', 
             } else if(data.code == 2) {
                 $state.go('activity_detail', {'id': data.msg});
             } else {
+            	window.localStorage.clear();
                 messageService.show(data.msg);
             }
 		}
@@ -239,6 +250,7 @@ angular.module('user', ['activity_servrt','directive_mml', 'common', 'request', 
 				    			 $location.path("/index");
 				    			 // 重置登录状态
 				    			 $rootScope.mySignin = false;
+				    			 window.localStorage.clear();
 				    		}, function error() {
 								console.log("退出登录失败");
 				    });

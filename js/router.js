@@ -18,11 +18,11 @@
 	    	url: '/add_activities', //加号进来的页面
 	    	templateUrl: '/html/add_activities.html'
 	    }).state('activity_reward',{
-	    	url: '/activity_reward',  				// 活动打赏表单
+	    	url: '/activity_reward/:id',  				// 活动打赏表单
 	    	templateUrl: '/html/activity/activity_reward.html',
 	    	controller: 'activity_rewardCtrl'
 	    }).state('activity_reward_detail',{
-	    	url: '/activity_reward_detail',  		// 活动打赏详情
+	    	url: '/activity_reward_detail/:id',  		// 活动打赏详情
 	    	templateUrl: '/html/activity/activity_reward_detail.html',
 	    	controller: 'activity_reward_detailCtrl'
 	    }).state('activity_loan',{

@@ -2,7 +2,7 @@
  * 活动详情and赞助详情
  */
 angular.module('act_details', [ "directive_mml","activity_servrt","ui.router","pay","sponsor"])
-.controller('activity_detail_c',["$scope","activity_data","$location","$stateParams","act_date","$state",function($scope,activity_data,$location,$stateParams,act_date,$state) { //活动详情 
+.controller('activity_detail_c',function($scope,activity_data,$location,$stateParams,act_date,$state,httpService) { //活动详情 
 	  $(".mml_bottom ").hide();
 	  $(".ds_poiu_a").removeClass("show_a");
 	  $(".retreat_icon").removeClass("none");
@@ -18,7 +18,9 @@ angular.module('act_details', [ "directive_mml","activity_servrt","ui.router","p
 		    		    	 mui.alert('活动详情数据获取失败', 'E场景活动');
 		    		    	 return
 		    		    }
-		    		    
+		    		    // 是否显示打赏数据
+		    		    $scope.rewardShow = data.info.tip.open;
+
 		    		    $scope.detail.detail_date=new activity_detail(data.info);
 		    		    $scope.detail.detail_date.act_id=$scope.id
 		    		    act_date.set_act_date($scope.detail.detail_date)
@@ -166,10 +168,19 @@ angular.module('act_details', [ "directive_mml","activity_servrt","ui.router","p
 				  $(".act_tble_a").removeAttr("style");	
 			  }
 
-		  })
+		  });
+
+	/* 
+	 * 张晗
+	 * 我要打赏数据
+	 */
+	httpService.getDatas('GET', '/activityTip/' + $stateParams.id + '/info').then(function(data) {
+		$scope.totalPerson = data.info.tip_num;
+	});
+
 		  
 	  
-}]).controller('activity_deta_date',function ($scope,activity_data,anchorScroll) {//活动详情 活动详情数据
+}).controller('activity_deta_date',function ($scope,activity_data,anchorScroll) {//活动详情 活动详情数据
     $(".act_tble_a .zd").removeClass("act_poi")
     $(".act_tble_a .zd").eq(0).addClass("act_poi")
     $(".progress_of").css({"left":"0%"})

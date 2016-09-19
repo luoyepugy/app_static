@@ -35,6 +35,13 @@ angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.rou
 	// 登录判断是否从底部菜单栏点击
     $scope.mySignin = function() {
     	$rootScope.mySignin = true;
+    	// window.localStorage.userLogin = true;
+    	console.log(window.localStorage.userLogin);
+    	if(window.localStorage.userLogin) {
+    		$state.go('personal_center');
+    	} else {
+    		$state.go('signin');
+    	}
     }
 
 
@@ -620,9 +627,9 @@ angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.rou
 			searchSupport(); 
 		}
 	}
-	var request = function(url, datas, array, push) {
+	var request = function(url, datas, array, more) {
 		httpService.getDatas('GET', url, datas).then(function(data) {
-			if(push) {
+			if(more) {
 				$scope[array] = $scope[array].concat(data.rows);
 				if(data.rows.length == 0) {
 					messageService.show('没有更多数据了');

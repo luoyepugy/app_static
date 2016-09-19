@@ -35,7 +35,7 @@
             <a>首页</a></li>
           <li ui-sref="sponsor_list"><a>赞助</a></li>
           <li ui-sref="ticket_user"><a>票券</a></li>
-          <li ui-sref="signin" ng-click="mySignin()"><a>我的</a></li>
+          <li ng-click="mySignin()"><a>我的</a></li>
           <li ui-sref="activity_user({type: 2})"><a>发起的</a></li>
           <li ui-sref="activity_user({type: 1})"><a>参与的</a></li>
           <li ui-sref="activity_loan"><a>活动白条</a></li>
@@ -67,7 +67,7 @@
            票券
            
         </a>
-           <a class="zc fz14 box_a" ng-click="mySignin()" ui-sref="signin"> 
+           <a class="zc fz14 box_a" ng-click="mySignin()"> 
           <i class="f_i mine_icon"></i><br>
            我的
            
@@ -103,6 +103,6 @@
     <script src="/js/common/modules.js?v=9"></script>
     <!-- 用户控制器 -->
     <script src="/js/controller/controller_user.js?v=9" ></script>
-
+    <script src="/js/controller/controller_activity.js" ></script>
 </body>
 </html>

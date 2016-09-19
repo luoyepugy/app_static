@@ -1,0 +1,69 @@
+
+@import "../custom/mixin";
+
+// ================ 活动打赏 ===============
+.activity-reward {
+	.avatar {
+		@include size(100vw, 250px);
+		@include gradient(linear, no, #4ea45d , #7fbc89 75%, transparent 0);
+	}
+	.userIcon {
+		@include size(90px);
+		border-radius: 45px;
+		border: 2px solid #fff;
+		position: relative;
+		top: 120px;
+		left: calc(50% - 46px);
+	}
+	.userName {
+		color: #fff;
+		position: relative;
+		top: 100px;
+		text-align: center;
+		font-size: 16px;
+	}
+	// 打赏提示语
+	.rewardTip {
+		color: $text-light;
+		text-align: center;
+		font-size: 14px;
+		margin-bottom: 15px;
+	}
+	.rewardMoney {
+		font-size: 17px;
+		color: $text-dark;
+		font-family: 'Helvetica Neue',Helvetica,sans-serif;
+		position: relative;
+		line-height: 21px;
+	    width: calc(100% -30px);
+	    height: 40px;
+	    margin: 0 15px 15px;
+	    -webkit-user-select: text;
+	    border: 1px solid rgba(0,0,0,.2);
+	    border-radius: 3px;
+	    outline: 0;
+	    background-color: #fff;
+	    -webkit-appearance: none;
+	    label {
+	    	margin: 0 10px;
+	    }
+	    input {
+	    	width: 67%;
+	    	text-align: right;
+	    	border: 0;
+	    	height: 38px;
+	    }
+	    span {
+	    	position: absolute;
+	    	right: 10px;
+	    	top: 9px;
+	    }
+	}
+}
+.moreWrap {
+	position: fixed;
+    left: 0px;
+    top: 90px;
+    width: 100%;
+    height: calc(100% - 150px);
+}

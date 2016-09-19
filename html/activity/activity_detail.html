@@ -83,16 +83,6 @@
     </ul>
 
 
-
-<!-- <p class="btm bgff pt10 pm10 cen">
-	<a class="ls">
-		看看他们打赏多少
-	</a>
-	
-</p> -->
-
-
-
 <section class="pt10 pm10 bgff mt10 bbm btm pr pd" ng-click="detail.activities_oi()">
 	<p class="mui-col-xs-11 dian hs">活动签到</p>
 	<span class="mui-icon mui-icon-arrowright right_icon zc"></span>
@@ -186,9 +176,9 @@
 </section>
 
 <!-- 我要打赏 -->
-<section class="tc bgff mt10 pt10 pm10">
-  <button class="mui-btn mui-btn-green mainBtn" ui-sref="activity_reward">我要打赏</button>
-  <p class="mt10 text-normal">200人打赏，<a ui-sref="activity_reward_detail" class="green">查看他们打赏了多少？</a></p>
+<section class="tc bgff mt10 pt10 pm10" ng-if="rewardShow==true">
+  <button class="mui-btn mui-btn-green mainBtn" ui-sref="activity_reward({id:id})">我要打赏</button>
+  <p class="mt10 text-normal">{{totalPerson}}人打赏&#12288;<a ng-if="totalPerson>0" ui-sref="activity_reward_detail({id:id})" class="green">查看他们打赏了多少？</a></p>
 </section>
 <!-- /我要打赏 -->
 

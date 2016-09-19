@@ -2,8 +2,8 @@
 
 angular.module('common',[])
     .filter('supportStatus', supportStatus)
-    .filter('supportStatusClass', supportStatusClass);
-
+    .filter('supportStatusClass', supportStatusClass)
+    .filter('formatTime', formatTime);
 
     // ======================== 赞助状态 ========================
     /* @ngInject */
@@ -38,8 +38,13 @@ angular.module('common',[])
         }
     }
 
-
-
+    // ======================== 时间格式化（时间戳转化为字符串） ========================
+    /* @ngInject */
+    function formatTime() {
+        return function(string){
+            
+        }
+    }
 
 
 })();
