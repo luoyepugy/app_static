@@ -4,7 +4,7 @@
 
 
 angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.router","pay","sponsor","request","form","user","activity", "common","act_details","router"])
-.controller('mode_Controller',function($scope, $rootScope,activity_data, $location, $state) {//公共方法
+.controller('mode_Controller',function($scope, $rootScope,activity_data, $location, $state, httpService) {//公共方法
 
 	/*分类*/   
 	$scope.classify=classify_p()
@@ -35,11 +35,13 @@ angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.rou
 	// 登录判断是否从底部菜单栏点击
     $scope.mySignin = function() {
     	$rootScope.mySignin = true;
-    	if(window.localStorage.userLogin) {
-    		$state.go('personal_center');
-    	} else {
-    		$state.go('signin');
-    	}
+    	httpService.getDatas('GET', '/user/verifyUserLogin').then(function(data) {
+			if(data.code!=0&&data.code!=-1){
+				$state.go("signin");
+				return false;
+			}
+            $state.go("personal_center");
+		});
     }
 
 
@@ -397,7 +399,12 @@ angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.rou
 	 
 	}
 }]).controller('loan_co',["$scope","activity_data","$location","$stateParams",function($scope,activity_data,$location,$stateParams) { //白条功能
-
+	  var sh_a={};
+	  sh_a.title="【首页】e场景活动";
+	  sh_a.desc='活动白条,让生活更容易';
+	  sh_a.link=window.location.href;
+	  sh_a.imgUrl="http://m.apptown.cn/img/activity_loan_share.jpg";
+	  wx_share(sh_a);
 	$scope.activity_id=$stateParams.activity_id;//获取传过来的活动
 	  $scope.answerPup=function(){ //申请成功提示
 		  	var loan_name=$(".loan_name").val();//姓名
@@ -475,12 +482,6 @@ angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.rou
 			})(mui, document);
 		  };
 		  
-		  var sh_a={};
-		  sh_a.title="【首页】e场景活动";
-		  sh_a.desc='活动白条,让生活更容易';
-		  sh_a.link=window.location.href;
-		  sh_a.imgUrl="http://m.apptown.cn/img/activity_loan_share.jpg";
-		  wx_share(sh_a);
 
 }]).controller('activity_hotr',["$scope","activity_data","$location","$stateParams",function($scope,activity_data,$location,$stateParams) { //推荐活动
 	$scope.dte=[]
@@ -675,6 +676,52 @@ angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.rou
 		};
 		request('/activity/query_activity_list', activityDatas, 'activityList', push);
 	};
+
+})
+
+// ======================= 机器申请 ============================
+/* @ngInject */
+.controller('activity_machine_apply', function($scope,httpService, messageService) {
+	var sh_a={};  //微信分享
+ 	sh_a.title="【首页】e场景活动"
+    sh_a.desc='便捷的活动众筹发布平台、"找活动,上e场景活动平台"'
+    sh_a.link=window.location.href;
+    sh_a.imgUrl="http://m.apptown.cn/img/activity_apply_share2.png"
+    wx_share(sh_a)
+	
+	$scope.applyBtn=function(){
+		var machine_name=$(".j_machine_name").val().trim();//申请名字
+		var machine_phone=$(".j_machine_phone").val().trim();//申请手机号
+		var machine_company=$(".j_machine_company").val().trim();//申请公司
+		var machine_detail=$(".j_machine_detail").val().trim();//申请备注	
+		if(!form_mm.isnull(machine_name)){
+					mui.alert("姓名不能为空")
+					$(".j_machine_name").focus();
+					return;
+		}
+		if(!form_mm.tel(machine_phone)){
+				mui.alert("手机号码格式错误")
+				$(".j_machine_phone").focus();
+				return;
+		}
+		if(!form_mm.isnull(machine_company)){
+				mui.alert("企业或组织名称不能为空")
+				$(".j_machine_company").focus();
+				return;
+		}
+		var datas={
+      "remark":machine_detail,
+      "team_name":machine_company,
+      "user_name":machine_name,
+       "user_phone":machine_phone                               
+      }
+		httpService.getDatas('POST', '/Machine/apply_machine',datas).then(function(data) {
+           if(data.code==0){
+           	 mui.alert(data.msg)
+           }
+        });
+	}
+	
 
 })
 

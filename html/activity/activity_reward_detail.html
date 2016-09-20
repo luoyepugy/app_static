@@ -11,7 +11,8 @@
 	                	<span class="text-dark mr5" ng-if="item.user_name!=''">{{item.user_name}}</span><span class="text-dark mr5" ng-if="item.user_name==''">匿名</span>打赏了<span class="orange  ml5 mr5">{{item.pay_num}}</span>元
 	                </p>
 					<p>{{item.pay_time | getDateDiff}}</p>
-	                <p class="text-dark">{{item.pay_info}}</p>
+	                <p ng-if="item.pay_info!=''" class="text-dark">{{item.pay_info}}</p>
+	                <p ng-if="item.pay_info==''" class="text-dark">支持！</p>
 	            </div>
 			</li>
 		</ul>

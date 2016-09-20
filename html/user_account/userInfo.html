@@ -22,7 +22,7 @@
 								<a>账户ID<span class="mui-pull-right" ng-bind="'000'+pe_er.user_icon_o.user_id"></span></a>
 							</li>
                             <li class="mui-table-view-cell">
-								<a  >手机号码<span class="mui-pull-right" ng-bind="pe_er.user_icon_o.contact_info"></span></a>
+								<a  ui-sref="userInfo_edit({type: 6})" class="mui-navigate-right">手机号码<span class="mui-pull-right" ng-bind="pe_er.user_icon_o.contact_info"></span></a>
 							</li>
                             <li class="mui-table-view-cell"  ng-click="deteail_a(pe_er.user_icon_o)">
 								<a ui-sref="userInfo_edit({type: 2})" class="mui-navigate-right">性别<span class="mui-pull-right" ng-bind="pe_er.user_icon_o.ehg_a"></span></a>

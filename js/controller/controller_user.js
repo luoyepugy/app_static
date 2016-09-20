@@ -25,12 +25,7 @@ angular.module('user', ['activity_servrt','directive_mml', 'common', 'request', 
 		if($stateParams.url!=null){
             $location.path($scope.url);
         }
-		// if(window.localStorage.userLogin) {
-		// 	$state.go("personal_center");
-		// } else {
-		// 	$state.go("signin");
-		// }
-
+        
 		// httpService.getDatas('GET', '/user/verifyUserLogin').then(function(data) {
 		// 	if(data.code!=0&&data.code!=-1){
 		// 		$state.go("signin");
@@ -57,7 +52,6 @@ angular.module('user', ['activity_servrt','directive_mml', 'common', 'request', 
 
 		// 跳转
 		$scope.route = function(data) {
-			window.localStorage.userLogin = true;
 			if(data.code == 0) {
 				if($rootScope.mySignin) {
 					$state.go('personal_center');
@@ -69,7 +63,6 @@ angular.module('user', ['activity_servrt','directive_mml', 'common', 'request', 
             } else if(data.code == 2) {
                 $state.go('activity_detail', {'id': data.msg});
             } else {
-            	window.localStorage.clear();
                 messageService.show(data.msg);
             }
 		}
@@ -250,7 +243,6 @@ angular.module('user', ['activity_servrt','directive_mml', 'common', 'request', 
 				    			 $location.path("/index");
 				    			 // 重置登录状态
 				    			 $rootScope.mySignin = false;
-				    			 window.localStorage.clear();
 				    		}, function error() {
 								console.log("退出登录失败");
 				    });
@@ -646,7 +638,7 @@ angular.module('user', ['activity_servrt','directive_mml', 'common', 'request', 
 		$("body").on("click",".act_use_p a",function(){
 			$(".act_use_p a").removeClass("cat_poo")
 			$(this).addClass("cat_poo")
-		})
+		});
 		$scope.my_activities={ "activity_list":[],//初始化活动列表数据
 			"participant":function(data_act){//参与的活动
 		 	 activity_data.myTakePartInActivity(data_act).then(
@@ -658,15 +650,17 @@ angular.module('user', ['activity_servrt','directive_mml', 'common', 'request', 
 			    				  mui.alert(data.msg, 'E场景活动');
 			    				return;
 			    			}
-			    			
-			    			poiu_po=true
+			    			console.log('ef');
+			    			poiu_po=true;
 			    			
 			    			 $(data.rows).map(function(){
-			    				 var khg=new query_activity_list(this)
-			    				 khg.order_id=this.order_id
-			    				 $scope.my_activities.activity_list.push(khg) 
+			    				 var khg=new query_activity_list(this);
+			    				 khg.order_id=this.order_id;
+			    				 khg.tip = this.tip;
+			    				 $scope.my_activities.activity_list.push(khg);
 			    			
 			    			 })
+
 			    		
 			    		}, function error() {
 							console.log("活动我的活动失败");
@@ -708,8 +702,10 @@ angular.module('user', ['activity_servrt','directive_mml', 'common', 'request', 
 			    			}
 			    		
 			    			poiu_po=true;
+			    			console.log('efef');
 			    			$(data.rows).map(function(){
 			    				 var khg=new query_activity_list(this);
+			    				 khg.tip = this.tip;
 			    				 $scope.my_activities.activity_list.push(khg); 
 			    			})
 			    		
@@ -728,9 +724,10 @@ angular.module('user', ['activity_servrt','directive_mml', 'common', 'request', 
 			    			}
 			    			$(".sys-loading").removeClass("show_a")
 			    			poiu_po=true
-			    			
+			    			console.log('ef12');
 			    			 $(data.rows).map(function(){
-			    				 var khg=new query_activity_list(this)
+			    				 var khg=new query_activity_list(this);
+			    				 khg.tip = this.tip;
 			    				 $scope.my_activities.activity_list.push(khg) 
 			    				
 			    			 })
@@ -1033,13 +1030,16 @@ angular.module('user', ['activity_servrt','directive_mml', 'common', 'request', 
 		$(".ds_poiu_a").removeClass("show_a")
 		$(".retreat_icon").removeClass("none")
 		 $(".mml_bottom").show()
-		$scope.pload_p=false;
+		 $(".sys-loading").addClass("show_a")
 			  /*验证是否登陆*/
 			 activity_data.verifyUserLogin().then(
 			    		function success(data){
-			    			if(data.code==0){
-			    				$scope.pload_p=true
+			    			if(data.code!=0){
+			    				$(".ssd_poio").eq(0).show();
+			    				 $(".sys-loading").removeClass("show_a")
+			    				return
 			    			}
+			    			
 			    		}, function error() {
 							console.log("验证失败");
 			    });
@@ -1062,17 +1062,19 @@ angular.module('user', ['activity_servrt','directive_mml', 'common', 'request', 
 		    				console.log(data.msg);
 							return;
 		    			}
+		    			 $(".sys-loading").removeClass("show_a")
+		    			if(data.info.length==0){
+		    				$(".ssd_poio").eq(1).show()
+		    			}else{
+		    				$(".ssd_poio").eq(2).show()
+		    			}
 		    			$(data.info).map(function(){
 		    				var tick_info=new ticket_volume_list(this);
 		    				if(parameter.filter!=3){
 		    					$scope.volume_list.v_data.push(tick_info);
-		    					
-		    					
 		    				}else if(parameter.filter==3){//过期票卷
-		    					
 		    					$scope.volume_list.over_data.push(tick_info);
 		    				}
-		    			
 		    			})
 		    			
 					

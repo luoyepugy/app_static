@@ -6,7 +6,7 @@
         touchEvent.preventDefault();   
     }  /*
     document.getElementById("mml_bottom").addEventListener( 'touchstart' , stopScrolling , false );  */
-  $(".mml_bottom,.sys-loading").off("touchmove").on("touchmove",stopScrolling)
+  $(".mml_bottom,.sys-loading,.filiuyt_o ").off("touchmove").on("touchmove",stopScrolling)
   /*  document.getElementById("mml_bottom").addEventListener( 'touchmove' , stopScrolling);  */
      
 function classify_p(){

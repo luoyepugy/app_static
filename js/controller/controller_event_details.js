@@ -19,7 +19,10 @@ angular.module('act_details', [ "directive_mml","activity_servrt","ui.router","p
 		    		    	 return
 		    		    }
 		    		    // 是否显示打赏数据
-		    		    $scope.rewardShow = data.info.tip.open;
+		    		    try{/*有异常*/
+		    		    	 $scope.rewardShow = data.info.tip.open;
+		    		    }catch(e){}
+		    		   
 
 		    		    $scope.detail.detail_date=new activity_detail(data.info);
 		    		    $scope.detail.detail_date.act_id=$scope.id
@@ -310,6 +313,7 @@ angular.module('act_details', [ "directive_mml","activity_servrt","ui.router","p
 				return;
 			}
 		}
+		
 		 if(!form_mm.tel($(".form_po_ipnut").eq(1).val())){
 			 mui.alert('电话号码格式输入错误', 'E场景活动');
 			 return
@@ -347,9 +351,19 @@ angular.module('act_details', [ "directive_mml","activity_servrt","ui.router","p
 		    		}, function error() {
 						console.log("报名失败");
 		    }); 
-	}
-	
+	}		
 }	
+	
+	 activity_data.verifyUserLogin().then(
+	    		function success(data){
+	    			if(data.code!=0){
+	       				return
+	       			}
+	    			$(".form_po_ipnut").eq(0).val(data.info.user_name)
+	    			$(".form_po_ipnut").eq(1).val(data.info.user_phone) 
+	    		}, function error() {
+					console.log("验证失败");
+	    });
 }]).controller('activity_charge_p',["$scope","activity_data","$location","$stateParams","act_date","$state",function($scope,activity_data,$location,$stateParams,act_date,$state) { //收费活动报名
    $(".mml_bottom ").hide();
   
@@ -391,8 +405,8 @@ angular.module('act_details', [ "directive_mml","activity_servrt","ui.router","p
 	   if(yu==0){
 		   return;
 	   }
-	   $(".df_pooiiuu_s .mui-hidden").removeClass("show_a")
-	   $(".df_pooiiuu_s").eq(x).find(".mui-hidden").addClass("show_a")
+	   $(".df_pooiiuu_s .lkmhgf_s").removeClass("fa-check-circle").addClass("fa-circle-thin")
+	   $(".df_pooiiuu_s").eq(x).find(".lkmhgf_s").removeClass("fa-circle-thin").addClass("fa-check-circle")
 	   this.selected=num
 	   this.the_price=this.selected*$scope.ticket
 	   this.ticket_id=id
@@ -476,8 +490,18 @@ angular.module('act_details', [ "directive_mml","activity_servrt","ui.router","p
    		}
    }
    
-
-   $("html,body").animate({scrollTop:0},200);//滚回顶部
+   activity_data.verifyUserLogin().then(
+   		function success(data){
+   			if(data.code!=0){
+   				return
+   			}
+   			$(".form_po_ipnut").eq(0).val(data.info.user_name)
+   			$(".form_po_ipnut").eq(1).val(data.info.user_phone) 
+   		}, function error() {
+				console.log("验证失败");
+   });
+   
+   $("html,body").animate({scrollTop:0},200);//滚回顶部 
 
 }]).controller('sp_details',["$scope","activity_data","$location","$stateParams","act_date","anchorScroll",'$sce',function($scope,activity_data,$location,$stateParams,act_date,anchorScroll,$sce) { //赞助单页--赞助详情
 	$(".mml_bottom ").hide()

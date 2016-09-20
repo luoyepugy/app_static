@@ -94,6 +94,10 @@ h4 {
     bottom: 0px;
     left: 0px;
     z-index: 1000;
+    padding-bottom:0px;
+}
+.mml_bottom .fz14{
+	font-size:12px;
 }
 .mml_bottom a{
     display: block;
@@ -101,44 +105,44 @@ h4 {
     
 }
 .mml_bottom i{
-    height: 30px;
-        position: relative;
+    height: 20px;
+    position: relative;
     top: 5px;
 }
 .discover_icon{
-    width: 24px;
-    background-position: -114px -7px;
+    width: 17px;
+    background-position: -120px -16px;
 }
 .sponsor_icon{
-    width: 26px;
-    background-position: -114px -52px;
+    width: 20px;
+    background-position: -117px -60px;
 }
 .vouchers_icon{
-    width: 36px;
-    background-position: -114px -97px;
+    width: 26px;
+    background-position: -117px -107px;
 }
 .mine_icon{
-       width: 24px;
-    background-position: -115px -143px;
+       width: 18px;
+    background-position: -121px -151px;
 }
 .add_icon{
-    width: 56px;
-    height: 43px !important;
-    background-position: -114px -214px;
+    width: 38px;
+    height: 29px !important;
+    background-position: -119px -230px;
     position: relative;
-    top: 4px;
+       top: 10px !important;
 }
 .bottom_act .vouchers_icon{
-    background-position: -76px -490px;
+    background-position: -78px -499px;
 }
 .bottom_act .discover_icon{
-    background-position: -76px -399px;
+    background-position: -81px -408px;
 }
 .bottom_act .sponsor_icon{
-    background-position: -76px -448px
+    background-position: -82px -450px
 }
 .bottom_act .mine_icon{
-    background-position: -76px -533px;
+       background-position: -80px -541px;
 }
 .bottom_act{
  
@@ -1510,9 +1514,8 @@ span.mui-pull-right.asd_po.dian.ng-binding {
 	float: left;
 	font-size: 14px;
 }
-#detail_date_o img {
+#detail_date_o * {
     max-width: 100%;
-    height: a;
     height: auto;
 }
 section.pup_soou_p {
@@ -2255,7 +2258,19 @@ background-position: -26px -1119px;
     .mui-dtpicker.mui-active,.mui-poppicker.mui-active{
        bottom:0px !important;
     }    
-    
+    .moby_new {
+    	width:70% !important; 
+    	border-radius: 0px !important;   	
+    }   
+    .moby_message {
+    	width:30%;
+    	text-align: center;
+    	line-height: 38px;
+    	border: 1px solid rgba(0,0,0,.2);
+    	background: #fff;
+    	color:#4EA45D;
+    	border-right:none;
+    }
     
     /*个人主办方主页*/
 .person_host_bg {
@@ -2310,4 +2325,24 @@ background-position: -26px -1119px;
 }
 .bgdiso a{
 	color:#fff !important;
+}
+.return_top {
+    font-size: 34px !important;
+    position: fixed;
+    bottom: 77px;
+    right: 16px;
+    z-index: 99999; 
+}
+/*
+ 签到机申请
+ * */
+.machine_apply_content {
+  padding:25px 15px 0 15px;
+}
+.t_in_0 {
+	text-indent: 0;
+}
+
+.ssd_poio{
+	display:none
 }
