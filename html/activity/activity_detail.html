@@ -1,6 +1,7 @@
 <!-- 活动详情 -->
 <meta charset="UTF-8">
 <section ng-controller="activity_detail_c" class="activity_detail_c">
+<section class="particulars_none">
 <section class="banner_top_a act_banner_top_a ">
 	    <section class="swiper-container banner_top_b banner_top_b_banner" >
 	    
@@ -15,11 +16,8 @@
 	      <section class="swiper-pagination"></section>
 	    </section>
 </section>
-    
-    
-    
-    
-	<section class="bgff pd pt10 pm10">
+
+<section class="bgff pd pt10 pm10">
 <h4 ng-bind="detail.detail_date.title" class="act_title_a">  
 </h4>
 <h6 class="mt10" >
@@ -98,6 +96,8 @@
     </p>
     <span class="mui-icon mui-icon-arrowright right_icon zc"></span>
 </section>
+</section>
+<section class="particulars_show">
 <!--主办方未认证的状态  -->
 <section class="pt10 pm10 bgff  bbm  pr pd" ng-if="detail.detail_date.sponsor_auth==0">
     <section class="mui-col-xs-11 dian" >  
@@ -133,8 +133,9 @@
     <span class="mui-icon mui-icon-arrowright right_icon zc right_icon_p"></span>
 </section>
 <!--主办方已认证的状态  -->
+</section>
 
-
+<section class="particulars_none">
 <section class="pd bgff pt10 mt10  pm10 honored_guest">
    <h4 class="pm5 fz14">活动嘉宾</h4>
    <section class=" bgff  pr btm pm5 pt5 "  ng-repeat="gu in detail.detail_date.honored_guest" >
@@ -237,6 +238,6 @@
    	
 </section>
 
-
+</section>
 </section>
 

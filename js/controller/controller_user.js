@@ -1510,20 +1510,24 @@ angular.module('user', ['activity_servrt','directive_mml', 'common', 'request', 
 		var index = 1;
 		var init = function(index, type, more) {
 			httpService.getDatas('GET', '/inform/messageCenter', {pageIndex: index, pageSize: 10, manyConditions: type}).then(function(data) {
-				if(data.rows.length == 0) {
+				if(more && data.rows.length == 0) {
 					messageService.show('没有更多数据了');
 					return false;
+				} else if(!more && data.rows.length == 0){
+					messageService.show('暂时没有消息哦');
 				}
 				if(type == 0) {
-					if(more) { 
+					if(more) {
 						$scope.userList = $scope.userList.concat(data.rows);
+					} else {
+						$scope.userList = data.rows;
 					}
-					$scope.userList = data.rows;
 				} else {
 					if(more) {
 						$scope.systemList = $scope.systemList.concat(data.rows);
-					} 
-					$scope.systemList = data.rows;
+					} else {
+						$scope.systemList = data.rows;
+					}
 				}
 			});
 		}

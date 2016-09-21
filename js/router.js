@@ -84,7 +84,18 @@
 	    }).state('activity_machine_apply',{      
 	    	url: '/activity_machine_apply', 
 	    	templateUrl: '/html/activity/activity_machine_apply.html'
-	    })  
+	    }).state('activity_streaming',{
+	    	url: '/activity_streaming',  //活动直播
+	    	templateUrl: '/html/activity/activity_streaming.html',
+	    	controller: 'activity_streamingCtrl'
+	    }).state('activity_streaming.activity_reward_detail',{
+	    	url: '/activity_reward_detail/:id',  		// 活动打赏详情
+	    	templateUrl: '/html/activity/activity_reward_detail.html',
+	    	controller: 'activity_reward_detailCtrl'
+	    }).state('activity_streaming.activity_detail',{
+	    	url: '/activity_detail/:id',  //活动详情
+	    	templateUrl: '/html/activity/activity_detail.html'		
+	    }) 
 
 	    // 搜索
 	    .state('search',{

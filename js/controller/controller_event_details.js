@@ -3,7 +3,6 @@
  */
 angular.module('act_details', [ "directive_mml","activity_servrt","ui.router","pay","sponsor"])
 .controller('activity_detail_c',function($scope,activity_data,$location,$stateParams,act_date,$state,httpService) { //活动详情 
-	  $(".mml_bottom ").hide();
 	  $(".ds_poiu_a").removeClass("show_a");
 	  $(".retreat_icon").removeClass("none");
 	  $scope.id=$stateParams.id
@@ -31,7 +30,7 @@ angular.module('act_details', [ "directive_mml","activity_servrt","ui.router","p
 		    			var reg = new RegExp("\n", 'g'); // 创建正则RegExp对象
 				        var hg_p=removeHTMLTag($scope.detail.detail_date.details).replace(reg,"").substring(0,100)
 				        var sh_a={}
-				        sh_a.title='【'+$scope.classify[1].maker_title[$scope.detail.detail_date.type].text+'】 '+$scope.detail.detail_date.title;
+				        sh_a.title='【'+$scope.classify[0].maker_title[$scope.detail.detail_date.type].text+'】 '+$scope.detail.detail_date.title;
 				        sh_a.desc=hg_p;
 				        sh_a.link=window.location.href;
 				        sh_a.imgUrl="http://m.apptown.cn/img/activity/share/share_activity1.jpg";
@@ -363,7 +362,6 @@ angular.module('act_details', [ "directive_mml","activity_servrt","ui.router","p
 					console.log("验证失败");
 	    });
 }]).controller('activity_charge_p',["$scope","activity_data","$location","$stateParams","act_date","$state",function($scope,activity_data,$location,$stateParams,act_date,$state) { //收费活动报名
-   $(".mml_bottom ").hide();
   
    $scope.ticket=1;//票种初始化
    $scope.act_d=act_date.date;//初始化活动详情数据
@@ -502,7 +500,6 @@ angular.module('act_details', [ "directive_mml","activity_servrt","ui.router","p
    $("html,body").animate({scrollTop:0},200);//滚回顶部 
 
 }]).controller('sp_details',["$scope","activity_data","$location","$stateParams","act_date","anchorScroll",'$sce',function($scope,activity_data,$location,$stateParams,act_date,anchorScroll,$sce) { //赞助单页--赞助详情
-	$(".mml_bottom ").hide()
 	var id=$stateParams.id
 	 $scope.id=id   
      var pass_data={}
@@ -804,7 +801,21 @@ angular.module('act_details', [ "directive_mml","activity_servrt","ui.router","p
 	 }); 
 	
 	
-}])
+}]).controller('activity_streamingCtrl',function($scope,activity_data,$location,$stateParams,act_date){
+	
+		 // 初始化播放器
+		    var player = new prismplayer({
+		        id: "J_prismPlayer", // 容器id
+		        source: "http://cloud.video.taobao.com/play/u/2554695624/p/1/e/6/t/1/fv/102/28552077.mp4",// 视频地址
+		        autoplay: true,    //自动播放：否
+		        width: "100%",       // 播放器宽度
+		        height: "200px"      // 播放器高度
+		    });
+		   
+
+	 
+
+})
  
 
 

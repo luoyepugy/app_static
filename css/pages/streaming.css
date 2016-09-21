@@ -1,0 +1,21 @@
+/*直播*/
+.nagf_ssd span{
+    padding: 8px 20px ;
+}
+.nagf_ssd .act{
+    border-bottom: 2px solid #4FA45D;
+    color: #4FA45D;
+}
+.broadcast_secondary{
+	height:230px;
+	overflow: hidden;
+}
+.broadcast_secondary #rewardList{
+	height:230px;
+}
+.broadcast_secondary .particulars_none{
+	display:none
+}
+.broadcast_secondary .particulars_show{
+	display:block
+}

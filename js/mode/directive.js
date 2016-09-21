@@ -22,7 +22,17 @@
         } else {
             $('.j-navSearchIcon').hide();
         }
-		 
+        var path_p=$location.path();
+        var arr_p=["activity_streaming","activity_detail","activity_charge"];
+        $(arr_p).map(function(){
+        	 if(path_p.indexOf(this)>0) {
+             	$(".mml_bottom").hide();
+             }else{
+             	$(".mml_bottom").show();
+             }
+        })
+       
+        
 	 });
 
     // 获取用户登录状态
