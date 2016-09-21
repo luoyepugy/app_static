@@ -1,8 +1,9 @@
+
 <link rel="stylesheet" href="/css/pages/user.css">
 <!-- 活动打赏详情 -->
 <div class="activity-rewardDetail">
-	<p class="tips" ng-if="userLogin==true">打赏金额<span class="orange ml5 mr5">{{reward.pay_total_amount}}</span>元&#12288;打赏人数<span class="orange ml5 mr5">{{reward.tip_num}}</span>人</p>
-	<div id="rewardList" pulllist callback="rewardMore()">
+	<p class="tips" ng-if="type==1">打赏金额<span class="orange ml5 mr5">{{reward.pay_total_amount}}</span>元&#12288;打赏人数<span class="orange ml5 mr5">{{reward.tip_num}}</span>人</p>
+	<div id="rewardList" pulllist callback="rewardMore()" class="moreWrap">
 		<ul class="mui-table-view" style="margin-top:0;">
 		    <li class="mui-table-view-cell mui-media" ng-repeat="item in rewardList">
 	            <img class="mui-media-object mui-pull-left" src="/img/userIcon.jpg" ng-src="{{item.user_icon}}" style="border-radius: 25px;">

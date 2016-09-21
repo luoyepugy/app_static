@@ -30,6 +30,7 @@ angular.module('activity', ['common', 'request', 'ui.router'])
 		var activityId = $stateParams.id,
 			index = 1;
 
+		$scope.type = $stateParams.type;
 		$scope.rewardMore = function() {
 			index++;
 			init(true);

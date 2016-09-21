@@ -1,0 +1,58 @@
+
+
+<section class="pd mt10">
+    <p class="box cen user_ad_top  bgff yj4">
+        <a class="box_a" ng-class="{true:'act_a', false: ''}[showUser]" ng-click="messageUser()">用户消息</a>
+        <a class="box_a" ng-class="{true:'', false: 'act_a'}[showUser]" ng-click="messageSystem()">系统消息</a>
+    </p>
+</section>
+<!-- 用户消息 -->
+<div id="messageUser" pulllist callback="userMore()" ng-if="showUser" class="moreWrap">
+    <ul class="mui-table-view">
+        <li class="mui-table-view-cell mui-media" ng-repeat="item in userList">
+            <a ui-sref="activity_detail({id:item.relatedId})">
+                <div class="mui-media-body">
+                    <div class="mui-ellipsis">{{item.content}}</div>
+                    <p class="lh180"><span>报名人：{{item.name}}</span><span class="fr">支付金额：{{item.payNum}}元</span></p>
+                    <p class="lh180">{{item.createTime | date:'yyyy-mm-dd hh:mm:ss'}}</p>
+                    <p class="lh180">共<span class="fz16">{{item.totalPeople}}</span>人报名
+                        <span class="mui-btn mainBtn mui-btn-outline fr" ui-sref="activity_detail({id:item.relatedId})">名单详情</span>
+                    </p>
+                </div>
+            </a>
+        </li>  
+        <!-- <li class="mui-table-view-cell mui-media">
+            <a href="javascript:;">
+                <div class="mui-media-body">
+                    <div class="mui-ellipsis">幸福</div>
+                    <p class="lh180"><span>报名人：我是报名人</span><span class="fr">支付金额：100元</span></p>
+                    <p class="lh180">2016-08-12 9：00</p>
+                    <p class="lh180">共<span class="fz16">300</span>人报名<span class="mui-btn mainBtn mui-btn-outline fr">名单详情</span></p>
+                </div>
+            </a>
+        </li>   -->
+    </ul>
+</div>
+<!-- /用户消息 -->
+<!-- 系统消息 -->
+<div id="messageSystem" pulllist callback="systemMore()" ng-if="!showUser" class="moreWrap">
+    <ul class="mui-table-view">
+        <li class="mui-table-view-cell mui-media" ng-repeat="item in systemList">
+            <a href="javascript:;">
+                <div class="mui-media-body">
+                    <p class="lh180">{{item.createTime | date:'yyyy-mm-dd hh:mm:ss'}}</p>
+                    <div class="fz16">{{item.content}}</div>
+                </div>
+            </a>
+        </li>
+        <!-- <li class="mui-table-view-cell mui-media">
+            <a href="javascript:;">
+                <div class="mui-media-body">
+                    <p class="lh180">2016-08-12 9：00</p>
+                    幸福
+                </div>
+            </a>
+        </li>   -->
+    </ul>
+</div>
+<!-- /系统消息 -->

@@ -26,18 +26,6 @@ angular.module('user', ['activity_servrt','directive_mml', 'common', 'request', 
             $location.path($scope.url);
         }
         
-		// httpService.getDatas('GET', '/user/verifyUserLogin').then(function(data) {
-		// 	if(data.code!=0&&data.code!=-1){
-		// 		$state.go("signin");
-		// 		return false;
-		// 	}
-		// 	if($stateParams.url!=null){
-  //               $location.path($scope.url);
-  //           } else {
-  //               $state.go("personal_center");
-  //           }
-		// });
-
 		// 忘记密码
 		$scope.forgetPwd = function() {
 			messageService.show('忘记密码请到PC端修改');
@@ -283,6 +271,7 @@ angular.module('user', ['activity_servrt','directive_mml', 'common', 'request', 
 	    		}, function error() {
 					console.log("获取用户信息失败");
 	    });
+	    
 
 	    /*
 	     * 张晗
@@ -298,12 +287,23 @@ angular.module('user', ['activity_servrt','directive_mml', 'common', 'request', 
 				$scope.status = data.info.status;
 			}
 	    });
+	     /*
+	     * 罗志明
+	     * 该账号是否绑定手机
+	     */
+	    httpService.getDatas('GET', '/userBind/is_bindPhone').then(function(data) {
+	    	if(data.code==0){
+	    		$scope.phoneIsBind=0  //0为已绑定
+	    	}else if(data.code!=0){
+	    		$scope.phoneIsBind=1  //1为未绑定
+	    	}
+	    });
 		
 	})
 
 	// ============================= 个人信息修改 ==============================
 	/* @ngInject */
-	.controller('userInfo_editCtrl', function($scope,$location,activity_data,$state,$stateParams,act_date) {
+	.controller('userInfo_editCtrl', function($scope,$location,activity_data,$state,$stateParams,act_date,httpService) {
 		 $scope.type = 1;
 		 $scope.type=$stateParams.type;//1为昵称，2为性别，3为修改密码，4为个性签名，5为行业
 		 $scope.pass_m=act_date.date;
@@ -431,6 +431,183 @@ angular.module('user', ['activity_servrt','directive_mml', 'common', 'request', 
 			         $(hjhg).attr("data-id",rl[0].id)
 				})
 			}) 
+			
+		/*个人中心手机绑定(已绑定的情况)*/
+		var onOFF=true;//定时器开关
+		$scope.getMess=function(){
+			var moby_old=$(".moby_old").val().trim(),//原手机号码
+		        moby_new=$(".moby_new").val().trim(),//新手机号码
+			    moby_mes=$(".moby_mes").val().trim();//短信认证码
+			
+			
+			if(!form_mm.isnull(moby_old)){
+				mui.alert("原手机号码不能为空")
+				$(".moby_old").focus();
+				return;
+		     }
+			if(!form_mm.tel(moby_old)){
+				mui.alert("原手机号码格式错误")
+				$(".moby_old").focus();
+				return;
+		     }
+			
+			if(!form_mm.isnull(moby_new)){
+				mui.alert("新手机号码不能为空")
+				$(".moby_new").focus();
+				return;
+		     }
+			
+			if(!form_mm.tel(moby_new)){
+				mui.alert("新手机号码格式错误")
+				$(".moby_new").focus();
+				return;
+		     }
+			if(moby_old==moby_new){
+				mui.alert("原手机号码不能跟新手机号码一样")
+				$(".moby_old").focus();
+				return;
+		     }
+			 
+             var countDown=60;
+			 if(onOFF){
+			 	onOFF=false;
+			 	$(".moby_message").css({"backgruound":"#dbdbdb","color":"#999999"})
+           	    	timer=setInterval(function(){	
+                         countDown--;
+
+           	    		
+           	    		$(".moby_message").text(countDown+'后再获取')
+           	    	},1000);
+           	    	setTimeout(function(){
+           	    		clearInterval(timer);
+           	    		onOFF=true;
+           	    		$(".moby_message").text("获取认证码");
+           	    		$(".moby_message").css({"backgruound":"#fff","color":"#4ea45d"})
+           	    		},60000)
+           	    	httpService.getDatas('GET', '/userBind/send_update_phone_code?phone='+moby_new).then(function(data) {
+                });
+           	    	
+             }
+			 
+		}
+		$scope.bindSave=function(){
+			var moby_mes_b=$(".moby_mes").val().trim();//短信认证码
+			var moby_new_b=$(".moby_new").val().trim();//新手机号码
+			var moby_old_b=$(".moby_old").val().trim();//原手机号码
+			if(!form_mm.isnull(moby_old_b)){
+				mui.alert("原手机号码不能为空")
+				$(".moby_old").focus();
+				return;
+		     }
+			if(!form_mm.tel(moby_old_b)){
+				mui.alert("原手机号码格式错误")
+				$(".moby_old").focus();
+				return;
+		     }
+			
+			if(!form_mm.isnull(moby_new_b)){
+				mui.alert("新手机号码不能为空")
+				$(".moby_new").focus();
+				return;
+		     }
+			
+			if(!form_mm.tel(moby_new_b)){
+				mui.alert("新手机号码格式错误")
+				$(".moby_new").focus();
+				return;
+		     }
+			if(moby_new_b==moby_old_b){
+				mui.alert("原手机号码不能跟新手机号码一样")
+				$(".moby_new").focus();
+				return;
+		     }
+			if(!form_mm.isnull(moby_mes_b)){
+				mui.alert("短信认证码不能为空")
+				$(".moby_mes").focus();
+				return;
+		    }		
+			 httpService.getDatas('GET', '/userBind/update_phone?phone='+moby_new_b+'&code='+moby_mes_b).then(function(data) {
+                   if(data.code==0){
+                   	   mui.alert("手机绑定修改成功");
+                   	   $location.path('/userInfo')
+                   }else if(data.code!=0){
+                   	   mui.alert(data.msg)
+                   }
+	         });
+		}
+		
+		
+		/*个人中心手机绑定(未绑定的情况)*/
+		var onBTn=true;//定时器开关
+		$scope.unBindSave=function(){
+			var unBind_new=$(".moby_new").val().trim();//原手机号码
+			var unBind_message=$(".moby_mes").val().trim();//验证码
+			if(!form_mm.isnull(unBind_new)){
+				mui.alert("原手机号码不能为空")
+				$(".moby_new").focus();
+				return;
+		     }
+			if(!form_mm.tel(unBind_new)){
+				mui.alert("原手机号码格式错误")
+				$(".moby_new").focus();
+				return;
+		     }
+			if(!form_mm.isnull(unBind_message)){
+				mui.alert("认证码不能为空")
+				$(".moby_mes").focus();
+				return;
+		     }
+			 httpService.getDatas('GET', '/userBind/bindPhone?phone='+unBind_new+'&code='+unBind_message).then(function(data) {
+		                   if(data.code==0){
+		                   	    mui.alert("手机绑定成功");
+		                   	    $location.path("/userInfo");
+		                   }else if(data.code!=0){
+		                   	   mui.alert(data.msg)
+		                   }
+	         });
+			
+			
+		}
+		$scope.getUnbindMess=function(){
+			var unBind_new_a=$(".moby_new").val().trim();//手机号码
+			if(!form_mm.isnull(unBind_new_a)){
+				mui.alert("手机号码不能为空")
+				$(".moby_new").focus();
+				return;
+		     }
+			if(!form_mm.tel(unBind_new_a)){
+				mui.alert("手机号码格式错误")
+				$(".moby_new").focus();
+				return;
+		    }	
+		    
+		     var countDown=60;
+			 if(onBTn){
+			 	onBTn=false;
+			 	
+           	    	timer=setInterval(function(){	
+                         countDown--;
+                         $(".moby_message").css({"backgruound":"#dbdbdb","color":"#999999"})
+                 		$(".moby_message").text(countDown+'后再获取')
+           	    	},1000);
+           	    	setTimeout(function(){
+           	    		clearInterval(timer);
+           	    		onBTn=true;
+           	    		$(".moby_message").text("获取认证码");
+           	    		$(".moby_message").css({"backgruound":"#fff","color":"#4ea45d"})
+           	    		},60000)
+           	    	 httpService.getDatas('GET', '/userBind/sendCodeMsg?phone='+unBind_new_a).then(function(data) {
+		                   if(data.code==0){
+		                   	 
+		                   }else if(data.code!=0){
+		                   	   mui.alert(data.msg)
+		                   }
+	              	});
+		    }
+			
+			
+		}
+		
 	})
 
 	// ============================== 主办方认证 ===========================
@@ -562,7 +739,7 @@ angular.module('user', ['activity_servrt','directive_mml', 'common', 'request', 
 
 	// ========================= 个人中心 =======================
 	/* @ngInject */
-	.controller('personal_centerCtrl', function($scope,activity_data,$location,act_date) { 
+	.controller('personal_centerCtrl', function($scope,activity_data,$location,act_date, $rootScope, httpService) { 
 		$(".mml_bottom a").removeClass("bottom_act");
 		$(".mml_bottom a").eq(4).addClass("bottom_act");
 		$(".ds_poiu_a").removeClass("show_a");
@@ -582,7 +759,12 @@ angular.module('user', ['activity_servrt','directive_mml', 'common', 'request', 
 	    		}, function error() {
 					console.log("获取用户信息失败");
 	    });
-		
+
+	 	// 获取是否有新消息
+	    httpService.getDatas('GET', '/inform/unRead').then(function(data) {
+	    	$scope.messageItems = data.info;
+	    });
+
 	})
 
 	// ========================= 我的反馈 =======================
@@ -702,7 +884,6 @@ angular.module('user', ['activity_servrt','directive_mml', 'common', 'request', 
 			    			}
 			    		
 			    			poiu_po=true;
-			    			console.log('efef');
 			    			$(data.rows).map(function(){
 			    				 var khg=new query_activity_list(this);
 			    				 khg.tip = this.tip;
@@ -787,7 +968,6 @@ angular.module('user', ['activity_servrt','directive_mml', 'common', 'request', 
 				$(".user_act_pii").addClass("user_act_pii_p")
 				;break;
 		}
-		
 
 	})
 
@@ -1312,6 +1492,53 @@ angular.module('user', ['activity_servrt','directive_mml', 'common', 'request', 
 	
 	    
 	    
+	})
+
+	// ========================= 用户消息 =======================
+	/* @ngInject */
+	.controller('message_userCtrl', function($scope,$stateParams, httpService, $rootScope, messageService) { 
+		$scope.messageList = [];
+		$scope.showUser = true;
+
+		$scope.messageUser = function() {
+			$scope.showUser = true;
+		}
+		$scope.messageSystem = function() {
+			$scope.showUser = false;
+			init(1, 1);
+		}
+		var index = 1;
+		var init = function(index, type, more) {
+			httpService.getDatas('GET', '/inform/messageCenter', {pageIndex: index, pageSize: 10, manyConditions: type}).then(function(data) {
+				if(data.rows.length == 0) {
+					messageService.show('没有更多数据了');
+					return false;
+				}
+				if(type == 0) {
+					if(more) { 
+						$scope.userList = $scope.userList.concat(data.rows);
+					}
+					$scope.userList = data.rows;
+				} else {
+					if(more) {
+						$scope.systemList = $scope.systemList.concat(data.rows);
+					} 
+					$scope.systemList = data.rows;
+				}
+			});
+		}
+		init(1, 0);
+
+		// 加载用户消息更多
+		$scope.userMore = function(page) {
+			index++;
+			init(index, 0, true);
+		}
+		// 加载系统消息更多
+		$scope.systemMore = function(page) {
+			index++;
+			init(index, 1, true);
+		}
 	})
 
 

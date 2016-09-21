@@ -71,20 +71,37 @@
              <a class="mui-btn register_button fz16" ng-click="save_personsal()">保存</a>
       </p>
     </section>
-     <section ng-if="type==6">
+     <section ng-if="type==6">  <!--已绑定-->
      	<p>
-     		<input class="border_left_right_none mt20 moby_old" type="text"  placeholder="请输入新手机号码" />       		
+     		<input class="border_left_right_none mt20 moby_old" type="text"  placeholder="请输入原手机号码" />       		
      	</p>
      	<p>
-     		<input class="border_left_right_none fl moby_new" type="text"  placeholder="请输入原手机号码" />  
-     		<span class="fl moby_message">
+     		<input class="border_left_right_none fl moby_new" type="text"  placeholder="请输入新手机号码" />  
+     		<span class="fl moby_message" ng-click="getMess()">
      			获取认证码
      		</span>
      	</p>
      	<p>
-     		<input class="border_left_right_none" type="text"  placeholder="请输入短信认证码" />       		
+     		<input class="border_left_right_none moby_mes" type="text"  placeholder="请输入短信认证码" />       		
      	</p>
+     	<p class="mt80 pd cen zd">
+          <a class="mui-btn register_button fz16" ng-click="bindSave()">保存</a>
+        </p>
         
+    </section>
+    <section ng-if="type==7">    <!--未绑定-->
+     	<p class="mt10">
+     		<input class="border_left_right_none fl moby_new" type="text"  placeholder="请输入新的手机号码" />  
+     		<span class="fl moby_message" ng-click="getUnbindMess()">
+     			获取认证码
+     		</span>
+     	</p>
+     	<p>
+     		<input class="border_left_right_none moby_mes" type="text"  placeholder="请输入短信认证码" />       		
+     	</p>  
+     	<p class="mt80 pd cen zd">
+          <a class="mui-btn register_button fz16"  ng-click="unBindSave()">保存</a>
+        </p>
     </section>
 	
 	

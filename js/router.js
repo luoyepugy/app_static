@@ -22,7 +22,7 @@
 	    	templateUrl: '/html/activity/activity_reward.html',
 	    	controller: 'activity_rewardCtrl'
 	    }).state('activity_reward_detail',{
-	    	url: '/activity_reward_detail/:id',  		// 活动打赏详情
+	    	url: '/activity_reward_detail/:id?type',  	// 活动打赏详情
 	    	templateUrl: '/html/activity/activity_reward_detail.html',
 	    	controller: 'activity_reward_detailCtrl'
 	    }).state('activity_loan',{
@@ -115,7 +115,12 @@
 	    }).state('agreement',{
 	    	url: '/agreement', 					// 服务协议
 	    	templateUrl: '/html/user/agreement.html' 
+	    }).state('message_user',{
+	    	url: '/message_user',  				// 用户消息
+	    	templateUrl: '/html/user/message_user.html',
+	    	controller: 'message_userCtrl'
 	    })
+
 
 	    .state('activity_user',{				// 我的活动
 	    	url: '/activity_user/:type/:user_id',  	

@@ -48,7 +48,7 @@
 	    	margin: 0 10px;
 	    }
 	    input {
-	    	width: 67%;
+	    	width: calc(100% - 120px);
 	    	text-align: right;
 	    	border: 0;
 	    	height: 38px;
@@ -59,11 +59,4 @@
 	    	top: 9px;
 	    }
 	}
-}
-.moreWrap {
-	position: fixed;
-    left: 0px;
-    top: 90px;
-    width: 100%;
-    height: calc(100% - 150px);
 }

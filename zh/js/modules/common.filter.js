@@ -40,10 +40,15 @@ angular.module('common',[])
 
     // ======================== 时间格式化（时间戳转化为字符串） ========================
     /* @ngInject */
-    function formatTime() {
-        return function(string){
-            
-        }
+    function formatTime(string) {
+        var time = new Date(parseInt(string));
+        var y = time.getFullYear();
+        var m = time.getMonth()+1;
+        var d = time.getDate();
+        var h = time.getHours();
+        var mm = time.getMinutes();
+        var s = time.getSeconds();
+        return y+'-'+add0(m)+'-'+add0(d)+' '+add0(h)+':'+add0(mm)+':'+add0(s);
     }
 
 

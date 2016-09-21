@@ -28,16 +28,14 @@
             关于我们
             
         </a>
-          <!-- <a class="box_a zc fz14" data-href="/letter/toMessage?ru=1"> -->
-          <a class="box_a zc fz14" onclick="alert('此功能正在开发')">
+          <a class="box_a zc fz14 pr" ui-sref="message_user">
           <i class="f_i mober_d"></i><br>
             消息
-            
+            <span ng-if="messageItems>0" class="redDot"></span>
         </a>
-    
     </section>
     
-     <section class="mt10 btm bbm pt10 pm10 bgff   ">
+     <section class="mt10 btm bbm pt10 pm10 bgff">
          <p class="bbm pd pr" ui-sref="activity_user({type: 1})">
             <i class="f_i logo_icon_a"></i>
              <span class="ml10 title_p">我的活动</span>

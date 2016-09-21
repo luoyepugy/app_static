@@ -30,12 +30,12 @@ angular.module('act_details', [ "directive_mml","activity_servrt","ui.router","p
 		    			$scope.industry=$scope.classify[1].maker_title[$scope.detail.detail_date.industry_id].text;//行业
 		    			var reg = new RegExp("\n", 'g'); // 创建正则RegExp对象
 				        var hg_p=removeHTMLTag($scope.detail.detail_date.details).replace(reg,"").substring(0,100)
-		    		    var sh_a={}
+				        var sh_a={}
 				        sh_a.title='【'+$scope.classify[1].maker_title[$scope.detail.detail_date.type].text+'】 '+$scope.detail.detail_date.title;
 				        sh_a.desc=hg_p;
 				        sh_a.link=window.location.href;
 				        sh_a.imgUrl="http://m.apptown.cn/img/activity/share/share_activity1.jpg";
-				        wx_share(sh_a,function(){
+				        wx_share(sh_a,function(){ 
 			    			$("#qrcode").on("click",function(){
 				        	activity_data.getDatas('get', '/shareImage/get_share_image_url?activityId='+id)
 				        	.then(function(data) { 
@@ -254,9 +254,7 @@ angular.module('act_details', [ "directive_mml","activity_servrt","ui.router","p
 	  },"message":function(id){
 		  $scope.me_id=id
 	      mui('#message').popover('toggle');
-		  $(".me_text_area").focus()
-		
-		  
+		  $(".me_text_area").focus();
 	  },"add_comment_data":function(data){
 		  activity_data.add_comment_data(data).then(
 		    		function success(data){    		
@@ -326,18 +324,17 @@ angular.module('act_details', [ "directive_mml","activity_servrt","ui.router","p
 				 date_f[map_p]=$(this).val();
 			 }
 		 })
+		  $(".sys-loading").addClass("show_a")
 		activity_data.add_consumption($scope.id,date_f).then(
-		    		function success(data){  
-		    		
+		    		function success(data){
+		    			  $(".sys-loading").removeClass("show_a")
 		    			if(data.code==-10){
 		    				 var oiuiuyt={}
 		    				 oiuiuyt.activity_id=$scope.id;
-		    				 oiuiuyt.conDetail=date_f;
-		    				 				
+		    				 oiuiuyt.conDetail=date_f;		
 		    				 act_date.set_act_date(oiuiuyt);
 		    				 mui.toast('还差最后一步登录哦！');
 		    				 $location.path("signin");
-		    				 
 		    		    	 return
 		    			}
 		    		    if(data.code!=0){
@@ -349,6 +346,7 @@ angular.module('act_details', [ "directive_mml","activity_servrt","ui.router","p
 		    		    	window.history.back();
 		    		    });
 		    		}, function error() {
+		    			  $(".sys-loading").removeClass("show_a")
 						console.log("报名失败");
 		    }); 
 	}		
