@@ -6,6 +6,7 @@ angular.module('act_details', [ "directive_mml","activity_servrt","ui.router","p
 	  $(".ds_poiu_a").removeClass("show_a");
 	  $(".retreat_icon").removeClass("none");
 	  $scope.id=$stateParams.id
+	  $scope.id_a=$stateParams.id
 	  var hjgf=true;//设置取消和收藏关注
 	  
 	  $scope.detail={
@@ -144,6 +145,7 @@ angular.module('act_details', [ "directive_mml","activity_servrt","ui.router","p
 	   
 	  
 	   $scope.detail.detail_f($scope.id)
+	    $(".nagf_ssd span").removeClass("act").eq(1).addClass("act")
 
 	   /*轮播图*/
 	    var mySwiper = new Swiper('.banner_top_b_banner',{
@@ -153,7 +155,7 @@ angular.module('act_details', [ "directive_mml","activity_servrt","ui.router","p
             pagination : '.swiper-pagination',//分页器的class的名字
             paginationClickable :true,//点击标题跳转到指定的那页
      });
-
+$(".dd_pooo").hide()
 	  /*  生产二维码*/
 	    var qc_poi={}
 	    qc_poi.render="canvas";
@@ -802,21 +804,26 @@ angular.module('act_details', [ "directive_mml","activity_servrt","ui.router","p
 	
 	
 }]).controller('activity_streamingCtrl',function($scope,activity_data,$location,$stateParams,act_date){
-	
 		 // 初始化播放器
 		    var player = new prismplayer({
 		        id: "J_prismPlayer", // 容器id
 		        source: "http://cloud.video.taobao.com/play/u/2554695624/p/1/e/6/t/1/fv/102/28552077.mp4",// 视频地址
-		        autoplay: true,    //自动播放：否
+		        autoplay: false,    //自动播放：否
+		        isLive:true,  //是否是直播
 		        width: "100%",       // 播放器宽度
 		        height: "200px"      // 播放器高度
 		    });
-		   
-
-	 
-
+		   $scope.id_p=$stateParams.ac_id;
+		   $("body").on("click",".nagf_ssd span",function(){
+			   $(".nagf_ssd span").removeClass("act")
+			   $(this).addClass("act")
+		   })
+		   $scope.play=function(){
+			   player.play();
+			   $(".syuytrt_as").hide()
+		   }
 })
- 
+
 
 
 

@@ -39,10 +39,10 @@ angular.module('activity', ['common', 'request', 'ui.router'])
 		httpService.getDatas('GET', '/activityTip/' + $stateParams.id + '/info').then(function(data) {
 			$scope.reward = data.info;
 		});
-		
+
 		var init = function(more) {
 			// 获取打赏列表数据
-			httpService.getDatas('GET', '/activityTip/' + activityId, {pageIndex: index, pageSize: 8}).then(function(data) {
+			httpService.getDatas('GET', '/activityTip/' + activityId, {pageIndex: index, pageSize: 10}).then(function(data) {
 				if(more) {
 					$scope.rewardList = $scope.rewardList.concat(data.rows);
 					if(data.rows.length == 0) {
@@ -50,12 +50,11 @@ angular.module('activity', ['common', 'request', 'ui.router'])
 					}
 				} else {
 					$scope.rewardList = data.rows;
-					if(data.rows.length == 0) {
-						messageService.show('还没有人打赏哦！');
-					}
 				}
 			});
 		}
+		$(".dd_pooo ").show()
+		  $(".nagf_ssd span").removeClass("act").eq(0).addClass("act")
 		init();
 	})
 

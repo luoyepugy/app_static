@@ -2379,3 +2379,12 @@ background-position: -26px -1119px;
 .ssd_poio{
 	display:none
 }
+
+
+img.streaming_poo {
+    width: 90px;
+    position: fixed;
+    bottom: 50px;
+    right: 0px;
+    z-index: 99999;
+}

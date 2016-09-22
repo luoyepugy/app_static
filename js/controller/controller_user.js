@@ -974,7 +974,7 @@ angular.module('user', ['activity_servrt','directive_mml', 'common', 'request', 
 
 	// ========================= 我的赞助 =======================
 	/* @ngInject */
-	.controller('sponsorship_userCtrl', function($scope,activity_data,$location,$stateParams,act_date) {
+	.controller('sponsorship_userCtrl', function($scope,activity_data,$location,$stateParams,act_date,$state) {
 		$scope.type=$stateParams.type;//获取传过来的参数    1.发起在赞助  2，赞助的
 		$scope.user_id=$stateParams.user_id;//获取传过来的user_id
 		//filter赞助状态（6已成功，7已失败）timeStatus时间状态（预热中(1) , 赞助中(2)）
@@ -1058,7 +1058,7 @@ angular.module('user', ['activity_servrt','directive_mml', 'common', 'request', 
 	    },"deteail_a":function(x){
 	    	
 	    	 act_date.set_act_date(x)
-	    	 $location.path("sponsorship_payment/");
+	    	 $state.go("sponsorship_payment");
 	    }
 		
 		}
@@ -1125,7 +1125,15 @@ angular.module('user', ['activity_servrt','directive_mml', 'common', 'request', 
 
 	// ========================= 我的赞助支付 =======================
 	/* @ngInject */
-	.controller('sponsorship_paymentCtrl', function($scope,activity_data,$location,$stateParams,act_date) { 
+	.controller('sponsorship_paymentCtrl', function($scope,activity_data,$location,$stateParams,act_date,$http) { 
+		if($stateParams.id>0){
+			$http.get('/support/shot_message_repay_detail?pay_support_id='+$stateParams.id).then(function(data) {
+				$scope.act_d=data.data.info
+				data.data.info.total_money
+				$scope.act_d.create_support_phone=data.data.info.content_detail.tel
+			});
+			return
+		}
 		$scope.act_d=act_date.date;//初始化活动详情数据
 		if($scope.act_d==0){
 			   window.history.back();
