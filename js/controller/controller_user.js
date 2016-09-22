@@ -1507,14 +1507,15 @@ angular.module('user', ['activity_servrt','directive_mml', 'common', 'request', 
 			$scope.showUser = false;
 			init(1, 1);
 		}
+		
 		var index = 1;
 		var init = function(index, type, more) {
 			httpService.getDatas('GET', '/inform/messageCenter', {pageIndex: index, pageSize: 10, manyConditions: type}).then(function(data) {
+				// 获取系统消息和用户消息未读数量
+				$scope.message = data.otherinfo;
 				if(more && data.rows.length == 0) {
 					messageService.show('没有更多数据了');
 					return false;
-				} else if(!more && data.rows.length == 0){
-					messageService.show('暂时没有消息哦');
 				}
 				if(type == 0) {
 					if(more) {

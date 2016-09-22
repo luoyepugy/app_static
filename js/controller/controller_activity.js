@@ -39,6 +39,7 @@ angular.module('activity', ['common', 'request', 'ui.router'])
 		httpService.getDatas('GET', '/activityTip/' + $stateParams.id + '/info').then(function(data) {
 			$scope.reward = data.info;
 		});
+		
 		var init = function(more) {
 			// 获取打赏列表数据
 			httpService.getDatas('GET', '/activityTip/' + activityId, {pageIndex: index, pageSize: 8}).then(function(data) {

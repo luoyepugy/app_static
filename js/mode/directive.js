@@ -82,7 +82,7 @@
         		  onScrollStart:function(){
         			  this.refresh();//刷新 
         			  $(".mml_bottom").css({"opacity":"0"});
-        			  console.log(this.y);
+        			  // console.log(this.y);
         			  
         		  },
         		  onScrollEnd: function(){

@@ -1952,6 +1952,12 @@ img.yj.user_zz_p {
 .green {
     color: #4EA45D;
 }
+.mainRed {
+    color: #e86062;
+}
+.orange {
+    color: #ff6600;
+}
 .m-auto {
     margin: 0 auto;
 }
@@ -2029,12 +2035,8 @@ img.yj.user_zz_p {
 }
 /* 用户消息提示 */
 .redDot {
-    background-color: #f14158;
-    border-radius: 6px;
-    width: 12px;
-    height: 12px;
     position: absolute;
-    right: 16px;
+    right: 7px;
     top: 0;
 }
 .moreWrap {

@@ -1,9 +1,11 @@
 
 
-<section class="pd mt10">
+<section class="pd mt10 mb10">
     <p class="box cen user_ad_top  bgff yj4">
-        <a class="box_a" ng-class="{true:'act_a', false: ''}[showUser]" ng-click="messageUser()">用户消息</a>
-        <a class="box_a" ng-class="{true:'', false: 'act_a'}[showUser]" ng-click="messageSystem()">系统消息</a>
+        <a class="box_a" ng-class="{true:'act_a', false: ''}[showUser]" ng-click="messageUser()">用户消息
+            <span class="ml5 orange" ng-if="message.system_msg_count>0">{{message.system_msg_count}}</span></a>
+        <a class="box_a" ng-class="{true:'', false: 'act_a'}[showUser]" ng-click="messageSystem()">系统消息
+            <span class="ml5 orange" ng-if="message.user_msg_count>0">{{message.user_msg_count}}</span></a>
     </p>
 </section>
 <!-- 用户消息 -->
@@ -22,19 +24,20 @@
             </a>
         </li>  
     </ul>
+    <p class="tc" ng-if="userList.length==0">暂时没有消息哦！</p>
 </div>
 <!-- /用户消息 -->
 <!-- 系统消息 -->
 <div id="messageSystem" pulllist callback="systemMore()" ng-if="!showUser" class="moreWrap">
     <ul class="mui-table-view mt0">
         <li class="mui-table-view-cell mui-media" ng-repeat="item in systemList">
-            <a href="javascript:;">
-                <div class="mui-media-body">
-                    <p class="lh180">{{item.createTime | date:'yyyy-mm-dd hh:mm:ss'}}</p>
-                    <div class="fz16">{{item.content}}</div>
-                </div>
-            </a>
+            <div class="mui-media-body">
+                <p class="lh180">{{item.createTime | date:'yyyy-mm-dd hh:mm:ss'}}</p>
+                <div class="fz16">{{item.content}}</div>
+            </div>
         </li>
     </ul>
+    <p class="tc" ng-if="systemList.length==0">暂时没有消息哦！</p>
 </div>
 <!-- /系统消息 -->
+
