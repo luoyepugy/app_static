@@ -1,13 +1,17 @@
 <!-- 直播 -->
 <meta charset="UTF-8">
     <link href="/css/pages/streaming.css" rel="stylesheet">
-<section id="J_prismPlayer" class="prism-player" style="background: #000"></section>
+    <section class="pr dd_poo_x">
+    	<section id="J_prismPlayer" class="prism-player pr ov" ></section>
+    	 <img src="/img/load_st.png" class="syuytrt_as" ng-click="play()">
+    </section>
+
 
    <section class="pt10 pm10 fz16 nagf_ssd bgff pr10">
-	         <span class="act"  ui-sref=".activity_reward_detail({id: 9200})">
+	         <span class="act"  ui-sref=".activity_reward_detail({id: id_p})">
 	             打赏
 	         </span>
-	           <span  ui-sref=".activity_detail({id: 8828})">
+	           <span  ui-sref=".activity_detail({id: id_p})">
 	             主办方
 	         </span>
 	         
@@ -15,8 +19,7 @@
 	             浏览量2015
 	         </p>
 	   </section>
-	  
 	   <section data-ui-view class="broadcast_secondary">
 	   
 	   </section>
-	   
+	   <button  class="mui-btn mui-btn-green  mui-btn-block mt10 dd_pooo"  text="马上打赏" ui-sref="activity_reward({id: 8828})">我要打赏</button>

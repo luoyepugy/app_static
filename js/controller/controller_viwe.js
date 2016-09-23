@@ -228,7 +228,7 @@ angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.rou
     	list_data.industry_id="";//行业ID
     	list_data.pageIndex=1;//页码
         list_data.pageSize=7;//行数  
-        list_data.city_name=city_name
+        list_data.city_name=city_name.trim()
         if(screen.width>1000){
         	list_data.pageSize=12 
         }
@@ -724,4 +724,11 @@ angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.rou
 	
 
 })
+//========= h5端 app下载 ==========  
+var _guide_DownloadClose = {
+   _init:function(){
+       $("#guide_Download").remove();
+      }
+   }
+//========= h5端 app下载 ==========      
 

@@ -807,7 +807,7 @@ $(".dd_pooo").hide()
 		 // 初始化播放器
 		    var player = new prismplayer({
 		        id: "J_prismPlayer", // 容器id
-		        source: "http://cloud.video.taobao.com/play/u/2554695624/p/1/e/6/t/1/fv/102/28552077.mp4",// 视频地址
+		        source: "rtmp://pili-live-rtmp.live.apptown.cn/manmanlai/test_61",// 视频地址
 		        autoplay: false,    //自动播放：否
 		        isLive:true,  //是否是直播
 		        width: "100%",       // 播放器宽度

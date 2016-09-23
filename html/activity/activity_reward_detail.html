@@ -2,14 +2,15 @@
 <link rel="stylesheet" href="/css/pages/user.css">
 <!-- 活动打赏详情 -->
 <div class="activity-rewardDetail">
-	<p class="tips" ng-if="type==1">打赏金额<span class="orange ml5 mr5">{{reward.pay_total_amount}}</span>元&#12288;打赏人数<span class="orange ml5 mr5">{{reward.tip_num}}</span>人</p>
+	<p class="tips" ng-if="type==1&&rewardList.length>0">打赏金额<span class="orange ml5 mr5">{{reward.pay_total_amount}}</span>元&#12288;打赏人数<span class="orange ml5 mr5">{{reward.tip_num}}</span>人</p>
 	<div id="rewardList" pulllist callback="rewardMore()" class="moreWrap">
 		<ul class="mui-table-view" style="margin-top:0;">
 		    <li class="mui-table-view-cell mui-media" ng-repeat="item in rewardList">
 	            <img class="mui-media-object mui-pull-left" src="/img/userIcon.jpg" ng-src="{{item.user_icon}}" style="border-radius: 25px;">
 	            <div class="mui-media-body">
 	                <p class="mui-ellipsis">
-	                	<span class="text-dark mr5" ng-if="item.user_name!=''">{{item.user_name}}</span><span class="text-dark mr5" ng-if="item.user_name==''">匿名</span>打赏了<span class="orange  ml5 mr5">{{item.pay_num}}</span>元
+	                	<span class="text-dark mr5" ng-if="item.user_name!=''">{{item.user_name}}</span>
+	                	<span class="text-dark mr5" ng-if="item.user_name==''">匿名</span>打赏了<span class="orange  ml5 mr5">{{item.pay_num}}</span>元
 	                </p>
 					<p>{{item.pay_time | getDateDiff}}</p>
 	                <p ng-if="item.pay_info!=''" class="text-dark">{{item.pay_info}}</p>
@@ -17,6 +18,7 @@
 	            </div>
 			</li>
 		</ul>
+		<p class="tc mt10" ng-if="rewardList.length==0">还没有人打赏哦！</p>
 	</div>
 </div>
 <!-- /活动打赏详情 -->

@@ -53,8 +53,9 @@ angular.module('activity', ['common', 'request', 'ui.router'])
 				}
 			});
 		}
+		// 直播打赏按钮显示
 		$(".dd_pooo ").show()
-		  $(".nagf_ssd span").removeClass("act").eq(0).addClass("act")
+		$(".nagf_ssd span").removeClass("act").eq(0).addClass("act")
 		init();
 	})
 

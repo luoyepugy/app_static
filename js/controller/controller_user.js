@@ -832,7 +832,6 @@ angular.module('user', ['activity_servrt','directive_mml', 'common', 'request', 
 			    				  mui.alert(data.msg, 'E场景活动');
 			    				return;
 			    			}
-			    			console.log('ef');
 			    			poiu_po=true;
 			    			
 			    			 $(data.rows).map(function(){

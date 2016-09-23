@@ -6,9 +6,22 @@
     border-bottom: 2px solid #4FA45D;
     color: #4FA45D;
 }
+.dd_poo_x{
+	height:200px;
+	background: #000
+}
+img.syuytrt_as {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top:0px;
+    left:0px;
+    z-index:99999;
+}
 .broadcast_secondary{
 	height:230px;
 	overflow: hidden;
+	
 }
 .broadcast_secondary #rewardList{
 	height:230px;
@@ -18,4 +31,19 @@
 }
 .broadcast_secondary .particulars_show{
 	display:block
+}
+@media screen and (min-width: 370px){
+  .broadcast_secondary{
+    height:300px;
+  }
+  .broadcast_secondary #rewardList{
+	height:300px;
+}
+@media screen and (min-width: 400px){
+  .broadcast_secondary{
+    height:350px;
+  }
+  .broadcast_secondary #rewardList{
+	height:350px;
+}
 }

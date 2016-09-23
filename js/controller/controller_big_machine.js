@@ -62,14 +62,15 @@
 	}).controller('big_streaming',function($scope,activity_data,messageService,$http) { //直播	
 		var act_id=window.location.search.split("=")[1]
 		// 初始化播放器
-		    var player = new prismplayer({
+		  var player = new prismplayer({
 		        id: "J_prismPlayer", // 容器id
-		        source: "http://cloud.video.taobao.com/play/u/2554695624/p/1/e/6/t/1/fv/102/28552077.mp4",// 视频地址
+		        source: "rtmp://pili-live-rtmp.live.apptown.cn/manmanlai/test_61",// 视频地址
 		        autoplay: true,    //自动播放：否
 		        isLive:true,  //是否是直播 
-		        width: "100%",       // 播放器宽度
+		        width: "100%",       // 播放器宽度 
 		        height: "600px"      // 播放器高度
 		    });
+		
 	 	$http.get('/activityTip/'+act_id+"?pageIndex=1&pageSize="+100).then(function(data) {
 	 		 $scope.play_tour=data.data.rows
 	 		 console.log($scope.play_tour);

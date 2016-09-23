@@ -85,7 +85,7 @@
 	    	url: '/activity_machine_apply', 
 	    	templateUrl: '/html/activity/activity_machine_apply.html'
 	    }).state('activity_streaming',{
-	    	url: '/activity_streaming',  //活动直播
+	    	url: '/activity_streaming/:ac_id',  //活动直播
 	    	templateUrl: '/html/activity/activity_streaming.html',
 	    	controller: 'activity_streamingCtrl'
 	    }).state('activity_streaming.activity_reward_detail',{

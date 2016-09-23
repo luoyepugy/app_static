@@ -1,25 +1,27 @@
 
-
+<!-- 消息 -->
 <section class="pd mt10 mb10">
     <p class="box cen user_ad_top  bgff yj4">
         <a class="box_a" ng-class="{true:'act_a', false: ''}[showUser]" ng-click="messageUser()">用户消息
-            <span class="ml5 orange" ng-if="message.system_msg_count>0">{{message.system_msg_count}}</span></a>
-        <a class="box_a" ng-class="{true:'', false: 'act_a'}[showUser]" ng-click="messageSystem()">系统消息
             <span class="ml5 orange" ng-if="message.user_msg_count>0">{{message.user_msg_count}}</span></a>
+        <a class="box_a" ng-class="{true:'', false: 'act_a'}[showUser]" ng-click="messageSystem()">系统消息
+            <span class="ml5 orange" ng-if="message.system_msg_count>0">{{message.system_msg_count}}</span></a>
     </p>
 </section>
 <!-- 用户消息 -->
 <div id="messageUser" pulllist callback="userMore()" ng-if="showUser" class="moreWrap">
     <ul class="mui-table-view mt0">
         <li class="mui-table-view-cell mui-media" ng-repeat="item in userList">
-            <a ui-sref="activity_detail({id:item.relatedId})">
+            <a ui-sref="ticket_user_detail({id:item.relatedId})">
                 <div class="mui-media-body">
                     <div class="mui-ellipsis">{{item.content}}</div>
-                    <p class="lh180"><span>报名人：{{item.name}}</span><span class="fr">支付金额：{{item.payNum}}元</span></p>
-                    <p class="lh180">{{item.createTime | date:'yyyy-mm-dd hh:mm:ss'}}</p>
-                    <p class="lh180">共<span class="fz16">{{item.totalPeople}}</span>人报名
-                        <span class="mui-btn mainBtn mui-btn-outline fr" ui-sref="activity_detail({id:item.relatedId})">名单详情</span>
+                    <p class="lh180 fz12">
+                        <span><i style="font-style:normal;" ng-if="item.typeId==1">报名人：</i><i style="font-style:normal;" ng-if="item.typeId==2">赞助人：</i>{{item.name}}</span>
+                        <span class="fr">支付金额：{{item.payNum}}元</span>
                     </p>
+                    <p class="lh180 fz12">
+                        <span class="mr20">{{item.createTime | date:'yyyy-MM-dd HH:mm:ss'}}</span>共<span class="fz16">{{item.totalPeople}}</span>人报名
+                        <span class="mui-btn mainBtn mui-btn-outline fr fz12" ui-sref="ticket_user_detail({id:item.relatedId})">名单详情</span></p>
                 </div>
             </a>
         </li>  
@@ -32,7 +34,7 @@
     <ul class="mui-table-view mt0">
         <li class="mui-table-view-cell mui-media" ng-repeat="item in systemList">
             <div class="mui-media-body">
-                <p class="lh180">{{item.createTime | date:'yyyy-mm-dd hh:mm:ss'}}</p>
+                <p class="lh180">{{item.createTime | date:'yyyy-MM-dd HH:mm:ss'}}</p>
                 <div class="fz16">{{item.content}}</div>
             </div>
         </li>
@@ -41,3 +43,4 @@
 </div>
 <!-- /系统消息 -->
 
+<!-- /消息 -->

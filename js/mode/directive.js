@@ -24,13 +24,21 @@
         }
         var path_p=$location.path();
         var arr_p=["activity_streaming","activity_detail","activity_charge"];
-        $(arr_p).map(function(){
+   
+        for(var i in arr_p){
+        	if(path_p.indexOf(arr_p[i])>0) {
+             	$(".mml_bottom").hide();
+             	return
+             } 
+        }
+        $(".mml_bottom").show().css({"opacity":"1"}); 
+        /*$(arr_p).map(function(){
         	 if(path_p.indexOf(this)>0) {
              	$(".mml_bottom").hide();
              }else{
              	$(".mml_bottom").show();
              }
-        })
+        })*/
        
         
 	 });
@@ -74,7 +82,7 @@
         	   		<li></li>
         		</ul>
         	</div>*/
-       
+              $(ele).addClass("scoller_p")
         	  var  poiu_po=true,//防止用户多次下拉
         	  myscroll = new iScroll(attr.id,{
         		  vScrollbar: false,
@@ -154,7 +162,7 @@
             	 /*阻止触发时间冒泡*/
                  e.preventDefault();
                  e.stopPropagation(); 
-                 $("#scroll").css({"transform": "translate(0px, 0px) scale(1) translateZ(0px)"})
+                 $(".scoller_p ul").css({"transform": "translate(0px, 0px) scale(1) translateZ(0px)"})
                  $(this).addClass("mui-hidden")
                  $("html,body").animate({scrollTop:0},200);
              });
@@ -305,18 +313,23 @@
         var day = hour * 24;
         var halfamonth = day * 15;
         var month = day * 30;
+        var year = month * 12;
         var now = new Date().getTime();
         var diffValue = now - dateTimeStamp;
         if(diffValue < 0){
             //若日期不符则弹出窗口告之
             //alert("结束日期不能小于开始日期！");
         }
+        var yearC = diffValue/year;
         var monthC =diffValue/month;
         var weekC =diffValue/(7*day);
         var dayC =diffValue/day;
         var hourC =diffValue/hour;
         var minC =diffValue/minute;
-        if(monthC>=1){
+
+        if(yearC>=1) {
+            result=parseInt(yearC) + "年前";
+        } else if(monthC>=1){
             result=parseInt(monthC) + "个月前";
         }
         else if(weekC>=1){
@@ -423,6 +436,47 @@
             this.date=msg
         }
     }
-});
+}).factory('MyData', function($websocket) {
+    // Open a WebSocket connection
+    var dataStream = $websocket('ws://www.apptown.cn/webSocketServer');
+    var collection = [],q_random=Math.floor(Math.random()*99999+1) ;
+    var hjkh=false;
+    dataStream.onMessage(function(message) {
+    	/*collection.push(JSON.parse(message.data));*/
+    	console.info(message.data);
+    	var iiuyh_p=JSON.parse(message.data)
+    	if(iiuyh_p!=""&&hjkh){
+    		mui('#share_pp').popover('toggle'); 
+    		setTimeout(function(){
+    			mui('#share_pp').popover('toggle'); 
+    		},6000)	
+    		var device_rooted=document.getElementById("player_p");//播放签到成功音效
+			device_rooted.play()//播放
+    	}
+    	hjkh=true
+    					
+    	$(iiuyh_p).map(function(){
+    		collection.unshift(this)
+    	}) 
+    	$(".yuyt_poiu").text(collection.length)
+    });
+    var methods = {
+      act_id:0,		
+      collection: collection,
+      get: function() {
+        dataStream.send(this.act_id+"#"+q_random);
+      }
+    };
+    
+     return methods;
+  }).filter("e_nam",function(){//姓名为空的时候返回默认值
+	    return function(x){
+	       if(x==""){
+	    	   x="匿名"
+	       }
+	       return x
+	    }
+  })
+	    
  
  })();

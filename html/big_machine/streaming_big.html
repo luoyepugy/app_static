@@ -11,17 +11,14 @@
 <link href="/css/common/mui.min.css" rel="stylesheet">  
 <link href="/css/common/base.css" rel="stylesheet">  
 <link href="/css/common/font-awesome.css" rel="stylesheet">  
-<link href="/css/big_machine/big_machine.css" rel="stylesheet"/>
+<link href="/css/big_machine/big_machine.css" rel="stylesheet"/> 
 </head>
-<body ng-controller="big_machine_controller">
-<section class="swiper-container big_switch">
-  <section class="swiper-wrapper">
-    <section class="swiper-slide"     ng-repeat="bg_b in big_sign.banner" >
-        <img ng-src="{{bg_b}}" class="big_mimg">
+<body ng-controller="big_streaming">
+      <section class="pr dd_poo_x">
+    	<section id="J_prismPlayer" class="prism-player pr ov" ></section>
+    	 <img src="/img/load_st.png" class="syuytrt_as" ng-click="play()">
     </section>
-  </section>
-     <section class="swiper-pagination"></section>
-</section>
+    
 <section class="big_bg_poi ">
    <section class="big_pd">
  <section class="pt30">
@@ -44,7 +41,7 @@
          <section class="mui-col-sm-4 fl">
            <section class="pr40">
              <p class="cen cf fz30">
-                 <span class="fz42 yellow" ng-bind="MyData.collection.length"></span>
+                 <span class="fz42 yellow" ng-bind="big_sign.cons_p.length"></span>
                  人签到
              </p>
              <section class="big_qc_sing mt30">
@@ -59,15 +56,17 @@
              </section>
          </section>
          
-          <section class="mui-col-sm-8 ov  dff_poiu">
-             <section class="sddf_poiou fl"  ng-repeat="si in MyData.collection">
-                 <section class="user_pooi big_uswer_s yj ov ml20 pr">
-                      <img ng-src="{{si.icon}}">
-                     <p class="cen fz20 dsd_poiui cf pt10 pm10 dian" ng-bind="si.name"></p>
-                 </section>
-             </section>
-         
-
+          <section class="mui-col-sm-8 ov  dff_poiu dfd_pooix pm20">
+                <section class="pd mt30"   ng-repeat="pr_p in play_tour">
+                  <img ng-src="{{pr_p.user_icon}}" class="fl user_pooi_a yj">
+                  <section class="ov pl20 cf fz22 pt10">
+                     	{{pr_p.user_name|e_nam:''}}<span class="zd">打赏了</span> <span class="hs">{{pr_p.pay_num}}</span> 元
+                     	
+                     	<span ng-bind="pr_p.pay_time|getDateDiff:''" class="fr"></span>
+                     	<p class="fz20 mt10 cf">{{pr_p.pay_info}}</p>
+                  </section>
+                </section>
+              
                 
          </section>
          
@@ -87,7 +86,7 @@
 </section>
 
 <footer class="box bottm_poi">
-     <section class="box_a cen act" data-href="/html/big_machine/according_sign.html?id={{acid}}">
+     <section class="box_a cen " data-href="/html/big_machine/according_sign.html?id={{acid}}">
          <i class="fa fa-home fz62"></i>
          <p class="fz30">签到</p>
      </section>
@@ -103,36 +102,24 @@
          <i class="fa fa-houzz fz62"></i>
          <p class="fz30">抽奖</p>
      </section>
-     <section class="box_a cen" data-href="/html/big_machine/streaming_big.html?id={{acid}}">
+     <section class="box_a cen act" data-href="/html/big_machine/streaming_big.html?id={{acid}}">
          <i class="fa fa-television fz62"></i>
          <p class="fz30">直播</p>
      </section>
 </footer>
 
-<section id="share_pp" class="mui-popover mui-popover-bottom mui-popover-action ">
-   <section class="yj4 bgff dsf_pooi">
-         <section class="user_pooi big_uswer_s yj ov ml20 pr big_uswer_s_pup">
-                      <img ng-src={{big_sign.cons_p[0].user_icon}}>
-                     <p class="cen fz30 dsd_poiui cf pt10 pm10 dian ng-binding" ng-bind="big_sign.cons_p[0].name"></p>
-                 </section>
-                 <p class="fz42 ls cen pt10 pm30 mt30">签到成功</p>
-   </section>
-</section>
-
- <audio  style="width:1px;height:1px;display:none" id="player_p" >
-  <source src="http://resource.apptown.cn/share/success.mp3" type="audio/mp3" />
-</audio> 
-
  <audio style="width:1px;height:1px;display:none" id="player_q" >
   <source src="http://resource.apptown.cn/share/activity_welcome.mp3" type="audio/mp3" />
 </audio>
+
 <script src="/js/common/jquery-1.11.3.min.js"></script>
 <script src="/js/common/swiper3.07.min.js"></script>
 <script src="/js/common/angular.min.js?v=9"></script>
- <script src="/js/common/mui.min.js?v=9"></script>
+<script src="/js/common/mui.min.js?v=9"></script>
 <script src="/js/common/angular-ui-router.min.js?v=9"></script>
 <script src="/js/common/angular-websocket.min.js?v=9"></script>
 <script src="/js/common/modules.js"></script>
+<script  src="/js/common/prism-min.js"></script>
 <script src="/js/mode/directive.js?v=9"></script>
 <script src="/js/service/service_activity.js?v=11?v=9"></script> 
 <script src="/js/entity/entity_phone.js?v=12"></script>

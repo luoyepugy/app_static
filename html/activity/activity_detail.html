@@ -24,7 +24,8 @@
 <span ng-bind="'浏览 '+detail.detail_date.browse_count+'次'"></span>
  <span class="ml10" ng-bind="'参与 '+detail.detail_date.consumption_count+'人'"> </span></h6>
 </section>
-<section class="box bgff cen mt10 fz14 pt20 pm10 btm">
+<!-- 暂时屏蔽掉 by scott  -->
+<!-- <section class="box bgff cen mt10 fz14 pt20 pm10 btm">
 	 <section class="box_a">
 	 	  <span class="{{detail.detail_date.sp_cl}}" ng-bind="detail.detail_date.target_amount+'元'"></span><br />
 	 	     目标金额
@@ -39,14 +40,14 @@
 	      </span><br/>
 	 	    赞助进度
 	 </section>
-</section>
-
-<section class="cen pt10 bgff pm20">
+</section> -->
+<!-- 暂时屏蔽掉 by scott  -->
+<!-- <section class="cen pt10 bgff pm20">
 	<button type="button" class="mui-btn  bghs  cf {{detail.detail_date.sp_bg}}"  ng-click="detail.sp_date(detail.detail_date.support_id)">
 		我要赞助
 	</button>
 	<h6 class="mt10" ng-if="detail.detail_date.support_id==0">主办方没有发起活动赞助哦！</h6>
-</section> 
+</section>  -->
 <ul class="mui-table-view ">
         <li class="mui-table-view-cell">
               <span class="act_title">所属行业：</span>
@@ -86,13 +87,19 @@
 	<span class="mui-icon mui-icon-arrowright right_icon zc"></span>
 </section>
 
-<section class="pt10 pm10 bgff  bbm  pr pd" data-href="https://8.baidu.com/">
-    <p class="mui-col-xs-11 dian hs">第三方入口</p>
+<section class="pt10 pm10 bgff  bbm  pr pd" data-href="http://e.eqxiu.com/s/Wjhdewta?eqrcode=1&from=timeline&isappinstalled=0">
+    <p class="mui-col-xs-11 dian hs">活动公益</p>
     <span class="mui-icon mui-icon-arrowright right_icon zc"></span>
 </section>
 <section class="pt10 pm10 bgff  bbm  pr pd"  ui-sref="activity_loan">
     <p class="mui-col-xs-11 dian hs">活动白条
     <span class="fr zc">让活动更容易</span>
+    </p>
+    <span class="mui-icon mui-icon-arrowright right_icon zc"></span>
+</section>
+<section class="pt10 pm10 bgff  bbm  pr pd"  ui-sref="activity_machine_apply">
+    <p class="mui-col-xs-11 dian hs">活动签到机申请
+    <span class="fr zc">e云屏活动签到</span>
     </p>
     <span class="mui-icon mui-icon-arrowright right_icon zc"></span>
 </section>
@@ -179,7 +186,7 @@
 <!-- 我要打赏 -->
 <section class="tc bgff mt10 pt10 pm10" ng-if="rewardShow==true">
   <button class="mui-btn mui-btn-green mainBtn" ui-sref="activity_reward({id: id})" >我要打赏</button>
-  <p class="mt10 text-normal">{{totalPerson}}人打赏&#12288;<a ng-if="totalPerson>0" ui-sref="activity_reward_detail({id:id})" class="green">查看他们打赏了多少？</a></p>
+  <p class="mt10 text-normal">{{totalPerson}}人打赏&#12288;<a ui-sref="activity_reward_detail({id:id})" class="green">查看他们打赏了多少？</a></p>
 </section>
 <!-- /我要打赏 -->
 
@@ -190,17 +197,19 @@
 
 
 <section class="act_bottom box cen bgff ">
-	 <a class="box_a zc fz14 pt5" ng-href="#share_pp"> 
+	 <a class="box_a zc fz14 pt0" ng-href="#share_pp"> 
 	 	<span class="mui-icon mui-icon-redo "></span><br />
 	 	分享
 	 </a>
-       <a class="box_a zc fz14 pt5 collection_p {{detail.detail_date.act_cl}}" ng-click="detail.collection()" >
+	  <a class="box_a zc fz14 mui-col-xs-4 mui-btn mui-btn-success bot_poiy_a fz18  {{detail.detail_date.reg_clas}}"  
+	  ng-click="detail.sign_up_p(detail.detail_date.is_free,detail.detail_date.registration.code)"  
+	  ng-bind="detail.detail_date.registration.msg">
+	  </a> 
+       <a class="box_a zc fz14 pt0 collection_p {{detail.detail_date.act_cl}}" ng-click="detail.collection()" >
 	 		<span class="mui-icon mui-icon-star "></span><br />
 	 	收藏
 	 </a>
-	  <a class="box_a zc fz14 mui-col-xs-4 mui-btn mui-btn-success bot_poiy_a fz18  {{detail.detail_date.reg_clas}}"  ng-click="detail.sign_up_p(detail.detail_date.is_free,detail.detail_date.registration.code)"  ng-bind="detail.detail_date.registration.msg">
-	 		
-	 </a> 
+	 
 </section>
     <section id="share_pp" class="mui-popover mui-popover-bottom mui-popover-action " style="z-index:9999">
         <section class="modal-content clearfix bgff">
@@ -238,6 +247,7 @@
    	
 </section>
 
+<img src="/img/seeding_p.png" class="streaming_poo" ui-sref="activity_streaming.activity_reward_detail({ac_id:id_a,id: id_a})">
 </section>
 </section>
 
