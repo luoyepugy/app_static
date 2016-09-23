@@ -22,7 +22,7 @@
             <p>主办方简介</p>
             <textarea rows="3" name="introduction"  placeholder="请简单介绍主办方（限150字）" data-empty="请输入主办方简介" max-length="150"></textarea>
         </div>
-        <submit-button action="/sponsor/add_or_update_apply_sponsor" text="提交审核" state="userInfo" form=".j-sponsorAuthForm"></submit-button>
+        <submit-button action="/sponsor/add_or_update_apply_sponsor" text="提交审核" form=".j-sponsorAuthForm" callback="route()"></submit-button>
     </form>
     <!-- /编辑表单 -->
     <!-- 成功 -->

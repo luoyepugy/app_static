@@ -632,6 +632,10 @@ angular.module('user', ['activity_servrt','directive_mml', 'common', 'request', 
 				}
 			}
 	    });
+	    // 表单提交成功后跳转
+	    $scope.route = function() {
+	    	vm.status = 3;
+	    }	
 		// 重新认证，显示主办方认证表单
 		$scope.reSponsorAuth = function () {
 			vm.status = 0;
