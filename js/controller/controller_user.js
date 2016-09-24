@@ -1557,5 +1557,39 @@ angular.module('user', ['activity_servrt','directive_mml', 'common', 'request', 
 		}
 	})
 
+	// ========================= 主办方列表 =======================
+	/* @ngInject */
+	.controller('personal_host_listCtrl', function($scope, httpService, messageService) { 
+		// 底部栏样式
+		$('.mml_bottom').show();
+		$('.mml_bottom a').removeClass('bottom_act').eq(1).addClass('bottom_act');
+		// 头部城市
+		$(".ds_poiu_a").removeClass("show_a");
+		$(".retreat_icon").removeClass("none");
+		var index = 1;
+		var sponsorDatas = {
+			'pageIndex': index,
+			'name': '',
+			'pageSize': 10
+		};
+		var request = function(more) {
+			httpService.getDatas('GET', '/sponsor/sponsor_search_page', sponsorDatas).then(function(data) {
+				if(more) {
+					$scope.sponsorList = $scope.sponsorList.concat(data.rows);
+					if(data.rows.length == 0) {
+						messageService.show('没有更多数据了');
+					}
+				} else {
+					$scope.sponsorList = data.rows;
+				}
+			});
+		}
+		request();
+		// 加载更多
+		$scope.sponsorMore = function() {
+			index++;
+			request(true);
+		}
+	})
 
 })();

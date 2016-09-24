@@ -55,13 +55,7 @@
                 
               </p>
         </li>
-           <li class="mui-table-view-cell pr" data-href="http://map.baidu.com/mobile/webapp/search/search/qt=s&wd={{detail.detail_date.address}}">
-              <span class="act_title">活动地址：</span>
-              <p class="ov dianer pr mui-col-xs-8 mui-col-sm-9" ng-bind="detail.detail_date.address">
-                    
-              </p>
-               <span class="mui-icon mui-icon-map ls map_icon_a"></span>
-        </li>
+          
         
             <li class="mui-table-view-cell">
               <span class="act_title">开始时间：</span>
@@ -72,6 +66,13 @@
               <span class="act_title">结束时间：</span>
               <p class="ov" ng-bind="detail.detail_date.endDate">
               </p>
+        </li>
+         <li class="mui-table-view-cell pr" data-href="http://map.baidu.com/mobile/webapp/search/search/qt=s&wd={{detail.detail_date.address}}">
+              <span class="act_title">活动地址：</span>
+              <p class="ov dianer pr mui-col-xs-8 mui-col-sm-9" ng-bind="detail.detail_date.address">
+                    
+              </p>
+               <span class="mui-icon mui-icon-map ls map_icon_a"></span>
         </li>
             <li class="mui-table-view-cell">
               <span class="act_title">活动席位：</span>
@@ -97,12 +98,7 @@
     </p>
     <span class="mui-icon mui-icon-arrowright right_icon zc"></span>
 </section>
-<section class="pt10 pm10 bgff  bbm  pr pd"  ui-sref="activity_machine_apply">
-    <p class="mui-col-xs-11 dian hs">活动签到机申请
-    <span class="fr zc">e云屏活动签到</span>
-    </p>
-    <span class="mui-icon mui-icon-arrowright right_icon zc"></span>
-</section>
+
 </section>
 <section class="particulars_show">
 <!--主办方未认证的状态  -->
@@ -190,6 +186,14 @@
 </section>
 <!-- /我要打赏 -->
 
+<!--签到机申请-->
+<section class="pt10 pm10 bgff mt10  bbm  pr pd"  ui-sref="activity_machine_apply">
+    <p class="mui-col-xs-11 dian hs">活动签到机申请
+    <span class="fr zc">e云屏活动签到</span>
+    </p>
+    <span class="mui-icon mui-icon-arrowright right_icon zc"></span>
+</section>
+<!--签到机申请-->
 
 <section ng-include="'/html/activity/activity_hot.html?v=15'"></section>
 
@@ -247,7 +251,7 @@
    	
 </section>
 
-<img src="/img/seeding_p.png" class="streaming_poo" ui-sref="activity_streaming.activity_reward_detail({ac_id:id_a,id: id_a})">
+<img src="/img/seeding_p.png" class="streaming_poo" ng-class="detail.detail_date.live_status" ui-sref="activity_streaming.activity_reward_detail({ac_id:id_a,count:detail.detail_date.browse_count,id: id_a})">
 </section>
 </section>
 

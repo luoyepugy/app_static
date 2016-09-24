@@ -10,6 +10,7 @@
 	 }} 
 	 $rootScope.$on('$stateChangeSuccess', function(ev, to, toParams, from, fromParams){//路由跳转触发
 		$(".menu_pup,.filiuyt_o").removeClass("show_a");
+		$(".return_top").addClass("mui-hidden");
 		
         /* 
          * 张晗

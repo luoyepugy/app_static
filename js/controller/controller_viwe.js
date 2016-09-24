@@ -499,12 +499,21 @@ angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.rou
 		}, function error() {
 			console.log("获取热门活动失败") 
 	});
-	$scope.down_po=function(){
-		if(/Android|webOS|BlackBerry|SymbianOS/i.test(navigator.userAgent)){//安卓机
-			 window.open("http://resource.apptown.cn/app/app.apk")
-		}else{//苹果机
-			$("body").remove("app_down_a").append('<section class="app_down_a"></section>')
-			   window.location.href="https://itunes.apple.com/cn/app/e-chang-jing-huo-dong/id1110240836?mt=8&uo=4"  
+	/** h5下载  **/
+	$scope.down_app=function(){
+		if(/Android|webOS|BlackBerry|SymbianOS/i.test(navigator.userAgent)){// 安卓机
+			var isWeixin = !!/MicroMessenger/i.test(_agent);
+			if(isWeixin){
+				   $("body").empty();
+				   $("body").append('<section class="app_down_a"></section>');
+			       document.body.style.backgroundColor = "#FFFFFF" ;
+			       window.open("http://resource.apptown.cn/app/app.apk");
+		    }
+		}else{// 苹果机
+			$("body").empty();
+		    $("body").append('<section class="app_down_a"></section>');
+			document.body.style.backgroundColor = "#FFFFFF" ;
+		    window.location.href="https://itunes.apple.com/cn/app/e-chang-jing-huo-dong/id1110240836?mt=8&uo=4"; 
 		}
 	}
 }]).controller('activity_show_ticket',["$scope","activity_data","$location","$stateParams",function($scope,activity_data,$location,$stateParams) { //票卷详情
@@ -584,7 +593,7 @@ angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.rou
 	$(".ds_poiu_a").removeClass("show_a");
 	$(".retreat_icon").removeClass("none");
 
-	$scope.suportList = [];
+	$scope.supportList = [];
 	$scope.activityList = [];
 
 	var activityIndex = 1,
@@ -628,7 +637,7 @@ angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.rou
 			$('#activityList').show().siblings().hide();
 			searchActivity();
 		} else if(type == '赞助') {
-			$('#suportList').show().siblings().hide();
+			$('#supportList').show().siblings().hide();
 			searchSupport(); 
 		}
 	}
@@ -652,7 +661,7 @@ angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.rou
 		var sponsorDatas = {
 			'pageIndex': sponsorIndex,
 			'name': name,
-			'pageSize': 7
+			'pageSize': 10
 		};
 		request('/sponsor/sponsor_search_page', sponsorDatas, 'sponsorList', push);
 	};
@@ -662,9 +671,9 @@ angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.rou
 			'pageIndex': suportIndex,
 			'sort': 1,
 			'name': name,
-			'pageSize': 6
+			'pageSize': 10
 		};
-		request('/support/support_list', supportDatas, 'suportList', push);
+		request('/support/support_list', supportDatas, 'supportList', push);
 	};
 	// 活动
 	var searchActivity = function(push) {
@@ -672,7 +681,7 @@ angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.rou
 			'pageIndex': activityIndex,
 			'status': 0,
 			'name': name,
-			'pageSize': 6
+			'pageSize': 10
 		};
 		request('/activity/query_activity_list', activityDatas, 'activityList', push);
 	};
@@ -730,5 +739,24 @@ var _guide_DownloadClose = {
        $("#guide_Download").remove();
       }
    }
+
+down_app=function(){
+	var _agent=navigator.userAgent;
+	if(_agent.match(/micromessenger/i)!=null && _agent.match(/android/i)!=null){//安卓机
+		var isWeixin = !!/MicroMessenger/i.test(_agent);
+		if(isWeixin){
+			   $("body").empty();
+			   $("body").append('<section class="app_down_a"></section>');
+		       document.body.style.backgroundColor = "#FFFFFF" ;
+		       window.open("http://resource.apptown.cn/app/app.apk");
+	    }
+	}else{//苹果机
+		$("body").empty();
+	    $("body").append('<section class="app_down_a"></section>');
+		document.body.style.backgroundColor = "#FFFFFF" ;
+	    window.location.href="https://itunes.apple.com/cn/app/e-chang-jing-huo-dong/id1110240836?mt=8&uo=4";
+    }
+}
+
 //========= h5端 app下载 ==========      
 

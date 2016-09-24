@@ -1,7 +1,8 @@
 body{
     padding-bottom: 100px;
+-webkit-text-size-adjust: auto;
 }
-h4 {
+h4 { 
     font-weight: 100;
 }
 /*注册*/
@@ -191,11 +192,10 @@ h4 {
 .check_icon_e{
     width: 20px;
     height: 20px;
-    border: 1px solid #e0e0e0
- 
+    border: 1px solid #e0e0e0;
 }
 .check_icon_act{
-      background-position: -115px -359px;
+    background-position: -115px -359px;
     position: relative;
     top: 4px;
 }
@@ -1596,6 +1596,7 @@ section.pup_soou_p {
 	width: 100%;
 	position: fixed;
 	bottom: 0px;
+	height:47px;
 	left: 0;
 	z-index: 9999;
 }
@@ -2262,14 +2263,11 @@ background-position: -26px -1119px;
 }
     .app_down_a{
         position: fixed;
-        width: 100%;
-        height: 100%;
-        background: url(/img/app_download.gif);
+        width: 80%;
+        height: 60%;
+        background-image: url(/img/app_down.jpg);
         background-size: 100% 100%;
-        z-index:99999;
-        left: 0;
-   	 top: 0;
-            
+        left: 10%;
     }
     
     .ov input{
@@ -2386,6 +2384,7 @@ img.streaming_poo {
     bottom: 50px;
     right: 0px;
     z-index: 99999;
+    display:none
 }
 
 /** h5 app 下载  begin **/
@@ -2450,5 +2449,13 @@ img.streaming_poo {
     font-weight: normal;
     border-radius: 3px;
 }
-
 /** h5 app 下载  end **/
+
+
+.sponsorship_payment_btn {
+    position: fixed;
+    width: 100%;
+    bottom: 0px;
+    left: 0;
+    z-index: 9999;
+}

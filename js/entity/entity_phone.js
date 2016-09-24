@@ -340,7 +340,12 @@ function ticket_volume_list(data){
 		  this.sDate_time=info.start_time;//活动开始时间
 		  this.eDate=info.end_time;//活动结束时间
 		  this.person_limit=info.person_limit==null?'无限制':info.person_limit;//活动活动席位（人数上限）
-		  
+          var clkj_show=""
+		  if(info.live_status==1){//1是有直播，0是无直播 
+			  clkj_show="show_a"
+		  }
+          this.mnbv=info.live_status
+		  this.live_status=clkj_show
 		  this.sponsor_head=info.sponsor_head;//活动主办方头像  
 		  this.sponsor_name=info.sponsor_name;//主办方姓名
 		  this.sponsor_user_id=info.sponsor_user_id;//主办方id

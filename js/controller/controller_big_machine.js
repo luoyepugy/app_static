@@ -27,7 +27,9 @@
 			       },240000)
 				 
 			 }
-			var act_id=window.location.search.split("=")[1]
+			var act_id=window.location.search.split("=")[1].split("&")[0]
+			$rootScope.type_poo=window.location.search.split("type=")[1]
+		
 			$rootScope.acid=act_id
 			$rootScope.big_sign={};//签到机数据
 			$rootScope.actid=act_id
@@ -44,7 +46,8 @@
 			 })
 	 })
 	.controller('big_machine_controller',function($scope,activity_data,messageService,MyData) { //签到机	
-		var act_id=window.location.search.split("=")[1]
+		var act_id=window.location.search.split("=")[1].split("&")[0]
+	
 		var date_leng=0;//当前签到人数
 		function consm(){
 			MyData.act_id=act_id
@@ -60,16 +63,26 @@
 		       loop: true
 		    })
 	}).controller('big_streaming',function($scope,activity_data,messageService,$http) { //直播	
-		var act_id=window.location.search.split("=")[1]
-		// 初始化播放器
-		  var player = new prismplayer({
-		        id: "J_prismPlayer", // 容器id
-		        source: "rtmp://pili-live-rtmp.live.apptown.cn/manmanlai/test_61",// 视频地址
-		        autoplay: true,    //自动播放：否
-		        isLive:true,  //是否是直播 
-		        width: "100%",       // 播放器宽度 
-		        height: "600px"      // 播放器高度
-		    });
+		var act_id=window.location.search.split("=")[1].split("&")[0]
+	/*	act_id=153*/
+		var player=""
+			  activity_data.getDatas('GET', '/Live/query_live_info?activity_id='+act_id)
+			  .then(function(data) {
+				 if(data.code!=0){
+					 return
+				 }
+				   // 初始化播放器
+				      player = new prismplayer({
+				        id: "J_prismPlayer", // 容器id
+				        source: data.info.live_url_str.liveurl_m3u8,// 视频地址
+				        autoplay: false,    //自动播放：否
+				        isLive:true,  //是否是直播
+				        width: "100%",       // 播放器宽度
+				        height: "600px"      // 播放器高度
+				    });
+			 }); 
+		
+		
 		
 	 	$http.get('/activityTip/'+act_id+"?pageIndex=1&pageSize="+100).then(function(data) {
 	 		 $scope.play_tour=data.data.rows

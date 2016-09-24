@@ -5,7 +5,9 @@
 	<div class="searchType iconfont j-searchType" ng-click="selectType()">活动</div>
 	<ul class="searchTypeList j-searchTypeList" style="display: none;">
 		<li>主办方</li>
-		<li>赞助</li>
+    <!-- 暂时屏蔽赞助 -->
+		<!-- <li>赞助</li> -->
+    <!-- /暂时屏蔽赞助 -->
 	</ul>
 	<p class="searchInput">
 		<i class="iconfont icon-search"></i>
@@ -73,9 +75,9 @@
 <!-- /活动结果 -->
 
 <!-- 赞助结果 -->
-<div id="suportList" class="searchResutWrap" pulllist callback="supportMore()">
+<div id="supportList" class="searchResutWrap" pulllist callback="supportMore()">
 	<ul>  
-    <li ng-repeat="list in suportList" finish >
+    <li ng-repeat="list in supportList" finish >
         <section class="details_case mt10 bgff pm10 btm details_case_z"  >
           <section class="banner_top_a banner_top_c  bgff prefecture_a">
            <section class="banner_top_b">

@@ -85,7 +85,7 @@
 	    	url: '/activity_machine_apply', 
 	    	templateUrl: '/html/activity/activity_machine_apply.html'
 	    }).state('activity_streaming',{
-	    	url: '/activity_streaming/:ac_id',  //活动直播
+	    	url: '/activity_streaming/:ac_id/:count',  //活动直播
 	    	templateUrl: '/html/activity/activity_streaming.html',
 	    	controller: 'activity_streamingCtrl'
 	    }).state('activity_streaming.activity_reward_detail',{
@@ -177,6 +177,10 @@
 	    	url: '/personal_host_message',  	// 个人主办方留言
 	    	templateUrl: '/html/user/personal_host_message.html',
 	    	controller: 'personal_host_message'
+	    }).state('personal_host_list',{
+	    	url: '/personal_host_list',  	// 个人主办方留言
+	    	templateUrl: '/html/user/personal_host_list.html',
+	    	controller: 'personal_host_listCtrl'
 	    })
       
 

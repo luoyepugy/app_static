@@ -5,6 +5,7 @@ angular.module('act_details', [ "directive_mml","activity_servrt","ui.router","p
 .controller('activity_detail_c',function($scope,activity_data,$location,$stateParams,act_date,$state,httpService) { //活动详情 
 	  $(".ds_poiu_a").removeClass("show_a");
 	  $(".retreat_icon").removeClass("none");
+
 	  $scope.id=$stateParams.id
 	  $scope.id_a=$stateParams.id
 	  var hjgf=true;//设置取消和收藏关注
@@ -25,6 +26,7 @@ angular.module('act_details', [ "directive_mml","activity_servrt","ui.router","p
 		    		   
 
 		    		    $scope.detail.detail_date=new activity_detail(data.info);
+		    		    
 		    		    $scope.detail.detail_date.act_id=$scope.id
 		    		    act_date.set_act_date($scope.detail.detail_date)
 		    			$scope.industry=$scope.classify[1].maker_title[$scope.detail.detail_date.industry_id].text;//行业
@@ -67,7 +69,10 @@ angular.module('act_details', [ "directive_mml","activity_servrt","ui.router","p
 			    		    	 mui.alert(data.msg, 'E场景活动');
 			    		    	 return
 			    		    }
-			    		    mui.alert("关注成功!");
+			    		    mui.alert("关注成功!","E场景活动",function(){
+			    		        $(".collection_p").toggleClass("ls")
+			    		    });
+			    		
 			    		    $(".contract_de2").eq(0).addClass("bgdiso")
 			    			//$(".collection_p").toggleClass("ls")
 			    			$("#user_attention").html("取消关注");
@@ -85,7 +90,9 @@ angular.module('act_details', [ "directive_mml","activity_servrt","ui.router","p
 				    			//$(".collection_p").toggleClass("ls")
 				    			$("#user_attention").html("关注TA");
 				    			hjgf=true;
-				    			mui.alert("取消关注成功!");
+				    			mui.alert("取消关注成功!",function(){ 
+				    		        $(".collection_p").toggleClass("ls")
+				    			});
 
 				    		    $(".contract_de2").eq(0).removeClass("bgdiso")
 				    		}, function error() {
@@ -124,7 +131,7 @@ angular.module('act_details', [ "directive_mml","activity_servrt","ui.router","p
 	    
 	    },"activities_oi":function(){
 	    	if(screen.availWidth>1000){
-	    		window.location.href='/html/big_machine/according_sign.html?id='+$scope.id
+	    		window.location.href='/html/big_machine/according_sign.html?id='+$scope.id+"&type="+$scope.detail.detail_date.mnbv
 	    		return;
 	    	}
 	    	$(".pup_soou_p").css({"left":"0"})
@@ -804,16 +811,27 @@ $(".dd_pooo").hide()
 	
 	
 }]).controller('activity_streamingCtrl',function($scope,activity_data,$location,$stateParams,act_date){
-		 // 初始化播放器
-		    var player = new prismplayer({
+	   $scope.id_p=$stateParams.ac_id;
+	   $scope.count=$stateParams.count
+	   var player=""
+	  activity_data.getDatas('GET', '/Live/query_live_info?activity_id='+$scope.id_p)
+	  .then(function(data) {
+		 if(data.code!=0){
+			 return
+		 }
+		   // 初始化播放器
+		      player = new prismplayer({
 		        id: "J_prismPlayer", // 容器id
-		        source: "rtmp://pili-live-rtmp.live.apptown.cn/manmanlai/test_61",// 视频地址
+		        source: data.info.live_url_str.liveurl_m3u8,// 视频地址
 		        autoplay: false,    //自动播放：否
 		        isLive:true,  //是否是直播
 		        width: "100%",       // 播放器宽度
 		        height: "200px"      // 播放器高度
 		    });
-		   $scope.id_p=$stateParams.ac_id;
+	 }); 
+
+		    $("html,body").animate({scrollTop:0},200);
+	
 		   $("body").on("click",".nagf_ssd span",function(){
 			   $(".nagf_ssd span").removeClass("act")
 			   $(this).addClass("act")

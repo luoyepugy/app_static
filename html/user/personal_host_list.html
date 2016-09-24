@@ -1,0 +1,17 @@
+
+<link rel="stylesheet" href="/css/pages/user.css">
+<!-- 主办方列表 -->
+<div id="sponsorList" class="moreWrap" pulllist callback="sponsorMore()">
+	<ul class="mui-table-view" style="margin-top:0;">
+	    <li class="mui-table-view-cell mui-media" ng-repeat="item in sponsorList">
+	        <a ui-sref="personal_host({sponsor_user_id:item.user_id})" class="mui-navigate-right">
+	            <img class="mui-media-object mui-pull-left sponsorImg" ng-src="{{item.sponsor_icon}}">
+	            <div class="mui-media-body">
+	                <p class="mui-ellipsis sponsorTitle">{{item.name}}</p>
+	                <p><span class="mr10">活动<b class="green fn ml5 mr5">{{item.act_sum}}</b>场</span><span>参与<b class="green fn ml5 mr5">{{item.sign_sum}}</b>人</span></p>
+	            </div>
+	        </a>
+		</li>
+	</ul>
+</div>
+<!-- /主办方列表 -->
