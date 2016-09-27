@@ -699,15 +699,13 @@ angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.rou
 
 })
 
-// ======================= 金融贷款 ============================
-/* @ngInject */
-.controller('finance_loanCtrl', function($scope,httpService, messageService) {
-
-})
-
 // ======================= 认证列表 ============================
 /* @ngInject */
 .controller('auth_listCtrl', function($scope,httpService, messageService) {
+	// 头部城市
+	$(".ds_poiu_a").removeClass("show_a");
+	$(".retreat_icon").removeClass("none");
+	// 获取数据
 	httpService.getDatas('GET', '/sponsor/certificationNum').then(function(data) {
 		$scope.auth = data.info;
 	});
