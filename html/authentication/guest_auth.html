@@ -1,0 +1,67 @@
+<!-- 注册嘉宾号-->
+<meta charset="UTF-8">
+   <section class="j-guestAuthForm">
+	   <img style="max-width:100%;"  src="/img/others/guest-banner.png" alt="活动banner" />
+       <section class="loan_content">
+       		<p class=" fz16 f-color-141414">
+			姓名
+	    	</p>
+	    	<p> 
+	      		<input name="name" class="loan_name" type="text"  placeholder="请输入您的姓名" data-empty="请输入您的姓名" />
+	    	</p>
+	    	<p class=" fz16 f-color-141414">
+			手机号码
+	    	</p>
+	    	<p> 
+	      		<input name="contacter_phone" class="loan_name" type="text"  placeholder="请输入您的手机号码" format-phone data-empty="请输入您的手机号码" />
+	    	</p>
+	    	<section class="upload_auth">
+	    		<upimg></upimg>
+	    		<input type="hidden" name="sponsor_icon" value="" data-empty="请上传嘉宾头像">
+	    		<span class="zd fz14">上传嘉宾头像</span>
+	    	</section>	    	
+	    		
+	    	 <p class=" fz16 f-color-141414 mt10">
+				个人介绍或演讲经历
+			</p>
+			<p>
+	    		<textarea name="introduction" style="height:85px;text-indent: 0;" class="loan_remark" placeholder="请填写您的个人介绍或演讲经历" data-empty="请填写您的个人介绍或演讲经历"></textarea>
+	    	</p>
+	    	<input type="hidden" name="type_id" value="1" number>
+	    	<submit-button action="/sponsor/add_or_update_apply_sponsor" btn-class="mainBtn"  text="立即注册" form=".j-guestAuthForm"  msg="提交成功"></submit-button>
+	    	<ul> 
+				<li >
+					<p class="f-color-141414 b">
+					1.为什么要成为演讲嘉宾？
+				</p>
+				<p class="f-color-141414">
+					建立你的个人品牌，让参会者成为你的粉丝。<br />传播你的影响力，获取你的演讲收益。<br />e场景活动作为你的会议经纪人，为你量身打造会议和个
+人演讲。
+				</p>
+				</li>
+				<li>
+					<p class="f-color-141414 b">
+					2.怎么成为演讲嘉宾？
+				</p>
+				<p class="f-color-141414">
+					按要求填写演讲者信息并上传照片。<br />
+					个人信息审核通过后，我们会安排专人与你联系并核对
+信息。<br />恭喜你，已获得e场景活动演讲嘉宾认证，成为e场景活
+动合作的活动嘉宾
+				</p>
+				</li>
+				<li>
+					<p class="f-color-141414 b">
+					3.成为演讲嘉宾有什么要求？
+				</p>
+				<p class="f-color-141414">
+					你有精彩的故事诉说。<br />
+					你在某个行业有丰富的经验。<br />
+					入住e场景活动嘉宾号，实现你的演讲梦
+				</p>
+				</li>				
+				
+			</ul>
+       </section>
+  
+</section>

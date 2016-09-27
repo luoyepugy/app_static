@@ -77,14 +77,14 @@
 <!--底部悬浮引导下载-->
 <section class="guide_Download" id="guide_Download" style="z-index: 9999">
   <section class="guide_K">
-    <a href="#" onclick="down_app()" class="down" ontouchstart="">
+    <a  class="down" ontouchstart=""  onclick="_guide_DownloadClose._init()">
       <img class="icon_logo_mh2" src="http://resource.apptown.cn/poster/app_down.png">
-      <strong>立即下载</strong>
+      <strong onclick="down_app()">立即下载</strong>
     </a>
     <a href="javascript:void(0)" onclick="_guide_DownloadClose._init()" title="关闭" class="close" ontouchstart=""></a>
   </section>
 </section>	
-	
+	 
 	
 
 	<script src="/js/common/jquery-1.11.3.min.js"></script>
@@ -100,6 +100,7 @@
     <script src="/js/common/iscroll.js"></script>
     <script src="/js/common/is_from.js"></script>
     <script  src="/js/common/prism-min.js"></script>
+    <script src="/js/common/webuploader.min.js"></script>
     <script src="/js/mode/directive.js"></script>
     <script src="/js/service/service_activity.js"></script> 
     <script src="/js/entity/entity_phone.js"></script>

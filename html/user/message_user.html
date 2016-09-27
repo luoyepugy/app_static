@@ -12,18 +12,23 @@
 <div id="messageUser" pulllist callback="userMore()" ng-if="showUser" class="moreWrap">
     <ul class="mui-table-view mt0">
         <li class="mui-table-view-cell mui-media" ng-repeat="item in userList">
-            <a ui-sref="ticket_user_detail({id:item.related_id})">
+<!--             <a ui-sref="ticket_user_detail({id:item.related_id})"> -->
                 <div class="mui-media-body">
-                    <div class="mui-ellipsis">{{item.content}}</div>
+                    <div class="mui-ellipsis" ui-sref="activity_detail({id:item.related_id})">{{item.content}}</div>
                     <p class="lh180 fz12">
-                        <span><i style="font-style:normal;" ng-if="item.type_id==1">报名人：</i><i style="font-style:normal;" ng-if="item.type_id==2">赞助人：</i>{{item.name}}</span>
+                        <span>
+                            <i style="font-style:normal;" ng-if="item.type_id==1">报名人：</i>
+                            <i style="font-style:normal;" ng-if="item.type_id==2">赞助人：</i>
+                        {{item.name}}</span>
                         <span class="fr">支付金额：{{item.pay_num}}元</span>
                     </p>
                     <p class="lh180 fz12">
                         <span class="mr20">{{item.create_time | date:'yyyy-MM-dd HH:mm:ss'}}</span>共<span class="fz16">{{item.report_number}}</span>人报名
-                        <span class="mui-btn mainBtn mui-btn-outline fr fz12" ui-sref="ticket_user_detail({id:item.related_id})">名单详情</span></p>
+                        <span ng-if="item.type_id==1" class="mui-btn mainBtn mui-btn-outline fr fz12"  ui-sref="ticket_user_detail({id:item.related_id})">名单详情</span></p>
+                        <span ng-if="item.type_id==2" class="mui-btn mainBtn mui-btn-outline fr fz12"  ui-sref="sponsorship_user_detail({id:item.related_id})">名单详情</span>
+                    </p>
                 </div>
-            </a>
+            <!-- </a> -->
         </li>  
     </ul>
     <p class="tc" ng-if="userList.length==0">暂时没有消息哦！</p>

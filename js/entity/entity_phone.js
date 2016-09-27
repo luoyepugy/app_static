@@ -1,9 +1,13 @@
 /**
  * 手机端实体js**/
 /*轮播图*/
-function indexbanner(id,banner_url){
+function indexbanner(id,banner_url,ulr){
 	this.id=id;//活动首页轮播图的ID
 	this.banner_url=banner_url;//活动首页轮播图的地址
+	switch(ulr){
+		case "1":this.href_i='/index.html#/activity_detail/'+id;break 
+	}
+	
 }
 /*首页3条数据*/
 function activity_sum(data){

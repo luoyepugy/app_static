@@ -1,0 +1,72 @@
+<!-- 注册媒体号-->
+<meta charset="UTF-8">
+   <section class="j-mediaAuthForm">
+	   <img style="max-width:100%;" src="/img/others/media-banner.png" alt="活动banner" />
+       <section class="loan_content">
+       		<p class=" fz16 f-color-141414">姓名</p>
+	    	<p> 
+	      		<input name="contacter" class="loan_name" type="text"  placeholder="请输入您的姓名" data-empty="请输入您的姓名" />
+	    	</p>
+	    	<p class=" fz16 f-color-141414">
+			手机号码
+	    	</p>
+	    	<p> 
+	      		<input name="contacter_phone" class="loan_name" type="text"  placeholder="请输入您的手机号码" data-empty="请输入您的手机号码" />
+	    	</p>	   
+	    	<section class="upload_auth">
+	    		<upimg></upimg>
+	    		<input type="hidden" name="sponsor_icon" value="" data-empty="请上传媒体logo">
+	    		<span class="zd fz14">上传媒体LOGO</span>
+	    	</section>	    	
+	    	<p class=" fz16 f-color-141414 mt10">
+			媒体名称
+	    	</p>
+	    	<p> 
+	      		<input name="name" class="loan_name" type="text"  placeholder="请输入您的媒体名称" data-empty="请输入您的媒体名称" />
+	    	</p>	
+	    	 <p class=" fz16 f-color-141414">
+				媒体资源介绍
+			</p>
+			<p>
+	    		<textarea name="introduction" style="height:85px;text-indent: 0;" class="loan_remark" placeholder="请输入媒体资源介绍" data-empty="请输入媒体资源介绍"></textarea>
+	    	</p>
+	    	<input type="hidden" name="type_id" value="2" number>
+	    	<submit-button action="/sponsor/add_or_update_apply_sponsor" btn-class="mainBtn"  text="立即注册" form=".j-mediaAuthForm" msg="提交成功"></submit-button>
+	    	<ul> 
+				<li >
+					<p class="f-color-141414 b">
+					1.为什么要成为演讲嘉宾？
+				</p>
+				<p class="f-color-141414">
+					传播您的影响力，获取您的媒体收益。<br />
+					e场景活动作为您的活动经纪人，为你量身打造活动媒体
+价值
+				</p>
+				</li>
+				<li>
+					<p class="f-color-141414 b">
+					2.怎么成为媒体号？
+				</p>
+				<p class="f-color-141414">
+					按要求填写演讲者信息并上传照片。<br />
+					个人信息审核通过后，我们会安排专人与你联系并核对
+信息。<br />恭喜你，已获得e场景活动媒体号认证，成为e场景活动
+合作的媒体单位
+				</p>
+				</li>
+				<li>
+					<p class="f-color-141414 b">
+					3.成为演讲嘉宾有什么要求？
+				</p>
+				<p class="f-color-141414">
+					有丰富的媒体资源。<br />
+					有海量的粉丝。<br />
+					懂技术，会新媒体运营。<br />
+					欢迎来入驻e场景媒体号，实现您的媒体梦
+				</p>
+				</li>				
+				
+			</ul>
+       </section>
+  
+</section>

@@ -18,7 +18,7 @@ angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.rou
 	        var key = CryptoJS.enc.Utf8.parse(keyStr);
 	        var iv  = CryptoJS.enc.Utf8.parse(ivStr);
 	        var encrypted = CryptoJS.AES.encrypt(sendData, key,{iv:iv,mode:CryptoJS.mode.CBC});
-	        return encrypted.toString();
+	        return encrypted.toString();   
 	    }
 	  }
 	
@@ -47,7 +47,7 @@ angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.rou
 
 })
 	// ===============================  首页 ==============================
-	.controller('index_controller',["$scope","activity_data", "$state", function($scope,activity_data, $state) {//首页
+	.controller('index_controller',["$scope","activity_data", "$state", function($scope,activity_data, $state,httpService) {//首页
 	$(".mml_bottom a").removeClass("bottom_act");
 	$(".mml_bottom a").eq(0).addClass("bottom_act");
 	$(".ds_poiu_a").addClass("show_a")
@@ -72,31 +72,40 @@ angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.rou
 			"activity_sum":{}
 	}
 	
-    var mySwiper = new Swiper('.banner_top_b_banner',{
+	
+   /* var mySwiper = new Swiper('.banner_top_b_banner',{
 	             autoplay : 3000,//自动滑动 滚动速度
 	             observer: true,//修改swiper自己或子元素时，自动初始化swiper
 	             observeParents: true,//修改swiper的父元素时，自动初始化swiper
 	             pagination : '.swiper-pagination',//分页器的class的名字
 	             paginationClickable :true,//点击标题跳转到指定的那页
-	      });
+	      });*/
 		
     
 	/*轮播图*/
-    activity_data.banner_index().then(
-			function success(data) {
-				if(data.code!=0){
-					return;
-				}
-				$(data.info).map(function(){
-					if(this.activity_banner_url==null){
-						return
+		activity_data.banner_index().then(
+				function success(data) {
+					if(data.code!=0){
+						return;
 					}
-					var bandata= new indexbanner(this.activity_id,this.activity_banner_url)
-					$scope.act_index.banner_index.push(bandata)
-				})
-			}, function error() {
-				console.log("获取轮播图失败")
-	});
+					$(data.info).map(function(){
+						if(this.activity_banner_url==null){
+							return
+						}
+						var bandata= new indexbanner(this.activity_id,this.activity_banner_url)
+						$scope.act_index.banner_index.push(bandata)
+					
+					})
+						  $scope.qing =$scope.act_index.banner_index
+			
+				}, function error() {
+					console.log("获取轮播图失败")
+		});
+	$scope.sft=function(x){
+
+		return x 
+	}
+
 	
 	  /*热门三条数据*/
     activity_data.activityIndex().then(
@@ -500,7 +509,9 @@ angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.rou
 			console.log("获取热门活动失败") 
 	});
 	/** h5下载  **/
-	$scope.down_app=function(){
+	$scope.down_app=function(e){
+        e.preventDefault();
+        e.stopPropagation();
 		if(/Android|webOS|BlackBerry|SymbianOS/i.test(navigator.userAgent)){// 安卓机
 			var isWeixin = !!/MicroMessenger/i.test(_agent);
 			if(isWeixin){
@@ -688,12 +699,26 @@ angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.rou
 
 })
 
+// ======================= 金融贷款 ============================
+/* @ngInject */
+.controller('finance_loanCtrl', function($scope,httpService, messageService) {
+
+})
+
+// ======================= 认证列表 ============================
+/* @ngInject */
+.controller('auth_listCtrl', function($scope,httpService, messageService) {
+	httpService.getDatas('GET', '/sponsor/certificationNum').then(function(data) {
+		$scope.auth = data.info;
+	});
+})
+
 // ======================= 机器申请 ============================
 /* @ngInject */
 .controller('activity_machine_apply', function($scope,httpService, messageService) {
 	var sh_a={};  //微信分享
  	sh_a.title="【首页】e场景活动"
-    sh_a.desc='便捷的活动众筹发布平台、"找活动,上e场景活动平台"'
+    sh_a.desc='便捷的活动发布平台、"找活动,上e场景活动平台"'
     sh_a.link=window.location.href;
     sh_a.imgUrl="http://m.apptown.cn/img/activity_apply_share2.png"
     wx_share(sh_a)
@@ -754,7 +779,7 @@ down_app=function(){
 		$("body").empty();
 	    $("body").append('<section class="app_down_a"></section>');
 		document.body.style.backgroundColor = "#FFFFFF" ;
-	    window.location.href="https://itunes.apple.com/cn/app/e-chang-jing-huo-dong/id1110240836?mt=8&uo=4";
+	    window.location.href="http://a.app.qq.com/o/simple.jsp?pkgname=com.mml.apptown";
     }
 }
 

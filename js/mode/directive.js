@@ -115,6 +115,99 @@
         	  });      
         }
     };
+}).directive('swift', function () { //轮播图图  
+	/*html调用
+	 *  <section swift banner='/activity/banner_activity'></section>  
+	 *  
+	 *  /activity/banner_activity==banner接口地址
+	 * */
+    return {
+        restrict: 'AE',
+        scope: {
+        	br: '@banner',
+        	hf:"@ulr"
+        }, 
+        template: '<section class="banner_top_a"><section class="swiper-container banner_top_b banner_top_b_banner"><section class="swiper-wrapper"><section class="swiper-slide" ng-repeat="banner in banner_index"><a ng-href={{banner.href_i}}><img ng-src="{{banner.banner_url[0]}}"  class="lazy"></a></section></section><section class="swiper-pagination"></section></section></section>', 
+        controller:function($scope,httpService){ 
+        
+        	$scope.banner_index=[]
+        	httpService.getDatas('get', $scope.br).then(function(data) {
+        		if(data.code!=0){
+					return;
+				}
+				$(data.info).map(function(){
+					if(this.activity_banner_url==null){
+						return
+					}
+					var bandata= new indexbanner(this.activity_id,this.activity_banner_url,$scope.hf)
+					$scope.banner_index.push(bandata)
+				
+				})
+				 
+             });
+        }, 
+        link: function(scope,ele,attr,ctrl){ 
+        	var mySwiper = new Swiper('.banner_top_b_banner',{
+	             autoplay : 3000,//自动滑动 滚动速度
+	             observer: true,//修改swiper自己或子元素时，自动初始化swiper
+	             observeParents: true,//修改swiper的父元素时，自动初始化swiper
+	             pagination : '.swiper-pagination',//分页器的class的名字
+	             paginationClickable :true,//点击标题跳转到指定的那页
+	      });
+        }
+    };
+}).directive('upimg', function () { //上传图片
+    return {
+        restrict: 'AECM',
+        scope: {
+        	br: '@banner'
+        }, 
+        transclude:true,
+        template: ' <div id="iconFile" class="f_q"><p class="schedule_p"></p></div>',
+        replace: true,
+        controller:function($scope,httpService){
+        	var uploader = WebUploader.create({
+        	    // 选完文件后，是否自动上传。
+        	    auto: true,
+ 
+        	    // swf文件路径
+        	    swf: '/Uploader.swf',
+
+        	    // 文件接收服务端。 
+        	    server: '/sponsor/sponsor_icon_upload_byuser',
+        	    fileVal:"iconFile",
+        	    // 选择文件的按钮。可选。
+        	    // 内部根据当前运行是创建，可能是input元素，也可能是flash.
+        	    pick: '#iconFile',
+
+        	    // 只允许选择图片文件。
+        	    accept: {
+        	        title: 'Images',
+        	        extensions: 'gif,jpg,jpeg,bmp,png',
+        	        mimeTypes: 'image/*'
+        	    }
+        	});
+        	// 文件上传过程中创建进度条实时显示。
+        	uploader.on( 'uploadProgress', function( file, percentage ) {
+        	    $(".schedule_p").css({"width":percentage*100})
+        	});
+
+        	// 文件上传成功，给item添加成功class, 用样式标记上传成功。
+        	uploader.on( 'uploadSuccess', function( file,data ) {  //data后台返回的数据
+        		// alert(data.msg)
+        	    $(".schedule_p").css({"width":0}) 
+        	    $("#iconFile .webuploader-pick").css({"background":"url("+data.msg+")"})
+        	    $("#iconFile").attr("data-url",data.msg);
+                var el = $('#iconFile').next('input[type="hidden"]');
+                if(el.length > 0) { 
+                    el.val(data.msg);
+                }
+        	});
+        }, 
+        link: function(scope,ele,attr,ctrl){
+        	
+        }
+    };
 }).directive('eliminate', function () {//点击叉叉清空  
     return {
         restrict: 'AE',
@@ -439,7 +532,7 @@
     }
 }).factory('MyData', function($websocket) {
     // Open a WebSocket connection
-    var dataStream = $websocket('ws://www.apptown.cn/webSocketServer');
+    var dataStream = $websocket('ws://'+window.location.hostname+'/webSocketServer');
     var collection = [],q_random=Math.floor(Math.random()*99999+1) ;
     var hjkh=false;
     dataStream.onMessage(function(message) {

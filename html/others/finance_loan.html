@@ -1,0 +1,58 @@
+ <!-- 金融贷款-->
+   <section  style="background: #fff;">
+	<img src="/img/others/finance-loan.png" alt="金融贷款" style="max-width: 100%;">
+	<img  src="/img/activity_loan_nav.png" style="width:100%;margin-top:5%" />
+	<!-- 表单 -->
+	<div class="loan_content j-finaceForm">
+		<p class=" fz16 f-color-141414">姓名*</p>
+	    <p><input name="name" class="loan_name" type="text"  placeholder="请输入您的姓名" data-empty="请输入您的姓名" /></p>
+	    <p class=" fz16 f-color-141414">
+	   		<span class="mr20">性别</span>
+	    	<input type="radio" name="sex" id="sex1" checked="checked" value="1" number style="display:inline-block" />
+	    	<label for="sex1" class="mr10" style="display:inline-block">男</label>
+	    	<input type="radio" name="sex" id="sex2" value="2" number  style="display:inline-block"/>
+	    	<label for="sex2" style="display:inline-block">女</label>
+	    </p>
+	    <p class=" fz16 f-color-141414">手机号码*</p>
+	    <p><input name="phone" class="loan_tel" style="padding:0;" type="text" placeholder="请输入您的手机号码" format-phone data-empty="请输入您的手机号码" /></p>
+	    <p class=" fz16 f-color-141414">微信号</p>
+	    <p> <input name="wxchat" class="loan_tel" type="text"  placeholder="请输入您的微信号" /></p>
+	    <p class=" fz16 f-color-141414">申请金额*</p>
+	    <p class="pr"> 
+	      <input  name="apply_money" class="loan_money" type="text"  placeholder="请输入您的申请金额" format-number data-empty="请输入您的申请金额" number  min-number="20000" />
+	      <!-- <i style="position:absolute;right:10px;top:10px;color:#515151;font-style:normal;">万元</i> -->
+	    <p class="pr">
+	    	<input name="periods" style="padding:0;" type="text" class="max_klabel_a " placeholder="请选择还款期限" readonly data-empty="请选择还款期限" mui-select 
+	    	deadline />
+	    	<input name="periods" type="hidden" value="" number>
+	    	<span   class="mui-icon mui-icon-arrowdown zc loan_down"></span>
+	    	</button>
+	    </p>
+	    <p class="pr" city>
+           <input name="address" style="padding:0;" type="text" class="max_klabel_a " placeholder="请选择地址" readonly />
+           <span class="mui-icon mui-icon-arrowdown zc loan_down"></span>
+       </p>
+       	<p class=" fz16 f-color-141414">贷款类型*</p>
+		<div class=" fz16 f-color-141414">
+	    	<p>
+	    		<input type="radio" id="loan_type1" name="loan_type" class="mr5"  value="1" number checked="checked" style="display:inline-block;" />
+	    		<label for="loan_type1" style="display:inline-block">房产抵押贷款</label>
+	    	</p>
+	    	<p>
+	    		<input type="radio" id="loan_type2" class="mr5"  name="loan_type" value="2" number style="display:inline-block;"/>
+	    		<label for="loan_type2" style="display:inline-block">企业贷款</label>
+	    	</p>
+	    	<p>
+	    		<input type="radio" id="loan_type3" class="mr5" name="loan_type" value="3" number style="display:inline-block;"/>
+	    		<label for="loan_type3" style="display:inline-block">工薪消费贷款</label>
+	    	</p>
+	    </div>
+	    <submit-button action="/Loan/add_apply_loan" text="立即申请" style="background:#ff9933;border-color:#ff9933;" form=".j-finaceForm"></submit-button>
+	    <p style="position:relative">
+	    <a  ng-href="tel:400-046-1388" style="display:block;width:100%;height:40px;text-align: center;line-height: 40px;color:#fff;background: #4FA45D;border-radius:4px;">联系电话400-046-1388</a>
+	    </p>
+	   	<p style="padding-bottom: 10px;">以上信息请真实填写，以便我司客服及时联系您，并快速审核。</p>
+	</div>
+	<!-- /表单 -->
+</section>
+<!-- /金融贷款

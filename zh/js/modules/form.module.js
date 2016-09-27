@@ -185,9 +185,21 @@ angular.module('form', ['request', 'common', 'ui.router'])
         function submitData(form) {
             var datas = {};
             $(form).find('input[name],textarea[name],select[name]').each(function() {
-                var key = $(this).attr('name');
-                var val = $.trim($(this).val());
-                if(key.indexOf('.') != -1) {
+                var key = $(this).attr('name'),
+                    val = $(this).val(),
+                    type = $(this).attr('type');
+                if((type == 'radio'|| type == 'checkbox') && $(this).prop('checked') == false){
+                    return;
+                } else if(key == '') {
+                    return;
+                } else if(type == 'checkbox' && key.substr(key.length-2,2) == '[]'){
+                    key = key.substr(0,key.length-2);                     
+                    if(!datas[key]) {
+                        datas[key] = [];
+                    } else {
+                        datas[key].push(val);
+                    }
+                } else if(key.indexOf('.') != -1) {
                     var arr = key.split('.');
                     if(!datas[arr[0]]) {
                         datas[arr[0]] = {};
@@ -210,6 +222,10 @@ angular.module('form', ['request', 'common', 'ui.router'])
                     });
                 }
             };
+            // 处理值为数字类型
+            _dealDatas('number', function(key, val) {
+                datas[key] = Number(val);
+            });
             // 处理加密数据
             _dealDatas('encrypt', function(key, val) {
                 datas[key] = encryptService.getValue(val);

@@ -5,7 +5,8 @@ angular.module('common')
     .factory('encryptService', encryptService)
     .factory('transmitService', transmitService)
     .factory('anchorService', anchorService)
-    .directive('backButton', backButton);
+    .directive('backButton', backButton)
+    .directive('muiSelect', muiSelect);
 
 
 
@@ -147,5 +148,42 @@ angular.module('common')
         }
     }
 
+
+    // =============================== 下拉选项 ==============================
+    /* @ngInject */
+    function  muiSelect($window) {
+        var directive = {
+            restrict: 'AE',
+            link: link
+        };
+        return directive;
+
+        function link(scope, ele, attrs) {
+            ele.bind('click', function () {
+                var deadline = [{'text':'3期','value': 3},{'text':'6期','value': 6},{'text':'9期','value': 9},{'text':'12期','value': 12},{'text':'24期','value': 24},{'text':'36期','value': 36},{'text':'48期','value': 48}],
+                    repayType = [{'text': '冠名'}, {'text': '广告位'},{'text': '媒体'}, {'text': '现场'},{'text': '实物'}, {'text': '指定物品'},{'text': '其他'}],
+                    industry = [],
+                    data;
+                if(ele.attr('deadline') == '') {
+                    data = deadline;
+                } else if(ele.attr('industry') == '') {
+                    data = industry;
+                } else if(ele.attr('repayType') == '') {
+                    data = repayType;
+                } else {
+                    data = JSON.parse(ele.attr('select-datas'));
+                }
+                var picker  = new mui.PopPicker();
+                picker.setData(data);
+                picker.show(function (selectItems) {
+                    ele.val(selectItems[0].text);
+                    // 判断是否有id值
+                    if(selectItems[0].value && ele.next('input[type="hidden"]').length > 0) {
+                        ele.next('input[type="hidden"]').val(selectItems[0].value);
+                    }
+                });
+            });
+        }
+    }
 
 })();

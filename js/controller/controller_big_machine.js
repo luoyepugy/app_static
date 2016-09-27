@@ -27,8 +27,8 @@
 			       },240000)
 				 
 			 }
-			var act_id=window.location.search.split("=")[1].split("&")[0]
-			$rootScope.type_poo=window.location.search.split("type=")[1]
+			var act_id=window.location.search.split("=")[1].split("&")[0];
+			$rootScope.type_poo=window.location.search.split("type=")[1];
 		
 			$rootScope.acid=act_id
 			$rootScope.big_sign={};//签到机数据
@@ -52,7 +52,7 @@
 		function consm(){
 			MyData.act_id=act_id
 			$scope.MyData = MyData;  
-		    MyData.get() 
+		    MyData.get(); 
 		}
 		consm()
 	      /*广告轮播图初始化*/
@@ -69,9 +69,9 @@
 			  activity_data.getDatas('GET', '/Live/query_live_info?activity_id='+act_id)
 			  .then(function(data) {
 				 if(data.code!=0){
-					 return
-				 }
-				   // 初始化播放器
+					 return 
+				 } 
+				   // 初始化播放器   
 				      player = new prismplayer({
 				        id: "J_prismPlayer", // 容器id
 				        source: data.info.live_url_str.liveurl_m3u8,// 视频地址
@@ -86,11 +86,10 @@
 		
 	 	$http.get('/activityTip/'+act_id+"?pageIndex=1&pageSize="+100).then(function(data) {
 	 		 $scope.play_tour=data.data.rows
-	 		 console.log($scope.play_tour);
 	 	});
 	     $scope.play=function(){
 			   player.play(); 
-			   $(".syuytrt_as").hide()
+			   $(".syuytrt_as").hide();
 		 }
 		
 	})

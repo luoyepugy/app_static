@@ -84,7 +84,7 @@ angular.module('act_details', [ "directive_mml","activity_servrt","ui.router","p
 	    		 activity_data.cancel_attention(date_po).then(
 				    		function success(data){    		
 				    		    if(data.code!=0){
-				    		    	 mui.alert(data.msg, 'E场景活动');
+				    		         mui.alert(data.msg, 'E场景活动');
 				    		    	 return
 				    		    }
 				    			//$(".collection_p").toggleClass("ls")
@@ -840,6 +840,8 @@ $(".dd_pooo").hide()
 			   player.play();
 			   $(".syuytrt_as").hide()
 		   }
+}).controller('test_listCtrl',function($scope,activity_data,$location,$stateParams,act_date){
+
 })
 
 

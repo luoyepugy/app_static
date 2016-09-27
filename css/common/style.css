@@ -1152,10 +1152,6 @@ section.ulact_p.ulact_p_sp {
 	padding-right:15px;
 	display:none;
 }
-.loan_content input[type="text"] {
-	height:40px;
-	margin-bottom: 0;
-}
 .success_mask {
 	position:fixed;
 	top:38%;
@@ -1237,8 +1233,9 @@ section.ulact_p.ulact_p_sp {
 	display:none;
 }
 .loan_content input[type="text"] {
-	height:40px;
+	height:35px;
 	margin-bottom: 0;
+	font-size:16px;
 }
 .success_mask {
 	position:fixed;
@@ -1980,6 +1977,10 @@ img.yj.user_zz_p {
     width: 100px;
     height: 100px;
 }
+.icon130x60 {
+    width: 130px;
+    height: 60px;
+}
 .icon-search {
     float: right;
     position: relative;
@@ -2459,3 +2460,53 @@ img.streaming_poo {
     left: 0;
     z-index: 9999;
 }
+
+#iconFile{
+	width:66px; 
+	height:66px;
+	position: relative;
+	overflow: hidden;
+}
+
+.webuploader-pick{
+	width:100%;
+	height:100%;
+	position: absolute;
+	left: 0px;
+	top:0px;
+	background: url("/img/upload_auth.png");
+	background-size:100% 100%;
+}
+p.schedule_p {
+    width: 0%; 
+    position: absolute;
+    left: 0px;
+    top: 44%;
+    background: #4FA45D;
+    height: 6px;
+    z-index: 99;
+}
+
+/**注册活动号 begin **/
+.authentication_bg1 {
+	width: 100%;
+	height: 150px;
+	background: #000;
+}
+.upload_auth {
+	padding-left: 5px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	background: #fff;
+	border: 1px solid rgba(0,0,0,.2);
+}
+.upload_auth_img {
+	vertical-align:middle;
+}
+/**注册活动号 end   **/
+
+ .webuploader-element-invisible{
+    display:none;
+}
+
+

@@ -182,6 +182,15 @@
 	    	templateUrl: '/html/user/personal_host_list.html',
 	    	controller: 'personal_host_listCtrl'
 	    })
+
+
+	    // 其他-金融贷款
+	    .state('finance_loan',{
+	    	url: '/finance_loan',  				// 金融贷款
+	    	templateUrl: '/html/others/finance_loan.html',
+	    	controller: 'finance_loanCtrl',
+	    	controllerAs: 'finance'
+	    })
       
 
 	    // 用户—钱包
@@ -236,6 +245,21 @@
             controller: 'sponsor_authCtrl'
             	
         })
-
+        
+        // 注册活动号， 注册嘉宾号， 注册媒体号
+        .state('activity_auth',{
+            url: '/activity_auth',   			// 注册活动号
+            templateUrl: '/html/authentication/activity_auth.html'
+        }).state('guest_auth',{
+            url: '/guest_auth',   				// 注册嘉宾号
+            templateUrl: '/html/authentication/guest_auth.html'	
+        }).state('media_auth',{
+            url: '/media_auth',   				// 注册媒体号
+            templateUrl: '/html/authentication/media_auth.html'
+        }).state('auth_list',{
+            url: '/auth_list',   				// 认证列表
+            templateUrl: '/html/authentication/auth_list.html',
+            controller: 'auth_listCtrl'
+        })
       
     }])
