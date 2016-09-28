@@ -1,21 +1,22 @@
 <meta charset="UTF-8">
 <!--  活动号列表 -->
+ <link href="/css/pages/activitie_mark.css" rel="stylesheet">
 <div id="demand_list" pulllist callback="paging()"  class="ulact_p nitialize" ng-click="">
         		<ul>  
         	   	<li class="pl10 pr10 pt10 pm10 bgff attention_po bbm"  ng-repeat="ge in ge_type">
-		    <img ng-src="{{ge.sponsor_icon}}" class="fl yj4">
-		    <section class="ov pl10">
-              <section class="mui-col-xs-9 fl">
+		    <img ng-src="{{ge.sponsor_icon}}" class="fl yj4"  ui-sref="personal_host({'sponsor_user_id':ge.id})">
+		    <section class="ov pl10" style="padding-right: 2px;">
+              <section class="mui-col-xs-9 fl" ui-sref="personal_host({'sponsor_user_id':ge.id})">
                    <p class="zd fz16 dian" ng-bind="ge.name"></p>
-		            <p class="zc dianer" ng-bind="ge.introduction"></p>
+		            <p class="zc dianer fz12 df_poiu_po_q" ng-bind="ge.introduction"></p>
                   
-              </section>
+              </section> 
 		      <section class="mui-col-xs-3 fl tr">
                    <p class="mt10" ng-click="attention(ge.ltype,ge.id,$index)">
                       <a class="fz12 yj4 attention_him" ng-class="ge.is_attention" ng-bind="ge.lkoi"></a> 
                    </p>
                     
-                </section>
+                </section> 
 		    </section>
 		    <p class="qc"></p>
         	   		</li>

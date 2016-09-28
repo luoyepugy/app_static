@@ -432,7 +432,7 @@ width: 16px;
 }
 .home_page_icon a{
     text-align: center;
-    font-size: 14px;
+    font-size: 13px;
     color: #878787
     
 }
@@ -446,6 +446,9 @@ width: 16px;
 .home_page_icon i{
     width: 48px;
     height: 48px;
+}
+.home_page_icon{
+	background: #fff
 }
 .home_page_icon_a{
     background-position: -172px -237px;
@@ -472,7 +475,10 @@ width: 16px;
      background-position: -227px -27px;
 }
 .details_case {
-    padding-top: 10px;
+    padding-top: 7px;
+}
+.details_case .banner_top_c{
+	margin-top:7px !important;
 }
 .name_icon img {
     width: 42px;
@@ -2060,7 +2066,7 @@ img.yj.user_zz_p {
 /* 首页广告图 */
 .indexAd {
     background: #fff;
-    padding: 10px;
+       padding: 7px 10px;
     border-top: 1px solid #e0e0e0;
     border-bottom: 1px solid #e0e0e0;
     margin-top: 10px;
@@ -2261,8 +2267,8 @@ background-position: -26px -1119px;
     position: absolute;
     bottom: 7px;
     right: 6px;
-    width: 50px;
-    height: 50px;
+    width: 44px;
+    height: 44px;
     border-radius: 4px;
     overflow: hidden;
 } 

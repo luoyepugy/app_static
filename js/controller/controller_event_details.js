@@ -3,8 +3,7 @@
  */
 angular.module('act_details', [ "directive_mml","activity_servrt","ui.router","pay","sponsor"])
 .controller('activity_detail_c',function($scope,activity_data,$location,$stateParams,act_date,$state,httpService) { //活动详情 
-	  $(".ds_poiu_a").removeClass("show_a");
-	  $(".retreat_icon").removeClass("none");
+
 
 	  $scope.id=$stateParams.id
 	  $scope.id_a=$stateParams.id
@@ -841,7 +840,7 @@ $(".dd_pooo").hide()
 			   $(".syuytrt_as").hide()
 		   }
 }).controller('test_listCtrl',function($scope,activity_data,$location,$stateParams,act_date){
-
+	
 })
 
 

@@ -1,37 +1,42 @@
-@CHARSET "UTF-8";
-.ddf_pooxd_a a{
-    padding: 3px 8px;
-    border: 1px solid #4FA45D;
-    float: left;
-    margin-right: 10px;
-    margin-bottom: 10px;
+/* 活动号列表 */ 
+.attention_him, .ddf_pooxd_a a {
+	padding: 3px 8px;
+	border: 1px solid #4FA45D
 }
-.df_renzs button{
-  
-    position: relative;
-    top: 6px;
+
+.ddf_pooxd_a a {
+	float: left;
+	margin-right: 10px;
+	margin-bottom: 10px
 }
-.df_renzs i{
-    font-size: 18px;
-    position: absolute;
-    right: -10px;
-    top: 14px;
+
+.df_renzs button {
+	position: relative;
+	top: 6px
 }
-.attention_po img{
-    width: 48px;
-    height: 48px;
+
+.df_renzs i {
+	font-size: 18px;
+	position: absolute;
+	right: -10px;
+	top: 14px
 }
-.attention_him{
-    padding: 3px 8px;
-    border: 1px solid #4FA45D;
-    
+
+.attention_po img {
+	width: 48px;
+	height: 48px
 }
-.poiuyt_sf{
-	display:none
+
+.poiuyt_sf, .poiuyt_sf_p {
+	display: none
 }
-@media screen and (min-width: 350px){
-    .attention_him{
-        padding: 5px 13px;
-        border: 1px solid #4FA45D;
-    }
+.df_poiu_po_q{
+    line-height: 1.3;
+    padding-top: 5px;
+}
+@media screen and (min-width:350px) {
+	.attention_him {
+		padding: 5px 13px;
+		border: 1px solid #4FA45D
+	}
 }

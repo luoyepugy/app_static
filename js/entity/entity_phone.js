@@ -345,8 +345,8 @@ function ticket_volume_list(data){
 		  this.eDate=info.end_time;//活动结束时间
 		  this.person_limit=info.person_limit==null?'无限制':info.person_limit;//活动活动席位（人数上限）
           var clkj_show=""
-		  if(info.live_status==1){//1是有直播，0是无直播 
-			  clkj_show="show_a"
+		  if(info.paly_status=="connected"){//disconnected无直播      connected是有直播      
+			  clkj_show="show_a";
 		  }
           this.mnbv=info.live_status
 		  this.live_status=clkj_show
@@ -557,4 +557,22 @@ function ticket_volume_list(data){
 		this.attention_sponsor=data.attention_sponsor//主办方是否关注，0位未关注，1为已关注	
 		this.comment_count=data.comment_count//评论总人数
 		this.contacter_phone=data.contacter_phone//联系电话
+	}
+	
+	/*活动号列表*/
+	function  getSponsorApply(data) {
+		this.id=data.user_id;//用户id
+		this.name=data.name;//活动号名称
+		this.introduction=data.introduction;//活动号简介
+		this.sponsor_icon=data.sponsor_icon;// 
+		var jkmnb="bgdiso",lkoi="已关注",ltype=false
+		this.atntion=data.is_attention
+		if(this.atntion==0){//0没关注  1已关注
+			jkmnb=""
+			lkoi="关注TA"
+			ltype=true
+		}
+		this.ltype=ltype
+		this.is_attention=jkmnb;
+		this.lkoi=lkoi
 	}

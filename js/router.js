@@ -259,6 +259,15 @@
             url: '/auth_list',   				// 认证列表
             templateUrl: '/html/authentication/auth_list.html',
             controller: 'auth_listCtrl'
+        }).state('activitie_demand',{
+            url: '/activitie_demand',   // 活动号查询
+            templateUrl: '/html/authentication/demand.html',
+            controller: 'activitie_demand'	
+        }).state('demand_list',{
+            url: '/demand_list',   // 活动号查询
+            templateUrl: '/html/authentication/demand_list.html',
+            controller: 'demand_list_ctl'	
         })
+        
       
     }])

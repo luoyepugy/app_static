@@ -20,8 +20,11 @@
         $rootScope.currentState = to.name;
         if($location.path() == '/index') {
             $('.j-navSearchIcon').show();
+           
         } else {
             $('.j-navSearchIcon').hide();
+      	  $(".ds_poiu_a").removeClass("show_a");
+    	  $(".retreat_icon").removeClass("none");
         }
         var path_p=$location.path();
         var arr_p=["activity_streaming","activity_detail","activity_charge"];
@@ -78,7 +81,7 @@
         },
         link: function(scope,ele,attr,ctrl){
         	/*html渲染 最外层div要高度*/
-        /*	<div id="test" pulllist='paging()'  class="ulact_p nitialize" ng-click="">
+        /*	<div id="test" pulllist callback="paging()"  class="ulact_p nitialize" ng-click="">
         		<ul>   ul自定定义
         	   		<li></li>
         		</ul>
@@ -195,7 +198,7 @@
         	// 文件上传成功，给item添加成功class, 用样式标记上传成功。
         	uploader.on( 'uploadSuccess', function( file,data ) {  //data后台返回的数据
         	    $(".schedule_p").css({"width":0}) 
-        	    $("#iconFile .webuploader-pick").css({"background":"url("+data.msg+")"})
+        	    $("#iconFile .webuploader-pick").css({"background":"url("+data.msg+")","background-size":"100% 100%"})
         	    $("#iconFile").attr("data-url",data.msg);
                 var el = $('#iconFile').next('input[type="hidden"]');
                 if(el.length > 0) { 

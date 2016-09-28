@@ -47,3 +47,36 @@
 	margin-bottom:0 !important;
 	border:none !important;
 }
+/* 产品反馈的问题修复 */
+.dfd_pooui_a .fz16,.dfd_pooui_a input,.dfd_pooui_a  textarea,.j-sponsorAuthForm input,.j-sponsorAuthForm textarea{
+	font-size:14px  !important
+}
+.j-sponsorAuthForm textarea{
+	text-indent: 0px;
+}
+.dfd_pooui_a .map_icon_a{
+	font-size:16px  !important
+}
+
+.mui-page-content-po .mui-table-view-cell{
+	    padding: 11px 15px;
+}
+.mui-page-content-po li a{
+	font-size:14px  !important
+}
+.ico_person_one{
+	padding-top:8px !important;
+}
+.pt3{
+	padding-top:3px 
+}
+.pm3{
+	padding-bottom:3px 
+}
+.j-signinForm input{
+	text-indent: 0px;
+	font-size:14px;
+}
+.signin .division span{
+	background: #EFEFF4 !important
+}

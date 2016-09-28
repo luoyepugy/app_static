@@ -4,8 +4,6 @@
 
 angular.module('sponsor', ["directive_mml","activity_servrt","ui.router", "common"])
 .controller('promotional_act_controller',function($scope,activity_data,$location,$stateParams,act_date) { //发起活动
-	$(".ds_poiu_a").removeClass("show_a");
-	$(".retreat_icon").removeClass("none");
 	var parameter_p={}
 /*	var kmh=$.parseJSON(localStorage.input_f)
 	input_val(kmh.activity)*/

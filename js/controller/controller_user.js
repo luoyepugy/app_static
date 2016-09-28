@@ -57,8 +57,6 @@ angular.module('user', ['activity_servrt','directive_mml', 'common', 'request', 
 	.controller('registerCtrl', function($scope,activity_data,$location) {
 		$(".mml_bottom a").removeClass("bottom_act");
 		$(".mml_bottom a").eq(4).addClass("bottom_act");
-		$(".ds_poiu_a").removeClass("show_a");
-		$(".retreat_icon").removeClass("none");  
 		 var countdown=true,countdown_time=90,reret=true;//倒计时
 		 
 		$scope.register={
@@ -212,8 +210,6 @@ angular.module('user', ['activity_servrt','directive_mml', 'common', 'request', 
 	.controller('userInfoCtrl',function($scope,activity_data,httpService,$location,act_date, $rootScope) {
 		$(".mml_bottom a").removeClass("bottom_act");
 		$(".mml_bottom a").eq(4).addClass("bottom_act");
-		$(".ds_poiu_a").removeClass("show_a");
-		$(".retreat_icon").removeClass("none"); 
 		$(".mml_bottom").show()
 	    mui.previewImage();
 	    var kmnb_p=true;
@@ -279,7 +275,15 @@ angular.module('user', ['activity_servrt','directive_mml', 'common', 'request', 
 	    	if(data.code == 0 && data.info.status == 1) {
 				$scope.sponsorStatus = true;
 			} else {
+<<<<<<< .mine
 				$scope.sponsorStatus = false;
+=======
+				try{//有异常
+					$scope.sponsorStatus = false;
+					$scope.status = data.info.status;
+				}catch(e){}
+			
+>>>>>>> .r12795
 			}
 	    });
 	     /*
@@ -741,8 +745,6 @@ angular.module('user', ['activity_servrt','directive_mml', 'common', 'request', 
 	.controller('personal_centerCtrl', function($scope,activity_data,$location,act_date, $rootScope, httpService) { 
 		$(".mml_bottom a").removeClass("bottom_act");
 		$(".mml_bottom a").eq(4).addClass("bottom_act");
-		$(".ds_poiu_a").removeClass("show_a");
-		$(".retreat_icon").removeClass("none"); 
 		$(".mml_bottom").show()
 		// 用户头像放大
 	    mui.previewImage();
@@ -808,8 +810,6 @@ angular.module('user', ['activity_servrt','directive_mml', 'common', 'request', 
 	.controller('activity_userCtrl', function($scope,activity_data,$location,$stateParams) { 
 		$(".mml_bottom a").removeClass("bottom_act");
 		$(".mml_bottom a").eq(4).addClass("bottom_act");
-		$(".ds_poiu_a").removeClass("show_a");
-		$(".retreat_icon").removeClass("none"); 
 		var data_act={"pageIndex":1,"pageSize":10,"user_id":$stateParams.user_id,"time_status":"","flag":"1","type":"0"}  // 1:未开始    3：已结束
 		var poiu_po=true;
 
@@ -1213,8 +1213,6 @@ angular.module('user', ['activity_servrt','directive_mml', 'common', 'request', 
 	.controller('ticket_userCtrl', function($scope,activity_data) {//票卷列表
 		$(".mml_bottom a").removeClass("bottom_act");
 		$(".mml_bottom a").eq(3).addClass("bottom_act");
-		$(".ds_poiu_a").removeClass("show_a")
-		$(".retreat_icon").removeClass("none")
 		 $(".mml_bottom").show()
 		 $(".sys-loading").addClass("show_a")
 			  /*验证是否登陆*/
@@ -1558,9 +1556,7 @@ angular.module('user', ['activity_servrt','directive_mml', 'common', 'request', 
 		// 底部栏样式
 		$('.mml_bottom').show();
 		$('.mml_bottom a').removeClass('bottom_act').eq(1).addClass('bottom_act');
-		// 头部城市
-		$(".ds_poiu_a").removeClass("show_a");
-		$(".retreat_icon").removeClass("none");
+	
 		var index = 1;
 		var sponsorDatas = {
 			'pageIndex': index,

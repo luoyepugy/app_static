@@ -56,7 +56,7 @@ angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.rou
 	switch($scope.city_name) {
 		case "深圳":city=450;break;
 		case "广州":city=449;break;
-		case "上海":city=3;break;
+		case "上海":city=3;break; 
 		case "北京":city=1;break;
 	}
 
@@ -209,8 +209,6 @@ angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.rou
 	  $(".mml_bottom ").show()
 	$(".mml_bottom a").removeClass("bottom_act");
 	$(".mml_bottom a").eq(0).addClass("bottom_act");
-	$(".ds_poiu_a").removeClass("show_a")
-	$(".retreat_icon").removeClass("none")
 	var title_po="创客"
 	var tio=parseInt($stateParams.activityTypeId)
 	switch(tio){
@@ -313,8 +311,6 @@ angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.rou
 	   
 	$(".mml_bottom a").removeClass("bottom_act");
 	$(".mml_bottom a").eq(1).addClass("bottom_act");
-	$(".ds_poiu_a").removeClass("show_a");
-	$(".retreat_icon").removeClass("none");
 	$(".acr_poui_x span").on("click",function(){
 		$(".acr_poui_x span").removeClass("ls")
 		$(this).addClass("ls")
@@ -387,8 +383,7 @@ angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.rou
     $scope.sponsor_list.sponsorship_re(parameter_p)
 	
 }]).controller('add_page_controller',["$scope","activity_data","$state","httpService",function($scope,activity_data,$state,httpService) {//点击加号进来的页面
-	$(".ds_poiu_a").removeClass("show_a");
-	$(".retreat_icon").removeClass("none");
+
 	$(".mml_bottom a").removeClass("bottom_act");
 	$('.mui-active').hide();
 	$(".mui-backdrop").remove();
@@ -600,9 +595,7 @@ angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.rou
 // ======================= 搜索结果 ============================
 /* @ngInject */
 .controller('searchCtrl', function($scope,httpService, messageService) {
-	// 头部城市
-	$(".ds_poiu_a").removeClass("show_a");
-	$(".retreat_icon").removeClass("none");
+
 
 	$scope.supportList = [];
 	$scope.activityList = [];
@@ -782,7 +775,75 @@ angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.rou
 	}
 	
 
+}).controller('activitie_demand', function($scope,httpService, messageService) {
+	httpService.getDatas('GET', '/type/get_all_type').then(function(data) {
+		$scope.ge_type=data
+	});
+	httpService.getDatas('GET', '/sponsor/get_sponsorapply').then(function(data) {
+		if(data.code==-1||data.code==-10){
+			$(".poiuyt_sf").addClass("show_a")
+		}else{
+			$(".poiuyt_sf_p").addClass("show_a")
+			
+		}
+	});
+}).controller('demand_list_ctl', function($scope,httpService, messageService,$state) {//活动号列表
+	$(".mml_bottom a").removeClass("bottom_act");
+	$(".mml_bottom a").eq(1).addClass("bottom_act");
+	var apply=new Object();
+	apply.pageIndex=1;//页码
+	apply.pageSize=10;//行数
+	$scope.ge_type=[];//活动号数据
+	$scope.getdate_a=function(apply){//活动好
+		httpService.getDatas('GET', '/sponsor/getSponsorApply',apply).then(function(data) {
+			if(data.code!=0){
+				mui.alert(data.msg)
+				return;
+			}
+			$(data.rows).map(function(){
+				var date_poi=new getSponsorApply(this);
+				$scope.ge_type.push(date_poi)
+			})
+			
+		
+		});
+	}
+	$scope.getdate_a(apply);//初始化活动好
+    $scope.paging=function(){//分页
+		apply.pageIndex++
+		$scope.getdate_a(apply)
+    }
+    $scope.attention=function(ltype,id,index){//关注和取消关注  ltype=true 已关注否则请求取消关注
+    	   var resources=new Object();
+    	   resources.resources_id=id;
+    	   resources.type=4; 
+    	   $(".sys-loading").addClass("show_a")
+    	   if(ltype){
+    		   httpService.getDatas('GET', '/activity/exec_attention',resources).then(function(data) {
+    			   if(data.code!=0){
+    				   $state.go("signin");
+    			   }
+    			   $scope.ge_type[index].is_attention="bgdiso";
+    	           $scope.ge_type[index].lkoi="已关注";
+    	           $scope.ge_type[index].ltype=false;
+    	           $(".sys-loading").removeClass("show_a")
+    		   });
+    	   }else{
+    		   httpService.getDatas('GET', '/activity/cancel_attention',resources).then(function(data) {
+    			   if(data.code!=0){
+    				   $state.go("signin");
+    			   }
+    			   $scope.ge_type[index].is_attention="";
+    	           $scope.ge_type[index].lkoi="关注TA";
+    	           $scope.ge_type[index].ltype=true;
+    	           $(".sys-loading").removeClass("show_a")
+    		   });
+    		  
+    	   }
+    }
 })
+
+
 //========= h5端 app下载 ==========  
 var _guide_DownloadClose = {
    _init:function(){
