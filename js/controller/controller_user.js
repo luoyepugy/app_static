@@ -12,9 +12,6 @@ angular.module('user', ['activity_servrt','directive_mml', 'common', 'request', 
 		// 底部栏样式
 		$('.mml_bottom').show();
 		$('.mml_bottom a').removeClass('bottom_act').eq(4).addClass('bottom_act');
-		// 头部城市
-		$(".ds_poiu_a").removeClass("show_a");
-		$(".retreat_icon").removeClass("none");  
 		// 登录方式
 		$scope.signinType = 'weixin';
 		$scope.changeSigninType = function() {
@@ -281,10 +278,8 @@ angular.module('user', ['activity_servrt','directive_mml', 'common', 'request', 
 	    httpService.getDatas('GET', '/sponsor/get_sponsorapply').then(function(data) {
 	    	if(data.code == 0 && data.info.status == 1) {
 				$scope.sponsorStatus = true;
-				$scope.status = 1;
 			} else {
 				$scope.sponsorStatus = false;
-				$scope.status = data.info.status;
 			}
 	    });
 	     /*

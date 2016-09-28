@@ -228,7 +228,7 @@ margin-right: 6px;
 }
 .act_user_a{
     min-width: 96px;
-    height: 84px;
+    height: 91px;
     width: 35%;
 }
 .success_icon{
@@ -1607,7 +1607,7 @@ section.pup_soou_p {
 }
 .bot_poiy_a{
 	border: 0px;
-	line-height:40px;
+	line-height:35px;
 	color: #fff;
 	
 }
@@ -1893,9 +1893,7 @@ img.yj.user_zz_p {
     .fg_poiu_input{
     width: 52% !important;
     }
-    .fz12{
-        font-size: 14px;
-    }
+
     section.mt10.user_act_pii {
           height: 72%;
     }
@@ -2005,6 +2003,19 @@ img.yj.user_zz_p {
     color: #4ea45d;
     padding: 3px 6px;
 }
+/* 消息提示 */
+.messageBox {
+    position: fixed;
+    bottom: 15%;
+    left: 50%;
+    background: rgba(0,0,0,.6);
+    color: #fff;
+    padding: 20px;
+    width: 80%;
+    margin-left: -40%;
+    text-align: center;
+    border-radius: 5px;
+}
 /* 主办方认证 */
 .sponsorSuccIcon b,
 .sponsorFailIcon b {
@@ -2037,7 +2048,7 @@ img.yj.user_zz_p {
 /* 用户消息提示 */
 .redDot {
     position: absolute;
-    right: 7px;
+    right: 10px;
     top: 0;
 }
 .moreWrap {
@@ -2351,7 +2362,7 @@ background-position: -26px -1119px;
 }
 .bgdiso{
 	background:#ccc!important;
-	
+	 color: #fff;
 	border:1px solid #ccc!important;
 }
 .bgdiso a{
@@ -2509,4 +2520,6 @@ p.schedule_p {
     display:none;
 }
 
-
+.mui-btn-success{
+    border: 1px solid #4FA45D
+}

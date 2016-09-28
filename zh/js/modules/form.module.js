@@ -226,6 +226,10 @@ angular.module('form', ['request', 'common', 'ui.router'])
             _dealDatas('number', function(key, val) {
                 datas[key] = Number(val);
             });
+            // 处理值为布尔类型
+            _dealDatas('boolean', function(key, val) {
+                datas[key] = (val === 'true') ? true : false;
+            });
             // 处理加密数据
             _dealDatas('encrypt', function(key, val) {
                 datas[key] = encryptService.getValue(val);
@@ -293,14 +297,11 @@ angular.module('form', ['request', 'common', 'ui.router'])
                             }
                             // 消息提示
                             if(attrs.msg) {
-                                messageService.show(attrs.msg);
+                                messageService.show(attrs.msg, 'toast');
                             }
                         } else {
                             if(data.msg) {
-                                messageService.show(data.msg);
-                            }
-                            if(attrs.msg) {
-                               messageService.show(attrs.msg); 
+                                messageService.show(data.msg, 'toast');
                             }
                         }
                     });

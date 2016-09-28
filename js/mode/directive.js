@@ -194,7 +194,6 @@
 
         	// 文件上传成功，给item添加成功class, 用样式标记上传成功。
         	uploader.on( 'uploadSuccess', function( file,data ) {  //data后台返回的数据
-        		// alert(data.msg)
         	    $(".schedule_p").css({"width":0}) 
         	    $("#iconFile .webuploader-pick").css({"background":"url("+data.msg+")"})
         	    $("#iconFile").attr("data-url",data.msg);

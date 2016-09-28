@@ -702,13 +702,40 @@ angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.rou
 // ======================= 认证列表 ============================
 /* @ngInject */
 .controller('auth_listCtrl', function($scope,httpService, messageService) {
-	// 头部城市
-	$(".ds_poiu_a").removeClass("show_a");
-	$(".retreat_icon").removeClass("none");
 	// 获取数据
 	httpService.getDatas('GET', '/sponsor/certificationNum').then(function(data) {
 		$scope.auth = data.info;
 	});
+})
+
+// ======================= 活动号认证 ============================
+/* @ngInject */
+.controller('activity_authCtrl', function($scope,httpService, messageService) {
+	var vm = $scope;
+	vm.sponsor = {};
+	// 获取认证数据
+	httpService.getDatas('GET', '/sponsor/get_sponsorapply')
+    .then(function(data) {
+    	if(data.info == null) {
+			vm.status = 0;
+			return false;
+		}
+		if(data.code==0 && data.info.status){
+			vm.status = data.info.status;
+			switch(Number(data.info.status)) {
+				case 1:  vm.sponsor = data.info; break;
+		    	case 2:  vm.sponsor.failInfo = data.info.remark; break;
+			}
+		}
+    });
+    // 表单提交成功后跳转
+    $scope.route = function() {
+    	vm.status = 3;
+    }	
+	// 重新认证，显示主办方认证表单
+	$scope.reSponsorAuth = function () {
+		vm.status = 0;
+	}
 })
 
 // ======================= 机器申请 ============================

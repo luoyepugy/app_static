@@ -1,6 +1,10 @@
+
+<!-- 获取主办方当前状态（0表示编辑表单，1表示成功，2表示失败，3表示等待审核） -->
+<link href="/css/pages/user.css" rel="stylesheet">
+
 <!-- 注册活动号-->
 <meta charset="UTF-8">
-   <section class="j-activityAuthForm">
+   <section class="j-activityAuthForm" ng-if="status==0">
 	   <img style="max-width:100%;" src="/img/others/activity-banner.png" alt="活动banner" />
        <section class="loan_content">
        		<p class=" fz16 f-color-141414">
@@ -29,7 +33,7 @@
 	    		<textarea name="introduction" style="height:85px;text-indent: 0;" class="loan_remark" placeholder="请输入您的活动号简介" data-empty="请输入您的活动号简介"></textarea>
 	    	</p>
 	    	<input type="hidden" name="type_id" value="0" number>
-	    	<submit-button style="width: 100%;" action="/sponsor/add_or_update_apply_sponsor" btn-class="mainBtn"  text="立即注册" form=".j-activityAuthForm" msg="提交成功"></submit-button>
+	    	<submit-button style="width: 100%;" action="/sponsor/add_or_update_apply_sponsor" btn-class="mainBtn"  text="立即注册" form=".j-activityAuthForm" callback="route()"></submit-button>
 	    	<ul> 
 				<li >
 					<p class="f-color-141414 b">
@@ -54,11 +58,46 @@
 					3.成为演讲嘉宾有什么要求？
 				</p>
 				<p class="f-color-141414">
-					是主办发或者组织机构，经常举办活动。<br>欢迎认证活动号，实现你的活动收益
+					是主办方或者组织机构，经常举办活动。<br>欢迎认证活动号，实现你的活动收益
 				</p>
 				</li>				
 				
 			</ul>
        </section>
-  
+  	
+
+  	<!-- 成功 -->
+    <div ng-if="status==1">
+        <ul class="p10">
+            <li class="mt20"><span class="gray">主办方单位：</span>{{sponsor.name}}</li>
+            <li class="mt20"><span class="gray">联系人：</span>{{sponsor.contacter}}</li>
+            <li class="mt20"><span class="gray">联系电话：</span>{{sponsor.contacter_phone}}</li>
+            <li class="mt20"><span class="gray">主办方简介：</span>{{sponsor.introduction}}</li>
+        </ul>
+        <p class="mt30 pd cen zd">
+            <span class="mui-btn register_button fz18" back-button>确定</span>     
+        </p>
+        <p class="mt20 pl10 fz16">认证信息错误或修改请联系<a ng-href="tel:400-046-1388" class="green">400-046-1388</a></p>
+    </div>
+    <!-- /成功 -->
+    <!-- 失败 -->
+    <div ng-if="status==2">
+        <div class="tc gray mt30 fz20"><img class="mr10" src="/img/face_fail.png" alt="失败">认证失败！</div>
+        <p class="tc mt20" ng-bind="sponsor.failInfo"></p>
+        <p class="mt30 pd cen zd">
+            <a class="mui-btn mui-btn-green mui-btn-block fz18" ng-click="reSponsorAuth()">重新填写</a>  
+            <button class="mui-btn mui-btn-outlined mui-btn-block fz18 mt15" back-button>确定</button>       
+        </p>
+    </div>
+    <!-- /失败 -->
+    <!-- 等待审核 -->
+    <div ng-if="status==3">
+        <div class="tc mt30 fz20"><img class="mr20" src="/img/waiting.png" alt="成功">审核中...</div>
+        <p class="tc mt30 fz16">申请结果将会在24小时内反馈。请耐心等待！</p>
+        <p class="mt30 pd cen zd">
+            <a class="mui-btn register_button fz18" back-button>确定</a>     
+        </p>
+    </div>
+    <!-- /等待审核 -->
+
 </section>

@@ -18,8 +18,8 @@
 </section>
 
 <section class="bgff pd pt10 pm10">
-<h4 ng-bind="detail.detail_date.title" class="act_title_a">  
-</h4>
+<p ng-bind="detail.detail_date.title" class="act_title_a fz16 zd">  
+</p>
 <h6 class="mt10" >
 <span ng-bind="'浏览 '+detail.detail_date.browse_count+'次'"></span>
  <span class="ml10" ng-bind="'参与 '+detail.detail_date.consumption_count+'人'"> </span></h6>
@@ -105,7 +105,7 @@
 <section class="particulars_show">
 <!--主办方未认证的状态  -->
 <section class="pt10 pm10 bgff  bbm  pr pd" ng-if="detail.detail_date.sponsor_auth==0">
-    <section class="mui-col-xs-11 dian" >  
+    <section class=" dian" >  
         <img ng-src="{{detail.detail_date.sponsor_head}}" class="sponsor_act_icon fl"/>
         <section class="ov  pl20" style="padding-top: 15px;">
         <a class="fr fz14 yj4 contract_de" ng-href="tel:{{detail.detail_date.contact_way}}">联系TA</a>

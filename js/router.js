@@ -186,10 +186,8 @@
 
 	    // 其他-金融贷款
 	    .state('finance_loan',{
-	    	url: '/finance_loan',  				// 金融贷款
-	    	templateUrl: '/html/others/finance_loan.html',
-	    	controller: 'finance_loanCtrl',
-	    	controllerAs: 'finance'
+	    	url: '/finance_loan',  			// 金融贷款
+	    	templateUrl: '/html/others/finance_loan.html'
 	    })
       
 
@@ -249,7 +247,8 @@
         // 注册活动号， 注册嘉宾号， 注册媒体号
         .state('activity_auth',{
             url: '/activity_auth',   			// 注册活动号
-            templateUrl: '/html/authentication/activity_auth.html'
+            templateUrl: '/html/authentication/activity_auth.html',
+            controller: 'activity_authCtrl'
         }).state('guest_auth',{
             url: '/guest_auth',   				// 注册嘉宾号
             templateUrl: '/html/authentication/guest_auth.html'	

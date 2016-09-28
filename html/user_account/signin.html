@@ -1,7 +1,7 @@
 
     <link href="/css/pages/user.css" rel="stylesheet">
     <!-- 登录 -->
-    <div class="signin j-signinForm">
+    <div class="signin j-signinForm" show-back-btn>
         <form action="" ng-if="{'phone': true,'weixin':false}[signinType]">
             <input type="text" name="user_phone" value="" placeholder="输入手机账号" data-empty="请输入手机账号" format-phone  />
             <input type="password" name="user_password" value=""  placeholder="输入密码" data-empty="请输入密码" encrypt />

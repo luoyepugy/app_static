@@ -6,7 +6,8 @@ angular.module('common')
     .factory('transmitService', transmitService)
     .factory('anchorService', anchorService)
     .directive('backButton', backButton)
-    .directive('muiSelect', muiSelect);
+    .directive('muiSelect', muiSelect)
+    .directive('showBackBtn', showBackBtn);
 
 
 
@@ -164,6 +165,9 @@ angular.module('common')
                     repayType = [{'text': '冠名'}, {'text': '广告位'},{'text': '媒体'}, {'text': '现场'},{'text': '实物'}, {'text': '指定物品'},{'text': '其他'}],
                     industry = [],
                     data;
+                console.log(ele.attr('deadline'));
+                console.log(ele.attr('industry'));
+                console.log(ele.attr('repayType'));
                 if(ele.attr('deadline') == '') {
                     data = deadline;
                 } else if(ele.attr('industry') == '') {
@@ -183,6 +187,21 @@ angular.module('common')
                     }
                 });
             });
+        }
+    }
+
+    // ======================== 顶部导航显示返回按钮 ========================
+    /* @ngInject */
+    function showBackBtn() {
+        var directive = {
+            restrict: 'AE',
+            link: link
+        };
+        return directive;
+
+        function link(scope, ele, attrs) {
+            $(".ds_poiu_a").removeClass("show_a");
+            $(".retreat_icon").removeClass("none");
         }
     }
 
