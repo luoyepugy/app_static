@@ -46,7 +46,7 @@ angular.module('activity', ['common', 'request', 'ui.router'])
 				if(more) {
 					$scope.rewardList = $scope.rewardList.concat(data.rows);
 					if(data.rows.length == 0) {
-						messageService.show('没有更多数据了');
+						messageService.show('没有更多数据了', 'toast');
 					}
 				} else {
 					$scope.rewardList = data.rows;

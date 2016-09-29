@@ -275,15 +275,7 @@ angular.module('user', ['activity_servrt','directive_mml', 'common', 'request', 
 	    	if(data.code == 0 && data.info.status == 1) {
 				$scope.sponsorStatus = true;
 			} else {
-<<<<<<< .mine
 				$scope.sponsorStatus = false;
-=======
-				try{//有异常
-					$scope.sponsorStatus = false;
-					$scope.status = data.info.status;
-				}catch(e){}
-			
->>>>>>> .r12795
 			}
 	    });
 	     /*
@@ -1518,7 +1510,7 @@ angular.module('user', ['activity_servrt','directive_mml', 'common', 'request', 
 				// 获取系统消息和用户消息未读数量
 				$scope.message = data.otherinfo;
 				if(more && data.rows.length == 0) {
-					messageService.show('没有更多数据了');
+					messageService.show('没有更多数据了', 'toast');
 					return false;
 				}
 				if(type == 0) {

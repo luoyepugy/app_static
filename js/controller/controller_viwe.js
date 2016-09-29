@@ -595,8 +595,6 @@ angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.rou
 // ======================= 搜索结果 ============================
 /* @ngInject */
 .controller('searchCtrl', function($scope,httpService, messageService) {
-
-
 	$scope.supportList = [];
 	$scope.activityList = [];
 
@@ -650,12 +648,12 @@ angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.rou
 			if(more) {
 				$scope[array] = $scope[array].concat(data.rows);
 				if(data.rows.length == 0) {
-					messageService.show('没有更多数据了');
+					messageService.show('没有更多数据了', 'toast');
 				}
 			} else {
 				$scope[array] = data.rows;
 				if(data.rows.length == 0) {
-					messageService.show('暂无搜索结果');
+					messageService.show('暂无搜索结果', 'toast');
 				}
 			}
 		});

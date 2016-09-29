@@ -24,7 +24,8 @@
 
 .attention_po img {
 	width: 48px;
-	height: 48px
+	height: 48px;
+	margin-top: 2px;
 }
 
 .poiuyt_sf, .poiuyt_sf_p {

@@ -93,12 +93,12 @@
         		  doubleTapZoom: 10, //双触放大几倍  
         		  onScrollStart:function(){
         			  this.refresh();//刷新 
-        			  $(".mml_bottom").css({"opacity":"0"});
+        			  $(".mml_bottom,.list_activities,.guide_K").css({"opacity":"0"});
         			  // console.log(this.y);
         			  
         		  },
         		  onScrollEnd: function(){
-        			  $(".mml_bottom").css({"opacity":"1"});
+        			  $(".mml_bottom,.list_activities,.guide_K").css({"opacity":"1"});
         			  if(this.y<0){
         				  $(".return_top").removeClass("mui-hidden");
         				
@@ -115,7 +115,7 @@
         		
         		  	}
         		  }
-        	  });      
+        	  });       
         }
     };
 }).directive('swift', function () { //轮播图图  

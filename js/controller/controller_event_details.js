@@ -32,6 +32,7 @@ angular.module('act_details', [ "directive_mml","activity_servrt","ui.router","p
 		    			var reg = new RegExp("\n", 'g'); // 创建正则RegExp对象
 				        var hg_p=removeHTMLTag($scope.detail.detail_date.details).replace(reg,"").substring(0,100)
 				        var sh_a={}
+				   
 				        sh_a.title='【'+$scope.classify[0].maker_title[$scope.detail.detail_date.type].text+'】 '+$scope.detail.detail_date.title;
 				        sh_a.desc=hg_p;
 				        sh_a.link=window.location.href;
@@ -135,6 +136,16 @@ angular.module('act_details', [ "directive_mml","activity_servrt","ui.router","p
 	    	}
 	    	$(".pup_soou_p").css({"left":"0"})
 	    }
+	  }
+	  $scope.streaming_poo=function(broadcast){//broadcast=真为正在直播
+		  $(".streaming_poo").removeClass("show_a")
+		  if(broadcast){ 
+			  $state.go("activity_streaming.activity_reward_detail",{ac_id:$scope.id_a,count:$scope.detail.detail_date.browse_count,id:$scope.id_a});
+		  }else{ 
+			  mui.alert("直播断开...","e场景活动",function(){
+				  $(".streaming_poo").addClass("show_a")
+			  });
+		  }
 	  }
 	  
       $(".pup_soou_p").on("tap",function(){
@@ -409,8 +420,10 @@ $(".dd_pooo").hide()
 	   if(yu==0){
 		   return;
 	   }
+	   $(".df_pooiiuu_s").find("h6").addClass("mui-hidden")
 	   $(".df_pooiiuu_s .lkmhgf_s").removeClass("fa-check-circle").addClass("fa-circle-thin")
 	   $(".df_pooiiuu_s").eq(x).find(".lkmhgf_s").removeClass("fa-circle-thin").addClass("fa-check-circle")
+	    $(".df_pooiiuu_s").eq(x).find("h6").removeClass("mui-hidden")
 	   this.selected=num
 	   this.the_price=this.selected*$scope.ticket
 	   this.ticket_id=id

@@ -289,15 +289,15 @@ angular.module('form', ['request', 'common', 'ui.router'])
 
                         // 其他情况
                         if(data.code == 0) {
+                            // 消息提示
+                            if(attrs.msg) {
+                                messageService.show(attrs.msg, 'toast');
+                            }
                             // 路由
                             if(attrs.state == 'back'){
                                 $window.history.back();
                             } else if(attrs.state){
                                 $state.go(attrs.state);
-                            }
-                            // 消息提示
-                            if(attrs.msg) {
-                                messageService.show(attrs.msg, 'toast');
                             }
                         } else {
                             if(data.msg) {

@@ -15,13 +15,13 @@
         <section class="mb40" ng-if="{'weixin': true,'phone':false}[signinType]">
             <button class="mui-btn mui-btn-block btn-green" data-href="/user/h5_wechat_login_page?key={{form_login}}">
                 <i class="iconfont icon-weixin inline-left"></i>
-                <span class="inline-right">微信登录</span>
+                <span class="inline-right">微信一键登录</span>
             </button>
         </section>
         <p class="division"><i></i><span>其他方式</span></p>
         <button ng-if="{'phone': true,'weixin':false}[signinType]" class="mui-btn mui-btn-block btn-green" data-href="/user/h5_wechat_login_page?key={{form_login}}">
             <i class="iconfont icon-weixin inline-left"></i>
-            <span class="inline-right">微信登录</span>
+            <span class="inline-right">微信一键登录</span>
         </button>
         <button ng-if="{'weixin': true,'phone':false}[signinType]" class="mui-btn mui-btn-block btn-red" ng-click="changeSigninType()">
             <i class="iconfont icon-mobile inline-left"></i>

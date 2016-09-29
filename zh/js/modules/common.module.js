@@ -28,7 +28,7 @@ angular.module('common')
                 $('body').append('<div class="messageBox">' + tips +'</div>').fadeIn();
                 $timeout(function(){
                     $('.messageBox').fadeOut();
-                }, 3500);
+                }, 2500);
             }
         };
     }
@@ -165,9 +165,6 @@ angular.module('common')
                     repayType = [{'text': '冠名'}, {'text': '广告位'},{'text': '媒体'}, {'text': '现场'},{'text': '实物'}, {'text': '指定物品'},{'text': '其他'}],
                     industry = [],
                     data;
-                console.log(ele.attr('deadline'));
-                console.log(ele.attr('industry'));
-                console.log(ele.attr('repayType'));
                 if(ele.attr('deadline') == '') {
                     data = deadline;
                 } else if(ele.attr('industry') == '') {

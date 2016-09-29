@@ -4,7 +4,7 @@
 // ================ 活动打赏 ===============
 .activity-reward {
 	.avatar {
-		@include size(100vw, 250px);
+		@include size(100vw, 190px);
 		@include gradient(linear, no, #4ea45d , #7fbc89 75%, transparent 0);
 	}
 	.userIcon {
@@ -12,13 +12,13 @@
 		border-radius: 45px;
 		border: 2px solid #fff;
 		position: relative;
-		top: 120px;
+		top: 75px;
 		left: calc(50% - 46px);
 	}
 	.userName {
 		color: #fff;
 		position: relative;
-		top: 100px;
+		top: 50px;
 		text-align: center;
 		font-size: 16px;
 	}
