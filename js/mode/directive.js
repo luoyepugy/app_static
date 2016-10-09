@@ -17,6 +17,7 @@
          * 顶部导航搜索图标显示隐藏
          */
         $rootScope.previousState = from.name;
+        $rootScope.previousParams = fromParams;
         $rootScope.currentState = to.name;
         if($location.path() == '/index') {
             $('.j-navSearchIcon').show();

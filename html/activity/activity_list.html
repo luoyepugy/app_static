@@ -1,7 +1,7 @@
 <!-- 活动列表 -->
 <meta charset="UTF-8">
 <section ng-controller="activities_list">
-     <section class=" list_activities pr" style="z-index:1001">
+     <section class=" list_activities pr gd" style="z-index:1001">
       <section class="sdf_poi_oiiuy box cen pt10 pm10 bgff pr">
         <p class="box_a" ng-click="act_list.title_p(1)">
          	  <span>创客</span><i class="f_i xiala_icon"></i>
@@ -17,8 +17,17 @@
         </p>
         </section>
         <section class="dfg_poi" ng-click="act_list.hdoe_sdf()"></section>
-        <ul class="list_active">
-              <li   ng-repeat="select in act_list.select_data.maker_title" ng-bind="select.text" ng-click="act_list.se_function(act_list.select_data.title,select.id,select.text)"></li>
+        <ul class="list_active" ng-show="!categoryType">
+              <li ng-bind="select.text" ng-repeat="select in act_list.select_data.maker_title" ng-click="act_list.se_function(act_list.select_data.title,select.id,select.text)" >
+              </li>
+        </ul>
+        <ul class="list_active" ng-show="categoryType">
+              <li ng-repeat="item in category">
+                <p ng-click="showSubCategory(item.note_id, $index)">{{item.type_name}} <i class="mui-icon mui-icon-arrowright mui-icon-arrowdown fr"></i></p>
+                <div class="j-subCategory mt10 pl10" ng-show="subCategoryType[$index]">
+                  <span ng-bind="subItem.type_name" ng-repeat="subItem in subCategory" ng-click="searchSubCategory(subItem.type_name)"></span>
+                </div>
+              </li>
         </ul>
         
         
@@ -26,25 +35,30 @@
     
     
 
-    <section id="act_list" pulllist callback="paging()"   class="ulact_p" ng-click="">
+    <section id="act_list" pulllist callback="paging()"   class="ulact_p ulact_p_pooox" ng-click="">
            <ul id="scroll" style="background:#EFEFF4">  
              <li  class="mb10" ng-repeat="list in act_list.activity_list" finish ui-sref="activity_detail({id:list.id})" >
                          <section class="pd  bgff  pt10 pm10">
-              <img ng-src="{{list.poster}}" class="fl act_user_a">
-               <section class="ov pl10 zc fz14">
+                         <section class="act_user_a fl">
+                                   <img src="/img/default_image.png" data-original="{{list.poster}}"  class="w100  lazy"> 
+                         </section>
+    
+            
+               <section class="ov pl10 zc fz14 ">
                    <p class="dianer zd  tile_poiu_a" ng-bind="list.name"></p>
                     
+                    <section class="dfd_pooic">
                 <p class="fz12 dian">
                 <i  class="f_i map_icon"></i><span ng-bind="list.city_name"></span>
                 </p>
                    
-                   <section class="fz12 dian zc">
+                   <section class="fz12 dian zc ">
                 <p class="fl fz12"><i class="f_i time_icon"></i><span ng-bind="list.start_time_str"></span> </p>
                   <a class="fr" ng-if="list.activity_way!=1">免费</a>
                        <span class="fr hs" ng-if="list.activity_way==1">收费</span>
                   <p class="qc"></p>
                 </section>
-               
+               </section>
                 
                </section>
                <p class="qc"></p>

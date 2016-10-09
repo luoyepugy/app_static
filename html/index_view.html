@@ -36,19 +36,19 @@
     <section class="box home_page_icon pt5 pm5 mt10">
         <a class="box_a" ui-sref="activities_list({activityTypeId:1})">
            <i class="f_i home_page_icon_a"></i><br>
-           路演场馆
+           商会场馆
         </a>
          <a class="box_a" ui-sref="activities_list({activityTypeId:2})">
            <i class="f_i home_page_icon_b"></i><br>
-           置业装修
+           创业投资
         </a>
          <a class="box_a" ui-sref="activities_list({activityTypeId:3})">
            <i class="f_i home_page_icon_c"></i><br>
-           汽车活动
+           亲子教育
         </a>
          <a class="box_a" ui-sref="activities_list({activityTypeId:9})">
            <i class="f_i home_page_icon_d"></i><br>
-           保险投资
+           金融财经
         </a>
         
     </section> 
@@ -60,11 +60,11 @@
         </a>
          <a class="box_a" ui-sref="activities_list({activityTypeId:7})">
            <i class="f_i home_page_icon_f"></i><br>
-           户外运动
+           休闲户外
         </a>
          <a class="box_a" ui-sref="activities_list({activityTypeId:5})">
            <i class="f_i home_page_icon_g"></i><br>
-           商家促销
+           娱乐艺术
         </a>
          <a class="box_a" ui-sref="activities_list({activityTypeId:0})">
            <i class="f_i home_page_icon_h"></i><br>
@@ -114,7 +114,7 @@
             </section>
         </section>
         <section class="pd">
-            <p class="dianer zd fz14 mt10" ng-bind="hot.activity_title"></p>
+            <p class="dianer zd fz14 mt10" ng-bind="hot.activity_title" ui-sref="activity_detail({id:hot.id})"></p>
                <p class="fz12 dian mt10">
                 <i class="f_i map_icon"></i>{{hot.activity_address}}
                 </p>
@@ -154,4 +154,19 @@
 	</p>
     
     </section>
+    
+    
+    
+     
+    
+    <!--底部悬浮引导下载-->
+<section class="guide_Download" id="guide_Download" style="z-index: 9999">
+  <section class="guide_K">
+    <a  class="down" ontouchstart=""  onclick="_guide_DownloadClose._init()">
+      <img class="icon_logo_mh2" src="http://resource.apptown.cn/poster/app_down.png">
+      <strong onclick="down_app()">立即下载</strong>
+    </a>
+    <a href="javascript:void(0)" onclick="_guide_DownloadClose._init()" title="关闭" class="close" ontouchstart=""></a>
+  </section>
+</section>	
     

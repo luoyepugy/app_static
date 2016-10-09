@@ -7,20 +7,19 @@
               <img ng-src="{{y.activity_first_face}}" class="fl act_user_a">
                <section class="ov pl10 zc fz14">
                    <p class="dianer zd  tile_poiu_a" ng-bind="y.activity_title"></p>
-                    
+                <section class="dfd_pooic">     
                 <p class="fz12 dian">
-                <i  class="f_i map_icon"></i><span ng-bind="y.activity_address"></span><span class="fr" ng-if="y.person_limit==0">不限名额</span>
-                <span class="fr" ng-if="y.person_limit>0">限{{y.person_limit}}名</span>
+                <i  class="f_i map_icon"></i><span ng-bind="y.activity_address"></span>
                 </p>
                    
                    <section class="fz12 dian zc">
-                <p class="fl"><i class="f_i time_icon"></i><span ng-bind="y.activity_time"></span> </p>
+                <p class="fl fz12"><i class="f_i time_icon"></i><span ng-bind="y.activity_time"></span> </p>
                   <a class="fr" ng-if="y.is_free!=1">免费</a>
                        <span class="fr hs" ng-if="y.is_free==1">收费</span>
                   <p class="qc"></p>
                 </section>
                
-                
+                </section>
                </section>
                <p class="qc"></p>
            </section>
@@ -52,20 +51,20 @@
               <img ng-src="{{y.activity_first_face}}" class="fl act_user_a">
                <section class="ov pl10 zc fz14">
                    <p class="dianer zd  tile_poiu_a" ng-bind="y.activity_title"></p>
-                    
+                <section class="dfd_pooic">     
                 <p class="fz12 dian">
                 <i  class="f_i map_icon"></i><span ng-bind="y.activity_address"></span><span class="fr" ng-if="y.person_limit==0">不限名额</span>
                 <span class="fr" ng-if="y.person_limit>0">限{{y.person_limit}}名</span>
                 </p>
                    
                    <section class="fz12 dian zc">
-                <p class="fl"><i class="f_i time_icon"></i><span ng-bind="y.activity_time"></span> </p>
+                <p class="fl fz12"><i class="f_i time_icon"></i><span ng-bind="y.activity_time"></span> </p>
                   <a class="fr" ng-if="y.is_free!=1">免费</a>
                        <span class="fr hs" ng-if="y.is_free==1">收费</span>
                   <p class="qc"></p>
                 </section>
                
-                
+               </section> 
                </section>
                <p class="qc"></p>
            </section>
@@ -85,7 +84,7 @@
                 
                     </li>
         </ul>
-        <p class="bgff green cen" ng-click="checkoverdue()" style="line-height:30px;">
+        <p ng-if="overResult>0" class="bgff green cen" ng-click="checkoverdue()" style="line-height:30px;">
 			查看过期活动
 		</p>
 		

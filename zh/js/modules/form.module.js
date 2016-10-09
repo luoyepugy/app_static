@@ -272,11 +272,12 @@ angular.module('form', ['request', 'common', 'ui.router'])
 
                 // 提交表单数据
                 var resultsDatas = validateService.submitData(attrs.form);
+                
+                // console.log(resultsDatas);
+                // return false;
 
                 if(!jQuery.isEmptyObject(resultsDatas)) {
                     var method = attrs.method || 'POST';
-
-                    // console.log(resultsDatas);
 
                     httpService.getDatas(method, attrs.action, resultsDatas)
                     // httpService.get(method, action, resultsDatas);

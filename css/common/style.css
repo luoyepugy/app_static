@@ -605,15 +605,21 @@ section.dfg_poi {
        top: 42px;
     display: none;
         overflow: scroll;
-    max-height: 300px;
+    max-height: calc(100vh - 42px);
 }
 .list_active li{
     padding-top: 10px;
     padding-bottom: 10px;
     font-size: 14px;
     border-bottom: 1px solid #ececec;
- 
-    
+}
+.list_active li span {
+    border: 1px solid #878787;
+    color: #878787;
+    border-radius: 3px;
+    margin: 0 5px 5px 0;
+    padding: 3px 6px;
+    display: inline-block;
 }
 section#pullrefresh {
     margin-top: 88px;

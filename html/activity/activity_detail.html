@@ -124,6 +124,7 @@
             <p class="ls dian mui-col-xs-8" ng-bind="detail.detail_date.sponsor_name"></p>
             <p class="dianer" ng-bind="detail.detail_date.sponsor_intro" ></p>
         </section>
+        <section class="qc"></section>
     </section>
     <section class="box mt10">
     	<p class="box_a yj4 contract_de2" ng-class="detail.detail_date.bgclass">
@@ -246,14 +247,14 @@
    			</div>
   		   <section class="code mt40 act_qc_im">
   		   
-  		   </section>
+  		   </section> 
      		<p class="cen qc_poiuy_a ls fz16 mt30">扫二维码签到</p>
          
    		</div>
    	
 </section>
 
-<img src="/img/seeding_p.png" class="streaming_poo" ng-class="detail.detail_date.live_status" ui-sref="activity_streaming.activity_reward_detail({ac_id:id_a,count:detail.detail_date.browse_count,id: id_a})">
+<img src="/img/seeding_p.png" class="streaming_poo" ng-class="detail.detail_date.live_status" ng-click="streaming_poo(detail.detail_date.broadcast)">
 </section>
 </section>
 

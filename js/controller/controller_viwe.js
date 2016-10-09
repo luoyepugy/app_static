@@ -205,26 +205,40 @@ angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.rou
 
     
 
-}]).controller('activities_list',["$scope","activity_data","$stateParams",function($scope,activity_data,$stateParams) {//活动列表
+}]).controller('activities_list',function($scope,activity_data,$stateParams, httpService) {//活动列表
 	  $(".mml_bottom ").show()
 	$(".mml_bottom a").removeClass("bottom_act");
 	$(".mml_bottom a").eq(0).addClass("bottom_act");
 	var title_po="创客"
 	var tio=parseInt($stateParams.activityTypeId)
 	switch(tio){
-		case 1:title_po="路演场馆";break
-		case 2:title_po="置业装修";break
-		case 3:title_po="汽车活动";break
-		case 5:title_po="商家促销";break
+		case 1:title_po="商会场馆";break
+		case 2:title_po="创业投资";break
+		case 3:title_po="亲子教育";break
+		case 5:title_po="金融财经";break
 		
 		case 6:title_po="精品课程";break
-		case 7:title_po="户外运动";break
-		case 9:title_po="保险投资";break
+		case 7:title_po="休闲户外";break
+		case 9:title_po="娱乐艺术";break
 	
 		case 0:title_po="全部";break
 	}
 	$(".sys-loading").addClass("show_a")
 	$(".list_activities .box_a").eq(0).find("span").text(title_po)
+
+	// 获取子类数据
+	$scope.showSubCategory = function(id, index) {
+		$scope.subCategoryType = {};
+		$scope.subCategoryType[index] = !($scope.subCategoryType[index]);
+		
+		httpService.getDatas('GET', '/type/twoCategory', {'id': id}).then(function(data) {
+			$scope.subCategory = data;
+		});
+	};
+	// 搜索子类
+	$scope.searchSubCategory = function(text) {
+		console.log(text);
+	}
 	
     var list_data={},
     	city_name=localStorage.city_name==undefined?"深圳":localStorage.city_name.split("市")[0];//行数
@@ -245,14 +259,23 @@ angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.rou
     		 "activity_list":[],//初始化活动列表数据
     		 "select_data":[],//初始化活动下拉框数据
     		 "title_p":function(type,ev){
-    			   	$(".list_active").addClass("show_a");
+    			   	$(".list_active").toggleClass("show_a");
+    			   	// 分类类型
+    			   	$scope.categoryType = false;
     			 	switch(type){
-    			 		case 1:$scope.act_list.select_data=$scope.classify[0];break;
+    			 		case 1: {
+    			 			httpService.getDatas('GET', '/type/oneCategory').then(function(datas) {
+								$scope.category = datas;
+		    			   	});
+    			 			$scope.categoryType = true; 
+    			 			$scope.act_list.select_data=$scope.category;
+    			 			break;
+    			 		}
     			 		case 2:$scope.act_list.select_data=$scope.classify[1];break;
     			 		case 3:$scope.act_list.select_data=$scope.classify[3];break;
     			 		case 4:$scope.act_list.select_data=$scope.classify[4];break;
     			    }
-    			   	$(".dfg_poi").addClass("mui-block")
+    			   	$(".dfg_poi").toggleClass("mui-block")
     		 },
     		 "se_function":function(title,id,name){//下拉框点击方法
     				$(".sys-loading").addClass("show_a")
@@ -261,6 +284,8 @@ angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.rou
 			 	  	$(".list_active").removeClass("show_a");
 			 		$(".dfg_poi").removeClass("mui-block");
 			 		id=id==0?'':id;
+			 		console.log('aa');
+			 		console.log(title);
 			 		switch(title){
     			 		case "分类": list_data.type=id;$(".list_activities .box_a").eq(0).find("span").text(name);break;
     			 		case "行业":list_data.industry_id=id;$(".list_activities .box_a").eq(1).find("span").text(name);break;
@@ -285,6 +310,7 @@ angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.rou
     	    				$("#scroll").append('<p class="cen pt10 pm10 bgff tikjhg_as">:-) 没有更多活动了</p>')
     	    			}
     	    			$(".sys-loading").removeClass("show_a")
+    	    			 $("img.lazy").lazyload({threshold : 200, effect : "fadeIn"}); 
     	    		}, function error() {
     					console.log("获取活动列表数据失败");
     	    });
@@ -306,7 +332,7 @@ angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.rou
         $scope.pm=10
 
      
-}]).controller('sponsor_listController',["$scope","activity_data","anchorScroll",function($scope,activity_data,anchorScroll) {//票卷列表
+}).controller('sponsor_listController',["$scope","activity_data","anchorScroll",function($scope,activity_data,anchorScroll) {//票卷列表
 	   $(".mml_bottom").show()
 	   
 	$(".mml_bottom a").removeClass("bottom_act");
@@ -632,7 +658,7 @@ angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.rou
 		name = $('.j-searchForm').find('input[name="searchName"]').val();
 		var type = $('.j-searchType').text();
 		
-		if(type == '主办方') {
+		if(type == '活动号') {
 			$('#sponsorList').show().siblings().hide();
 			searchSponsor();
 		} else if(type == '活动') {
@@ -697,6 +723,13 @@ angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.rou
 	httpService.getDatas('GET', '/sponsor/certificationNum').then(function(data) {
 		$scope.auth = data.info;
 	});
+})
+
+// ======================= 金融贷款 ============================
+/* @ngInject */
+.controller('finance_loanCtrl', function($scope,httpService, messageService) {
+	$scope.selectedSex = 1;
+	$scope.selectedType = 1;
 })
 
 // ======================= 活动号认证 ============================

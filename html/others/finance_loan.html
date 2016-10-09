@@ -8,10 +8,11 @@
 	    <p><input name="name" class="loan_name" type="text"  placeholder="请输入您的姓名" data-empty="请输入您的姓名" /></p>
 	    <p class=" fz16 f-color-141414">
 	   		<span class="mr20">性别</span>
-	    	<input type="radio" name="sex" id="sex1" checked="checked" value="1" number style="display:inline-block" />
+	    	<input type="radio" name="sex" ng-model="selectedSex" id="sex1" value="1" style="display:inline-block" />
 	    	<label for="sex1" class="mr10" style="display:inline-block">男</label>
-	    	<input type="radio" name="sex" id="sex2" value="2" number  style="display:inline-block"/>
+	    	<input type="radio" name="sex" ng-model="selectedSex" id="sex2" value="2"  style="display:inline-block"/>
 	    	<label for="sex2" style="display:inline-block">女</label>
+	    	<input type="hidden" name="sex" value="{{selectedSex}}" number />
 	    </p>
 	    <p class=" fz16 f-color-141414">手机号码*</p>
 	    <p><input name="phone" class="loan_tel" style="padding:0;" type="text" placeholder="请输入您的手机号码" format-phone data-empty="请输入您的手机号码" /></p>
@@ -24,7 +25,7 @@
 	    <p class="pr">
 	    	<input name="periods" style="padding:0;" type="text" class="max_klabel_a " placeholder="请选择还款期限" readonly data-empty="请选择还款期限" mui-select 
 	    	deadline />
-	    	<input name="periods" type="hidden" value="" number>
+	    	<input name="periods" type="hidden" value="" number />
 	    	<span   class="mui-icon mui-icon-arrowdown zc loan_down"></span>
 	    	</button>
 	    </p>
@@ -35,19 +36,23 @@
        	<p class=" fz16 f-color-141414">贷款类型*</p>
 		<div class=" fz16 f-color-141414">
 	    	<p>
-	    		<input type="radio" id="loan_type1" name="loan_type" class="mr5"  value="1" number checked="checked" style="display:inline-block;" />
+	    		<input type="radio" id="loan_type1" name="loan_type" class="mr5"  value="1" ng-model="selectedType" checked="checked" style="display:inline-block;" />
 	    		<label for="loan_type1" style="display:inline-block">房产抵押贷款</label>
 	    	</p>
 	    	<p>
-	    		<input type="radio" id="loan_type2" class="mr5"  name="loan_type" value="2" number style="display:inline-block;"/>
+	    		<input type="radio" id="loan_type2" class="mr5"  name="loan_type" value="2" ng-model="selectedType" style="display:inline-block;"/>
 	    		<label for="loan_type2" style="display:inline-block">企业贷款</label>
 	    	</p>
 	    	<p>
-	    		<input type="radio" id="loan_type3" class="mr5" name="loan_type" value="3" number style="display:inline-block;"/>
+	    		<input type="radio" id="loan_type3" class="mr5" name="loan_type" value="3" ng-model="selectedType" style="display:inline-block;"/>
 	    		<label for="loan_type3" style="display:inline-block">工薪消费贷款</label>
 	    	</p>
+	    	<input type="hidden" name="loan_type" value="{{selectedType}}" number />
 	    </div>
 	    <submit-button action="/Loan/add_apply_loan" text="立即申请" style="background:#ff9933;border-color:#ff9933;" form=".j-finaceForm" state="index" msg="申请成功"></submit-button>
+	    <p>
+	    	<a style="display:block;width:100%;height:40px;text-align: center;line-height: 40px;color:#fff;background: #4FA45D;border-radius:4px;" ng-href="http://daikuan.sdhcredit.com">录单系统(渠道入口)</a>
+	    </p>
 	    <p style="position:relative">
 	    <a  ng-href="tel:400-046-1388" style="display:block;width:100%;height:40px;text-align: center;line-height: 40px;color:#fff;background: #4FA45D;border-radius:4px;">联系电话400-046-1388</a>
 	    </p>

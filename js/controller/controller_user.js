@@ -1314,12 +1314,12 @@ angular.module('user', ['activity_servrt','directive_mml', 'common', 'request', 
 		
 		activity_data.person_detail_info({"user_id":$scope.sponsor_user_id}).then(//主办方详情
 				function success(data) {
-                         $scope.perDeta= new secrchH(data.info);	                         
+                         $scope.perDeta= new secrchH(data.info);
                          if($scope.perDeta.attention_sponsor==0||$scope.perDeta.attention_sponsor==null){
                         	 $(".attent_change").css("background","#4FA45D").attr("data-x",1);
                         	 $(".attent_text").text("关注TA")
                          }else {	                        	 
-                        	 $(".attent_change").css("background","#a9a9a9").attr("data-x",2).text("取消关注");
+                        	 $(".attent_change").css("background","#a9a9a9").attr("data-x",2);
                         	 $(".attent_text").text("取消关注")
                          }
                          $scope.shareName=$scope.perDeta.name;
@@ -1334,6 +1334,26 @@ angular.module('user', ['activity_servrt','directive_mml', 'common', 'request', 
 				}, function error() {
 					console.log("获取主办方详情失败")
 		});
+		
+		
+		var data_inistale={};
+		data_inistale.sponsor_id=$scope.sponsor_user_id;	
+		data_inistale.time_status=2;//1：未结束 2:已结束
+		data_inistale.pageIndex=1;//页码
+		data_inistale.pageSize=20;//行数
+		activity_data.person_li(data_inistale).then(
+	    		function success(data){  	    			
+	    		   $scope.overResult=data.results  
+	    		}, function error() {
+					console.log("获取报名数据失败");
+	    }); 
+		
+		
+		
+		
+		
+		
+		
 	    var message_i={}//留言参过去的参数
 		message_i.pageIndex=1;
 		message_i.pageSize=100;
@@ -1389,7 +1409,7 @@ angular.module('user', ['activity_servrt','directive_mml', 'common', 'request', 
 	var data_overActivity={};
 	data_overActivity.sponsor_id=$scope.sponsor_user_id;	
 	data_overActivity.time_status=2;//1：未结束 2:已结束
-	data_overActivity.pageIndex=1;//页码
+	data_overActivity.pageIndex=0;//页码
 	data_overActivity.pageSize=4;//行数
 	$scope.overDateList=[];//获得数据的数组
 	$scope.checkoverdue=function(){	

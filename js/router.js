@@ -187,7 +187,8 @@
 	    // 其他-金融贷款
 	    .state('finance_loan',{
 	    	url: '/finance_loan',  			// 金融贷款
-	    	templateUrl: '/html/others/finance_loan.html'
+	    	templateUrl: '/html/others/finance_loan.html',
+	    	controller: 'finance_loanCtrl'
 	    })
       
 

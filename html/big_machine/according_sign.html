@@ -60,8 +60,9 @@
          </section>
          
           <section class="mui-col-sm-8 ov  dff_poiu">
-             <section class="sddf_poiou fl"  ng-repeat="si in MyData.collection">
+             <section class="sddf_poiou fl"  ng-repeat="si in MyData.collection track by $index">
                  <section class="user_pooi big_uswer_s yj ov ml20 pr">
+                 		<input type="hidden" ng-model="si.id" />
                       <img ng-src="{{si.icon}}">
                      <p class="cen fz20 dsd_poiui cf pt10 pm10 dian" ng-bind="si.name"></p>
                  </section>
