@@ -607,19 +607,24 @@ section.dfg_poi {
         overflow: scroll;
     max-height: calc(100vh - 42px);
 }
-.list_active li{
+.list_active > li{
     padding-top: 10px;
     padding-bottom: 10px;
     font-size: 14px;
     border-bottom: 1px solid #ececec;
 }
-.list_active li span {
+.list_active > li .sub {
     border: 1px solid #878787;
     color: #878787;
     border-radius: 3px;
-    margin: 0 5px 5px 0;
-    padding: 3px 6px;
+    margin: 0 0 5px 10px;
+    padding: 3px 7px 3px 0;
     display: inline-block;
+    width: 83px;
+    text-align: center;
+}
+.list_active > li .sub:first-child {
+    margin-left: 0;    
 }
 section#pullrefresh {
     margin-top: 88px;

@@ -215,11 +215,11 @@ angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.rou
 		case 1:title_po="商会场馆";break
 		case 2:title_po="创业投资";break
 		case 3:title_po="亲子教育";break
-		case 5:title_po="金融财经";break
+		case 4:title_po="金融财经";break
 		
-		case 6:title_po="精品课程";break
-		case 7:title_po="休闲户外";break
-		case 9:title_po="娱乐艺术";break
+		case 5:title_po="精品课程";break
+		case 6:title_po="休闲户外";break
+		case 7:title_po="娱乐艺术";break
 	
 		case 0:title_po="全部";break
 	}
@@ -227,18 +227,20 @@ angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.rou
 	$(".list_activities .box_a").eq(0).find("span").text(title_po)
 
 	// 获取子类数据
-	$scope.showSubCategory = function(id, index) {
-		$scope.subCategoryType = {};
-		$scope.subCategoryType[index] = !($scope.subCategoryType[index]);
-		
-		httpService.getDatas('GET', '/type/twoCategory', {'id': id}).then(function(data) {
-			$scope.subCategory = data;
-		});
-	};
+	// $scope.showSubCategory = function(id) {
+	// 	$scope.subCategoryType = {};
+	// 	$scope.subCategoryType[index] = !($scope.subCategoryType[index]);
+	// 	$scope.subCategory = $scope.category[index].child_list;
+	// };
 	// 搜索子类
-	$scope.searchSubCategory = function(text) {
-		console.log(text);
-	}
+	// $scope.searchSubCategory = function(id) {
+	// 	httpService.getDatas('GET', '/activity/query_activity_list', {pageIndex: 1, pageSize: 8, status: 0, type: id}, function(data) {
+	// 		console.log(data.rows);
+	// 		$scope.act_list.act_list_data(list_data);
+	// 	});
+	// 	list_data.type_child = id;
+	// 	$scope.act_list.act_list_data(list_data);
+	// }
 	
     var list_data={},
     	city_name=localStorage.city_name==undefined?"深圳":localStorage.city_name.split("市")[0];//行数
@@ -255,37 +257,42 @@ angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.rou
         }
         list_data.time_status="";//时间
         list_data.status=0; 
+        var oldType = 1;
         $scope.act_list={  
     		 "activity_list":[],//初始化活动列表数据
     		 "select_data":[],//初始化活动下拉框数据
     		 "title_p":function(type,ev){
-    			   	$(".list_active").toggleClass("show_a");
-    			   	// 分类类型
-    			   	$scope.categoryType = false;
-    			 	switch(type){
-    			 		case 1: {
-    			 			httpService.getDatas('GET', '/type/oneCategory').then(function(datas) {
-								$scope.category = datas;
-		    			   	});
-    			 			$scope.categoryType = true; 
-    			 			$scope.act_list.select_data=$scope.category;
-    			 			break;
-    			 		}
-    			 		case 2:$scope.act_list.select_data=$scope.classify[1];break;
-    			 		case 3:$scope.act_list.select_data=$scope.classify[3];break;
-    			 		case 4:$scope.act_list.select_data=$scope.classify[4];break;
-    			    }
-    			   	$(".dfg_poi").toggleClass("mui-block")
+		 		if(oldType == type) {
+		 			$(".list_active").toggleClass("show_a");
+		 			$(".dfg_poi").toggleClass("mui-block")
+		 		} else {
+		 			oldType = type;
+		 			$(".list_active").addClass("show_a");
+		 			$(".dfg_poi").addClass("mui-block")
+		 		}
+			   	// 分类类型
+			   	$scope.categoryType = false;
+			 	switch(type){
+			 		case 1: {
+			 			httpService.getDatas('GET', '/type/get_all_type', {flag: 'h5'}).then(function(datas) {
+							$scope.category = datas;
+	    			   	});
+			 			$scope.categoryType = true;
+			 			break;
+			 		}
+			 		case 2:$scope.act_list.select_data=$scope.classify[1];break;
+			 		case 3:$scope.act_list.select_data=$scope.classify[3];break;
+			 		case 4:$scope.act_list.select_data=$scope.classify[4];break;
+			    }
     		 },
-    		 "se_function":function(title,id,name){//下拉框点击方法
+    		 "se_function":function(title,id,name, subId){//下拉框点击方法
     				$(".sys-loading").addClass("show_a")
     				$scope.act_list.activity_list=[];
 			 		list_data.pageIndex=1;
 			 	  	$(".list_active").removeClass("show_a");
 			 		$(".dfg_poi").removeClass("mui-block");
-			 		id=id==0?'':id;
-			 		console.log('aa');
-			 		console.log(title);
+					// 二级分类id
+			 		list_data.type_child = subId;
 			 		switch(title){
     			 		case "分类": list_data.type=id;$(".list_activities .box_a").eq(0).find("span").text(name);break;
     			 		case "行业":list_data.industry_id=id;$(".list_activities .box_a").eq(1).find("span").text(name);break;

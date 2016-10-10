@@ -21,12 +21,12 @@
               <li ng-bind="select.text" ng-repeat="select in act_list.select_data.maker_title" ng-click="act_list.se_function(act_list.select_data.title,select.id,select.text)" >
               </li>
         </ul>
-        <ul class="list_active" ng-show="categoryType">
-              <li ng-repeat="item in category">
-                <p ng-click="showSubCategory(item.note_id, $index)">{{item.type_name}} <i class="mui-icon mui-icon-arrowright mui-icon-arrowdown fr"></i></p>
-                <div class="j-subCategory mt10 pl10" ng-show="subCategoryType[$index]">
-                  <span ng-bind="subItem.type_name" ng-repeat="subItem in subCategory" ng-click="searchSubCategory(subItem.type_name)"></span>
-                </div>
+        <ul class="list_active mui-table-view" ng-show="categoryType" style="margin-top: 0;">
+              <li ng-repeat="item in category" class="mui-table-view-cell mui-collapse">
+                <a class="mui-navigate-right" href="#">{{item.type_name}}</a>
+                <ul class="mt10 mui-collapse-content" >
+                  <li class="sub" ng-repeat="subItem in category[$index].child_list" ng-click="act_list.se_function('分类', subItem.note_id, subItem.type_name, subItem.id)">{{subItem.type_name}}</li>
+                </ui>
               </li>
         </ul>
         
