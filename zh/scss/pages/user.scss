@@ -116,8 +116,16 @@
 		position: absolute;
     	right: 5px;
     	top: 10px;
-	}    
+	} 
 }
+// 2行省略
+.ellipsisText2 {
+	overflow : hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+}  
 .searchResutWrap {
 	position: fixed;
     left: 0px;

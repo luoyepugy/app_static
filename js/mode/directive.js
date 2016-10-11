@@ -23,12 +23,15 @@
             $('.j-navSearchIcon').show();
            
         } else {
-            $('.j-navSearchIcon').hide();
+          $('.j-navSearchIcon').hide();
       	  $(".ds_poiu_a").removeClass("show_a");
     	  $(".retreat_icon").removeClass("none");
         }
+    
+        
+        
         var path_p=$location.path();
-        var arr_p=["activity_streaming","activity_detail","activity_charge"];
+        var arr_p=["activity_streaming","activity_detail","activity_charge","b_map"];
    
         for(var i in arr_p){
         	if(path_p.indexOf(arr_p[i])>0) {
@@ -70,6 +73,7 @@
             if (scope.$last === true) {
                 $timeout(function() {
                     scope.$emit('ngfinish');
+               	 $("img.lazy").lazyload({threshold : 200, effect : "fadeIn"}); 
                 });
             }
         }

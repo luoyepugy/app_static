@@ -252,10 +252,12 @@
             controller: 'activity_authCtrl'
         }).state('guest_auth',{
             url: '/guest_auth',   				// 注册嘉宾号
-            templateUrl: '/html/authentication/guest_auth.html'	
+            templateUrl: '/html/authentication/guest_auth.html',
+            controller: 'guest_authCtrl'	
         }).state('media_auth',{
             url: '/media_auth',   				// 注册媒体号
-            templateUrl: '/html/authentication/media_auth.html'
+            templateUrl: '/html/authentication/media_auth.html',
+            controller: 'media_authCtrl'	
         }).state('auth_list',{
             url: '/auth_list',   				// 认证列表
             templateUrl: '/html/authentication/auth_list.html',
@@ -265,9 +267,14 @@
             templateUrl: '/html/authentication/demand.html',
             controller: 'activitie_demand'	
         }).state('demand_list',{
-            url: '/demand_list',   // 活动号查询
+            url: '/demand_list?data',   // 活动号查询
             templateUrl: '/html/authentication/demand_list.html',
             controller: 'demand_list_ctl'	
+        })
+        .state('b_map',{
+            url: '/b_map/:city',   // 地图
+            templateUrl: '/html/map.html',
+            controller: 'mapCtrl'
         })
         
       

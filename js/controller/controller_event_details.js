@@ -28,6 +28,7 @@ angular.module('act_details', [ "directive_mml","activity_servrt","ui.router","p
 		    		    
 		    		    $scope.detail.detail_date.act_id=$scope.id
 		    		    act_date.set_act_date($scope.detail.detail_date)
+		    		    $scope.user_id_a=data.info.sponsor_user_id
 		    			$scope.industry=$scope.classify[1].maker_title[$scope.detail.detail_date.industry_id].text;//行业
 		    			var reg = new RegExp("\n", 'g'); // 创建正则RegExp对象
 				        var hg_p=removeHTMLTag($scope.detail.detail_date.details).replace(reg,"").substring(0,100)
@@ -56,8 +57,8 @@ angular.module('act_details', [ "directive_mml","activity_servrt","ui.router","p
 		    }); 
 	    },"collection":function(){//收藏或关注
 	    	var date_po={}
-	    	date_po.resources_id=$scope.id
-	    	date_po.type=1;
+	    	date_po.resources_id=$scope.user_id_a
+	    	date_po.type=4;
 	    	if($scope.detail.detail_date.is_collect==1){
 	    		hjgf=false;
 	    	}

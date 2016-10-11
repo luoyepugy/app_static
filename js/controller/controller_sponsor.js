@@ -3,7 +3,7 @@
  */
 
 angular.module('sponsor', ["directive_mml","activity_servrt","ui.router", "common"])
-.controller('promotional_act_controller',function($scope,activity_data,$location,$stateParams,act_date) { //发起活动
+.controller('promotional_act_controller',function($scope,activity_data,$location,$stateParams,act_date,$state) { //发起活动
 	var parameter_p={}
 /*	var kmh=$.parseJSON(localStorage.input_f)
 	input_val(kmh.activity)*/
@@ -40,11 +40,67 @@ angular.module('sponsor', ["directive_mml","activity_servrt","ui.router", "commo
 	  $("input,textarea").blur(function(){
         $(".mml_bottom").show()
 	 })
+	 $("#address").on("click",function(){
+		 localStorage.input_f=JSON.stringify(da_input(2))
+		 var kmh=$.parseJSON(localStorage.input_f)
+		 console.log(kmh.activity); 
+		 $state.go("b_map",{"city":$("#city").val()});
+	 })
+	 try{
+		 var kmh=$.parseJSON(localStorage.input_f)
+		 input_val(kmh.activity)
+	 }catch(e){
+		 
+	 }
 	 
-}).controller('custom_form_controller',["$scope","activity_data","$location","$stateParams","act_date",function($scope,activity_data,$location,$stateParams,act_date) { //自定义表单
 
-
-}])
+	 
+	 
+}).controller('mapCtrl',function($scope,$stateParams) { //地图
+	 $("html,body").animate({scrollTop:0},200);
+	// 百度地图API功能
+	var map = new BMap.Map("allmap");
+	var point = new BMap.Point(116.331398,39.897445); 
+	var local = new BMap.LocalSearch(map, {
+         renderOptions: {map: map, panel: "haha"}
+    });
+    local.search($stateParams.city);
+	map.centerAndZoom(point,12);
+	var geolocation = new BMap.Geolocation();
+	geolocation.getCurrentPosition(function(r){
+		if(this.getStatus() == BMAP_STATUS_SUCCESS){
+			var mk = new BMap.Marker(r.point);
+			map.addOverlay(mk);
+			map.panTo(r.point);
+		}
+		else {
+			alert('failed'+this.getStatus());
+		}        
+	},{enableHighAccuracy: true})
+	
+		function showInfo(e){
+		var point = new BMap.Point(e.point.lng,e.point.lat);
+        	var gc = new BMap.Geocoder();
+        	gc.getLocation(point, function(rs){
+        	  var addComp = rs.addressComponents;
+        $(".orientation input").val(rs.addressComponents.district+rs.addressComponents.street+rs.addressComponents.streetNumber)
+        	  
+        	});
+	}
+	map.addEventListener("click", showInfo);
+	
+	 $(".orientation input").keyup(function(){
+		    local.search($stateParams.city+$(this).val()); 
+	 })
+	 $(".ssd_ssdfg").on("click",function(){
+		  var kmh=$.parseJSON(localStorage.input_f)
+		  kmh.activity.address=$(".orientation input").val()
+		  localStorage.input_f=JSON.stringify(kmh)
+		  window.history.back();
+	 })
+	 
+	
+})
 // =================== 发布赞助 begin by zh =================
 .controller('sponsorship_controller',function($scope,messageService,validateService,httpService,$state) { //发起赞助
 	$scope.repayForm = false;
@@ -100,9 +156,7 @@ angular.module('sponsor', ["directive_mml","activity_servrt","ui.router", "commo
 })
 // =================== 发布赞助 end =================
 
-window.onunload = function(){
-	localStorage.input_f=JSON.stringify(da_input(2))
-}
+
 
 /**
  * 验证表单数据和缓存
@@ -125,6 +179,7 @@ function da_input(x){
 	contact_way=$("#contact_way").val(),//联系方式
 	sponsor=$("#sponsor").val(),//主办方  
 	activity={};
+	
 	activity.name=name;
 	activity.start_time=start_time_gettime;
 	activity.end_time=end_time_gettime;
@@ -132,9 +187,11 @@ function da_input(x){
 	activity.address=address;
 	activity.type=type_id;
 	activity.details=details;
+	activity.industry=industry_val
 	activity.industry_id=industry;
 	activity.contact_way=contact_way;
 	activity.sponsor=sponsor;
+	
 	var poiy={};
 	if(x==1){
 		if(!form_mm.isnull(name)){
@@ -219,6 +276,7 @@ function da_input(x){
 		activity.e_time=end_time;
 		activity.city_m=city;
 		activity.type_m=type;
+		
 	}
 	poiy.activity=activity;
 	return poiy
@@ -240,9 +298,15 @@ function input_val(data){
 	}
 	$("#address").val(data.address);//详细地址
 	$("#type").val(data.type_m);//活动类型
+	
+	$("#industry").val(data.industry);
+	$("#industry").attr("data-id",data.industry_id);
 	if(form_mm.isnull($("#type").val())){
 		$("#type").attr("data-id",data.type);
 	}
+	$("#contact_way").val(data.contact_way)
+	
 	$("#details").val(data.details);//详情
+	$("#sponsor").val(data.sponsor)
 }
 

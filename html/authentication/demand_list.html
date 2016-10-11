@@ -1,6 +1,13 @@
 <meta charset="UTF-8">
 <!--  活动号列表 -->
- <link href="/css/pages/activitie_mark.css" rel="stylesheet">
+ <link href="/css/pages/activitie_mark.css?v=6" rel="stylesheet">
+ <section class="pd pull_down_w pt10 pm10 bgff bbm pr">
+    <span class="fz14">{{sel_name}}</span>	 <i class="mui-icon mui-icon-arrowdown fz16"></i>
+    	<section class="xz_po_er bgff">
+    	   <p class="pd pt5 pm5" ng-repeat="lk in ilk_as" ng-bind="lk.type_name" ng-click="classify_oiiw(lk.note_id,lk.id,lk.type_name)"></p>   
+    	</section>
+    	
+ </section>
 <div id="demand_list" pulllist callback="paging()"  class="ulact_p nitialize" ng-click="">
         		<ul>  
         	   	<li class="pl10 pr10 pt10 pm10 bgff attention_po bbm"  ng-repeat="ge in ge_type">

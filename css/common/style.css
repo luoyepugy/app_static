@@ -228,8 +228,11 @@ margin-right: 6px;
 }
 .act_user_a{
     min-width: 96px;
-    height: 91px;
+    height: 80px;
     width: 35%;
+}
+.act_user_a img{
+	height:100%
 }
 .success_icon{
     width: 30px;
@@ -530,13 +533,11 @@ img {
     position: relative;
     bottom: 6px;
 }
-.time_icon {
-    background-position: -152px -34px;
-}
+
 .map_icon{
     width: 14px;
     height: 16px;
-    background-position: -226px -96px;
+    background-position: -227px -99px;
     position: relative;
     top: 4px;
     margin-right: 6px;
@@ -544,10 +545,14 @@ img {
 .time_icon{
     width: 14px;
     height: 16px;
-    background-position: -254px -97px;
+    background-position: -255px -99px;
       position: relative;
     top: 4px;
     margin-right: 6px;
+}
+section.dfd_pooic{
+    line-height: 1;
+    padding-top: 4px;
 }
 .schedule_p i{
 	width:13px;
@@ -633,13 +638,18 @@ section#pullrefresh {
     height: 41px;
 }
 .ulact_p{
-     position: fixed;
+  position: fixed;
     left: 0px;
-    top: 88px;
+    top: 76px;
     width: 100%;
     height: 100%;
     z-index: 999;
     background: #fff;
+
+}
+.ulact_p_pooox{
+	    top: 48px;
+	    padding-top: 40px;
 }
 .nitialize {
     top: 46px;
@@ -1524,7 +1534,7 @@ span.mui-pull-right.asd_po.dian.ng-binding {
 /*活动详情*/
 .act_title{
 	display: block;
-	width: 80px;
+	width: 74px;
 	float: left;
 	font-size: 14px;
 }
@@ -2081,7 +2091,7 @@ img.yj.user_zz_p {
        padding: 7px 10px;
     border-top: 1px solid #e0e0e0;
     border-bottom: 1px solid #e0e0e0;
-    margin-top: 10px;
+    margin-top: 7px;
 }
 .indexAd img{
 	width:100%
@@ -2541,3 +2551,22 @@ p.schedule_p {
 .mui-btn-success{
     border: 1px solid #4FA45D
 }
+footer#mml_bottom a {
+    width: 20%;
+}
+
+#allmap{
+	height:400px;
+}
+.orientation input{
+            margin: 0;
+            border-radius: 0px;
+            text-indent: 0;
+            font-size:12px;
+        }
+        .ssd_ssdfg{
+            height: 40px;
+            border: 1px solid #CCCCCC;
+            border-left: 0px;
+            line-height: 40px;
+        }

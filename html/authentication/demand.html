@@ -2,7 +2,7 @@
 <meta charset="UTF-8">
  <link href="/css/pages/activitie_mark.css" rel="stylesheet">
 <section class="pd pt10  bgff ddf_pooxd_a">
-		    <a class="activitie_label fz14 yj4"  ng-repeat="ty in ge_type" ng-bind="ty.type_name" ui-sref="demand_list" >
+		    <a class="activitie_label fz14 yj4"  ng-repeat="ty in ge_type" ng-bind="ty.type_name" ng-click="gp_list(ty.child_list)">
 		      
 		    </a>
 		

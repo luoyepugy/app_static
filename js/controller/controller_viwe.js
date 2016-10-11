@@ -216,31 +216,13 @@ angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.rou
 		case 2:title_po="创业投资";break
 		case 3:title_po="亲子教育";break
 		case 4:title_po="金融财经";break
-		
 		case 5:title_po="精品课程";break
 		case 6:title_po="休闲户外";break
 		case 7:title_po="娱乐艺术";break
-	
 		case 0:title_po="全部";break
 	}
 	$(".sys-loading").addClass("show_a")
 	$(".list_activities .box_a").eq(0).find("span").text(title_po)
-
-	// 获取子类数据
-	// $scope.showSubCategory = function(id) {
-	// 	$scope.subCategoryType = {};
-	// 	$scope.subCategoryType[index] = !($scope.subCategoryType[index]);
-	// 	$scope.subCategory = $scope.category[index].child_list;
-	// };
-	// 搜索子类
-	// $scope.searchSubCategory = function(id) {
-	// 	httpService.getDatas('GET', '/activity/query_activity_list', {pageIndex: 1, pageSize: 8, status: 0, type: id}, function(data) {
-	// 		console.log(data.rows);
-	// 		$scope.act_list.act_list_data(list_data);
-	// 	});
-	// 	list_data.type_child = id;
-	// 	$scope.act_list.act_list_data(list_data);
-	// }
 	
     var list_data={},
     	city_name=localStorage.city_name==undefined?"深圳":localStorage.city_name.split("市")[0];//行数
@@ -633,7 +615,9 @@ angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.rou
 
 	var activityIndex = 1,
 		suportIndex = 1,
-		sponsorIndex = 1;
+		sponsorIndex = 1,
+		index = 1,
+		typeId = 0;
 	
 	// 选择类型
 	$scope.selectType = function() {
@@ -648,32 +632,30 @@ angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.rou
 	
 	// 下拉加载
 	$scope.sponsorMore = function() {
-		sponsorIndex++;
+		index++;
 		searchSponsor(true);
 	}
 	$scope.activityMore = function() {
-		activityIndex++;
+		index++;
 		searchActivity(true);
 	}
 	$scope.supportMore = function() {
-		suportIndex++;
+		index++;
 		searchSupport(true);
 	}
 
 	// 搜索结果
 	$scope.searchResult = function() {
+		index = 1;
+
 		name = $('.j-searchForm').find('input[name="searchName"]').val();
 		var type = $('.j-searchType').text();
-		
-		if(type == '活动号') {
-			$('#sponsorList').show().siblings().hide();
-			searchSponsor();
-		} else if(type == '活动') {
-			$('#activityList').show().siblings().hide();
-			searchActivity();
-		} else if(type == '赞助') {
-			$('#supportList').show().siblings().hide();
-			searchSupport(); 
+		switch(type) {
+			case '活动号': typeId = 0; $('#sponsorList').show().siblings().hide(); searchSponsor(); break;
+			case '赞助': $('#supportList').show().siblings().hide(); searchSupport(); break;
+			case '嘉宾号': typeId = 1; $('#guestList').show().siblings().hide(); searchSponsor(); break;
+			case '媒体号': typeId = 2; $('#mediaList').show().siblings().hide(); searchSponsor(); break;
+			default: $('#activityList').show().siblings().hide(); searchActivity();	// 默认活动
 		}
 	}
 	var request = function(url, datas, array, more) {
@@ -691,19 +673,26 @@ angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.rou
 			}
 		});
 	}
-	// 主办方
+	// 活动号、嘉宾号、媒体号
 	var searchSponsor = function(push) {
+		var list;
 		var sponsorDatas = {
-			'pageIndex': sponsorIndex,
+			'pageIndex': index,
 			'name': name,
-			'pageSize': 10
+			'pageSize': 10,
+			'type_id': typeId
 		};
-		request('/sponsor/sponsor_search_page', sponsorDatas, 'sponsorList', push);
+		switch(typeId) {
+			case 0 : list = 'sponsorList'; break;
+			case 1: list = 'guestList'; break;
+			case 2: list = 'mediaList'; break;
+		}
+		request('/sponsor/sponsor_search_page', sponsorDatas, list, push);
 	};
 	// 赞助
 	var searchSupport = function(push) {
 		var supportDatas = {
-			'pageIndex': suportIndex,
+			'pageIndex': index,
 			'sort': 1,
 			'name': name,
 			'pageSize': 10
@@ -713,7 +702,7 @@ angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.rou
 	// 活动
 	var searchActivity = function(push) {
 		var activityDatas = {
-			'pageIndex': activityIndex,
+			'pageIndex': index,
 			'status': 0,
 			'name': name,
 			'pageSize': 10
@@ -730,13 +719,12 @@ angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.rou
 	httpService.getDatas('GET', '/sponsor/certificationNum').then(function(data) {
 		$scope.auth = data.info;
 	});
-})
-
-// ======================= 金融贷款 ============================
-/* @ngInject */
-.controller('finance_loanCtrl', function($scope,httpService, messageService) {
-	$scope.selectedSex = 1;
-	$scope.selectedType = 1;
+	 var sh_a={};  //微信分享
+ 	sh_a.title="E场景活动号、嘉宾号、媒体号入驻开启啦！"
+    sh_a.desc='想成为e场景活动签约活动主办方、活动嘉宾、活动媒体吗？入口已开启，赶紧申请入驻吧！'
+    sh_a.link=window.location.href;
+    sh_a.imgUrl="http://m.apptown.cn/img/vip_loan_share.png"
+    wx_share(sh_a)
 })
 
 // ======================= 活动号认证 ============================
@@ -758,6 +746,8 @@ angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.rou
 		    	case 2:  vm.sponsor.failInfo = data.info.remark; break;
 			}
 		}
+		
+		
     });
     // 表单提交成功后跳转
     $scope.route = function() {
@@ -767,14 +757,55 @@ angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.rou
 	$scope.reSponsorAuth = function () {
 		vm.status = 0;
 	}
+    var sh_a={};  //微信分享
+ 	sh_a.title="e场景活动“活动号”来了，欢迎认证！"
+    sh_a.desc='认证成为e场景活动号，将获得丰富高级功能服务，赶集来认证吧！'
+    sh_a.link=window.location.href;
+    sh_a.imgUrl="http://m.apptown.cn/img/Activity-number.png"
+    wx_share(sh_a)
+})
+// ======================= 嘉宾号认证 ============================
+/* @ngInject */
+.controller('guest_authCtrl', function($scope,httpService, messageService) {//111111
+    var sh_a={};  //微信分享
+ 	sh_a.title="我要成为e场景活动签约嘉宾！"
+    sh_a.desc='我是行业精英、大咖、网络红人，我想分享，我有话说，现在申请成为e场景活动签约嘉宾吧！'
+    sh_a.link=window.location.href;
+    sh_a.imgUrl="http://m.apptown.cn/img/Guest-number.png"
+    wx_share(sh_a)
+})
+// ======================= 媒体号认证 ============================
+/* @ngInject */
+.controller('media_authCtrl', function($scope,httpService, messageService) {//111111
+    var sh_a={};  //微信分享
+ 	sh_a.title="我要成为e场景签约媒体！"
+    sh_a.desc='赶紧成为e场景活动合作媒体，百万活动媒体宣传需求等您来袭！'
+    sh_a.link=window.location.href;
+    sh_a.imgUrl="http://m.apptown.cn/img/Media-number.png"
+    wx_share(sh_a)
+})
+
+// ======================= 金融贷款 ============================
+/* @ngInject */
+.controller('finance_loanCtrl', function($scope,httpService, messageService) {//111111
+	// 单选框默认选中状态值
+	$scope.selectedSex = 1;
+	$scope.selectedType = 1;
+	// 分享
+    var sh_a={};  //微信分享
+ 	sh_a.title="易居购金融，借款so easy！再也不用担心没钱啦！"
+    sh_a.desc='主营红本抵押、工薪消费贷、企业贷等贷款服务，为您量身打造一款合适您的贷款产品。'
+    sh_a.link=window.location.href;
+    sh_a.imgUrl="http://m.apptown.cn/img/loan_loan_share.png"
+    wx_share(sh_a)
 })
 
 // ======================= 机器申请 ============================
 /* @ngInject */
 .controller('activity_machine_apply', function($scope,httpService, messageService) {
 	var sh_a={};  //微信分享
- 	sh_a.title="【首页】e场景活动"
-    sh_a.desc='便捷的活动发布平台、"找活动,上e场景活动平台"'
+ 	sh_a.title="想要一台e场景活动免费签到机吗？赶紧来申请吧！"
+    sh_a.desc='签到机为活动量身打造的签到和广告等服务，欢迎广大活动主办方和活动场地方前来申请，满足条件可以免费哦！'
     sh_a.link=window.location.href;
     sh_a.imgUrl="http://m.apptown.cn/img/activity_apply_share2.png"
     wx_share(sh_a)
@@ -813,7 +844,9 @@ angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.rou
 	}
 	
 
-}).controller('activitie_demand', function($scope,httpService, messageService) {
+})
+/*=====================活动号查询========================*/
+.controller('activitie_demand', function($scope,httpService, messageService,$state) {
 	httpService.getDatas('GET', '/type/get_all_type').then(function(data) {
 		$scope.ge_type=data
 	});
@@ -825,7 +858,13 @@ angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.rou
 			
 		}
 	});
-}).controller('demand_list_ctl', function($scope,httpService, messageService,$state) {//活动号列表
+
+	$scope.gp_list=function(da){
+		da=JSON.stringify(da)
+		console.log(da);
+		$state.go("demand_list",{'data':da})
+	}
+}).controller('demand_list_ctl', function($scope,httpService, messageService,$state,$stateParams) {//活动号列表
 	$(".mml_bottom a").removeClass("bottom_act");
 	$(".mml_bottom a").eq(1).addClass("bottom_act");
 	var apply=new Object();
@@ -878,6 +917,27 @@ angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.rou
     		   });
     		  
     	   }
+    }
+    $scope.ilk_as=angular.fromJson($stateParams.data)
+    if($scope.ilk_as==null){
+    	return
+    }else{
+    	$(".pull_down_w ").addClass("show_a")
+    	$("#demand_list").css({"top":"88px"})
+    } 
+    
+    $(".pull_down_w ").on("click",function(){
+    	$(".xz_po_er ").toggleClass("show_a")
+    })
+    $scope.sel_name="全部"
+    $scope.classify_oiiw=function(type,type_child,name){
+    	console.log(type+"  "+type_child);
+    	$scope.ge_type=[]
+    	apply.pageIndex=1
+    	apply.type=type
+    	apply.type_child=type_child
+    	$scope.sel_name=name
+		$scope.getdate_a(apply)
     }
 })
 

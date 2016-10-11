@@ -35,6 +35,34 @@
 	</ul>
 </div>
 <!-- /主办方结果 -->
+<!-- 嘉宾号结果 -->
+<div id="guestList" class="searchResutWrap" pulllist callback="sponsorMore()">
+  <ul class="mui-table-view" style="margin-top:0;">
+      <li class="mui-table-view-cell mui-media" ng-repeat="item in guestList">
+          <img class="mui-media-object mui-pull-left sponsorImg" ng-src="{{item.sponsor_icon}}">
+          <div class="mui-media-body" style="padding-right: 75px;">
+              <p class="mui-ellipsis sponsorTitle">{{item.name}}</p>
+              <p class="ellipsisText2">{{item.introduction}}</p>
+          </div>
+          <a ng-href="tel:{{item.contacter_phone}}" class="mui-btn mui-btn-outline mainBtn">联系TA</a>
+    </li>
+  </ul>
+</div>
+<!-- /嘉宾号结果 -->
+<!-- 媒体号结果 -->
+<div id="mediaList" class="searchResutWrap" pulllist callback="sponsorMore()">
+  <ul class="mui-table-view" style="margin-top:0;">
+      <li class="mui-table-view-cell mui-media" ng-repeat="item in mediaList">
+          <img class="mui-media-object mui-pull-left sponsorImg" ng-src="{{item.sponsor_icon}}">
+          <div class="mui-media-body" style="padding-right: 75px;">
+              <p class="mui-ellipsis sponsorTitle">{{item.contacter}}</p>
+              <p class="ellipsisText2">{{item.introduction}}</p>
+          </div>
+          <a ng-href="tel:{{item.contacter_phone}}" class="mui-btn mui-btn-outline mainBtn">联系TA</a>
+    </li>
+  </ul>
+</div>
+<!-- /媒体号结果 -->
 <!-- 活动结果 -->
 <div id="activityList" class="searchResutWrap" pulllist callback="activityMore()">
    <ul style="background:#EFEFF4">  
@@ -126,8 +154,6 @@
 	</ul>
 </div>
 <!-- /赞助结果 -->
-
-</div>
 
 
 <!-- /搜索结果页 -->
