@@ -1,15 +1,21 @@
 
 <meta charset="UTF-8">
- <link href="/css/pages/activitie_mark.css" rel="stylesheet">
+ <link href="/css/pages/activitie_mark.css?v=15" rel="stylesheet">
 <section class="pd pt10  bgff ddf_pooxd_a">
-		    <a class="activitie_label fz14 yj4"  ng-repeat="ty in ge_type" ng-bind="ty.type_name" ng-click="gp_list(ty.child_list)">
+           <section  ng-repeat="ty in ge_type">
+              <p ng-bind="ty.name" class="zd fz16 pm5 pl10"></p>
+              <section class="pokjhiT_a" ng-repeat="tuiou in ty.child_list">
+             		<a class="activitie_label fz14 yj4"   ng-bind="tuiou.label_name" ng-click="gp_list(tuiou.id)">
 		      
-		    </a>
+		   		 </a>
+              </section>
+               <p class="qc"></p>
+		 </section>   
 		
-		    <p class="qc"></p>
+		   
 		</section>
 		
- 		<section class="pd mt10 bgff pt10 pm10 poiuyt_sf" ng-click="isLogin('activity_auth')">
+ 		<section class="pd mt10 bgff pt10 pm10 poiuyt_sf mt32" ng-click="isLogin('activity_auth')">
            <p class="mui-col-xs-8 fl fz12">
                活动号可以拥有活动号粉丝群 可以发起话题，了解并壮大您的粉丝群
                
@@ -25,7 +31,7 @@
 		</section> 
 		
 		
-		<section class="pd mt10 bgff pt10 pm10 poiuyt_sf_p">
+		<section class="pd mt10 bgff pt10 pm10 poiuyt_sf_p mt32">
            <p class="mui-col-xs-12 fl fz12">
           您认证了活动号，可以获得打赏、票卷、广告等活动收益，下版本即开通活动号粉丝群，您可以拥有平台带给您的粉丝群了......
                

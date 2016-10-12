@@ -239,29 +239,14 @@ angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.rou
         }
         list_data.time_status="";//时间
         list_data.status=0; 
-        var oldType = 1;
         $scope.act_list={  
     		 "activity_list":[],//初始化活动列表数据
     		 "select_data":[],//初始化活动下拉框数据
     		 "title_p":function(type,ev){
-		 		if(oldType == type) {
-		 			$(".list_active").toggleClass("show_a");
-		 			$(".dfg_poi").toggleClass("mui-block")
-		 		} else {
-		 			oldType = type;
-		 			$(".list_active").addClass("show_a");
-		 			$(".dfg_poi").addClass("mui-block")
-		 		}
-			   	// 分类类型
-			   	$scope.categoryType = false;
+	 			$(".list_active").addClass("show_a");
+	 			$(".dfg_poi").addClass("mui-block")
 			 	switch(type){
-			 		case 1: {
-			 			httpService.getDatas('GET', '/type/get_all_type', {flag: 'h5'}).then(function(datas) {
-							$scope.category = datas;
-	    			   	});
-			 			$scope.categoryType = true;
-			 			break;
-			 		}
+			 		case 1:$scope.act_list.select_data=$scope.classify[0];break;
 			 		case 2:$scope.act_list.select_data=$scope.classify[1];break;
 			 		case 3:$scope.act_list.select_data=$scope.classify[3];break;
 			 		case 4:$scope.act_list.select_data=$scope.classify[4];break;
@@ -273,8 +258,6 @@ angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.rou
 			 		list_data.pageIndex=1;
 			 	  	$(".list_active").removeClass("show_a");
 			 		$(".dfg_poi").removeClass("mui-block");
-					// 二级分类id
-			 		list_data.type_child = subId;
 			 		switch(title){
     			 		case "分类": list_data.type=id;$(".list_activities .box_a").eq(0).find("span").text(name);break;
     			 		case "行业":list_data.industry_id=id;$(".list_activities .box_a").eq(1).find("span").text(name);break;
@@ -733,7 +716,7 @@ angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.rou
 	var vm = $scope;
 	vm.sponsor = {};
 	// 获取认证数据
-	httpService.getDatas('GET', '/sponsor/get_sponsorapply')
+	httpService.getDatas('GET', '/sponsor/get_sponsorapply', {typeId: 0})
     .then(function(data) {
     	if(data.info == null) {
 			vm.status = 0;
@@ -767,6 +750,31 @@ angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.rou
 // ======================= 嘉宾号认证 ============================
 /* @ngInject */
 .controller('guest_authCtrl', function($scope,httpService, messageService) {//111111
+	var vm = $scope;
+	vm.sponsor = {};
+	// 获取认证数据
+	httpService.getDatas('GET', '/sponsor/get_sponsorapply', {typeId: 1})
+    .then(function(data) {
+    	if(data.info == null) {
+			vm.status = 0;
+			return false;
+		}
+		if(data.code==0 && data.info.status){
+			vm.status = data.info.status;
+			switch(Number(data.info.status)) {
+				case 1:  vm.sponsor = data.info; break;
+		    	case 2:  vm.sponsor.failInfo = data.info.remark; break;
+			}
+		}	
+    });
+    // 表单提交成功后跳转
+    $scope.route = function() {
+    	vm.status = 3;
+    }	
+	// 重新认证，显示主办方认证表单
+	$scope.reSponsorAuth = function () {
+		vm.status = 0;
+	}
     var sh_a={};  //微信分享
  	sh_a.title="我要成为e场景活动签约嘉宾！"
     sh_a.desc='我是行业精英、大咖、网络红人，我想分享，我有话说，现在申请成为e场景活动签约嘉宾吧！'
@@ -777,6 +785,33 @@ angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.rou
 // ======================= 媒体号认证 ============================
 /* @ngInject */
 .controller('media_authCtrl', function($scope,httpService, messageService) {//111111
+	var vm = $scope;
+	vm.sponsor = {};
+	// 获取认证数据
+	httpService.getDatas('GET', '/sponsor/get_sponsorapply', {typeId: 2})
+    .then(function(data) {
+    	if(data.info == null) {
+			vm.status = 0;
+			return false;
+		}
+		if(data.code==0 && data.info.status){
+			vm.status = data.info.status;
+			switch(Number(data.info.status)) {
+				case 1:  vm.sponsor = data.info; break;
+		    	case 2:  vm.sponsor.failInfo = data.info.remark; break;
+			}
+		}
+		
+		
+    });
+    // 表单提交成功后跳转
+    $scope.route = function() {
+    	vm.status = 3;
+    }	
+	// 重新认证，显示主办方认证表单
+	$scope.reSponsorAuth = function () {
+		vm.status = 0;
+	}
     var sh_a={};  //微信分享
  	sh_a.title="我要成为e场景签约媒体！"
     sh_a.desc='赶紧成为e场景活动合作媒体，百万活动媒体宣传需求等您来袭！'
@@ -847,7 +882,7 @@ angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.rou
 })
 /*=====================活动号查询========================*/
 .controller('activitie_demand', function($scope,httpService, messageService,$state) {
-	httpService.getDatas('GET', '/type/get_all_type').then(function(data) {
+	httpService.getDatas('GET', '/label/group').then(function(data) {
 		$scope.ge_type=data
 	});
 	httpService.getDatas('GET', '/sponsor/get_sponsorapply').then(function(data) {
@@ -885,6 +920,10 @@ angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.rou
 		
 		});
 	}
+	  $scope.ilk_as=$stateParams.data
+	    if($scope.ilk_as>0){
+	      apply.labels=$scope.ilk_as
+	    } 
 	$scope.getdate_a(apply);//初始化活动好
     $scope.paging=function(){//分页
 		apply.pageIndex++
@@ -918,13 +957,14 @@ angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.rou
     		  
     	   }
     }
-    $scope.ilk_as=angular.fromJson($stateParams.data)
-    if($scope.ilk_as==null){
+
+  
+/*    if($scope.ilk_as==null){
     	return
     }else{
     	$(".pull_down_w ").addClass("show_a")
     	$("#demand_list").css({"top":"88px"})
-    } 
+    } */
     
     $(".pull_down_w ").on("click",function(){
     	$(".xz_po_er ").toggleClass("show_a")
@@ -932,12 +972,11 @@ angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.rou
     $scope.sel_name="全部"
     $scope.classify_oiiw=function(type,type_child,name){
     	console.log(type+"  "+type_child);
-    	$scope.ge_type=[]
-    	apply.pageIndex=1
-    	apply.type=type
-    	apply.type_child=type_child
-    	$scope.sel_name=name
-		$scope.getdate_a(apply)
+    	$scope.ge_type=[];
+    	apply.pageIndex=1;
+    	apply.type=type;
+    	$scope.sel_name=name;
+		$scope.getdate_a(apply);
     }
 })
 
