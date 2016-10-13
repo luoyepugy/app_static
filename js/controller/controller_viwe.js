@@ -611,12 +611,7 @@ angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.rou
 		$('.j-searchType').text($(this).text());
 		$('.j-searchTypeList').slideToggle();
 	});
-
-	// 获取活动标签
-	httpService.getDatas('GET', '/label/group').then(function(data) {
-		$scope.activityLabel = data;
-	});
-
+	
 	// 搜索结果
 	$scope.searchResult = function() {
 		name = $('.j-searchForm').find('input[name="searchName"]').val();
@@ -651,7 +646,7 @@ angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.rou
 	$scope.supportList = [];
 	$scope.activityList = [];
 	$scope.hostList = [];
-	
+
 	var search = {
 		request: function(url, datas, array, more) {
 			httpService.getDatas('GET', url, datas).then(function(data) {
@@ -661,7 +656,7 @@ angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.rou
 						messageService.show('没有更多数据了', 'toast');
 					}
 				} else {
-					console.log(array);
+					// console.log(array);
 					$scope[array] = data.rows;
 					if(data.rows.length == 0) {
 						messageService.show('暂无搜索结果', 'toast');
