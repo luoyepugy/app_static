@@ -11,13 +11,13 @@ angular.module('pay', ["directive_mml","activity_servrt","ui.router"])
 	} 
 	$scope.pay={"sum":function(type){
 		if(type==0){
-			 $(".sys-loading").addClass("show_a")
+			    $(".sys-loading").addClass("show_a");
 				activity_data.pay_consumption($scope.act_d.date).then(
 			    		function success(data){    	
-			    			   $(".sys-loading").removeClass("show_a")
+			    			$(".sys-loading").removeClass("show_a");
 			    		    if(data.code!=0){
 			    		    	 mui.alert(data.msg, 'E场景活动');
-			    		    	 return
+			    		    	 return;
 			    		    }
 			    		 
 			    		    var id_p={}

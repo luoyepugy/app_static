@@ -332,6 +332,8 @@ function ticket_volume_list(data){
 	  function activity_detail(info){
 		  this.images_po=info.cover_url;//活动详情轮播图
 		  this.title=info.name;//活动详情轮标题
+		  this.activity_min_money=info.activity_min_money;//票劵价格最低多少元起
+		  this.activity_time=info.activity_time;//活动详情开始和结束时间
 		  this.browse_count=info.scan;//活动详情浏览次数
 		  this.join_count=info.join_count;//活动详情参与人数
 		  this.industry_id=info.industry_id;//活动详情行情ID
@@ -343,7 +345,7 @@ function ticket_volume_list(data){
 		  this.endDate=info.end_time_fm;//活动结束时间 
 		  this.sDate_time=info.start_time;//活动开始时间
 		  this.eDate=info.end_time;//活动结束时间
-		  this.person_limit=info.person_limit==null?'无限制':info.person_limit;//活动活动席位（人数上限）
+		  this.person_limit=info.person_limit==null?'无限制':info.person_limit+'人';//活动活动席位（人数上限）
           var clkj_show="",
           broadcast=true;//为真的时候直播正在进行中  否则直播结束
 		  if(info.live_status==1){//1有直播  0没有直播
@@ -441,6 +443,34 @@ function ticket_volume_list(data){
 		   }
 		   this.is_free=info.is_free;//0.免费  1收费
 		   this.sponsor_intro=info.sponsor_intro;//主办方认证后获得主办方简介
+		   this.attention_sponsor=info.attention_sponsor;//是否关注主办方
+		   if(this.attention_sponsor==0){
+		   	this.attent_text="关注TA";
+		   	this.attent_class="contract_de2";	
+		   	this.dataX=0;
+		   }else{
+		    this.attent_text="取消关注";
+		    this.attent_class="contract_de3";
+		    this.dataX=1;
+		   }	
+		   
+		   if(info.share_count<0){//分享次数
+		   	this.share_count="";
+		   }else if(info.share_count>0&&info.share_count<100){
+		   	this.share_count=info.share_count;
+		   }else if(info.share_count>=99){
+		   	this.share_count=99+"+";
+		   }
+		   
+		   if(info.collect_count<0){//收藏次数
+		   	this.collect_count="";
+		   }else if(info.collect_count>0&&info.collect_count<100){
+		   	this.collect_count=info.collect_count;
+		   }else if(info.collect_count>=99){
+		   	this.collect_count=99+"+";
+		   }
+		   this.collect_count=info.collect_count;//收藏次数
+		  
 	  }
 	  
 	   /*签到墙*/

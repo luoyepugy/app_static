@@ -590,109 +590,125 @@ angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.rou
 	 }) 
 }])
 
-// ======================= 搜索结果 ============================
+// ======================= 搜索 ============================
 /* @ngInject */
-.controller('searchCtrl', function($scope,httpService, messageService) {
-	$scope.supportList = [];
-	$scope.activityList = [];
-
-	var activityIndex = 1,
-		suportIndex = 1,
-		sponsorIndex = 1,
-		index = 1,
-		typeId = 0;
+.controller('searchCtrl', function($scope,httpService, messageService, $state) {
+	var name = '',
+		type = 0;	// 搜索类型(活动0、活动号1、嘉宾号2、媒体号3、赞助4),前端判断使用
+		typeText = '活动';
 	
 	// 选择类型
 	$scope.selectType = function() {
 		$('.j-searchTypeList').slideToggle();
 	}
 	$('.j-searchTypeList li').click(function() {
-		var text = $('.j-searchType').text();
+		if($(this).text() == '活动'){
+			$('.j-activityLabel').show();
+		} else {
+			$('.j-activityLabel').hide();
+		}
+		typeText = $(this).text();
 		$('.j-searchType').text($(this).text());
-		$(this).text(text).parent().slideToggle();
-
+		$('.j-searchTypeList').slideToggle();
 	});
-	
-	// 下拉加载
-	$scope.sponsorMore = function() {
-		index++;
-		searchSponsor(true);
-	}
-	$scope.activityMore = function() {
-		index++;
-		searchActivity(true);
-	}
-	$scope.supportMore = function() {
-		index++;
-		searchSupport(true);
-	}
+
+	// 获取活动标签
+	httpService.getDatas('GET', '/label/group').then(function(data) {
+		$scope.activityLabel = data;
+	});
 
 	// 搜索结果
 	$scope.searchResult = function() {
-		index = 1;
-
 		name = $('.j-searchForm').find('input[name="searchName"]').val();
-		var type = $('.j-searchType').text();
-		switch(type) {
-			case '活动号': typeId = 0; $('#sponsorList').show().siblings().hide(); searchSponsor(); break;
-			case '赞助': $('#supportList').show().siblings().hide(); searchSupport(); break;
-			case '嘉宾号': typeId = 1; $('#guestList').show().siblings().hide(); searchSponsor(); break;
-			case '媒体号': typeId = 2; $('#mediaList').show().siblings().hide(); searchSponsor(); break;
-			default: $('#activityList').show().siblings().hide(); searchActivity();	// 默认活动
+		console.log(typeText);
+		switch(typeText) {
+			case '活动': type = 10; break;
+			case '活动号': type = 20; break;
+			case '嘉宾号': type = 21; break;
+			case '媒体号': type = 22; break;
+			case '赞助': type = 30; break;
 		}
+		$state.go('search_result', {'name': name, 'type': type});
 	}
-	var request = function(url, datas, array, more) {
-		httpService.getDatas('GET', url, datas).then(function(data) {
-			if(more) {
-				$scope[array] = $scope[array].concat(data.rows);
-				if(data.rows.length == 0) {
-					messageService.show('没有更多数据了', 'toast');
-				}
-			} else {
-				$scope[array] = data.rows;
-				if(data.rows.length == 0) {
-					messageService.show('暂无搜索结果', 'toast');
-				}
-			}
-		});
-	}
-	// 活动号、嘉宾号、媒体号
-	var searchSponsor = function(push) {
-		var list;
-		var sponsorDatas = {
-			'pageIndex': index,
-			'name': name,
-			'pageSize': 10,
-			'type_id': typeId
-		};
-		switch(typeId) {
-			case 0 : list = 'sponsorList'; break;
-			case 1: list = 'guestList'; break;
-			case 2: list = 'mediaList'; break;
-		}
-		request('/sponsor/sponsor_search_page', sponsorDatas, list, push);
-	};
-	// 赞助
-	var searchSupport = function(push) {
-		var supportDatas = {
-			'pageIndex': index,
-			'sort': 1,
-			'name': name,
-			'pageSize': 10
-		};
-		request('/support/support_list', supportDatas, 'supportList', push);
-	};
-	// 活动
-	var searchActivity = function(push) {
-		var activityDatas = {
-			'pageIndex': index,
-			'status': 0,
-			'name': name,
-			'pageSize': 10
-		};
-		request('/activity/query_activity_list', activityDatas, 'activityList', push);
-	};
 
+	$scope.searchActivity = function(labelId) {
+		$state.go('search_result', {type: 11, name: labelId});
+	}
+})
+// ======================= 搜索结果 ============================
+/* @ngInject */
+.controller('search_resultCtrl', function($scope,httpService, messageService, $stateParams) {
+	var params = {'pageIndex': 1, 'pageSize': 10, 'name': name},
+		list = 'hostList';
+		// 活动号0、嘉宾号1、媒体号2 (传递给后端参数)
+		typeId = 0,	
+		// 搜索类型(活动10、活动标签11、活动号20、嘉宾号21、媒体号22、赞助30),前端判断使用
+		type = Number($stateParams.type),	
+		name = $stateParams.name,	// 搜索的关键字
+		labelId = '',				// 活动标签
+
+	$scope.type = type;	
+	$scope.supportList = [];
+	$scope.activityList = [];
+	$scope.hostList = [];
+	
+	var search = {
+		request: function(url, datas, array, more) {
+			httpService.getDatas('GET', url, datas).then(function(data) {
+				if(more) {
+					$scope[array] = $scope[array].concat(data.rows);
+					if(data.rows.length == 0) {
+						messageService.show('没有更多数据了', 'toast');
+					}
+				} else {
+					console.log(array);
+					$scope[array] = data.rows;
+					if(data.rows.length == 0) {
+						messageService.show('暂无搜索结果', 'toast');
+					}
+				}
+			});
+		},
+		activity: function(more, name) {
+			var data = params;
+				data.status = 0;
+				data.label = labelId;
+			if(labelId) data.name = '';
+			search.request('/activity/query_activity_list', data, 'activityList', more);
+		},
+		host: function(more) {
+			var data = params;
+				data.type_id = typeId;
+			search.request('/sponsor/sponsor_search_page', data, list, more);
+		},
+		support: function(more) {
+			var data = params;
+				data.sort = 1;
+			search.request('/support/support_list', data, 'supportList', more);
+		}
+	};
+	switch(type) {
+		case 10: typeId = 0; search.activity(); break;
+		case 11: typeId = 0; labelId = name; search.activity(); break;
+		case 20: typeId = 0; list = 'hostList';  search.host(); break;
+		case 21: typeId = 1; list = 'guestList'; search.host(); break;
+		case 22: typeId = 2; list = 'mediaList'; search.host(); break;
+		case 30: typeId = 0; search.support(); break;
+	}
+
+	// 下拉加载
+	$scope.sponsorMore = function() {
+		params.pageIndex++;
+		search.host(true);
+	}
+	$scope.activityMore = function() {
+		params.pageIndex++;
+		search.activity(true);
+	}
+	$scope.supportMore = function() {
+		params.pageIndex++;
+		search.support(true);
+	}
 })
 
 // ======================= 认证列表 ============================
@@ -899,6 +915,18 @@ angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.rou
 		console.log(da);
 		$state.go("demand_list",{'data':da})
 	}
+	  $scope.$on('ngfinish', function (ngfinishEvent) {
+		  var li_length=$(".deh_list").length
+		  $scope.contract($(".deh_list").eq(li_length-1))
+		  $scope.contract($(".deh_list").eq(li_length-2))
+      })
+      $scope.contract=function(eve){//展开
+		  $(eve).on("click",function(){
+			  $(this).removeClass("mt10").find(".tltle_p span").css({"opacity":"0"}) 
+			  $(this).find(".pomhhgf_we").css({"display":"block"}) 
+		  }).addClass("mt10").find(".tltle_p span").css({"opacity":"1"}).end().find(".pomhhgf_we").css({"display":"none"}) 
+
+	  }
 }).controller('demand_list_ctl', function($scope,httpService, messageService,$state,$stateParams) {//活动号列表
 	$(".mml_bottom a").removeClass("bottom_act");
 	$(".mml_bottom a").eq(1).addClass("bottom_act");
@@ -909,12 +937,12 @@ angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.rou
 	$scope.getdate_a=function(apply){//活动好
 		httpService.getDatas('GET', '/sponsor/getSponsorApply',apply).then(function(data) {
 			if(data.code!=0){
-				mui.alert(data.msg)
+				mui.alert(data.msg);
 				return;
 			}
 			$(data.rows).map(function(){
 				var date_poi=new getSponsorApply(this);
-				$scope.ge_type.push(date_poi)
+				$scope.ge_type.push(date_poi);
 			})
 			
 		
@@ -922,12 +950,12 @@ angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.rou
 	}
 	  $scope.ilk_as=$stateParams.data
 	    if($scope.ilk_as>0){
-	      apply.labels=$scope.ilk_as
+	      apply.labels=$scope.ilk_as;
 	    } 
 	$scope.getdate_a(apply);//初始化活动好
     $scope.paging=function(){//分页
-		apply.pageIndex++
-		$scope.getdate_a(apply)
+		apply.pageIndex++;
+		$scope.getdate_a(apply);
     }
     $scope.attention=function(ltype,id,index){//关注和取消关注  ltype=true 已关注否则请求取消关注
     	   var resources=new Object();
@@ -942,7 +970,7 @@ angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.rou
     			   $scope.ge_type[index].is_attention="bgdiso";
     	           $scope.ge_type[index].lkoi="已关注";
     	           $scope.ge_type[index].ltype=false;
-    	           $(".sys-loading").removeClass("show_a")
+    	           $(".sys-loading").removeClass("show_a");
     		   });
     	   }else{
     		   httpService.getDatas('GET', '/activity/cancel_attention',resources).then(function(data) {
@@ -952,7 +980,7 @@ angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.rou
     			   $scope.ge_type[index].is_attention="";
     	           $scope.ge_type[index].lkoi="关注TA";
     	           $scope.ge_type[index].ltype=true;
-    	           $(".sys-loading").removeClass("show_a")
+    	           $(".sys-loading").removeClass("show_a");
     		   });
     		  
     	   }
@@ -967,7 +995,7 @@ angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.rou
     } */
     
     $(".pull_down_w ").on("click",function(){
-    	$(".xz_po_er ").toggleClass("show_a")
+    	$(".xz_po_er ").toggleClass("show_a");
     })
     $scope.sel_name="全部"
     $scope.classify_oiiw=function(type,type_child,name){

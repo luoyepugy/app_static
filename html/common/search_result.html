@@ -1,0 +1,135 @@
+<link rel="stylesheet" href="/css/pages/user.css">
+<div>
+	<!-- 活动结果 -->
+	<div id="activityList" class="searchResutWrap" pulllist callback="activityMore()" ng-if="type==10||type==11">
+	   <ul style="background:#EFEFF4">  
+	     <li  class="mb10" ng-repeat="list in activityList" finish ui-sref="activity_detail({id:list.id})" >
+	                 <section class="pd  bgff  pt10 pm10">
+	      <img ng-src="{{list.activity_first_face}}" class="fl act_user_a">
+	       <section class="ov pl10 zc fz14">
+	           <p class="dianer zd  tile_poiu_a" ng-bind="list.activity_title"></p>
+	            
+	        <p class="fz12 dian">
+	        <i  class="f_i map_icon"></i><span ng-bind="list.city_name"></span>
+	        </p>
+	           
+	           <section class="fz12 dian zc">
+	        <p class="fl"><i class="f_i time_icon"></i><span ng-bind="list.activity_time"></span> </p>
+	          <a class="fr" ng-if="list.is_free==0">免费</a>
+	               <span class="fr hs" ng-if="list.is_free==1">收费</span>
+	          <p class="qc"></p>
+	        </section>
+	       
+	        
+	       </section>
+	       <p class="qc"></p>
+	   <!-- 暂时屏蔽赞助 -->
+	    <!-- <section class="box btm pt5 pm5 fz12 cen zc schedule_p bgff pd">
+	           <section class="box_a  tl" ng-class="list.skjhg_s">
+	              <i class="f_i zmkjf_a" ></i>目标金额{{list.target_money}}元
+	           </section>
+	            <section class="box_a" ng-class="list.skjhg_s">
+	             <i class="f_i zmkjf_b"></i>已筹{{list.now_money}}元
+	           </section>
+	            <section class="box_a tr" ng-class="list.skjhg_s">
+	             <i class="f_i zmkjf_c"></i>进度{{list.schedule}}
+	           </section>
+	        </section> -->
+	    <!-- /暂时屏蔽赞助 -->
+	        
+	            </li>
+		</ul>
+	</div> 
+	<!-- /活动结果 -->
+	<!-- 主办方/活动号结果 -->
+	<div id="hostList" class="searchResutWrap" pulllist callback="sponsorMore()" ng-if="type==20">
+		<ul class="mui-table-view" style="margin-top:0;">
+		    <li class="mui-table-view-cell mui-media" ng-repeat="item in hostList">
+		        <a ui-sref="personal_host({sponsor_user_id:item.user_id})" class="mui-navigate-right">
+		            <img class="mui-media-object mui-pull-left sponsorImg" ng-src="{{item.sponsor_icon}}">
+		            <div class="mui-media-body">
+		                <p class="mui-ellipsis sponsorTitle">{{item.name}}</p>
+		                <p><span class="mr10">活动<b class="green fn">{{item.act_sum}}</b>场</span><span>参与<b class="green fn">{{item.sign_sum}}</b>人</span></p>
+		            </div>
+		        </a>
+			</li>
+		</ul>
+	</div>
+	<!-- /主办方结果 -->
+	<!-- 嘉宾号结果 -->
+	<div id="guestList" class="searchResutWrap" pulllist callback="sponsorMore()" ng-if="type==21">
+	  <ul class="mui-table-view" style="margin-top:0;">
+	      <li class="mui-table-view-cell mui-media" ng-repeat="item in guestList">
+	          <img class="mui-media-object mui-pull-left sponsorImg" ng-src="{{item.sponsor_icon}}">
+	          <div class="mui-media-body" style="padding-right: 75px;">
+	              <p class="mui-ellipsis sponsorTitle">{{item.name}}</p>
+	              <p class="ellipsisText2">{{item.introduction}}</p>
+	          </div>
+	          <a ng-href="tel:{{item.contacter_phone}}" class="mui-btn mui-btn-outline mainBtn">联系TA</a>
+	    </li>
+	  </ul>
+	</div>
+	<!-- /嘉宾号结果 -->
+	<!-- 媒体号结果 -->
+	<div id="mediaList" class="searchResutWrap" pulllist callback="sponsorMore()"  ng-if="type==22">
+	  <ul class="mui-table-view" style="margin-top:0;">
+	      <li class="mui-table-view-cell mui-media" ng-repeat="item in mediaList">
+	          <img class="mui-media-object mui-pull-left sponsorImg" ng-src="{{item.sponsor_icon}}">
+	          <div class="mui-media-body" style="padding-right: 75px;">
+	              <p class="mui-ellipsis sponsorTitle">{{item.name}}</p>
+	              <p class="ellipsisText2">{{item.introduction}}</p>
+	          </div>
+	          <a ng-href="tel:{{item.contacter_phone}}" class="mui-btn mui-btn-outline mainBtn">联系TA</a>
+	    </li>
+	  </ul>
+	</div>
+	<!-- /媒体号结果 -->
+	<!-- 赞助结果 -->
+	<div id="supportList" class="searchResutWrap" pulllist callback="supportMore()" ng-if="type==30">
+		<ul>  
+	    <li ng-repeat="list in supportList" finish >
+	        <section class="details_case mt10 bgff pm10 btm details_case_z"  >
+	          <section class="banner_top_a banner_top_c  bgff prefecture_a">
+	           <section class="banner_top_b">
+	              <a ui-sref="sp_details({'id':list.id})">
+	               <img  ng-src="{{list.covers[0]}}">
+	               </a>
+	            </section>
+	        </section>
+	        <section class="pd">
+	            <p class="dianer zd fz16 mt10" ng-bind="list.title"></p>
+	               
+	            <p class="mt10">
+	               目标金额：￥<span class="hs fz18" ng-bind="list.target_amount"></span>
+	                <span  class="yj4 cf bgls prompt_o fr" ng-class="list.status | supportStatusClass" ng-bind="list.status | supportStatus"></span>
+	            </p>
+	            <p class="mt10 progress_bar pr yj4 ov">
+	               <span class="oiuy_po_n" style="width:{{list.schedule}}">
+	                
+	                </span>
+	            </p>
+	            <section class="box mt5 ">
+	              <p class="box_a tl">
+	                   <span class="fz14">赞助进度</span><br>
+	                    <span class="hs fz12" ng-bind="list.schedule"></span>
+	                  
+	                </p>
+	                    <p class="box_a cen">
+	                   <span class="fz14">已筹金额</span><br>
+	                    <span class="hs fz12" ng-bind="list.now_money"></span>
+	                  
+	                </p>
+	                    <p class="box_a tr">
+	                   <span class="fz14">剩余天数</span><br>
+	                    <span class="hs fz12" ng-bind="list.end_time | reduce_time:''"></span>
+	                  
+	                </p>
+	            </section>
+	        </section>  
+	    </section>
+	             
+	 	</li>
+		</ul>
+	</div>
+	<!-- /赞助结果 -->
+</div>

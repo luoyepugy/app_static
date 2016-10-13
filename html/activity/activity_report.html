@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />  
+<title>举报</title>
+<link href="/css/common/base.css" rel="stylesheet"/>
+<link href="/css/common/mui.min.css" rel="stylesheet"/>
+<style>
+    	textarea,input{
+    		text-indent: 0;
+    		margin: 0;
+    		font-size: 14px;
+    	}
+    </style>
+</head>
+<body>
+	<header class="mui-bar mui-bar-nav">
+	    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+	    <h1 class="mui-title">举报</h1>
+	</header>
+	<div class="mui-content pd">
+		<section class="mt20">
+			 <textarea rows="4" placeholder="请填写举报原因" id="reason"></textarea>
+			 <p class="mt10">
+			 	<input type="tel" placeholder="联系电话" id="phone_a"/>
+			 </p>
+			 <p>
+			   <button type="button" class="mui-btn mui-btn-blue w100 pt5 pm5 fz16" id="submit_p">提交</button>
+			 </p>
+			 <p>
+			 	说明：如举报为诈骗，联系电话为必填
+			 </p>
+		</section>
+	    
+	</div>
+	<script src="/js/common/jquery-1.11.3.min.js"></script>
+	<script src="/js/common/mui.min.js"></script>
+	<script src="/js/common/is_from.js"></script>
+	<script>
+	   $(function(){
+		   $("#submit_p").on("click",function(){
+			   var reason=$("#reason").val(),//举报原因
+			       phone_a=$("#phone_a").val();//手机号
+			      if(!form_mm.isnull(reason)){
+			         mui.alert("请输入举报原因");
+			    	   return;
+			      }
+			      if(!form_mm.isnull(phone_a)){
+		    		   mui.alert("请输入手机号码");
+		    		   return;
+		      	}
+			      if(!form_mm.tel(phone_a)){
+		    		   mui.alert("手机号码号码格式输入错误")
+		    		   return;
+		            }
+			      var report_d={}
+			      report_d.user_phone=phone_a
+			      report_d.report_reason=reason
+			      report_d.activity_id=153
+			      $.ajax({
+				    type :"post",
+		                url : "/report/add_report",
+		                data : report_d,
+		                dataType : 'json',
+		                success : function(data) { 
+		                	  if(data.code==0){
+		                		  mui.alert("举报成功","",function(){
+			                	    	 history.go(-1)
+			                	     })
+		                	  }
+		                	    
+		                },
+		                error : function(res) {
+		                   mui.alert("请求后台失败")
+		                }
+		            });
+		   })
+	   })
+	</script>
+</body>
+</html>

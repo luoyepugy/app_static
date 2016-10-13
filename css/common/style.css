@@ -1349,6 +1349,11 @@ section.ulact_p.ulact_p_sp {
     height: 28px;
     background-position: -17px -407px;
 }
+.user_icon_p_d_er{
+    width: 27px;
+    height: 28px;
+    background-position: -15px -536px;
+}
 .logo_icon_b{
     width: 22px;
     background-position: -19px -445px;
@@ -1656,7 +1661,45 @@ font[size="5"]{
 .pb0{
     padding-bottom: 0px !important
 }
-
+.de_timer {
+	width:14px;
+	height:14px;
+	background-position: -79px -653px;
+    margin-top: 4px;
+}
+.de_adress {
+	width:14px;
+	height:14px;
+	background-position: -78px -685px;
+    margin-top: 4px;
+}
+.de_plimit {
+	width:14px;
+	height:14px;
+	background-position: -78px -718px;
+    margin-top: 4px;
+}
+.de_price{
+	width:14px;
+	height:14px;
+	background-position: -78px -745px;
+    margin-top: 4px;
+}
+.bor_e0_t {
+	border-top:1px solid #e0e0e0
+}
+.bor_e0_r {
+	border-right:1px solid #e0e0e0
+}
+.de_auth {
+	background: #8ddd9b;
+	color: #fff;
+	border-radius: 4px;
+	width:40px;
+	text-align: center;
+	font-size: 12px;	
+	line-height: 28px;
+}
 /* 分享 */
 
 .modal-header.text-center {
@@ -1748,8 +1791,18 @@ img.yj.user_zz_p {
 	color:#4ea45d;
 	line-height:28px;
 }
+.contract_de3 {
+	border:1px solid #ccc;
+	text-align:center;
+	color:#fff;
+	line-height:28px;
+	background: #ccc;
+}
 .ml5 {
 	margin-left:5px;
+}
+.pt2 {
+	padding-top: 2px;
 }
 /*免费报名表单*/
 .apply_p li{

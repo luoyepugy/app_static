@@ -9,11 +9,17 @@ angular.module('act_details', [ "directive_mml","activity_servrt","ui.router","p
 	  $scope.id_a=$stateParams.id
 	  var hjgf=true;//设置取消和收藏关注
 	  
+	  $(".share_all_num").on("click",function(){
+	  	httpService.getDatas('POST', '/share/add_share',{"type":1,"relevance_id":$scope.id}).then(function(data) {
+				  
+				});  
+	  })
+	  
 	  $scope.detail={
 		  "detail_date":{},
 		  "detail_f":function(id){//查看活动详情
 		    activity_data.activity_detail(id).then(
-		    		function success(data){    		
+		    		function success(data){    
 		    		    if(data.code!=0){
 		    		    	 mui.alert('活动详情数据获取失败', 'E场景活动');
 		    		    	 return
@@ -52,13 +58,15 @@ angular.module('act_details', [ "directive_mml","activity_servrt","ui.router","p
 				        		});
 			    			});
 				        });  
+				     
+				       
 		    		}, function error() {
 						console.log("活动详情获取失败");
 		    }); 
-	    },"collection":function(){//收藏或关注
+	    },"collectionActivity":function(){//收藏或关注活动
 	    	var date_po={}
-	    	date_po.resources_id=$scope.user_id_a
-	    	date_po.type=4;
+	    	date_po.resources_id=$scope.id
+	    	date_po.type=1;
 	    	if($scope.detail.detail_date.is_collect==1){
 	    		hjgf=false;
 	    	}
@@ -136,6 +144,22 @@ angular.module('act_details', [ "directive_mml","activity_servrt","ui.router","p
 	    		return;
 	    	}
 	    	$(".pup_soou_p").css({"left":"0"})
+	    },"collectionSponsor":function(){//主办方关注操作
+	    	var user_id_a=$scope.user_id_a;
+	    	var x=$('.detail_jus').attr("data-x");
+	    	if(x==0){
+	    		httpService.getDatas('GET', '/activity/exec_attention?resources_id='+user_id_a+'&type=4').then(function(data) {
+				    $('.detail_jus').removeClass('contract_de2').addClass("contract_de3");
+				    $('.contract_dr3').text("取消关注");
+				    $('.detail_jus').attr("data-x",1);
+				});  
+	    	}else{
+	    		 httpService.getDatas('GET', '/activity/cancel_attention?resources_id='+user_id_a+'&type=4').then(function(data) {
+				    $('.detail_jus').removeClass('contract_de3').addClass("contract_de2");
+				    $('.contract_dr3').text("关注TA");
+				    $('.detail_jus').attr("data-x",0);
+				});
+	    	}
 	    }
 	  }
 	  $scope.streaming_poo=function(broadcast){//broadcast=真为正在直播
@@ -382,7 +406,7 @@ $(".dd_pooo").hide()
 					console.log("验证失败");
 	    });
 }]).controller('activity_charge_p',["$scope","activity_data","$location","$stateParams","act_date","$state",function($scope,activity_data,$location,$stateParams,act_date,$state) { //收费活动报名
-  
+  console.log(act_date.date)
    $scope.ticket=1;//票种初始化
    $scope.act_d=act_date.date;//初始化活动详情数据
    $scope.form_p= $scope.act_d.detail_config;
@@ -435,12 +459,12 @@ $(".dd_pooo").hide()
 	   $(".we_pay_oi .mui-hidden").removeClass("show_a")
 	   $(".we_pay_oi").eq(x).find(".mui-hidden").addClass("show_a")
    },"act_pay":function(){
-		   var date_f={}
-		   var tick={}
-		   tick.ticket_id=this.ticket_id
+		   var date_f={};
+		   var tick={};
+		   tick.ticket_id=this.ticket_id;
 			 if(tick.ticket_id==0){
 				 mui.alert('请选择票种', 'E场景活动');
-				 return
+				 return;
 			 }
 			 
 			for(var i=0;i<$(".form_po_ipnut").length;i++){

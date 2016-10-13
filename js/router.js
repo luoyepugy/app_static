@@ -99,9 +99,13 @@
 
 	    // 搜索
 	    .state('search',{
-	    	url: '/search',						// 搜索结果
+	    	url: '/search',						// 搜索
 	    	templateUrl: '/html/common/search.html',
 	    	controller: 'searchCtrl'
+	    }).state('search_result',{
+	    	url: '/search_result/:type/:name',						// 搜索
+	    	templateUrl: '/html/common/search_result.html',
+	    	controller: 'search_resultCtrl'
 	    }) 
 	    
 	    .state('test_list',{

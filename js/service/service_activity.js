@@ -1,4 +1,4 @@
-﻿/**
+﻿﻿/**
  * 活动页面数据接口
  */
 angular.module('activity_servrt', []).

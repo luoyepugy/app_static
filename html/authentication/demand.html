@@ -1,14 +1,16 @@
 
 <meta charset="UTF-8">
- <link href="/css/pages/activitie_mark.css?v=15" rel="stylesheet">
+ <link href="/css/pages/activitie_mark.css?v=17" rel="stylesheet">
 <section class="pd pt10  bgff ddf_pooxd_a">
-           <section  ng-repeat="ty in ge_type">
-              <p ng-bind="ty.name" class="zd fz16 pm5 pl10"></p>
-              <section class="pokjhiT_a" ng-repeat="tuiou in ty.child_list">
+           <section  ng-repeat="ty in ge_type" class="deh_list" finish>
+             	 <p  class="zd fz16 pm5 pl10 tltle_p">{{ty.name}}<span class="ls">+</span></p>
+                 <section class="pomhhgf_we">
+             	 <section class="pokjhiT_a" ng-repeat="tuiou in ty.child_list">
              		<a class="activitie_label fz14 yj4"   ng-bind="tuiou.label_name" ng-click="gp_list(tuiou.id)">
 		      
 		   		 </a>
-              </section>
+             	 </section>
+             	 </section>
                <p class="qc"></p>
 		 </section>   
 		

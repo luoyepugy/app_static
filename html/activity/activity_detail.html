@@ -20,9 +20,8 @@
 <section class="bgff pd pt10 pm10">
 <p ng-bind="detail.detail_date.title" class="act_title_a fz16 zd">  
 </p>
-<!-- <h6 class="mt10" >
-<span ng-bind="'浏览 '+detail.detail_date.browse_count+'次'"></span>
- <span class="ml10" ng-bind="'参与 '+detail.detail_date.consumption_count+'人'"> </span></h6> -->
+<h6 style="text-align:right;margin-top:0;">
+<span ng-bind="+detail.detail_date.browse_count+'次浏览'"></span></h6> 
 </section>
 <!-- 暂时屏蔽掉 by scott  -->
 <!-- <section class="box bgff cen mt10 fz14 pt20 pm10 btm">
@@ -48,50 +47,48 @@
 	</button>
 	<h6 class="mt10" ng-if="detail.detail_date.support_id==0">主办方没有发起活动赞助哦！</h6>
 </section>  -->
-<ul class="mui-table-view ">
-        <li class="mui-table-view-cell">
+<ul class="mui-table-view">
+        <!--<li class="mui-table-view-cell">
               <span class="act_title">所属行业：</span>
               <p class="ov" ng-bind="industry">
                 
               </p>
-        </li>
+        </li>-->
           
         
             <li class="mui-table-view-cell">
-              <span class="act_title">开始时间：</span>
-              <p class="ov" ng-bind="detail.detail_date.startDate">
+              <span class="f_i de_timer fl"></span>
+              <p class="fl ml10" ng-bind="detail.detail_date.activity_time">
               </p>
+              
         </li>
-            <li class="mui-table-view-cell">
-              <span class="act_title">结束时间：</span>
-              <p class="ov" ng-bind="detail.detail_date.endDate">
-              </p>
-        </li>
+           
          <li class="mui-table-view-cell pr" data-href="http://map.baidu.com/mobile/webapp/search/search/qt=s&wd={{detail.detail_date.address}}">
-              <span class="act_title">活动地址：</span>
-              <p class="ov dianer pr mui-col-xs-8 mui-col-sm-9" ng-bind="detail.detail_date.address">
+              <span class="f_i de_adress fl"></span>
+              <p class="fl ml10 dianer pr mui-col-xs-8 mui-col-sm-9" ng-bind="detail.detail_date.address">
                     
               </p>
                <span class="mui-icon mui-icon-map ls map_icon_a"></span>
         </li>
             <li class="mui-table-view-cell">
-              <span class="act_title">活动席位：</span>
-              <p class="ov"  ng-bind="detail.detail_date.person_limit" >
+              <span class="f_i de_plimit fl"></span>
+              <p class="fl ml10"  ng-bind="detail.detail_date.person_limit" >
                 
+              </p>
+        </li>
+         <li class="mui-table-view-cell">
+              <span class="f_i de_price fl"></span>
+              <p class="fl ml10" ng-if="detail.detail_date.is_free==0">
+                                   免费
+              </p>
+              <p class="fl ml10" ng-if="detail.detail_date.is_free!=0" ng-bind="detail.detail_date.activity_min_money+'元起'">
+                                  
               </p>
         </li>
     </ul>
 
 
-<section class="pt10 pm10 bgff mt10 bbm btm pr pd" ng-click="detail.activities_oi()">
-	<p class="mui-col-xs-11 dian hs">活动签到</p>
-	<span class="mui-icon mui-icon-arrowright right_icon zc"></span>
-</section>
 
-<section class="pt10 pm10 bgff  bbm  pr pd" data-href="http://e.eqxiu.com/s/Wjhdewta?eqrcode=1&from=timeline&isappinstalled=0">
-    <p class="mui-col-xs-11 dian hs">活动公益</p>
-    <span class="mui-icon mui-icon-arrowright right_icon zc"></span>
-</section>
 <!-- 暂时屏蔽白条 -->
 <!-- <section class="pt10 pm10 bgff  bbm  pr pd"  ui-sref="activity_loan">
     <p class="mui-col-xs-11 dian hs">活动白条
@@ -127,11 +124,15 @@
         <section class="qc"></section>
     </section>
     <section class="box mt10">
-    	<p class="box_a yj4 contract_de2" ng-class="detail.detail_date.bgclass">
-    		<a  id="user_attention" ng-click="detail.collection()" >
-    		<span ng-bind="detail.detail_date.collect" ></span>
-    		</a>
+    	<p class="de_auth box_a">已认证活动号</p>
+    	<div class="box_a" style="width:21.3%">
+    		<p  class="yj4 detail_jus {{detail.detail_date.attent_class}} ml10" ng-click="detail.collectionSponsor()" data-x="{{detail.detail_date.dataX}}">
+    		
+    		<span class="contract_dr3" ng-bind="detail.detail_date.attent_text"></span>
+    		
     	</p>
+    	</div>
+    	
     	<p class="box_a yj4 contract_de2 ml5">
     		<a ng-href="tel:{{detail.detail_date.contact_way}}">联系TA</a>
     	</p>  
@@ -143,7 +144,7 @@
 
 <section class="particulars_none">
 <section class="pd bgff pt10 mt10  pm10 honored_guest">
-   <h4 class="pm5 fz14">活动嘉宾</h4>
+   <h4 class="pm5 fz14">活动嘉宾  <span class="gray " ng-if="detail.detail_date.honored_guest==null">暂无活动嘉宾。</span></h4>
    <section class=" bgff  pr btm pm5 pt5 "  ng-repeat="gu in detail.detail_date.honored_guest" >
        <section class="mui-col-xs-11 dian ">
            <img ng-src="{{gu.honored_guest_icon_b}}" class="sponsor_act_icon fl"/>
@@ -155,10 +156,7 @@
        </section> 
    </section>
 
-<p class="btm pt20" ng-if="detail.detail_date.honored_guest==null">
-	暂无活动嘉宾。
-</p>
-   
+
 </section>
 
 <section class=" bgff pt10 pm10 mt10 cen bbm btm act_tble_a pr">
@@ -188,34 +186,50 @@
   <p class="mt10 text-normal">{{totalPerson}}人打赏&#12288;<a ui-sref="activity_reward_detail({id:id})" class="green">查看他们打赏了多少？</a></p>
 </section>
 <!-- /我要打赏 -->
-
+<!--活动签到-->
+<section class="pt10 pm10 bgff mt10 bbm btm pr pd" ng-click="detail.activities_oi()">
+	<p class="mui-col-xs-11 dian green">活动签到</p>
+	<span class="mui-icon mui-icon-arrowright right_icon zc"></span>
+</section>
+<!--活动签到-->
 <!--签到机申请-->
-<section class="pt10 pm10 bgff mt10  bbm  pr pd"  ui-sref="activity_machine_apply">
-    <p class="mui-col-xs-11 dian hs">活动签到机申请
+<section class="pt10 pm10 bgff  bbm  pr pd"  ui-sref="activity_machine_apply">
+    <p class="mui-col-xs-11 dian green">活动签到机申请
     <span class="fr zc">e云屏活动签到</span>
     </p>
     <span class="mui-icon mui-icon-arrowright right_icon zc"></span>
 </section>
 <!--签到机申请-->
 
+<!--活动公益-->
+<section class="pt10 pm10 bgff  bbm  pr pd" data-href="http://e.eqxiu.com/s/Wjhdewta?eqrcode=1&from=timeline&isappinstalled=0">
+    <p class="mui-col-xs-11 dian green">活动公益</p>
+    <span class="mui-icon mui-icon-arrowright right_icon zc"></span>
+</section>
+<!--活动公益-->
 <section ng-include="'/html/activity/activity_hot.html?v=15'"></section>
 
 
 
 
 <section class="act_bottom box cen bgff ">
-	 <a class="box_a zc fz14 pt0" ng-href="#share_pp"> 
-	 	<span class="mui-icon mui-icon-redo "></span><br />
-	 	分享
+	 <a class="box_a zc fz14 pt0 bor_e0_t bor_e0_r" ng-href="#share_pp"> 
+	 	<span class="mui-icon mui-icon-redo pt2"></span><br />
+	 	<span >分享</span><span  ng-bind="detail.detail_date.share_count"></span>
+	 </a>	  
+       <a class="box_a zc fz14 pt0 collection_p {{detail.detail_date.act_cl}} bor_e0_t bor_e0_r" ng-click="detail.collectionActivity()" >
+	 		<span class="mui-icon mui-icon-star pt2"></span><br />
+	 	<span>收藏</span><span  ng-bind="detail.detail_date.collect_count"></span>
 	 </a>
-	  <a class="box_a zc fz14 mui-col-xs-4 mui-btn mui-btn-success bot_poiy_a fz18  {{detail.detail_date.reg_clas}}"  
+	  <a class="box_a zc fz14 pt0  bor_e0_t" ng-click="isLogin('promotional_act')" >	 		
+	 		<span class="mui-icon mui-icon-plus pt2"></span><br />
+	 	发起
+	 </a>
+	  
+	 <a class="box_a zc fz14 mui-col-xs-3 mui-btn mui-btn-success bot_poiy_a fz18  {{detail.detail_date.reg_clas}}"  
 	  ng-click="detail.sign_up_p(detail.detail_date.is_free,detail.detail_date.registration.code)"  
 	  ng-bind="detail.detail_date.registration.msg">
 	  </a> 
-       <a class="box_a zc fz14 pt0 collection_p {{detail.detail_date.act_cl}}" ng-click="detail.collection()" >
-	 		<span class="mui-icon mui-icon-star "></span><br />
-	 	收藏
-	 </a>
 	 
 </section>
     <section id="share_pp" class="mui-popover mui-popover-bottom mui-popover-action " style="z-index:9999">
@@ -223,10 +237,10 @@
             <section class="modal-header text-center pb0" >分享给好友</div>
             <section class="modal-body mt20">
                 <section class="share-row clearfix box">
-                     <a  id="qrcode" class="box_a"><i class="icon icon-qrcode"></i>二维码</a>
-                     <a class="box_a" ng-click="sharep_a.Qzone()"><i class="icon icon-qqzone"></i>QQ空间</a> 
-                     <a class="box_a" ng-click="sharep_a.qqweibo()"><i class="icon icon-qqweibo"></i>腾讯微博</a> 
-                     <a class="box_a" ng-click="sharep_a.qq()"><i class="icon icon-qq"></i>QQ好友</a>
+                     <a  id="qrcode" class="box_a share_all_num"><i class="icon icon-qrcode"></i>二维码</a>
+                     <a class="box_a share_all_num" ng-click="sharep_a.Qzone()"><i class="icon icon-qqzone"></i>QQ空间</a> 
+                     <a class="box_a share_all_num" ng-click="sharep_a.qqweibo()"><i class="icon icon-qqweibo"></i>腾讯微博</a> 
+                     <a class="box_a share_all_num" ng-click="sharep_a.qq()"><i class="icon icon-qq"></i>QQ好友</a>
                 </section>
             </section>
             <section class="modal-footer">

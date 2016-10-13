@@ -19,7 +19,7 @@ img.syuytrt_as {
     z-index:99999;
 }
 .broadcast_secondary{
-	height:230px;
+	height:180px;
 	overflow: hidden;
 	
 }
@@ -34,14 +34,14 @@ img.syuytrt_as {
 }
 @media screen and (min-width: 370px){
   .broadcast_secondary{
-    height:300px;
+    height:250px;
   }
   .broadcast_secondary #rewardList{
 	height:300px;
 }
 @media screen and (min-width: 400px){
   .broadcast_secondary{
-    height:350px;
+    height:300px;
   }
   .broadcast_secondary #rewardList{
 	height:350px;
