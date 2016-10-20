@@ -8,6 +8,8 @@ angular.module('sponsor', ["directive_mml","activity_servrt","ui.router", "commo
 /*	var kmh=$.parseJSON(localStorage.input_f)
 	input_val(kmh.activity)*/
 	$scope.promotional={"initiate":function(parameter_p){
+		 localStorage.input_f=JSON.stringify(da_input(2))
+		 var kmh=$.parseJSON(localStorage.input_f)
 		var poiy=da_input(1);
 		if(poiy==undefined){ 
 			return
@@ -163,6 +165,7 @@ angular.module('sponsor', ["directive_mml","activity_servrt","ui.router", "commo
  * x=1 发起  x=2缓存返回数据
  */
 function da_input(x){
+	
 	var name=$("#name").val(),//活动标题
 	start_time=$("#start_time").val(),//开始时间
 	end_time=$("#end_time").val(),//结束时间

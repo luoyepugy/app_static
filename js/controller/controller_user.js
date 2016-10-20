@@ -1593,6 +1593,15 @@ angular.module('user', ['activity_servrt','directive_mml', 'common', 'request', 
 			index++;
 			request(true);
 		}
+	}).controller('awardCtrl', function($scope, httpService, messageService) { 
+		
+		httpService.getDatas('GET', '/draw/get_currentuser_prize').then(function(data) {
+			if(data.code!=0){
+				mui.alert(data.msg)
+				return
+			}
+			$scope.info_prize=data.info
+		});
 	})
 
 })();

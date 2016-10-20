@@ -47,7 +47,6 @@
 	 })
 	.controller('big_machine_controller',function($scope,activity_data,messageService,MyData) { //签到机	
 		var act_id=window.location.search.split("=")[1].split("&")[0]
-	
 		var date_leng=0;//当前签到人数
 		function consm(){
 			MyData.act_id=act_id
@@ -78,7 +77,8 @@
 				        autoplay: false,    //自动播放：否
 				        isLive:true,  //是否是直播
 				        width: "100%",       // 播放器宽度
-				        height: "600px"      // 播放器高度
+				        height: "600px",      // 播放器高度
+				        waterMark:"/img/sylogo.png|TL|0.15|0.5" 
 				    });
 			 }); 
 		
@@ -92,7 +92,11 @@
 			   $(".syuytrt_as").hide();
 		 }
 		
+	}).controller('draw_lottery_ctr',function($scope,activity_data,messageService,$http) { //抽奖	
+		
 	})
+	
+	
 })()
 
   

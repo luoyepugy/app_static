@@ -2097,6 +2097,24 @@ img.yj.user_zz_p {
     border-radius: 5px;
     font-family: '微软雅黑';
 }
+.downApp {
+    position: absolute;
+    right: -35px;
+    top: 45px;
+    z-index: 2;
+    height: 80px;
+}
+.downApp img {
+    width: 55%
+}
+.close-downApp {
+    position: absolute;
+    right: -35px;
+    top: 125px;
+    z-index: 2;
+    height: 40px;
+    width: 84px;
+}
 /* 主办方认证 */
 .sponsorSuccIcon b,
 .sponsorFailIcon b {

@@ -149,12 +149,22 @@ angular.module('act_details', [ "directive_mml","activity_servrt","ui.router","p
 	    	var x=$('.detail_jus').attr("data-x");
 	    	if(x==0){
 	    		httpService.getDatas('GET', '/activity/exec_attention?resources_id='+user_id_a+'&type=4').then(function(data) {
+	    			 if(data.code!=0){
+			    		    	 $location.path("signin")
+			    		    	 mui.alert(data.msg, 'E场景活动');
+			    		    	 return
+			    		    }
 				    $('.detail_jus').removeClass('contract_de2').addClass("contract_de3");
 				    $('.contract_dr3').text("取消关注");
 				    $('.detail_jus').attr("data-x",1);
 				});  
 	    	}else{
 	    		 httpService.getDatas('GET', '/activity/cancel_attention?resources_id='+user_id_a+'&type=4').then(function(data) {
+	    		 	 if(data.code!=0){
+			    		    	 $location.path("signin")
+			    		    	 mui.alert(data.msg, 'E场景活动');
+			    		    	 return
+			    		    }
 				    $('.detail_jus').removeClass('contract_de3').addClass("contract_de2");
 				    $('.contract_dr3').text("关注TA");
 				    $('.detail_jus').attr("data-x",0);
@@ -863,7 +873,8 @@ $(".dd_pooo").hide()
 		        autoplay: false,    //自动播放：否
 		        isLive:true,  //是否是直播
 		        width: "100%",       // 播放器宽度
-		        height: "200px"      // 播放器高度
+		        height: "200px",      // 播放器高度
+		        waterMark:"/img/sylogo.png|TL|0.15|0.5" 
 		    });
 	 }); 
 

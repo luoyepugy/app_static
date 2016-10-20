@@ -251,7 +251,7 @@
         
         // 注册活动号， 注册嘉宾号， 注册媒体号
         .state('activity_auth',{
-            url: '/activity_auth',   			// 注册活动号
+            url: '/activity_auth?type',   			// 注册活动号 
             templateUrl: '/html/authentication/activity_auth.html',
             controller: 'activity_authCtrl'
         }).state('guest_auth',{
@@ -279,6 +279,10 @@
             url: '/b_map/:city',   // 地图
             templateUrl: '/html/map.html',
             controller: 'mapCtrl'
+        }).state('award',{
+            url: '/award',   // 个人中心奖品
+            templateUrl: '/html/user/award.html',
+            controller: 'awardCtrl'
         })
         
       

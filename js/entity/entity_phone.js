@@ -469,7 +469,7 @@ function ticket_volume_list(data){
 		   }else if(info.collect_count>=99){
 		   	this.collect_count=99+"+";
 		   }
-		   this.collect_count=info.collect_count;//收藏次数
+		   
 		  
 	  }
 	  

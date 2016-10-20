@@ -11,6 +11,7 @@
 	 $rootScope.$on('$stateChangeSuccess', function(ev, to, toParams, from, fromParams){//路由跳转触发
 		$(".menu_pup,.filiuyt_o").removeClass("show_a");
 		$(".return_top").addClass("mui-hidden");
+		$(".bg_loading").remove()
 		
         /* 
          * 张晗
@@ -52,12 +53,17 @@
 	 });
 
     // 获取用户登录状态
-    $rootScope.isLogin = function(url){
+    $rootScope.isLogin = function(url,ty){
         httpService.getDatas('GET', '/user/verifyUserLogin').then(function(data) {
             if(data.code!=0&&data.code!=-1){
+            	if(ty==1){ 
+            		window.location.href="/user/h5_wechat_login_page?key=0"
+            		return
+            	}
                 messageService.show('您还未登录！');
                 $state.go("signin");
             } else {
+            	
                 $state.go(url);
             } 
         });

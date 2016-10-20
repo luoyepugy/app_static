@@ -520,6 +520,7 @@ angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.rou
 		    window.location.href="https://itunes.apple.com/cn/app/e-chang-jing-huo-dong/id1110240836?mt=8&uo=4"; 
 		}
 	}
+
 }]).controller('activity_show_ticket',["$scope","activity_data","$location","$stateParams",function($scope,activity_data,$location,$stateParams) { //票卷详情
 	  var data_p={"id":3};//投票ID
 	  $scope.type_p;//投票单选多选
@@ -611,11 +612,11 @@ angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.rou
 		$('.j-searchType').text($(this).text());
 		$('.j-searchTypeList').slideToggle();
 	});
-	
+
 	// 搜索结果
 	$scope.searchResult = function() {
 		name = $('.j-searchForm').find('input[name="searchName"]').val();
-		console.log(typeText);
+		// console.log(typeText);
 		switch(typeText) {
 			case '活动': type = 10; break;
 			case '活动号': type = 20; break;
@@ -623,11 +624,12 @@ angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.rou
 			case '媒体号': type = 22; break;
 			case '赞助': type = 30; break;
 		}
-		$state.go('search_result', {'name': name, 'type': type});
+		// console.log(name);
+		$state.go('search_result', {'type': type, 'name': name});
 	}
 
 	$scope.searchActivity = function(labelId) {
-		$state.go('search_result', {type: 11, name: labelId});
+		$state.go('search_result', {'type': 11, 'name': labelId});
 	}
 })
 // ======================= 搜索结果 ============================
@@ -664,11 +666,11 @@ angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.rou
 				}
 			});
 		},
-		activity: function(more, name) {
+		activity: function(more) {
 			var data = params;
 				data.status = 0;
 				data.label = labelId;
-			if(labelId) data.name = '';
+			if(labelId) data.name = name = '';
 			search.request('/activity/query_activity_list', data, 'activityList', more);
 		},
 		host: function(more) {
@@ -723,7 +725,8 @@ angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.rou
 
 // ======================= 活动号认证 ============================
 /* @ngInject */
-.controller('activity_authCtrl', function($scope,httpService, messageService) {
+.controller('activity_authCtrl', function($scope,httpService, messageService,$stateParams) {
+	
 	var vm = $scope;
 	vm.sponsor = {};
 	// 获取认证数据
@@ -740,9 +743,11 @@ angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.rou
 		    	case 2:  vm.sponsor.failInfo = data.info.remark; break;
 			}
 		}
-		
-		
     });
+	/*为苹果机引入 兼容*/
+	if($stateParams.type==1){
+		$(".header_mml,.mml_bottom").remove()
+	}
     // 表单提交成功后跳转
     $scope.route = function() {
     	vm.status = 3;
@@ -1027,6 +1032,9 @@ down_app=function(){
 		document.body.style.backgroundColor = "#FFFFFF" ;
 	    window.location.href="http://a.app.qq.com/o/simple.jsp?pkgname=com.mml.apptown";
     }
+}
+function closeDownApp() {
+	$('.downApp').fadeOut();
 }
 
 //========= h5端 app下载 ==========      
