@@ -203,11 +203,19 @@
         	});
         	// 文件上传过程中创建进度条实时显示。
         	uploader.on( 'uploadProgress', function( file, percentage ) {
+        		if($(".image_ad").attr("data-type")==1){
+        			return
+        		}
         	    $(".schedule_p").css({"width":percentage*100})
         	});
 
         	// 文件上传成功，给item添加成功class, 用样式标记上传成功。
         	uploader.on( 'uploadSuccess', function( file,data ) {  //data后台返回的数据
+        	      if($(".image_ad").attr("data-type")==1){
+                  	alert(data.msg)
+                  	return 
+                  }
+                  
         	    $(".schedule_p").css({"width":0}) 
         	    $("#iconFile .webuploader-pick").css({"background":"url("+data.msg+")","background-size":"100% 100%"})
         	    $("#iconFile").attr("data-url",data.msg);
@@ -215,10 +223,13 @@
                 if(el.length > 0) { 
                     el.val(data.msg);
                 }
+              
+          
+                
         	});
         }, 
         link: function(scope,ele,attr,ctrl){
-        	
+        
         }
     };
 }).directive('eliminate', function () {//点击叉叉清空  
@@ -386,6 +397,25 @@
                  picker.show(function (rl) {
         	 		 $(ele).find("input").val(rl[0].text+rl[1].text)
         	 		 $(ele).find("input").attr("data-id",rl[1].id)
+                 })
+                 
+             });
+         }
+     };
+ }).directive('citySelect', function () { //城市下拉框(发起活动)
+     return {
+         restrict: 'AE',
+         link: function(scope,ele,attr){
+             ele.on('tap',function(e){
+            	 /*阻止触发时间冒泡*/
+                 e.preventDefault();
+                 e.stopPropagation();
+                 $(".mui-poppicker").remove()
+                 var picker= new mui.PopPicker({"layer":[2]});
+                 picker.setData(cityData);
+                 picker.show(function (rl) {
+        	 		 $("#city").val(rl[0].text+rl[1].text)
+        	 		 $("#city").attr("data-id",rl[1].id)
                  })
                  
              });

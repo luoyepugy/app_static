@@ -1,7 +1,7 @@
 <!-- 个人中心 -->
 <meta charset="UTF-8">
 <section>
-     <section class="user_top bgff  mt20 pt10 pm10 pd pr btm bbm"  ui-sref="userInfo">
+     <section class="user_top bgff  mt20 pt10 pm10 pd pr btm bbm"  ng-click="mySignin('userInfo')">
         <img class="fl user_icon_p yj4" ng-src="{{pe_er.user_icon_o.user_icon}}" >
          <section class="ov pl10">
             <p class="fz16 zd" ng-bind="pe_er.user_icon_o.user_name"></p>
@@ -13,22 +13,20 @@
     </section>
     
     <section class="mt10 btm bbm pt10 pm10 bgff box cen mobey_icon">
-        <a class="box_a zc fz14" ui-sref="wallet">
+        <a class="box_a zc fz14" ng-click="mySignin('wallet')">
           <i class="f_i mober_a"></i><br>
             钱包
             
         </a>
-          <a class="box_a zc fz14" ui-sref="feedback">
+          <a class="box_a zc fz14" ng-click="mySignin('feedback')">
           <i class="f_i mober_b"  ></i><br>
             意见反馈
-            
         </a>
           <a class="box_a zc fz14"  ui-sref="about_us">
           <i class="f_i mober_c"></i><br>
             关于我们
-            
         </a>
-          <a class="box_a zc fz14 pr" ui-sref="message_user">
+          <a class="box_a zc fz14 pr" ng-click="mySignin('message_user')">
           <i class="f_i mober_d"></i><br>
             消息
             <span ng-if="messageItems<=99&&messageItems>0" class="mui-badge mui-badge-danger redDot">{{messageItems}}</span>
@@ -37,26 +35,26 @@
     </section>
     
      <section class="mt10 btm bbm pt10 pm10 bgff">
-         <p class="bbm pd pr" ui-sref="activity_user({type: 1})">
+         <p class="bbm pd pr" ng-click="mySignin('activity_user', {type: 1})">
             <i class="f_i logo_icon_a"></i>
              <span class="ml10 title_p">我的活动</span>
                  <i class="f_i right_arrow right_arrow_p"></i>
          </p>
          
          <section class="cen box pt10 pm10">
-             <a class="box_a fz14 zc"  ui-sref="activity_user({type: 1})">
+             <a class="box_a fz14 zc" ng-click="mySignin('activity_user', {type: 1})">
                 <i class="f_i user_icon_p_a"></i><br>
                  待参与
              </a>
-                  <a class="box_a fz14 zc" ui-sref="activity_user({type: 2})">
+                  <a class="box_a fz14 zc" ng-click="mySignin('activity_user', {type: 2})">
                 <i class="f_i user_icon_p_b"></i><br>
                  发起的
              </a>
-                  <a class="box_a fz14 zc" ui-sref="activity_user({type: 3})">
+                  <a class="box_a fz14 zc" ng-click="mySignin('activity_user', {type: 3})">
                 <i class="f_i user_icon_p_c"></i><br>
                  收藏的
              </a>
-              <a class="box_a fz14 zc" ui-sref="activity_user({type: 3})">
+              <a class="box_a fz14 zc" ng-click="award">
                 <i class="f_i user_icon_p_d_er"></i><br>
                 获奖品
              </a>

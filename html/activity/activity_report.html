@@ -23,7 +23,7 @@
 		<section class="mt20">
 			 <textarea rows="4" placeholder="请填写举报原因" id="reason"></textarea>
 			 <p class="mt10">
-			 	<input type="tel" placeholder="联系电话" id="phone_a"/>
+			 	<input type="tel" placeholder="联系电话（选填）" id="phone_a"/>
 			 </p>
 			 <p>
 			   <button type="button" class="mui-btn mui-btn-blue w100 pt5 pm5 fz16" id="submit_p">提交</button>
@@ -35,10 +35,12 @@
 	    
 	</div>
 	<script src="/js/common/jquery-1.11.3.min.js"></script>
-	<script src="/js/common/mui.min.js"></script>
+	<script src="/js/common/mui.min.js"></script> 
 	<script src="/js/common/is_from.js"></script>
 	<script>
 	   $(function(){
+		   var act_id=window.location.search.split("=")[1]
+		
 		   $("#submit_p").on("click",function(){
 			   var reason=$("#reason").val(),//举报原因
 			       phone_a=$("#phone_a").val();//手机号
@@ -53,15 +55,16 @@
 			      if(!form_mm.tel(phone_a)){
 		    		   mui.alert("手机号码号码格式输入错误")
 		    		   return;
-		            }
-			      var report_d={}
-			      report_d.user_phone=phone_a
-			      report_d.report_reason=reason
-			      report_d.activity_id=153
+		            } 
+			      var report_d={};
+			       report_d.user_phone=phone_a; 
+			       report_d.report_reason=reason; 
+			       report_d.activity_id=act_id;
 			      $.ajax({
 				    type :"post",
 		                url : "/report/add_report",
-		                data : report_d,
+		                data : JSON.stringify(report_d),
+		                contentType : 'application/json;charset=UTF-8',
 		                dataType : 'json',
 		                success : function(data) { 
 		                	  if(data.code==0){

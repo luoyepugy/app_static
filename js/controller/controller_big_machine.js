@@ -93,7 +93,17 @@
 		 }
 		
 	}).controller('draw_lottery_ctr',function($scope,activity_data,messageService,$http) { //抽奖	
+		var act_id=window.location.search.split("=")[1].split("&")[0]
 		
+		
+		 activity_data.getDatas('GET', '/draw/get_win_prize?activity_id='+  act_id)
+		  .then(function(data) {
+			 if(data.code!=0){
+				 alert(data.msg)
+				 return
+			 }
+			 $scope.win_prize_data=data.info
+		 }); 
 	})
 	
 	

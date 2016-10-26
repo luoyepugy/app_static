@@ -1,0 +1,24 @@
+<!-- 个人奖品 -->
+<meta charset="UTF-8">
+	<section class="pd bgff pr mt10"  ng-repeat="p_e in info_prize">
+         <i class="mui-icon mui-icon-arrowright fz16 ssd_iconhg"> </i>
+		    <p class="pt5 pm5 zd pr tutke_sdf dian bbm">
+		        <i class="f_i libao_icon"></i>
+		        <span ng-bind="p_e.activity_name"></span>
+		       
+		    </p>
+		    <div class="pt10 pm10 cen">
+		         <h4 ng-bind="p_e.draw_name"></h4>
+		         <p ng-bind="p_e.prize_remark"></p>
+		         <p class="jp_sdci">
+		             <img ng-src="p_e.prize_image">
+		         </p>
+		<!--          <p class="fz16 zd mt10">
+		             兑换码：13360973250
+		         </p> --> 
+		           <p class="fz16 zc ">
+		          兑奖请联系客服：<a href="tel:{{p_e.service_tel}}" class="ls" ng-bind="p_e.service_tel"></a>
+		         </p>
+		    </div>
+		    
+		</section>

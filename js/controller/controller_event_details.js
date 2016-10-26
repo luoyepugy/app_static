@@ -1,5 +1,5 @@
 /**
- * 活动详情and赞助详情
+ * 活动详情and赞助详情 
  */
 angular.module('act_details', [ "directive_mml","activity_servrt","ui.router","pay","sponsor"])
 .controller('activity_detail_c',function($scope,activity_data,$location,$stateParams,act_date,$state,httpService) { //活动详情 
@@ -78,7 +78,7 @@ angular.module('act_details', [ "directive_mml","activity_servrt","ui.router","p
 			    		    	 mui.alert(data.msg, 'E场景活动');
 			    		    	 return
 			    		    }
-			    		    mui.alert("关注成功!","E场景活动",function(){
+			    		    mui.alert("收藏成功!","E场景活动",function(){
 			    		        $(".collection_p").toggleClass("ls")
 			    		    });
 			    		
@@ -99,7 +99,7 @@ angular.module('act_details', [ "directive_mml","activity_servrt","ui.router","p
 				    			//$(".collection_p").toggleClass("ls")
 				    			$("#user_attention").html("关注TA");
 				    			hjgf=true;
-				    			mui.alert("取消关注成功!",function(){ 
+				    			mui.alert("取消收藏成功!",function(){ 
 				    		        $(".collection_p").toggleClass("ls")
 				    			});
 
@@ -172,13 +172,16 @@ angular.module('act_details', [ "directive_mml","activity_servrt","ui.router","p
 	    	}
 	    }
 	  }
-	  $scope.streaming_poo=function(broadcast){//broadcast=真为正在直播
+	  $scope.streaming_poo=function(broadcast,mki){//broadcast=真为正在直播
 		  $(".streaming_poo").removeClass("show_a")
 		  if(broadcast){ 
 			  $state.go("activity_streaming.activity_reward_detail",{ac_id:$scope.id_a,count:$scope.detail.detail_date.browse_count,id:$scope.id_a});
 		  }else{ 
+			  if(mki==0){
+				  return;
+			  }
 			  mui.alert("直播断开...","e场景活动",function(){
-				  $(".streaming_poo").addClass("show_a")
+				  $(".streaming_poo").addClass("show_a");
 			  });
 		  }
 	  }
@@ -395,7 +398,7 @@ $(".dd_pooo").hide()
 		    		    	 return
 		    		    }
 		    		    
-		    		    mui.alert("报名成功", 'E场景活动',function(){
+		    		    mui.alert("报名成功!  下载APP，可以参与刚报名活动的群聊、主办方互动哦。", 'E场景活动',function(){
 		    		    	window.history.back();
 		    		    });
 		    		}, function error() {

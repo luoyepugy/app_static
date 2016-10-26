@@ -16,7 +16,8 @@
 	      <section class="swiper-pagination"></section>
 	    </section>
 </section>
-
+  <div class="downApp" onclick="down_app()"><img src="/img/index/downloadApp.png" alt="下载app图"></div>
+  <div class="close-downApp" onclick="closeDownApp()"></div>
 <section class="bgff pd pt10 pm10">
 <p ng-bind="detail.detail_date.title" class="act_title_a fz16 zd">  
 </p>
@@ -178,6 +179,10 @@
     <section class="pd pt10 pm10 bgff fz14" ng-bind-html="detail.detail_date.details|to_trusted:''" id="detail_date_o">
 
 	</section>
+	<p class="pd tr pm10 tr pt5 bgff">
+	 <a class="zc" ng-href="/html/activity/activity_report.html?act_id={{id_a}}">举报</a>
+	 
+	</p>
 </section>
 
 <!-- 我要打赏 -->
@@ -221,7 +226,7 @@
 	 		<span class="mui-icon mui-icon-star pt2"></span><br />
 	 	<span>收藏</span><span  ng-bind="detail.detail_date.collect_count"></span>
 	 </a>
-	  <a class="box_a zc fz14 pt0  bor_e0_t" ng-click="isLogin('promotional_act')" >	 		
+	  <a class="box_a zc fz14 pt0  bor_e0_t" ng-click="isLogin('promotional_act',1)" >	 		
 	 		<span class="mui-icon mui-icon-plus pt2"></span><br />
 	 	发起
 	 </a>
@@ -268,7 +273,9 @@
    	
 </section>
 
-<img src="/img/seeding_p.png" class="streaming_poo" ng-class="detail.detail_date.live_status" ng-click="streaming_poo(detail.detail_date.broadcast)">
+<img ng-src="{{detail.detail_date.live_status}}" class="streaming_poo" ng-click="streaming_poo(detail.detail_date.broadcast,detail.detail_date.mnbv)">
+
+
 </section>
 </section>
 

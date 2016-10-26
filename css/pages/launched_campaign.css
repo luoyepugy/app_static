@@ -83,3 +83,66 @@
 .dfd_pooic .fr{
 	margin-top:5px;
 }
+.up_load_face {
+	display: inline-block;
+	width:18px;
+	height:18px;
+	background:url(../../img/xbt.png) no-repeat -148px -624px;
+	background-size: 360px;
+}
+
+.up_load_wrap {
+	border-left:1px solid #4EA45D;
+}
+.upload_img {
+	position: absolute;
+    left: 15px;
+    bottom: 25px;
+    width: 17px;
+    height: 17px;
+    background: url(../../img/xbt.png) no-repeat -148px -657px;
+    background-size: 360px;
+}
+.more_set {	
+	padding: 11px 15px;
+	background-color: #fff;
+}
+.more_set a {
+	color:#000;
+}
+.more_title {
+	line-height:25px;
+	height:25px;
+	color:#878787;
+	text-align: center;
+}
+.activity_more_setting {
+	display: none;
+}
+.pokjhiT_a {
+    width: 33.3%;
+    float: left;
+    text-align: center;
+    height: 37px;
+}
+.ddf_pooxd_a a {
+    padding: 3px 8px;
+    padding: 3px 8px;
+    border: 1px solid #F5F5F5;
+    background: #F5F5F5;
+    color: #575757;
+}
+.ddf_pooxd_a .active {
+    padding: 3px 8px;
+    padding: 3px 8px;
+    border: 1px solid #4EA45D;
+    background: #fff;
+    color: #4EA45D;
+}
+#re_img {
+	max-height: 200px;
+	max-width: 100%;
+	width: 100%;
+}
+
+

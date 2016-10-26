@@ -3,8 +3,9 @@
  */
 
 angular.module('sponsor', ["directive_mml","activity_servrt","ui.router", "common"])
-.controller('promotional_act_controller',function($scope,activity_data,$location,$stateParams,act_date,$state) { //发起活动
-	var parameter_p={}
+.controller('promotional_act_controller',function($scope,activity_data,$location,$stateParams,act_date,$state,httpService) { //发起活动
+	
+	var parameter_p={};
 /*	var kmh=$.parseJSON(localStorage.input_f)
 	input_val(kmh.activity)*/
 	$scope.promotional={"initiate":function(parameter_p){
@@ -42,7 +43,10 @@ angular.module('sponsor', ["directive_mml","activity_servrt","ui.router", "commo
 	  $("input,textarea").blur(function(){
         $(".mml_bottom").show()
 	 })
-	 $("#address").on("click",function(){
+	 $("#address").on("click",function(e){
+	 	 /*阻止触发时间冒泡*/
+                 e.preventDefault();
+                 e.stopPropagation();
 		 localStorage.input_f=JSON.stringify(da_input(2))
 		 var kmh=$.parseJSON(localStorage.input_f)
 		 console.log(kmh.activity); 
@@ -55,8 +59,32 @@ angular.module('sponsor', ["directive_mml","activity_servrt","ui.router", "commo
 		 
 	 }
 	 
-
+	 mui("#mySwitch").switch(); //
 	 
+     $scope.activityBaseSetting=function(){
+     	$(".activity_base_setting,.header_mml").hide();
+     	$(".activity_more_setting").show();
+     }
+     $scope.activityMoreSetting=function(){
+     	$(".activity_base_setting,.header_mml").show();
+     	$(".activity_more_setting").hide()
+     }
+	 $scope.labelSwitch=function(){
+	 	if($(".ddf_pooxd_a").attr("data-x")==1){
+	 		$(".ddf_pooxd_a").show();
+	 		$(".ddf_pooxd_a").attr("data-x",2)
+	 	}else{
+	 		$(".ddf_pooxd_a").hide();
+	 		$(".ddf_pooxd_a").attr("data-x",1)
+	 	}
+	 }
+	 $scope.select_lab=function(eve){
+	 	alert(1)
+	 	$(eve).addClass("active")
+	 }
+	 httpService.getDatas('GET', '/label/group').then(function(data) {//获取活动标签
+		$scope.ge_type=data
+	});
 	 
 }).controller('mapCtrl',function($scope,$stateParams) { //地图
 	 $("html,body").animate({scrollTop:0},200);

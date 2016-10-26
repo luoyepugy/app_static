@@ -193,6 +193,10 @@
 	    	url: '/finance_loan',  			// 金融贷款
 	    	templateUrl: '/html/others/finance_loan.html',
 	    	controller: 'finance_loanCtrl'
+	    }).state('subscribe',{
+	    	url: '/subscribe',  			// 订阅
+	    	templateUrl: '/html/others/subscribe.html',
+	    	controller: 'subscribeCtrl'
 	    })
       
 

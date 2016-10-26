@@ -41,7 +41,7 @@
           <!-- <li ui-sref="sponsor_list"><a>赞助</a></li> -->
           <!-- /暂时屏蔽赞助和白条 -->
           <li ui-sref="ticket_user"><a>票券</a></li>
-          <li ng-click="mySignin()"><a>我的</a></li>
+          <li ui-sref="personal_center"><a>我的</a></li>
           <li ui-sref="activity_user({type: 2})"><a>发起的</a></li>
           <li ui-sref="activity_user({type: 1})"><a>参与的</a></li>
           <!-- 暂时屏蔽赞助和白条 -->
@@ -68,22 +68,13 @@
 		</a> <a class="zc fz14 box_a " ui-sref="ticket_user"> <i
 			class="f_i vouchers_icon"></i><br> 票券
 
-		</a> <a class="zc fz14 box_a" ng-click="mySignin()"> <i
+		</a> <a class="zc fz14 box_a" ui-sref="personal_center"> <i
 			class="f_i mine_icon"></i><br> 我的
 
 		</a>
 	</footer>
 
-<!--底部悬浮引导下载-->
-<section class="guide_Download" id="guide_Download" style="z-index: 9999">
-  <section class="guide_K">
-    <a  class="down" ontouchstart=""  onclick="_guide_DownloadClose._init()">
-      <img class="icon_logo_mh2" src="http://resource.apptown.cn/poster/app_down.png">
-      <strong onclick="down_app()">立即下载</strong>
-    </a>
-    <a href="javascript:void(0)" onclick="_guide_DownloadClose._init()" title="关闭" class="close" ontouchstart=""></a>
-  </section>
-</section>	
+
 	 
 	
 
@@ -94,6 +85,7 @@
     <script src="/js/common/angular-animate.js"></script>
     <script src="/js/common/swiper3.07.min.js"></script>
     <script src="/js/common/jweixin-1.0.0.js"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=KIpwmISmRtIMMssrIQ4NF9ji"></script>
     <script src="/js/common/aes-min.js"></script>
     <script src="/js/common/pad-iso10126-min.js"></script>
     <script src="/js/common/city.data.js"></script>
@@ -101,6 +93,7 @@
     <script src="/js/common/is_from.js"></script>
     <script  src="/js/common/prism-min.js"></script>
     <script src="/js/common/webuploader.min.js"></script>
+    <script src="/js/common/jquery.lazyload.min.js"></script>
     <script src="/js/mode/directive.js"></script>
     <script src="/js/service/service_activity.js"></script> 
     <script src="/js/entity/entity_phone.js"></script>

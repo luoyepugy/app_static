@@ -4,7 +4,7 @@
 
 
 angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.router","pay","sponsor","request","form","user","activity", "common","act_details","router"])
-.controller('mode_Controller',function($scope, $rootScope,activity_data, $location, $state, httpService) {//公共方法
+.controller('mode_Controller',function($scope, $rootScope,activity_data, $location, $state, httpService, messageService) {//公共方法
 
 	/*分类*/   
 	$scope.classify=classify_p()
@@ -33,14 +33,16 @@ angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.rou
 			
 		
 	// 登录判断是否从底部菜单栏点击
-    $scope.mySignin = function() {
+    $scope.mySignin = function(state, params) {
+    	params = params || {};
     	$rootScope.mySignin = true;
     	httpService.getDatas('GET', '/user/verifyUserLogin').then(function(data) {
 			if(data.code!=0&&data.code!=-1){
+				messageService.show('请先登录');
 				$state.go("signin");
 				return false;
 			}
-            $state.go("personal_center");
+            $state.go(state, params);
 		});
     }
 
@@ -609,14 +611,14 @@ angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.rou
 			$('.j-activityLabel').hide();
 		}
 		typeText = $(this).text();
-		$('.j-searchType').text($(this).text());
+		$(this).text($('.j-searchType').text());	
+		$('.j-searchType').text(typeText);
 		$('.j-searchTypeList').slideToggle();
 	});
 
 	// 搜索结果
 	$scope.searchResult = function() {
 		name = $('.j-searchForm').find('input[name="searchName"]').val();
-		// console.log(typeText);
 		switch(typeText) {
 			case '活动': type = 10; break;
 			case '活动号': type = 20; break;
@@ -850,6 +852,41 @@ angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.rou
     sh_a.imgUrl="http://m.apptown.cn/img/loan_loan_share.png"
     wx_share(sh_a)
 })
+
+
+// ======================= 订阅 ============================
+/* @ngInject */
+.controller('subscribeCtrl', function($scope,httpService, messageService) {
+	$scope.subscribArray = [];
+	// 获取标签数据
+	httpService.getDatas('GET', '/label/group').then(function(data) {
+		$scope.labelList = data;
+	});
+	// 选择订阅标签
+	$('body').on('click', '.j-selectLabel', function() {
+		$(this).toggleClass('mui-btn-green mainBtn');
+		if($(this).hasClass('mainBtn')) {
+			$scope.subscribArray.push($(this).data('id'));
+		} else {
+			var index = $scope.subscribArray.indexOf($(this).data('id'));
+			$scope.subscribArray.splice(1, index);
+		}
+	});
+	// 提交订阅数据
+	$scope.submit = function() {
+		if($scope.subscribArray.length > 5) {
+			messageService.show('最多订阅5个', 'toast');
+		} else if($scope.subscribArray.length == 0) {
+			messageService.show('请至少订阅1个', 'toast');
+		} else {
+			httpService.getDatas('GET', '', {array: $scope.subscribArray}).then(function(data) {
+				console.log(data.info);
+			});
+		}
+		console.log($scope.subscribArray);
+	}
+})
+
 
 // ======================= 机器申请 ============================
 /* @ngInject */

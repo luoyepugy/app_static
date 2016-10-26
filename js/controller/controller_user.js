@@ -745,7 +745,10 @@ angular.module('user', ['activity_servrt','directive_mml', 'common', 'request', 
 	 	activity_data.selectOne().then(
 	    		function success(data){
 	    			if(data.code!=0&&data.code!=-1){
-	    				  $location.path('/signin')
+	    				  $scope.pe_er.user_icon_o = {
+	    				  	'user_name': '未登录',
+	    				  	'user_icon': '/img/userIcon.jpg'
+	    				  }
 	    				  return
 	    			}
 	    			$scope.pe_er.user_icon_o=new user_info(data.info)

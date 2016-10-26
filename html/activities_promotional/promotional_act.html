@@ -2,83 +2,172 @@
 <meta charset="UTF-8">
 
 <section ng-controller="promotional_act_controller" class="dfd_pooui_a">
- <ul class="mui-table-view mt20">
-          <li class="mui-table-view-cell">
-                <span class="act_title fz16">活动名称：</span>
-                <p class="ov">
-                  <input type="text" class="max_klabel_a" placeholder="请填写报名的活动名称" id="name" maxlength="30"/>
-                </p>
-          </li>
-         </ul>
-          <ul class="mui-table-view mt10">
-             <li class="mui-table-view-cell pr time" time> 
-                <span class="act_title fz16">开始时间：</span>
-                <p class="ov dianer pr mui-col-xs-8 mui-col-sm-9 ">
-                       <input type="text" class="max_klabel_a " placeholder="请选择活动开始时间" id="start_time"  readonly   />
-                </p>
-                 <span class="mui-icon mui-icon-arrowdown zc map_icon_a"></span>
-          </li>
-          <li class="mui-table-view-cell pr time" time>
-                <span class="act_title fz16">结束时间：</span>
-                <p class="ov dianer pr mui-col-xs-8 mui-col-sm-9">
-                       <input type="text" class="max_klabel_a " placeholder="请选择活动结束时间" id="end_time"  readonly   />
-                </p>
-                 <span class="mui-icon mui-icon-arrowdown zc map_icon_a"></span>
-          </li>
-          <li class="mui-table-view-cell pr cat_poiu" city>
-                <span class="act_title fz16">所在城市：</span>
-                <p class="ov dianer pr mui-col-xs-8 mui-col-sm-9">
-                       <input type="text" class="max_klabel_a " placeholder="请选择活动所在城市" id="city" readonly    />
-                </p>
-                 <span class="mui-icon mui-icon-arrowdown zc map_icon_a"></span>
-          </li>
-             <li class="mui-table-view-cell">
-                <span class="act_title fz16">详细地址：</span>
-                <p class="ov">
-                  <input type="text" class="max_klabel_a" placeholder="请填写活动的详情地址" id="address" readonly   />
-                </p>
-          </li>
-          
-            <li class="mui-table-view-cell pr select_po" acttpe> 
-                <span class="act_title fz16">活动类型：</span>
-                <p class="ov dianer pr mui-col-xs-8 mui-col-sm-9">
-                       <input type="text" class="max_klabel_a " placeholder="请选择活动类型" id="type"  />
-                </p>
-                 <span class="mui-icon mui-icon-arrowdown zc map_icon_a"></span>
-          </li>
-          
-                <li class="mui-table-view-cell pr select_po_p" industry>
-                <span class="act_title fz16">活动行业：</span>
-                <p class="ov dianer pr mui-col-xs-8 mui-col-sm-9">
-                       <input type="text" class="max_klabel_a " placeholder="请选择活动所属行业"  id="industry"  readonly />
-                </p>
-                 <span class="mui-icon mui-icon-arrowdown zc map_icon_a"></span>
-          </li>
-          
-          
-         
-            
-           
-              <li class="mui-table-view-cell">
-                <span class="act_title fz16">联系方式：</span>
-                <p class="ov">
-                  <input type="text" class="max_klabel_a" placeholder="请输入联系方式" id="contact_way"/>
-                </p>
-          </li>
-             <li class="mui-table-view-cell">
-                <span class="act_title fz16">主办方：</span>
-                <p class="ov">
-                  <input type="text" class="max_klabel_a" placeholder="请输入主办方" id="sponsor"/>
-                </p>
-          </li>
-      </ul>
-      <p class="pt10 pm10 pd fz16">
-      	  活动详情
-      	
-      </p>
-        <p>
-      	  <textarea class="act_poiiu_tr" placeholder="请输入活动详情" id="details" rows="6"></textarea>
-      	</p>
+	<!--发起活动基本设置start-->
+	    <section class="activity_base_setting">
+	    	<section class="cen">
+	    		<img id="re_img" src=""  />
+	    	</section>
+	    	
+		     <ul class="mui-table-view" style="margin-top:0 ;"> 
+		          <li class="mui-table-view-cell">
+		                <span class="act_title fz16 fl">活动名称：</span>
+		                <p class="ov fl">
+		                  <input style="width:auto;" type="text" class="max_klabel_a te_0" placeholder="请填写报名的活动名称" id="name" maxlength="30"/>                 
+		                </p>
+		                <div class="ov up_load_wrap fr">
+		                  	<!-- <span class="up_load_face ml5 mt5"></span> -->
+		                  	<div upimg  data-type="1" class="image_ad"></div>
+		                  </div>
+		                
+		          </li>
+		         </ul>
+		          <ul class="mui-table-view mt10">
+		             <li class="mui-table-view-cell pr time" time> 
+		                <span class="act_title fz16">开始时间：</span>
+		                <p class="ov dianer pr mui-col-xs-8 mui-col-sm-9 ">
+		                       <input type="text" class="max_klabel_a te_0" placeholder="请选择活动开始时间" id="start_time"  readonly   />
+		                </p>
+		                 <span class="mui-icon mui-icon-arrowdown zc map_icon_a"></span>
+		          </li>
+		          <li class="mui-table-view-cell pr time" time>
+		                <span class="act_title fz16">结束时间：</span>
+		                <p class="ov dianer pr mui-col-xs-8 mui-col-sm-9">
+		                       <input type="text" class="max_klabel_a te_0" placeholder="请选择活动结束时间" id="end_time"  readonly   />
+		                </p>
+		                 <span class="mui-icon mui-icon-arrowdown zc map_icon_a"></span>
+		          </li>
+		          <li class="mui-table-view-cell pr cat_poiu"  style="padding-right:0">
+		                <span class="act_title fz16">所在城市：</span>
+		                <p class="ov dianer pr mui-col-xs-8 mui-col-sm-9">
+		                       <input city-select style="width:50%" type="text" class="max_klabel_a te_0" placeholder="请选择所在城市"  id="city" readonly    />
+		                        <input style="width:47%" type="text" class="max_klabel_a te_0" placeholder="填写详细地址" id="address" readonly   />
+		                </p>
+		                
+		          </li>            
+		          
+		           <!-- <li class="mui-table-view-cell pr select_po" acttpe> 
+		                <span class="act_title fz16">活动类型：</span>
+		                <p class="ov dianer pr mui-col-xs-8 mui-col-sm-9">
+		                       <input type="text" class="max_klabel_a te_0" placeholder="请选择活动类型" id="type"  />
+		                </p>
+		                 <span class="mui-icon mui-icon-arrowdown zc map_icon_a"></span>
+		          </li>
+		          
+		                <li class="mui-table-view-cell pr select_po_p" industry>
+		                <span class="act_title fz16">活动行业：</span>
+		                <p class="ov dianer pr mui-col-xs-8 mui-col-sm-9">
+		                       <input type="text" class="max_klabel_a te_0" placeholder="请选择活动所属行业"  id="industry"  readonly />
+		                </p>
+		                 <span class="mui-icon mui-icon-arrowdown zc map_icon_a"></span>
+		          </li>
+		          
+		          
+		         
+		            
+		           
+		              <li class="mui-table-view-cell">
+		                <span class="act_title fz16 ">联系方式：</span>
+		                <p class="ov">
+		                  <input type="text" class="max_klabel_a te_0" placeholder="请输入联系方式" id="contact_way"/>
+		                </p>
+		          </li>
+		             <li class="mui-table-view-cell">
+		                <span class="act_title fz16">主办方：</span>
+		                <p class="ov">
+		                  <input type="text" class="max_klabel_a te_0" placeholder="请输入主办方" id="sponsor"/>
+		                </p>
+		          </li>-->
+		      </ul>
+		      <p class="pt10 pm10 pd fz16">
+		      	  活动详情
+		      	
+		      </p>
+		        <p class="pr">
+		      	  <textarea class="act_poiiu_tr" placeholder="请输入活动详情" id="details" rows="6"></textarea>
+		      
+		      	</p>
+		      	
+		      	<p class="bgff more_set pr" ng-click="activityBaseSetting()">
+					<a  class="mui-navigate-right" >高级设置</a>
+				</p>
+				  <p class="mt60 pd cen zd">
+       					<a class="mui-btn register_button fz16" ng-click="promotional.initiate()">立即发布</a>
+    			</p>
+    			
+	    </section>
+	<!--发起活动基本设置end-->
+	
+	<!--发起活动高级设置start-->
+	    <section class="activity_more_setting" >
+	    	 <p class="more_title">选择类型和标签让更多人看到本活动</p>
+	    	 <ul class="mui-table-view mt10">
+	    	 	          
+		          
+		            <li class="mui-table-view-cell pr select_po" acttpe> 
+		                <span class="act_title fz16">活动类型：</span>
+		                <p class="ov dianer pr mui-col-xs-8 mui-col-sm-9">
+		                       <input type="text" class="max_klabel_a te_0" placeholder="请选择活动类型" id="type"  />
+		                </p>
+		                 <span class="mui-icon mui-icon-arrowdown zc map_icon_a"></span>
+		          </li>
+		           <li class="mui-table-view-cell pr select_po" ng-click="labelSwitch()"> 
+		                <span class="act_title fz16">活动标签：</span>
+		                <p class="ov dianer pr mui-col-xs-8 mui-col-sm-9">
+		                       <input type="text" class="max_klabel_a te_0" placeholder="请选择活动标签" readonly="" id="labelArr"  />
+		                </p>
+		                 <span class="mui-icon mui-icon-arrowdown zc map_icon_a"></span>
+		          </li>
+		           <section class="pd pt10  bgff ddf_pooxd_a" data-x=1 style="display: none;">
+			            <section  ng-repeat="item in ge_type" class="deh_list" finish>
+			              <p class="zd fz16 pm5 pl10 tltle_p">{{item.name}}</p>
+			              <section class="pomhhgf_we">
+			                <section class="pokjhiT_a" ng-repeat="child in item.child_list">
+			                    <a class="activitie_label fz14 yj4" data-y="{{child.id}}" ng-bind="child.label_name" ng-click="select_lab()"></a>
+			                </section>
+			              </section>
+			              <p class="qc"></p>
+			            </section>  
+        			</section>
+		          
+		                <li class="mui-table-view-cell pr select_po_p" industry>
+		                <span class="act_title fz16">活动行业：</span>
+		                <p class="ov dianer pr mui-col-xs-8 mui-col-sm-9">
+		                       <input type="text" class="max_klabel_a te_0" placeholder="请选择活动所属行业"  id="industry"  readonly />
+		                </p>
+		                 <span class="mui-icon mui-icon-arrowdown zc map_icon_a"></span>
+		          </li>
+		          
+		          
+		         
+		            
+		           
+		              <li class="mui-table-view-cell">
+		                <span class="act_title fz16 ">联系方式：</span>
+		                <p class="ov">
+		                  <input type="text" class="max_klabel_a te_0" placeholder="请输入联系方式" id="contact_way"/>
+		                </p>
+		          </li>
+		             <li class="mui-table-view-cell">
+		                <span class="act_title fz16">主办方：</span>
+		                <p class="ov">
+		                  <input type="text" class="max_klabel_a te_0" placeholder="请输入主办方" id="sponsor"/>
+		                </p>
+		          </li>
+		          
+	    	 </ul>
+	    	 <div class="mui-table-view-cell mt10 bgff" >
+					<span class="fz16">允许e场景活动推荐</span>
+					<div class="mui-switch mui-active" id="mySwitch">
+						<div class="mui-switch-handle"></div>
+					</div>
+				</div>
+			<p class="pl15 fz18 green mt10" ng-click="activityMoreSetting()">
+				完成设置&nbsp;<span >》</span>
+			</p>
+	    </section>
+	<!--发起活动高级设置end-->
+	
+		
 
      <!-- <ul class="mui-table-view ">
              <li class="mui-table-view-cell pr"  ui-sref="custom_form">
@@ -93,11 +182,7 @@
           </li>
           
          </ul> -->
-         <p class="mt60 pd cen zd">
-       <a class="mui-btn register_button fz16" ng-click="promotional.initiate()">立即发布</a>
       
-
-    </p>
 </section>
 
 
