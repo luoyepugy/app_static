@@ -501,27 +501,8 @@ angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.rou
 					$scope.dte.push(hoti)
 				})
 		}, function error() {
-			console.log("获取热门活动失败") 
+			console.log("获取热门活动失败");
 	});
-	/** h5下载  **/
-	$scope.down_app=function(e){
-        e.preventDefault();
-        e.stopPropagation();
-		if(/Android|webOS|BlackBerry|SymbianOS/i.test(navigator.userAgent)){// 安卓机
-			var isWeixin = !!/MicroMessenger/i.test(_agent);
-			if(isWeixin){
-				   $("body").empty();
-				   $("body").append('<section class="app_down_a"></section>');
-			       document.body.style.backgroundColor = "#FFFFFF" ;
-			       window.open("http://resource.apptown.cn/app/app.apk");
-		    }
-		}else{// 苹果机
-			$("body").empty();
-		    $("body").append('<section class="app_down_a"></section>');
-			document.body.style.backgroundColor = "#FFFFFF" ;
-		    window.location.href="https://itunes.apple.com/cn/app/e-chang-jing-huo-dong/id1110240836?mt=8&uo=4"; 
-		}
-	}
 
 }]).controller('activity_show_ticket',["$scope","activity_data","$location","$stateParams",function($scope,activity_data,$location,$stateParams) { //票卷详情
 	  var data_p={"id":3};//投票ID
@@ -858,10 +839,54 @@ angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.rou
 /* @ngInject */
 .controller('subscribeCtrl', function($scope,httpService, messageService) {
 	$scope.subscribArray = [];
+	// 获取订阅数据
+	var getSubscribeDatas =	function() {
+		httpService.getDatas('GET', '/user_center/get_subscribe').then(function(data) {
+			if(data.info.industryId) {
+				var id = data.info.industryId;
+				$scope.industry.id = id;
+				$scope.industry.oldIndex = id - 1;
+				$scope.industry.array['name'] = $scope.industry.list[id - 1]['name'];
+				$scope.industry.array[id - 1] = true;
+			}
+			if(data.info.labels) {
+				$scope.subscribArray = data.info.labels;
+				$('.j-selectLabel').each(function() {
+					if($scope.subscribArray.indexOf($(this).data('id')) != -1) {
+						$(this).addClass('mui-btn-green mainBtn');
+					}
+				});
+			}
+		});
+	};
+	// 获取行业数据
+	httpService.getDatas('GET', '/system/queryIndustryAll').then(function(data) {
+		$scope.industry.list = data.info;
+	});
 	// 获取标签数据
 	httpService.getDatas('GET', '/label/group').then(function(data) {
 		$scope.labelList = data;
+		getSubscribeDatas();
 	});
+
+	// 行业
+	$scope.industry = {
+		show: false,
+		oldIndex: 0,
+		array: [],
+		list: [],
+		id: 0,
+		choice: function(index) {
+			if(this.oldIndex != index) {
+				this.array[this.oldIndex] = false;
+				this.array[index] = true;
+				this.array['name'] = this.list[index].name;
+				this.id = this.list[index].id;
+				this.show = false;
+			}
+			this.oldIndex = index;
+		}
+	}
 	// 选择订阅标签
 	$('body').on('click', '.j-selectLabel', function() {
 		$(this).toggleClass('mui-btn-green mainBtn');
@@ -869,7 +894,8 @@ angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.rou
 			$scope.subscribArray.push($(this).data('id'));
 		} else {
 			var index = $scope.subscribArray.indexOf($(this).data('id'));
-			$scope.subscribArray.splice(1, index);
+			console.log(index);
+			$scope.subscribArray.splice(index, 1);
 		}
 	});
 	// 提交订阅数据
@@ -879,11 +905,10 @@ angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.rou
 		} else if($scope.subscribArray.length == 0) {
 			messageService.show('请至少订阅1个', 'toast');
 		} else {
-			httpService.getDatas('GET', '', {array: $scope.subscribArray}).then(function(data) {
-				console.log(data.info);
+			httpService.getDatas('GET', '/user_center/subscribe', {labels: $scope.subscribArray.toString(), industryId: $scope.industry.id}).then(function(data) {
+				messageService.show('订阅成功', 'toast');
 			});
 		}
-		console.log($scope.subscribArray);
 	}
 })
 
@@ -961,7 +986,7 @@ angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.rou
 		  $(eve).on("click",function(){
 			  $(this).removeClass("mt10").find(".tltle_p span").css({"opacity":"0"}) 
 			  $(this).find(".pomhhgf_we").css({"display":"block"}) 
-		  }).addClass("mt10").find(".tltle_p span").css({"opacity":"1"}).end().find(".pomhhgf_we").css({"display":"none"}) 
+		  }).addClass("mt10").find(".tltle_p span").css({"opacity":"1",'font-size': '24px'}).end().find(".pomhhgf_we").css({"display":"none"}) 
 
 	  }
 }).controller('demand_list_ctl', function($scope,httpService, messageService,$state,$stateParams) {//活动号列表
@@ -1061,7 +1086,7 @@ down_app=function(){
 			   $("body").empty();
 			   $("body").append('<section class="app_down_a"></section>');
 		       document.body.style.backgroundColor = "#FFFFFF" ;
-		       window.open("http://resource.apptown.cn/app/app.apk");
+		       window.open("http://resource.apptown.cn/app/manmanlai.apk");
 	    }
 	}else{//苹果机
 		$("body").empty();

@@ -12,13 +12,35 @@
 	                	<span class="text-dark mr5" ng-if="item.user_name!=''">{{item.user_name}}</span>
 	                	<span class="text-dark mr5" ng-if="item.user_name==''">匿名</span>打赏了<span class="orange  ml5 mr5">{{item.pay_num}}</span>元
 	                </p>
-					<p>{{item.pay_time | getDateDiff}}</p>
+					<p>{{item.pay_time | getDateDiff}}
+						<span class="mui-icon mui-icon-chat ls fr fz18" ng-click="comment.add(item.id)"></span>
+					</p>
 	                <p ng-if="item.pay_info!=''" class="text-dark">{{item.pay_info}}</p>
 	                <p ng-if="item.pay_info==''" class="text-dark">支持！</p>
+
+	            	<section class="bgf2 pd pt10 pm10 yj4 mt10" ng-if="item.comment.length>0">
+	            		<p ng-repeat="child in item.comment">
+	            			<span class="ls" ng-bind="child.user_name"></span>
+	            			<span ng-bind="child.comment_content"></span>
+	            		</p>
+	            	</section>
 	            </div>
 			</li>
 		</ul>
 		<p class="tc mt10" ng-if="rewardList.length==0">还没有人打赏哦！</p>
 	</div>
 </div>
+<section id="message" class="mui-popover mui-popover-bottom mui-popover-action " style="z-index:99999">
+      <section class="modal-content clearfix bgff mek_oiiy_p mek_oiiy_p">
+        <p class="bgls cf fz18 cf cen pt10 pm10 pd">
+           评论
+           <a class="mui-icon mui-icon-close fr cf" href="#message"></a>
+        </p>
+        <textarea class="me_text_area" maxlength="140" placeholder="发表新的评论" ng-model="comment.content">
+        </textarea>
+        <p class="tr pd pm20">
+           <button type="button" class="mui-btn  cf bgls fz16" ng-click="comment.submit()">发表</button>
+        </p>
+      </section>
+</section>
 <!-- /活动打赏详情 -->

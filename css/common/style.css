@@ -2050,6 +2050,12 @@ img.yj.user_zz_p {
 .mr5 {
     margin-right: 5px;
 }
+.db {
+    display: block;
+}
+.di {
+    display: inline;
+}
 .lh180 {
     line-height: 180%;
 }

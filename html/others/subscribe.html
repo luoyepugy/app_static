@@ -3,8 +3,19 @@
 <!-- 订阅 -->
 <div>
    <section class="pd pt10  bgff ddf_pooxd_a">
+        <p class="zd fz16 pm5 pl10 mb10" ng-click="industry.show=!industry.show">行业
+          <span class="fz24 green">
+            <i style="font-style: normal;" ng-class="{'none': industry.show, 'di': !industry.show}">+</i>
+            <i ng-class="{'none': !industry.show, 'di': industry.show}">-</i>
+          </span>
+          <a class="activitie_label fz14 yj4 mainBtn mui-btn-green fr tc" style="width: 23.3%;" ng-show="industry.id>0">{{industry.array['name']}}</a>
+        </p>
+        <section class="pokjhiT_a" ng-repeat="item in industry.list" ng-class="{'none': !industry.show, 'db': industry.show}">
+            <a class="activitie_label fz14 yj4" ng-class="{'mui-btn-green mainBtn':industry.array[$index]}" ng-bind="item.name" ng-click="industry.choice($index)"></a>
+        </section>
+        <p class="zd fz16 pm5 pl10 mt10">我喜欢*</p>
         <section  ng-repeat="item in labelList" class="deh_list" finish>
-          <p class="zd fz16 pm5 pl10 tltle_p">{{item.name}}<span class="ls">+</span></p>
+          <p class="zd fz14 pm5 pl10 tltle_p">{{item.name}}<span class="ls">+</span></p>
           <section class="pomhhgf_we">
             <section class="pokjhiT_a" ng-repeat="child in item.child_list">
                 <a class="activitie_label fz14 yj4 j-selectLabel" ng-bind="child.label_name" data-id="{{child.id}}"></a>

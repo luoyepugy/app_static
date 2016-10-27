@@ -26,7 +26,7 @@ angular.module('activity', ['common', 'request', 'ui.router'])
 	})
 	// ======================= 活动打赏详情 ==============================
 	/* @ngInject */
-	.controller('activity_reward_detailCtrl', function($scope, $stateParams, httpService, messageService) {
+	.controller('activity_reward_detailCtrl', function($scope, $state, $stateParams, httpService, messageService) {
 		var activityId = $stateParams.id,
 			index = 1;
 
@@ -57,6 +57,27 @@ angular.module('activity', ['common', 'request', 'ui.router'])
 		$(".dd_pooo ").show()
 		$(".nagf_ssd span").removeClass("act").eq(0).addClass("act")
 		init();
+
+		// 打赏评论
+		$scope.comment = {
+			currentId : null,
+			add: function(id) {
+				this.currentId = id;
+				mui('#message').popover('toggle');
+				$('.me_text_area').focus();
+			},
+			submit: function() {
+				var params = {
+					source_id: this.currentId,
+					comment_type: 7,
+					comment_content: this.content
+				}
+				httpService.getDatas('POST', '/comment/add_comment_data', params).then(function(data) {
+					mui('#message').popover('hide');
+					$state.go($state.current, {}, {reload: true});
+				});
+			}
+		}
 	})
 
 
