@@ -1327,7 +1327,8 @@ angular.module('user', ['activity_servrt','directive_mml', 'common', 'request', 
                          }
                          $scope.shareName=$scope.perDeta.name;
                          $scope.shareImg=$scope.perDeta.sponsor_icon;
-                         $scope.shareInduction=$scope.perDeta.introduction;	
+                         $scope.shareInduction=$scope.perDeta.introduction;
+                         $scope.overDate_num=data.info.stale_activity_count
                          var sh_a={}
 	                 	 sh_a.title=$scope.perDeta.name;
 	                 	 sh_a.desc=$scope.perDeta.introduction;

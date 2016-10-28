@@ -345,11 +345,13 @@ function ticket_volume_list(data){
 		  this.endDate=info.end_time_fm;//活动结束时间 
 		  this.sDate_time=info.start_time;//活动开始时间
 		  this.eDate=info.end_time;//活动结束时间
-		  this.person_limit=info.person_limit==null?'无限制':info.person_limit+'人';//活动活动席位（人数上限）
+		  this.person_limit=info.person_limit;//活动活动席位（人数上限）
           var clkj_show="",
           broadcast=true;//为真的时候直播正在进行中  否则直播结束
 		  if(info.live_status==1){//1有直播  0没有直播
-			  clkj_show="show_a";
+			  clkj_show="/img/seeding_p.png";
+		  }else{
+			  clkj_show="/img/live.png";
 		  }
 		  if(info.play_status=="disconnected"){//disconnected断开直播    connected：直播中
 			  broadcast=false

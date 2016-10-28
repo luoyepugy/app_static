@@ -116,7 +116,7 @@
         			  }else{ 
         				  $(".return_top").addClass("mui-hidden");
         			  }
-        		  if(this.y == this.maxScrollY&&poiu_po){
+        			  if(this.y == this.maxScrollY&&poiu_po){
         			  poiu_po=false;
         			  $(".sys-loading").addClass("show_a");
         			  	poiu_po=true;
@@ -125,6 +125,10 @@
         			  	$(".sys-loading").removeClass("show_a")
         		
         		  	}
+        			 if( $(".scoller_p li").length>4){ 
+        				 $(".scoller_p ul").css({"padding-bottom":"70px"})
+        			 }
+        			  
         		  }
         	  });       
         }
@@ -212,7 +216,7 @@
         	// 文件上传成功，给item添加成功class, 用样式标记上传成功。
         	uploader.on( 'uploadSuccess', function( file,data ) {  //data后台返回的数据
         	      if($(".image_ad").attr("data-type")==1){
-                  	alert(data.msg)
+                  	$("#re_img").attr("src",data.msg)
                   	return 
                   }
                   

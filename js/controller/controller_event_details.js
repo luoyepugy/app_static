@@ -31,16 +31,25 @@ angular.module('act_details', [ "directive_mml","activity_servrt","ui.router","p
 		    		   
 
 		    		    $scope.detail.detail_date=new activity_detail(data.info);
-		    		    
+		    		    if(data.info.is_collect==0){
+		    		    	$('.collection_p').attr('data-x','0')
+		    		    }else{
+		    		    	$('.collection_p').attr('data-x','1')
+		    		    }
 		    		    $scope.detail.detail_date.act_id=$scope.id
 		    		    act_date.set_act_date($scope.detail.detail_date)
 		    		    $scope.user_id_a=data.info.sponsor_user_id
 		    			$scope.industry=$scope.classify[1].maker_title[$scope.detail.detail_date.industry_id].text;//行业
 		    			var reg = new RegExp("\n", 'g'); // 创建正则RegExp对象
 				        var hg_p=removeHTMLTag($scope.detail.detail_date.details).replace(reg,"").substring(0,100)
-				        var sh_a={}
-				   
-				        sh_a.title='【'+$scope.classify[0].maker_title[$scope.detail.detail_date.type].text+'】 '+$scope.detail.detail_date.title;
+				        var sh_a={},fx_text=""
+				        
+				        try{
+				        	fx_text='【'+$scope.classify[0].maker_title[$scope.detail.detail_date.type].text+'】 '+$scope.detail.detail_date.title;
+				        }catch(e){
+				        	fx_text='【其他】 '+$scope.detail.detail_date.title;
+				        }
+				        sh_a.title=fx_text
 				        sh_a.desc=hg_p;
 				        sh_a.link=window.location.href;
 				        sh_a.imgUrl="http://m.apptown.cn/img/activity/share/share_activity1.jpg";
@@ -64,13 +73,25 @@ angular.module('act_details', [ "directive_mml","activity_servrt","ui.router","p
 						console.log("活动详情获取失败");
 		    }); 
 	    },"collectionActivity":function(){//收藏或关注活动
+	    	
 	    	var date_po={}
 	    	date_po.resources_id=$scope.id
 	    	date_po.type=1;
-	    	if($scope.detail.detail_date.is_collect==1){
+	    	
+	    	if($('.collection_p').attr('data-x')==0){
+	    		hjgf=true;
+	    		$('.collection_p').attr('data-x','1')
+	    	}else{
 	    		hjgf=false;
+	    		$('.collection_p').attr('data-x','0')
 	    	}
 	    	if(hjgf){
+	    		
+	    		var col_num=parseInt($('.cl_num').text());
+	    		if(isNaN(col_num)){
+	    			col_num=0
+	    		}
+	    		$('.cl_num').text(col_num+1);
 	    		activity_data.exec_attention(date_po).then(
 			    		function success(data){    		
 			    		    if(data.code!=0){
@@ -90,6 +111,11 @@ angular.module('act_details', [ "directive_mml","activity_servrt","ui.router","p
 							console.log("请求取消收藏接口失败");
 			    }); 
 	    	}else{
+	    		var col_num=parseInt($('.cl_num').text());
+	    		if(isNaN(col_num)){
+	    			col_num=0
+	    		}
+	    		$('.cl_num').text(col_num-1);
 	    		 activity_data.cancel_attention(date_po).then(
 				    		function success(data){    		
 				    		    if(data.code!=0){
@@ -195,7 +221,7 @@ angular.module('act_details', [ "directive_mml","activity_servrt","ui.router","p
        $(".pup_soou_p").on("swiperight",function(){
     	  $(".pup_soou_p").css({"left":"1100px"})
       })
-	    $scope.sharep_a=new share_p()
+	    $scope.sharep_a=new share_p($scope.id)
 	    
 	   
 	  
@@ -656,7 +682,7 @@ $(".dd_pooo").hide()
 	 }
 
 	 $scope.sharep_a=new share_p(id);
-	 
+
 	 
 	    var mySwiper = new Swiper('.banner_top_b_banner',{
             autoplay : 3000,//自动滑动 滚动速度

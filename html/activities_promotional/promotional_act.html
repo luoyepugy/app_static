@@ -4,6 +4,14 @@
 <section ng-controller="promotional_act_controller" class="dfd_pooui_a">
 	<!--发起活动基本设置start-->
 	    <section class="activity_base_setting">
+	      <p class="fz12 zc pd pt10">
+	    		  下载APP可以选择收费、报名表单设置，进行会议、活动直播、打赏取现等功能，快到APP上去发布吧
+	    		 <span class="ls down_span_a yj4"  onclick="down_app()">
+	    		  	  下载app
+	    		 </span>
+	      </p>
+	    
+	    
 	    	<section class="cen">
 	    		<img id="re_img" src=""  />
 	    	</section>
@@ -12,7 +20,7 @@
 		          <li class="mui-table-view-cell">
 		                <span class="act_title fz16 fl">活动名称：</span>
 		                <p class="ov fl">
-		                  <input style="width:auto;" type="text" class="max_klabel_a te_0" placeholder="请填写报名的活动名称" id="name" maxlength="30"/>                 
+		                  <input style="width:auto;" type="text" class="max_klabel_a te_0" placeholder="请填写活动名称" id="name" maxlength="30"/>                 
 		                </p>
 		                <div class="ov up_load_wrap fr">
 		                  	<!-- <span class="up_load_face ml5 mt5"></span> -->
@@ -36,11 +44,19 @@
 		                </p>
 		                 <span class="mui-icon mui-icon-arrowdown zc map_icon_a"></span>
 		          </li>
-		          <li class="mui-table-view-cell pr cat_poiu"  style="padding-right:0">
+		          <li class="mui-table-view-cell pr cat_poiu ctyt_ois"  style="padding-right:0">
 		                <span class="act_title fz16">所在城市：</span>
 		                <p class="ov dianer pr mui-col-xs-8 mui-col-sm-9">
 		                       <input city-select style="width:50%" type="text" class="max_klabel_a te_0" placeholder="请选择所在城市"  id="city" readonly    />
-		                        <input style="width:47%" type="text" class="max_klabel_a te_0" placeholder="填写详细地址" id="address" readonly   />
+		                        <input style="width:47%" type="text" class="max_klabel_a te_0 address" placeholder="填写详细地址" id="address" readonly   />
+		                </p>
+		                
+		          </li>  
+		          <li class="mui-table-view-cell pr cat_poiu detailed_address"  style="padding-right:0">
+		                <span class="act_title fz16">详细地址：</span>
+		                <p class="ov dianer pr mui-col-xs-8 mui-col-sm-9">
+		                     
+		                        <input  type="text" class="max_klabel_a te_0 address" placeholder="填写详细地址" id="address" readonly   />
 		                </p>
 		                
 		          </li>            
@@ -142,9 +158,9 @@
 		            
 		           
 		              <li class="mui-table-view-cell">
-		                <span class="act_title fz16 ">联系方式：</span>
+		                <span class="act_title fz16 ">联系电话：</span>
 		                <p class="ov">
-		                  <input type="text" class="max_klabel_a te_0" placeholder="请输入联系方式" id="contact_way"/>
+		                  <input type="text" class="max_klabel_a te_0" placeholder="请输入联系电话" id="contact_way"/>
 		                </p>
 		          </li>
 		             <li class="mui-table-view-cell">
@@ -161,7 +177,7 @@
 						<div class="mui-switch-handle"></div>
 					</div>
 				</div>
-			<p class="pl15 fz18 green mt10" ng-click="activityMoreSetting()">
+			<p class="pl15 fz14 green mt10" ng-click="activityMoreSetting()">
 				完成设置&nbsp;<span >》</span>
 			</p>
 	    </section>

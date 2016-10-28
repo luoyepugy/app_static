@@ -468,7 +468,7 @@ angular.module('activity_servrt', []).
 	    /*   发起活动*/
 	    this.simple_create_activity = function(data){
             var create_activity  = $q.defer();
-            $http.post('/activity/simple_create_activity',data).success(function(data){
+            $http.post('/activity/create_activity',data).success(function(data){
             	create_activity.resolve(data);
            }).error(function () {
         	   create_activity.reject();

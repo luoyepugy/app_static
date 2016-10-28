@@ -71,11 +71,9 @@
               </p>
                <span class="mui-icon mui-icon-map ls map_icon_a"></span>
         </li>
-            <li class="mui-table-view-cell">
+            <li class="mui-table-view-cell" ng-if="detail.detail_date.person_limit!=null && detail.detail_date.person_limit!=0">
               <span class="f_i de_plimit fl"></span>
-              <p class="fl ml10"  ng-bind="detail.detail_date.person_limit" >
-                
-              </p>
+              <p class="fl ml10"  ng-bind="detail.detail_date.person_limit" ></p>
         </li>
          <li class="mui-table-view-cell">
               <span class="f_i de_price fl"></span>
@@ -224,7 +222,7 @@
 	 </a>	  
        <a class="box_a zc fz14 pt0 collection_p {{detail.detail_date.act_cl}} bor_e0_t bor_e0_r" ng-click="detail.collectionActivity()" >
 	 		<span class="mui-icon mui-icon-star pt2"></span><br />
-	 	<span>收藏</span><span  ng-bind="detail.detail_date.collect_count"></span>
+	 	<span>收藏</span><span class="cl_num"  ng-bind="detail.detail_date.collect_count"></span>
 	 </a>
 	  <a class="box_a zc fz14 pt0  bor_e0_t" ng-click="isLogin('promotional_act',1)" >	 		
 	 		<span class="mui-icon mui-icon-plus pt2"></span><br />

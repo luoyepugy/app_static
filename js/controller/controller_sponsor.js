@@ -1,7 +1,7 @@
 /**
  * 发起活动
  */
-
+var arrLabel=[];
 angular.module('sponsor', ["directive_mml","activity_servrt","ui.router", "common"])
 .controller('promotional_act_controller',function($scope,activity_data,$location,$stateParams,act_date,$state,httpService) { //发起活动
 	
@@ -19,7 +19,7 @@ angular.module('sponsor', ["directive_mml","activity_servrt","ui.router", "commo
 	    		function success(data){
 	    			 $(".sys-loading").removeClass("show_a")
 	    			if(data.code==-10){
-	    				 $location.path("signin");
+	    				$location.path("signin");
 	    				 mui.alert(data.msg, 'E场景活动');
 						return;
 	    			}
@@ -27,7 +27,7 @@ angular.module('sponsor', ["directive_mml","activity_servrt","ui.router", "commo
 	    				mui.alert(data.msg, 'E场景活动');
 						return;
 	    			}
-	    			 $location.path("/activity_detail/"+data.info)
+	    			 $location.path("/activity_detail/"+data.msg)
 	    		
 	    			mui.alert("活动发布成功", 'E场景活动',function(){
 	    				
@@ -43,7 +43,7 @@ angular.module('sponsor', ["directive_mml","activity_servrt","ui.router", "commo
 	  $("input,textarea").blur(function(){
         $(".mml_bottom").show()
 	 })
-	 $("#address").on("click",function(e){
+	 $(".address").on("click",function(e){
 	 	 /*阻止触发时间冒泡*/
                  e.preventDefault();
                  e.stopPropagation();
@@ -59,13 +59,65 @@ angular.module('sponsor', ["directive_mml","activity_servrt","ui.router", "commo
 		 
 	 }
 	 
+	  $(".header_mml,.mml_bottom ").on("click",function(e){//页面跳转缓存页面
+	 	 /*阻止触发时间冒泡*/
+         e.preventDefault();
+         e.stopPropagation();
+		 localStorage.input_f=JSON.stringify(da_input(2))
+		 var kmh=$.parseJSON(localStorage.input_f)
+	});
+	window.onunload=function(){//页面刷新缓存页面
+		 localStorage.input_f=JSON.stringify(da_input(2))
+		 var kmh=$.parseJSON(localStorage.input_f)
+	}
+	  
+	 
 	 mui("#mySwitch").switch(); //
 	 
      $scope.activityBaseSetting=function(){
-     	$(".activity_base_setting,.header_mml").hide();
+     	$(".activity_base_setting").hide();
      	$(".activity_more_setting").show();
+     	history.pushState(0, null, '');
+     	
+     	
      }
+   	$(".retreat_icon").on("tap",function(){
+     	        $(".activity_more_setting").hide()	
+     	        $(".activity_base_setting").show();
+     		})
      $scope.activityMoreSetting=function(){
+     	var type=$("#type").val();//活动类型
+     	var industry_val=$("#industry").val();//行业内容
+     	var contact_way=$("#contact_way").val();//联系方式
+	     var sponsor=$("#sponsor").val();//主办方  
+     	
+     	if(!form_mm.isnull(type)){
+		mui.alert('请选择类型', 'E场景活动',function(){
+			$("#industry").focus();
+		});
+		return
+	}
+     	
+     	if(!form_mm.isnull(industry_val)){
+		mui.alert('请选择行业', 'E场景活动',function(){
+			$("#industry").focus();
+		});
+		return
+	}	
+		
+	if(!form_mm.isnull(contact_way)){
+		mui.alert('请输入联系方式', 'E场景活动',function(){
+			$("#contact_way").focus();
+		});
+		return
+	}	
+	if(!form_mm.isnull(sponsor)){
+		mui.alert('请输入主办方', 'E场景活动',function(){
+			$("#sponsor").focus();
+		});
+		return
+	}
+     
      	$(".activity_base_setting,.header_mml").show();
      	$(".activity_more_setting").hide()
      }
@@ -78,13 +130,42 @@ angular.module('sponsor', ["directive_mml","activity_servrt","ui.router", "commo
 	 		$(".ddf_pooxd_a").attr("data-x",1)
 	 	}
 	 }
-	 $scope.select_lab=function(eve){
-	 	alert(1)
-	 	$(eve).addClass("active")
-	 }
+
 	 httpService.getDatas('GET', '/label/group').then(function(data) {//获取活动标签
 		$scope.ge_type=data
 	});
+	
+	$("body").on("click",".activitie_label ",function(){
+		 arrLabel=[]
+		 
+		 if($(".activitie_label.active").length<5){
+		 	$(this).toggleClass("active");
+		 }else{
+		 	$(this).removeClass("active");
+		 }
+		 $(".activitie_label").map(function(){
+		 	if($(this).hasClass("active")&&arrLabel.length<5){
+		 		arrLabel.push($(this).attr("data-y"))
+		 	}
+		 }) 
+		
+		
+		 
+		/*
+		for(var i=0;i<arrLabel.length;i++){
+			if($(this).attr("data-y")==arrLabel[i]){
+				removeByValue(arrLabel,$(this).attr("data-y"))
+				console.log(arrLabel)
+				return;
+			}
+		}
+		if(arrLabel.length<5){
+			
+			$(this).addClass("active");
+		    arrLabel.push($(this).attr("data-y"))
+		}
+	console.log(arrLabel)
+	*/})
 	 
 }).controller('mapCtrl',function($scope,$stateParams) { //地图
 	 $("html,body").animate({scrollTop:0},200);
@@ -92,8 +173,10 @@ angular.module('sponsor', ["directive_mml","activity_servrt","ui.router", "commo
 	var map = new BMap.Map("allmap");
 	var point = new BMap.Point(116.331398,39.897445); 
 	var local = new BMap.LocalSearch(map, {
-         renderOptions: {map: map, panel: "haha"}
-    });
+		renderOptions: {map: map, panel: "r-result"}
+	}
+	
+	);
     local.search($stateParams.city);
 	map.centerAndZoom(point,12);
 	var geolocation = new BMap.Geolocation();
@@ -113,14 +196,21 @@ angular.module('sponsor', ["directive_mml","activity_servrt","ui.router", "commo
         	var gc = new BMap.Geocoder();
         	gc.getLocation(point, function(rs){
         	  var addComp = rs.addressComponents;
-        $(".orientation input").val(rs.addressComponents.district+rs.addressComponents.street+rs.addressComponents.streetNumber)
-        	  
+        	  $(".orientation input").val(rs.addressComponents.district+rs.addressComponents.street+rs.addressComponents.streetNumber)
+        
         	});
 	}
 	map.addEventListener("click", showInfo);
-	
+	 if($stateParams.city==""){
+		 $stateParams.city="深圳市"
+	 }
 	 $(".orientation input").keyup(function(){
+		 
 		    local.search($stateParams.city+$(this).val()); 
+	 })
+	 $(".ssd_poi a").on("click",function(){
+		
+		 local.search($stateParams.city+$(this).text()); 
 	 })
 	 $(".ssd_ssdfg").on("click",function(){
 		  var kmh=$.parseJSON(localStorage.input_f)
@@ -128,6 +218,7 @@ angular.module('sponsor', ["directive_mml","activity_servrt","ui.router", "commo
 		  localStorage.input_f=JSON.stringify(kmh)
 		  window.history.back();
 	 })
+
 	 
 	
 })
@@ -201,19 +292,21 @@ function da_input(x){
 	end_time_gettime=new Date($("#end_time").val().replace(/-/g,'/')).getTime(),//结束时间
 	city=$("#city").val(),//城市
 	city_id="",//城市id
-	address=$("#address").val(),//详细地址
+	address=$(".address").val(),//详细地址
 	type=$("#type").val(),//活动类型
 	type_id=$("#type").attr("data-id"),
 	details=$("#details").val(),//详情
 	industry=$("#industry").attr("data-id"),//行业id
 	industry_val=$("#industry").val(),//行业内容
 	contact_way=$("#contact_way").val(),//联系方式
-	sponsor=$("#sponsor").val(),//主办方  
+	sponsor=$("#sponsor").val(),//主办方
+	poster_a=$("#re_img").attr("src"),//活动图片
 	activity={};
-	
+	activity.label=arrLabel.join(",");//活动标签
+	activity.poster=poster_a;//活动图片
 	activity.name=name;
-	activity.start_time=start_time_gettime;
-	activity.end_time=end_time_gettime;
+	activity.start_date=start_time_gettime;
+	activity.end_date=end_time_gettime;
 	activity.city=$("#city").attr("data-id");
 	activity.address=address;
 	activity.type=type_id;
@@ -231,6 +324,11 @@ function da_input(x){
 			});
 			return
 	}
+		if(!form_mm.isnull(poster_a)){
+			mui.alert('请上传活动封面', 'E场景活动',function(){
+			});
+			return
+	}		
 	if(!form_mm.isnull(start_time)){
 		mui.alert('请选择活动开始时间', 'E场景活动',function(){
 			$("#start_time").click();
@@ -264,49 +362,36 @@ function da_input(x){
 	}
 	if(!form_mm.isnull(address)){
 		mui.alert('请输入详细地址', 'E场景活动',function(){
-			$("#address").focus();
+			$(".address").focus();
 		});
 		return
 	}
-	
-	if(!form_mm.isnull(type)){
-		mui.alert('请选择行业', 'E场景活动',function(){
-			$("#industry").focus();
-		});
-		return
-	}
-	
-	
-	if(!form_mm.isnull(industry_val)){
-		mui.alert('请选择行业', 'E场景活动',function(){
-			$("#industry").focus();
-		});
-		return
-	}	
 	if(!form_mm.isnull(details)){
 		mui.alert('请输入活动详情', 'E场景活动',function(){
 			$("#details").focus();
 		});
 		return
-	}	
-	if(!form_mm.isnull(contact_way)){
-		mui.alert('请输入联系方式', 'E场景活动',function(){
-			$("#contact_way").focus();
-		});
-		return
-	}	
-	if(!form_mm.isnull(sponsor)){
-		mui.alert('请输入主办方', 'E场景活动',function(){
-			$("#sponsor").focus();
+	}
+		if(!form_mm.isnull(type)){
+		mui.alert('请选择高级设置中的类型', 'E场景活动',function(){
+			$("#industry").focus();
 		});
 		return
 	}
+	
+	
+	
+	
+	
+	
 	 $(".sys-loading").addClass("show_a");
 	}else if(x==2){
 		activity.s_time=start_time;
 		activity.e_time=end_time;
 		activity.city_m=city;
 		activity.type_m=type;
+		activity.poster_a=poster_a;
+		activity.activity_label=activity.label;
 		
 	}
 	poiy.activity=activity;
@@ -327,7 +412,7 @@ function input_val(data){
 	if(form_mm.isnull($("#end_time").val())){
 		$("#city").attr("data-id",data.city);
 	}
-	$("#address").val(data.address);//详细地址
+	$(".address").val(data.address);//详细地址
 	$("#type").val(data.type_m);//活动类型
 	
 	$("#industry").val(data.industry);
@@ -338,6 +423,8 @@ function input_val(data){
 	$("#contact_way").val(data.contact_way)
 	
 	$("#details").val(data.details);//详情
-	$("#sponsor").val(data.sponsor)
+	$("#sponsor").val(data.sponsor);
+	$("#re_img").attr("src",data.poster_a);//活动图片
+	
 }
 
