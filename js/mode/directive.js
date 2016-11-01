@@ -28,12 +28,18 @@
       	  $(".ds_poiu_a").removeClass("show_a");
     	  $(".retreat_icon").removeClass("none");
         }
+        if($location.path().indexOf("/awardList")!=-1) {//判断获奖列表
+        	
+            $('.header_mml').addClass("none")
+           
+        } else {
+          $('.header_mml').removeClass("none")
+        }
     
         
         
         var path_p=$location.path();
         var arr_p=["activity_streaming","activity_detail","activity_charge","b_map"];
-   
         for(var i in arr_p){
         	if(path_p.indexOf(arr_p[i])>0) {
              	$(".mml_bottom").hide();
@@ -41,19 +47,16 @@
              } 
         }
         $(".mml_bottom").show().css({"opacity":"1"}); 
-        /*$(arr_p).map(function(){
-        	 if(path_p.indexOf(this)>0) {
-             	$(".mml_bottom").hide();
-             }else{
-             	$(".mml_bottom").show();
-             }
-        })*/
-       
-        
+        var head_e="issue_success"
+        if(path_p.indexOf(head_e)>0){
+        	$(".header_mml").hide()
+        }else{
+        	$(".header_mml").show()
+        }	
 	 });
 
     // 获取用户登录状态
-    $rootScope.isLogin = function(url,ty){
+    $rootScope.isLogin = function(url,ty){  
         httpService.getDatas('GET', '/user/verifyUserLogin').then(function(data) {
             if(data.code!=0&&data.code!=-1){
             	if(ty==1){ 
@@ -63,7 +66,6 @@
                 messageService.show('您还未登录！');
                 $state.go("signin");
             } else {
-            	
                 $state.go(url);
             } 
         });
@@ -276,7 +278,7 @@
              });
          }
      };
- }).directive('retup', function () { //跳转制定的页面
+ }).directive('retup', function () { 
      return {
          restrict: 'AE',
          link: function(scope,ele,attr){

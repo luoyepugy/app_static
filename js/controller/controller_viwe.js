@@ -32,13 +32,14 @@ angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.rou
 	$scope.city_name=localStorage.city_name==undefined?"深圳":localStorage.city_name.split('市')[0];
 			
 		
-	// 登录判断是否从底部菜单栏点击
-    $scope.mySignin = function(state, params) {
+	// 判断是否登录
+    $scope.mySignin = function(state, params, flag) {
     	params = params || {};
-    	$rootScope.mySignin = true;
     	httpService.getDatas('GET', '/user/verifyUserLogin').then(function(data) {
 			if(data.code!=0&&data.code!=-1){
-				messageService.show('请先登录');
+				if(flag) {
+					messageService.show('请先登录');
+				}
 				$state.go("signin");
 				return false;
 			}
@@ -48,8 +49,8 @@ angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.rou
 
 
 })
-	// ===============================  首页 ==============================
-	.controller('index_controller',["$scope","activity_data", "$state", function($scope,activity_data, $state,httpService) {//首页
+// ===============================  首页 ==============================
+.controller('index_controller',["$scope","activity_data", "$state", function($scope,activity_data, $state,httpService) {//首页
 	$(".mml_bottom a").removeClass("bottom_act");
 	$(".mml_bottom a").eq(0).addClass("bottom_act");
 	$(".ds_poiu_a").addClass("show_a")
@@ -894,7 +895,6 @@ angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.rou
 			$scope.subscribArray.push($(this).data('id'));
 		} else {
 			var index = $scope.subscribArray.indexOf($(this).data('id'));
-			console.log(index);
 			$scope.subscribArray.splice(index, 1);
 		}
 	});

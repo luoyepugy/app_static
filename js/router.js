@@ -95,7 +95,11 @@
 	    }).state('activity_streaming.activity_detail',{
 	    	url: '/activity_detail/:id',  //活动详情
 	    	templateUrl: '/html/activity/activity_detail.html'		
-	    }) 
+	    }) .state('issue_success',{
+            url: '/issue_success/?id?teile?text',    // 发布成功活动
+            templateUrl: '/html/activities_promotional/issue_success.html',
+            controller: 'issue_successCtrl'
+        })
 
 	    // 搜索
 	    .state('search',{
@@ -287,6 +291,14 @@
             url: '/award',   // 个人中心奖品
             templateUrl: '/html/user/award.html',
             controller: 'awardCtrl'
+        }).state('awardList',{
+            url: '/awardList/:activity_id',   // 个人中心获奖名单列表
+            templateUrl: '/html/user/award_list.html',
+            controller: 'awardListCtrl'
+        }).state('activity_more_manage',{
+            url: '/activity_more_manage/:activity_id?switchEnroll',   // 个人中心发起活动更多管理
+            templateUrl: '/html/user/activity_more_manage.html',
+            controller: 'activityMoreManageCtrl'
         })
         
       

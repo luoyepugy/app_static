@@ -3,8 +3,6 @@
  */
 angular.module('act_details', [ "directive_mml","activity_servrt","ui.router","pay","sponsor"])
 .controller('activity_detail_c',function($scope,activity_data,$location,$stateParams,act_date,$state,httpService) { //活动详情 
-
-
 	  $scope.id=$stateParams.id
 	  $scope.id_a=$stateParams.id
 	  var hjgf=true;//设置取消和收藏关注
@@ -12,7 +10,7 @@ angular.module('act_details', [ "directive_mml","activity_servrt","ui.router","p
 	  $(".share_all_num").on("click",function(){
 	  	httpService.getDatas('POST', '/share/add_share',{"type":1,"relevance_id":$scope.id}).then(function(data) {
 				  
-				});  
+		});  
 	  })
 	  
 	  $scope.detail={
@@ -31,12 +29,17 @@ angular.module('act_details', [ "directive_mml","activity_servrt","ui.router","p
 		    		   
 
 		    		    $scope.detail.detail_date=new activity_detail(data.info);
+		    		    console.log(data.info);
 		    		    if(data.info.is_collect==0){
 		    		    	$('.collection_p').attr('data-x','0')
 		    		    }else{
 		    		    	$('.collection_p').attr('data-x','1')
 		    		    }
-		    		    $scope.detail.detail_date.act_id=$scope.id
+		    		    if($scope.detail.detail_date.status==1){
+		    		    	$(".header_mml ").append('<span class=" cf mui-btn-blue mui-btn-link mui-pull-right fz16 aas_muijh" ng-click="release_a()">发布</span>')  
+				    		  
+		    		    }
+		    			  $scope.detail.detail_date.act_id=$scope.id
 		    		    act_date.set_act_date($scope.detail.detail_date)
 		    		    $scope.user_id_a=data.info.sponsor_user_id
 		    			$scope.industry=$scope.classify[1].maker_title[$scope.detail.detail_date.industry_id].text;//行业
@@ -137,8 +140,12 @@ angular.module('act_details', [ "directive_mml","activity_servrt","ui.router","p
 	    	}
 	    	
 	    
-	    },"sign_up_p":function(a,x){ 
+	    },"sign_up_p":function(a,x,y){ 
+	    	if(y==1){
 	    	
+	    		mui.alert("该活动还未发布，不能报名，请点击右上角发布按钮！")
+	    		return
+	    	}
 	    	if(x==2){//活动已结束
 	    		return;
 	    	}
@@ -198,6 +205,21 @@ angular.module('act_details', [ "directive_mml","activity_servrt","ui.router","p
 	    	}
 	    }
 	  }
+	 $("body").on("click",".aas_muijh",function(){
+		
+		  var r_dada={}
+		  r_dada.activity={"id":$scope.id,"status":0}
+		  activity_data.getDatas('post', '/activity/release_activity',r_dada)
+		  .then(function(data) {
+			  $(".aas_muijh").remove()
+			  if(data.code==-10){
+				  $state.go("signin");
+				 } 
+			   $scope.date_poi=data.info
+		  }); 
+	 })
+	
+		
 	  $scope.streaming_poo=function(broadcast,mki){//broadcast=真为正在直播
 		  $(".streaming_poo").removeClass("show_a")
 		  if(broadcast){ 
@@ -221,8 +243,12 @@ angular.module('act_details', [ "directive_mml","activity_servrt","ui.router","p
        $(".pup_soou_p").on("swiperight",function(){
     	  $(".pup_soou_p").css({"left":"1100px"})
       })
-	    $scope.sharep_a=new share_p($scope.id)
-	    
+      $scope.fengg_a=function(){
+    	  mui('#share_pp').popover('toggle');
+    	  $scope.sharep_a=new share_p($scope.id,$scope.detail.detail_date.title,$("#detail_date_o").text().substring(0,50).trim())
+   	    
+      } 
+	 
 	   
 	  
 	   $scope.detail.detail_f($scope.id)
@@ -681,7 +707,7 @@ $(".dd_pooo").hide()
 			 
 	 }
 
-	 $scope.sharep_a=new share_p(id);
+	 $scope.sharep_a= new share_p($scope.id,$("title").text(),$("#detail_date_o").text())
 
 	 
 	    var mySwiper = new Swiper('.banner_top_b_banner',{

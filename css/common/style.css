@@ -913,6 +913,7 @@ section#pullrefresh {
 	.mml_login_go li {
 		margin-bottom: 12px;
 	}
+	
 }
 
 @media screen and (min-height: 730px) {
@@ -926,6 +927,52 @@ section#pullrefresh {
 	.mml_login_go li {
 		margin-bottom: 14px;
 	}
+	#allmap{
+	   height:400px !important; 
+	}
+	.sign_in_icon_top{
+	  height:400px  !important;;
+	}
+	.sign_in_icon_top h4{
+	   font-size:34px;
+	       margin-top: 180px;
+	}
+	.code,.code canvas{ 
+	margin-top:30px;
+              	width: 320px !important;;
+              	height: 320px !important;;
+              }
+              .qc_poiuy_a {
+                font-size:26px !important;;
+                    padding-top: 39px !important;
+              }
+              .act_user_a{
+                height:120px;
+              }
+              
+              .tile_poiu_a,.act_title_a,.fz16 {
+                font-size:18px !important;
+              }
+              .dfd_pooic .fz12,.mui-col-xs-11.dian.green,.fz14,.act_tble_a  p{
+                font-size:16px !important;
+              }
+              .dfd_pooic>p{
+                 margin-top:20px;
+              }
+              .dfd_pooic section.fz12.dian.zc{
+                margin-top:10px;
+              }
+              .sdf_poi_oiiuy p{
+                     font-size:16px;
+              }
+              .mui-table-view-cell p{
+                  font-size:16px;
+              }
+              section.tc.bgff.mt10.pt10.pm10.ng-scope {
+    			padding-top: 30px;
+   			padding-bottom: 30px;
+		 }
+	
 }
 
 @media screen and (max-width: 370px){
@@ -2091,6 +2138,10 @@ img.yj.user_zz_p {
     height: 22px;
     top: 2px;
 }
+.ddf_pooxd_a .dashLabel{
+    background: #fff;
+    border: 1px dashed #575757;
+}
 .mainBtn.mui-btn-block {
     width: 90%;
     display: block;
@@ -2718,4 +2769,216 @@ footer#mml_bottom a {
 .ssd_poi a{
 	margin-right:20px;
 	font-size:16px;
+	color:#575757
 }
+
+
+.particulars_wer{
+	height:160px;
+	overflow: scroll;
+	overflow: auto;
+}
+.ssd_pooiu .fa{
+	font-size:18px;
+	margin-right:16px;
+}
+
+p.yj4.po_pooi_s a {
+    /* padding: 10px; */
+    display: block;
+    width: 33.3%;
+    float: left;
+    padding: 9px 0px;
+    text-align: center;
+}
+.po_pooi_s  {
+    position: absolute;
+    width: 113px;
+    border: 1px solid #4FA45D;
+    left: -41px;
+    top: -46px;
+    display:none;
+    background:#fff
+}
+.po_pooi_s_wr p {
+    width: 32px;
+    margin-bottom: 4px;
+    margin-left: 6px;
+    height: 30px;
+    float: left;
+}
+.po_pooi_s_wr {
+    width: 200px;
+    padding-top: 4px;
+    top: -86px;
+    z-index:1000
+}
+/*获奖名单*/
+.header_award {
+    background: #4FA45D;
+    font-size: 20px;
+    z-index: 10000;
+}
+.side_menu_award {
+    width: 40px;
+    height: 22px;
+    position: absolute;
+    right: 5px;
+    top: 12px;
+}
+.award_title {
+	height:40px;
+	line-height: 40px;
+	text-align: center;
+}
+.award_img {
+	border-radius: 50%;
+	margin-left:15px;
+	margin-top:10px;
+}
+/*个人中心更多管理*/
+.more_ma {
+    border: 1px solid #4EA45D;
+    color: #4EA45D;
+    padding: 1px 6px;
+}
+.more_acti_1,.more_acti_2 {
+	background:#686f78;
+	padding-top:20px;
+}
+.more_acti_list1 p,.more_acti_list2 p{
+	color:#fff;
+	text-align: center;
+}
+.more_acti_2 {
+	padding-bottom: 20px;
+}
+.more_width {
+	width:27px;
+	height:23px;
+}
+.more_enroll {	
+	background-position: -210px -622px;
+}
+.more_award {
+	background-position: -209px -654px;
+}
+.more_message {
+	background-position: -214px -683px;
+}
+.enroll_btn {
+	background-position: -210px -718px;
+}
+.more_please {
+	background-position: -272px -622px;
+}
+.more_code {
+	background-position: -268px -654px;
+}
+.more_live {
+	background-position: -271px -683px;
+}
+.more_bat {
+	background-position: -269px -718px;
+}
+.more_ac_content_list {
+	width: 25%;
+	background: #fff;
+	padding-top:15px;
+	padding-bottom:15px;
+	text-align: center;
+	border-right:#e0e0e0 1px solid;
+	border-bottom:#e0e0e0 1px solid;
+}
+.more_republish {
+	background-position: -208px -751px;
+}
+.more_tick {
+	background-position: -269px -749px;
+}
+
+.weingf_a{
+    width: 37px;
+    height: 36px;
+    background-position: -16px -25px;
+}
+.weingf_b{
+   background-position: -74px -25px; 
+}
+
+.weingf_c{
+   background-position: -132px -25px; 
+}
+.weingf_d{
+   background-position: -190px -25px; 
+}
+.weingf_e{
+   background-position: -247px -25px; 
+}
+.oiuyt_fmnb_as{
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    display: none
+}
+
+.aas_muijh {
+    background: #4FA45D;
+    padding: 4px 10px;
+    position: relative;
+}
+
+#r-result ol li>div>div span{
+	color:#141414 !important;
+}
+#r-result ol li>div div:nth-child(2) b,#r-result ol li>div div:nth-child(2) span,#r-result  a{
+	color:#575757 !important;
+}
+.downApp_pup {
+	background:rgba(0,0,0,0.4);
+	width:100%;
+	height: 100%;
+	position:absolute;
+	top:0;
+	left:0;
+	z-index: 100000;			
+	display: none;
+}
+.downApp_content {
+	width: 70%;
+	margin: 40% auto;
+	background: #fff;
+	border-radius:4px ;
+	padding-bottom: 15px;	
+}
+.an_down {
+	width:80%;
+	background: #55aee8;
+	border-radius: 4px;
+	margin: 0 auto;
+}
+.ip_down {
+	width:80%;
+	background: #fc4861;
+	border-radius: 4px;
+	margin: 0 auto;
+}
+.an_down label {
+	width: 26px;
+	height:30px;
+	background: url(/img/xbt.png) no-repeat -325px -582px;
+	background-size: 360px;
+}
+.ip_down label{
+	width: 26px;
+	height:30px;
+	background: url(/img/xbt.png) no-repeat -325px -646px;
+	background-size: 360px;
+}
+.an_down span ,.ip_down span {
+	color:#fff;
+}
+

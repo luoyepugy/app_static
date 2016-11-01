@@ -1,0 +1,134 @@
+<!-- 个人中心发起活动更多管理-->
+<meta charset="UTF-8">
+<section class="pr">
+		<!--更多管理数据展示start-->
+		<section class="more_acti_1 box">
+		   <section class="more_acti_list1 box_a">
+		   	   <p>254558</p>
+		   	   <p>浏览数</p>
+		   </section>
+		   <section class="more_acti_list1 box_a">
+		   	   <p>254</p>
+		   	   <p>报名数</p>
+		   </section>
+		   <section class="more_acti_list1 box_a">
+		   	   <p>254</p>
+		   	   <p>分享数</p>
+		   </section>
+		   <section class="more_acti_list1 box_a">
+		   	   <p>254</p>
+		   	   <p>收藏数</p>
+		   </section>   
+		</section>
+		<section class="more_acti_2 box">
+		   <section class="more_acti_list2 box_a">
+		   	   <p>254</p>
+		   	   <p>已签到</p>
+		   </section>
+		   <section class="more_acti_list2 box_a">
+		   	   <p>254</p>
+		   	   <p>打赏数</p>
+		   </section>
+		   <section class="more_acti_list2 box_a">
+		   	   <p>254</p>
+		   	   <p>留言数</p>
+		   </section>
+		   <section class="more_acti_list2 box_a">
+		   	   <p>2</p>
+		   	   <p>签到率</p>
+		   </section> 
+		</section>
+		 <!--更多管理数据展示end--> 
+		 
+		<!--入驻start-->
+		<div class="mt10" ui-sref="auth_list">
+			<img style="width: 100%;" src="/img/index/authentication_1.png" alt="活动号嘉宾号媒体号认证">
+		</div>
+		 <!--入驻end-->  
+		
+		 <!--更多管理具体入口start-->
+		<section class="box more_content_1 mt10">
+			<section class="more_ac_content_list box_a " ui-sref="ticket_user_detail({id: id})">
+				<span class="more_enroll f_i more_width"></span><br />
+				<span class="fz14">报名名单</span>
+			</section>
+			<section class="more_ac_content_list box_a"  ui-sref="activity_reward_detail({id: id})">
+				<span class="more_award f_i more_width"></span><br />
+				<span class="fz14">打赏名单</span>
+			</section>
+			<section class="more_ac_content_list box_a onOffApp">
+				<span class="more_message f_i more_width"></span><br />
+				<span class="fz14">短信通知</span>
+			</section>
+			<section class="more_ac_content_list box_a" ng-click="switchEnroll()">
+				<span class="enroll_btn f_i more_width"></span><br />
+				<span ng-show="closeEnroll" class="fz14" data-status="0">关闭报名</span>
+				<span ng-show="!closeEnroll" class="fz14" data-status="1">开启报名</span>
+			</section>		
+		</section>
+		<section class="box more_content_1">
+			<section class="more_ac_content_list box_a onOffApp">
+				<span class="more_please f_i more_width"></span><br />
+				<span class="fz14">邀请函</span>
+			</section>
+			<section class="more_ac_content_list box_a onOffApp">
+				<span class="more_code f_i more_width"></span><br />
+				<span class="fz14">签单二维码</span>
+			</section>
+			<section class="more_ac_content_list box_a onOffApp">
+				<span class="more_live f_i more_width"></span><br />
+				<span class="fz14">我要直播</span>
+			</section>
+			<section class="more_ac_content_list box_a" ui-sref="awardList({activity_id: id})">
+				<span class="more_bat f_i more_width"></span><br />
+				<span class="fz14">获奖名单</span>
+			</section>	
+		</section>
+		<section class="box more_content_1">
+			<section class="more_ac_content_list onOffApp">
+				<span class="more_republish f_i more_width"></span><br />
+				<span class="fz14">再次发布</span>
+			</section>
+			<section class="more_ac_content_list onOffApp">
+				<span class="more_tick f_i more_width"></span><br />
+				<span class="fz14">我要验票</span>
+			</section>	
+			<section class="more_ac_content_list">
+				
+			</section>
+			<section class="more_ac_content_list">
+				
+			</section>
+			<section class="qc">
+				
+			</section>
+		</section>
+		 <!--更多管理具体入口end-->  
+		 
+		
+</section>
+       <!--下载APP弹框start-->
+		 <section class="downApp_pup">
+		 	     <section class="downApp_content">
+		 	     	 <p class="tr pr5" ng-click="dismiss_pup()">X</p>
+		 	     	  <p class="fz18 zd cen">提示</p>
+		 	     	   <p class="cen fz14 mt10">该功能需要下载APP才能使用</p>
+		 	     	    <div class="fz14 an_down pt5 pl15 mt10" ng-click="down_app()">
+		 	     	    	<label class="fl"></label>
+		 	     	    	<span class="fl" style="margin-left: 10%;">android版下载</span>
+		 	     	    	<div class="qc">
+		 	     	    		
+		 	     	    	</div>
+		 	     	    </div>
+		 	     	     <div class="fz14 ip_down pt5 pl15 mt10  pb10" ng-click="down_app()">
+		 	     	    	<label class="fl"></label>
+		 	     	    	<span class="fl" style="margin-left: 10%;">iphone版下载</span>
+		 	     	    	<div class="qc">
+		 	     	    		
+		 	     	    	</div>
+		 	     	    </div>
+		 	     </section>
+		 </section>
+		 <!--下载APP弹框end-->
+
+ 

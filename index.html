@@ -1,5 +1,8 @@
+
+
+
 <!DOCTYPE html>
-<html ng-app="ticket_volume_list">
+<html >
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -10,7 +13,7 @@
 <link href="/css/common/swiper3.07.min.css" rel="stylesheet">  
 <link href="/css/common/mui.min.css" rel="stylesheet">  
 <link href="/css/common/base.css" rel="stylesheet">
-<link href="/css/common/style.css" rel="stylesheet">
+<link href="/css/common/style.css?v=5" rel="stylesheet">
 <link href="/css/pages/launched_campaign.css" rel="stylesheet"/>
 <link href="//at.alicdn.com/t/font_1477531881_361757.css" rel="stylesheet">
 <link href="/css/common/font-awesome.css" rel="stylesheet">
@@ -20,6 +23,9 @@
 <script src="/js/common/mui.picker.min.js"></script>
 </head>
 <body ng-controller="mode_Controller"> 
+<div class="bg_loading">
+ <p><img src="/img/system_loading.gif">&nbsp;<span>请求正在处理，请稍等</span></p>
+</div>
       <header class="header_mml pr pt10 pm10 cf cen ">
            <a class="f_i retreat_icon j-backBtn" back></a>
       	 <a class="cf fz16 ds_poiu_a" ng-href="/html/common/common.html" >
@@ -44,6 +50,8 @@
           <li ui-sref="personal_center"><a>我的</a></li>
           <li ui-sref="activity_user({type: 2})"><a>发起的</a></li>
           <li ui-sref="activity_user({type: 1})"><a>参与的</a></li>
+            <li data-href="/html/page/attention.html"><a>关注e场景</a></li>
+                      <li onclick="down_app()"><a>下载app</a></li> 
           <!-- 暂时屏蔽赞助和白条 -->
           <!-- <li ui-sref="activity_loan"><a>活动白条</a></li> -->
           <!-- /暂时屏蔽赞助和白条 -->
@@ -73,40 +81,10 @@
 
 		</a>
 	</footer>
-
-
-	 
-	
-
-	<script src="/js/common/jquery-1.11.3.min.js"></script>
-    <script src="/js/common/jquery.qrcode.min.js"></script>
-    <script src="/js/common/angular.min.js"></script>
-    <script src="/js/common/angular-ui-router.min.js"></script>
-    <script src="/js/common/angular-animate.js"></script>
-    <script src="/js/common/swiper3.07.min.js"></script>
-    <script src="/js/common/jweixin-1.0.0.js"></script>
-    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=KIpwmISmRtIMMssrIQ4NF9ji"></script>
-    <script src="/js/common/aes-min.js"></script>
-    <script src="/js/common/pad-iso10126-min.js"></script>
-    <script src="/js/common/city.data.js"></script>
-    <script src="/js/common/iscroll.js"></script>
-    <script src="/js/common/is_from.js"></script>
-    <script  src="/js/common/prism-min.js"></script>
-    <script src="/js/common/webuploader.min.js"></script>
-    <script src="/js/common/jquery.lazyload.min.js"></script>
-    <script src="/js/mode/directive.js"></script>
-    <script src="/js/service/service_activity.js"></script> 
-    <script src="/js/entity/entity_phone.js"></script>
-    <script src="/js/router.js" ></script> 
-    <script src="/js/mode/methods_jq.js" ></script>
-    <script src="/js/controller/controller_viwe.js" ></script>
-    <script src="/js/controller/controller_pay.js" ></script>
-    <script src="/js/controller/controller_sponsor.js" ></script>
-    <script src="/js/controller/controller_event_details.js" ></script> 
-    <!-- 模块 -->
-    <script src="/js/common/modules.js"></script>
-    <!-- 用户控制器 -->
-    <script src="/js/controller/controller_user.js" ></script>
-    <script src="/js/controller/controller_activity.js" ></script>
+     <script src="/js/common/jquery-1.11.3.min.js"></script> 
+     <script src="/js/common/webuploader.min.js"></script>
+     <script src="/js/common/jweixin-1.0.0.js"></script>
+     <script src="/js/common/require.js"  data-main="/js/main" ></script>   
+     <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=KIpwmISmRtIMMssrIQ4NF9ji"></script>
 </body>
 </html>

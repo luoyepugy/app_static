@@ -51,7 +51,9 @@ var ruuy_ar=["common/jquery-1.11.3.min",
              "controller/controller_activity"]    	    
 require(ruuy_ar,function(){
 	angular.bootstrap(document,['ticket_volume_list']); 
-});	    
+});	  
+
+
     	    
 
     	    

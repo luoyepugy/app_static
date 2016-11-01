@@ -38,11 +38,7 @@ angular.module('user', ['activity_servrt','directive_mml', 'common', 'request', 
 		// 跳转
 		$scope.route = function(data) {
 			if(data.code == 0) {
-				if($rootScope.mySignin) {
-					$state.go('personal_center');
-				} else {
-					$window.history.back();
-				}
+				$window.history.back();
             } else if(data.code == 1){
                 $state.go('activity_success', {'t_id': data.msg});
             } else if(data.code == 2) {
@@ -222,8 +218,6 @@ angular.module('user', ['activity_servrt','directive_mml', 'common', 'request', 
 					activity_data.clear_cookie().then(
 				    		function success(data){
 				    			 $location.path("/index");
-				    			 // 重置登录状态
-				    			 $rootScope.mySignin = false;
 				    		}, function error() {
 								console.log("退出登录失败");
 				    });
@@ -802,7 +796,7 @@ angular.module('user', ['activity_servrt','directive_mml', 'common', 'request', 
 
 	// ========================= 我的活动 =======================
 	/* @ngInject */
-	.controller('activity_userCtrl', function($scope,activity_data,$location,$stateParams) { 
+	.controller('activity_userCtrl', function($scope,activity_data,$location,$stateParams, transmitService, $state) { 
 		$(".mml_bottom a").removeClass("bottom_act");
 		$(".mml_bottom a").eq(4).addClass("bottom_act");
 		var data_act={"pageIndex":1,"pageSize":10,"user_id":$stateParams.user_id,"time_status":"","flag":"1","type":"0"}  // 1:未开始    3：已结束
@@ -832,6 +826,7 @@ angular.module('user', ['activity_servrt','directive_mml', 'common', 'request', 
 			    				 var khg=new query_activity_list(this);
 			    				 khg.order_id=this.order_id;
 			    				 khg.tip = this.tip;
+			    				 khg.apply_switch = this.apply_switch;
 			    				 $scope.my_activities.activity_list.push(khg);
 			    			
 			    			 })
@@ -880,6 +875,7 @@ angular.module('user', ['activity_servrt','directive_mml', 'common', 'request', 
 			    			$(data.rows).map(function(){
 			    				 var khg=new query_activity_list(this);
 			    				 khg.tip = this.tip;
+			    				 khg.apply_switch = this.apply_switch;
 			    				 $scope.my_activities.activity_list.push(khg); 
 			    			})
 			    		
@@ -902,6 +898,7 @@ angular.module('user', ['activity_servrt','directive_mml', 'common', 'request', 
 			    			 $(data.rows).map(function(){
 			    				 var khg=new query_activity_list(this);
 			    				 khg.tip = this.tip;
+			    				 khg.apply_switch = this.apply_switch;
 			    				 $scope.my_activities.activity_list.push(khg) 
 			    				
 			    			 })
@@ -961,6 +958,14 @@ angular.module('user', ['activity_servrt','directive_mml', 'common', 'request', 
 				$(".user_act_pii").addClass("user_act_pii_p")
 				;break;
 		}
+
+		
+		// 传送数据
+		$scope.transmit = function(data) {
+			transmitService.setDatas(data);
+			$state.go('activity_more_manage', {id: data.id});
+		}
+		
 
 	})
 
@@ -1606,6 +1611,82 @@ angular.module('user', ['activity_servrt','directive_mml', 'common', 'request', 
 			}
 			$scope.info_prize=data.info
 		});
+	}).controller('awardListCtrl', function($scope, httpService, messageService,$stateParams) { //获奖名单列表
+		$scope.awardArray=[];//获奖名单数据
+		$scope.activity_id=$stateParams.activity_id;//活动ID
+		$scope.prize_name="";//奖项筛选
+		var getUrl='/draw/get_win_prize?activity_id='+$scope.activity_id;//请求地址
+	    $scope.awardAll={
+	    	"awardSelect":function(name){//按奖项筛选
+				 $(".menu_pup,.filiuyt_o").toggleClass("show_a")
+			 $scope.prize_name=name;	 
+		     getUrl='/draw/get_win_prize?activity_id='+$scope.activity_id+'&prize_name='+$scope.prize_name;
+		     $scope.awardAll.awardBase(getUrl);
+			 },
+			 "awardBase":function(getUrl){
+			 	$scope.awardArray=[];
+			 	httpService.getDatas('GET', getUrl).then(function(data) {
+					if(data.code!=0){
+						mui.alert(data.msg)
+						return
+					}
+					$scope.awardArray=data.info;
+					$scope.awardArray_length=data.info.length;//已获奖人数
+					$scope.awardSum=data.msg;//总参加人数
+			
+				});
+			 }
+	    }
+
+	}).controller('activityMoreManageCtrl', function($scope, httpService, messageService, $stateParams) { //个人中心更多管理
+		// 0关闭， 1开启
+		status = $stateParams.switchEnroll;
+		// 活动id
+		$scope.id = $stateParams.activity_id;
+		// 关闭开启报名
+		$scope.closeEnroll = (status == 0) ? false : true;
+		$scope.switchEnroll = function() {
+			$scope.closeEnroll = !$scope.closeEnroll;
+			var status = ($scope.closeEnroll==true) ? 1 : 0;
+			httpService.getDatas('POST',  '/activity/apply_switch?activityid=' + $scope.id + '&apply_switch=' + status).then(function(data) {
+				var tip = (status == 0) ? '报名已关闭': '报名已开启';
+				messageService.show(tip, 'toast');
+		  	});
+		}
+
+	    // $scope.awardAll.awardBase(getUrl);
+		httpService.getDatas('GET', 'draw/get_draw_level?activity_id='+$scope.activity_id).then(function(data) {//获取奖项名称
+			if(data.code!=0){
+				mui.alert(data.msg)
+				return
+			}			
+			$scope.awardNameArray=data.info;
+		});
+
+	    $scope.dismiss_pup=function(){
+	    	$('.downApp_pup').css('display','none')
+	    }
+	    $('.onOffApp').on('click',function(){
+	    	$('.downApp_pup').css('display','block')
+	    })
+			$scope.down_app=function(){
+			var _agent=navigator.userAgent;
+			if(_agent.match(/micromessenger/i)!=null && _agent.match(/android/i)!=null){//安卓机
+				var isWeixin = !!/MicroMessenger/i.test(_agent);
+				if(isWeixin){
+					   $("body").empty();
+					   $("body").append('<section class="app_down_a"></section>');
+				       document.body.style.backgroundColor = "#FFFFFF" ;
+				       window.open("http://resource.apptown.cn/app/manmanlai.apk");
+			    }
+			}else{//苹果机
+				$("body").empty();
+			    $("body").append('<section class="app_down_a"></section>');
+				document.body.style.backgroundColor = "#FFFFFF" ;
+			    window.location.href="http://a.app.qq.com/o/simple.jsp?pkgname=com.mml.apptown";
+		    }
+		}
+	    
 	})
 
 })();

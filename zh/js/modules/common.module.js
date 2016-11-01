@@ -87,11 +87,11 @@ angular.module('common')
         return transmit;
         
         function setDatas(data) {
-            if(transmit.data == '') {
-                $window.history.back();
-            } else {
+            // if(transmit.data == '') {
+            //     $window.history.back();
+            // } else {
                 transmit.data = data;
-            }
+            // }
         }
         function getDatas() {
             return transmit.data;

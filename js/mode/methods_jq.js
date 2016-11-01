@@ -93,21 +93,20 @@ function classify_p(){
 
  }
 /* 分享*//*:$("#details_a").text().replace(reg,"").substring(0,30)*/
- function share_p(id){
-
+ function share_p(id,b,c){
 	  var reg = new RegExp("\n", 'g');
 	var khg={"url":"http://m.apptown.cn/activity/activityShowSkip?activity_id="+id//分享链接
-    	,"title":$("title").text()//分享标题
+    	,"title":b//分享标题
     	,"pics":"http://m.apptown.cn/img/activity/share/share_activity1.jpg"//分享图片地址
-        ,"details_a":"e场景活动"//分享摘要		
+        ,"details_a":c//分享摘要		
     	,"Qzone":function(){//QQ空间分享
     	      var p = {
     	            url:this.url,
     	            showcount:'1',/*是否显示分享总数,显示：'1'，不显示：'0' */
-    	            desc:'这活动我太喜欢了',/*默认分享理由(可选)*/
-    	            summary:this.details_a,/*分享摘要(可选)*/
+    	            desc:this.details_a,/*默认分享理由(可选)*/ 
+    	            summary:"e场景活动吧",/*分享摘要(可选)*/
     	            title:this.title,/*分享标题(可选)*/
-    	            site:'e场景活动吧',/*分享来源 如：腾讯网(可选)*/
+    	            site:"e场景活动吧",/*分享来源 如：腾讯网(可选)*/
     	            pics:this.pics, /*分享图片的路径(可选)*/
     	            style:'101',
     	            width:199,
@@ -121,7 +120,7 @@ function classify_p(){
     },"qq":function(){//分享QQ
     	 var p = {
                  url:this.url, /*获取URL，可加上来自分享到QQ标识，方便统计*/
-                 desc:'这活动我太喜欢了', /*分享理由(风格应模拟用户对话),支持多分享语随机展现（使用|分隔）*/
+                 desc:c, /*分享理由(风格应模拟用户对话),支持多分享语随机展现（使用|分隔）*/
                  title:this.title, /*分享标题(可选)*/
                  summary:this.details_a, /*分享摘要(可选)*/
                  pics:this.pics, /*分享图片(可选)*/
@@ -138,7 +137,30 @@ function classify_p(){
              window.location.href="http://connect.qq.com/widget/shareqq/index.html?"+s.join('&')
     },"qqweibo":function(){//微博
     	window.location.href="http://share.v.t.qq.com/index.php?c=share&a=index&url="+this.url+"&title="+this.title+"&site=&pic="+this.pics+"&appkey=1103378751'"
-    }}
+    },"weibo":function(){
+    	 var p = {
+ 	            url:this.url,
+ 	            showcount:'1',/*是否显示分享总数,显示：'1'，不显示：'0' */
+ 	            desc:this.details_a,/*默认分享理由(可选)*/ 
+ 	            summary:"e场景活动吧",/*分享摘要(可选)*/
+ 	            title:this.title,/*分享标题(可选)*/
+ 	            site:"e场景活动吧",/*分享来源 如：腾讯网(可选)*/
+ 	            pics:this.pics, /*分享图片的路径(可选)*/
+ 	            style:'101',
+ 	            width:199,
+ 	            height:30
+ 	        };
+ 	        var s = [];
+ 	        for(var i in p){
+ 	            s.push(i + '=' + encodeURIComponent(p[i]||''));
+ 	        }
+ 	        window.location.href="http://service.weibo.com/share/mobile.php?"+s.join('&')
+
+    }
+    
+	
+	
+	}
 	return khg
 }
 /* 过滤标签*/

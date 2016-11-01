@@ -384,7 +384,6 @@ function ticket_volume_list(data){
 			  registration.code=-1;
 			  registration.msg="我要报名";
 		  }
-	
 		  if(this.is_applay==true){
 			  registration.code=1;
 			  registration.msg="已报名";
@@ -396,7 +395,12 @@ function ticket_volume_list(data){
 			  registration.msg="活动已结束";
 			  this.reg_clas="bghs"
 		  }
-		  this.registration=registration;
+		  if(info.apply_switch == 0) {
+		  	registration.code=2;
+			registration.msg="报名已结束";
+			this.reg_clas="bghs"
+		  }
+ 		  this.registration=registration;
 		  this.sign_count = info.sign_count ; // 签到总人数
 		  this.unsign_count = info.unsign_count ; // 未签到总人数
 		  this.live_url=info.live_url; // 视频直播地址

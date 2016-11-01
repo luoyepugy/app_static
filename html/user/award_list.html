@@ -1,0 +1,51 @@
+<!--兑奖名单列表-->
+<meta charset="UTF-8">
+<section>
+	<header class="header_award pr pt10 pm10 cf cen ">
+           <a class="f_i retreat_icon j-backBtn" back></a>
+      	 <a class="cf fz16 ds_poiu_a" ng-href="/html/common/common.html" >
+     			  {{city_name}}
+        		 <i class="f_i index_select"></i>
+    		 </a>
+            <i class="f_i logo_icon"></i>
+            <img class="icon-search j-navSearchIcon" src="/img/icon-search.png" ui-sref="search" alt="搜索图标" style="display: none;">
+            <span class="side_menu_award fz16" ng-click="mode.the_menu()">筛选</span>
+          
+          <section class="filiuyt_o" ng-click="mode.the_menu()">
+          
+          </section>
+     <ul class="bgff yj4 menu_pup">
+        
+        <i class="f_i joiuyr_icon_a" ></i> 
+           <li ng-click="awardAll.awardSelect(y)" ng-repeat="y in awardNameArray"><a ng-bind="y"></a></li> 
+     </ul>   
+	</header>
+
+    	<p class="award_title fz14">
+    		<span>总参加人数 <span class="orange" ng-bind="awardSum"></span> 人</span>
+    		<span>已获奖<span class="orange" ng-bind="awardArray_length"></span>人</span>
+    	</p>
+     <section ng-repeat="x in awardArray">
+     	<section class="bgff mt10 pd pm5 box pr ov user_li_s mt10">
+            <section style="width:100%">
+                <img width="28" height="28" class="award_img fl ml15"  ng-src="{{x.user_icon}}"/>
+                <section class="fl ml10 mt5">
+                	<p class="zd" ng-bind="x.name"></p>
+                	<p class="c57" ng-bind="x.entry_code"></p>
+                </section>
+                <section class="fr mr15 mt15 orange fz14" ng-bind="x.prize_name"></section>
+             <span class="d_dian_a yj"></span>
+              <span class="d_dian_a d_dian_b yj"></span>
+              <span class="d_dian_a d_dian_c yj"></span>
+             <span class="d_dian_a d_dian_d yj"></span>
+             <span class="d_dian_a d_dian_e yj"></span>
+             <span class="d_dian_a d_dian_f yj"></span>
+            <span class="d_dian_a d_dian_g yj"></span>
+        </section>
+        
+     </section>
+    
+</section>
+
+	
+     

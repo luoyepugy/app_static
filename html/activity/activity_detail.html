@@ -216,7 +216,7 @@
 
 
 <section class="act_bottom box cen bgff ">
-	 <a class="box_a zc fz14 pt0 bor_e0_t bor_e0_r" ng-href="#share_pp"> 
+	 <a class="box_a zc fz14 pt0 bor_e0_t bor_e0_r" ng-click="fengg_a()"> 
 	 	<span class="mui-icon mui-icon-redo pt2"></span><br />
 	 	<span >分享</span><span  ng-bind="detail.detail_date.share_count"></span>
 	 </a>	  
@@ -230,12 +230,12 @@
 	 </a>
 	  
 	 <a class="box_a zc fz14 mui-col-xs-3 mui-btn mui-btn-success bot_poiy_a fz18  {{detail.detail_date.reg_clas}}"  
-	  ng-click="detail.sign_up_p(detail.detail_date.is_free,detail.detail_date.registration.code)"  
+	  ng-click="detail.sign_up_p(detail.detail_date.is_free,detail.detail_date.registration.code,detail.detail_date.status)"  
 	  ng-bind="detail.detail_date.registration.msg">
 	  </a> 
 	 
 </section>
-    <section id="share_pp" class="mui-popover mui-popover-bottom mui-popover-action " style="z-index:9999">
+    <section id="share_pp" class="mui-popover mui-popover-bottom mui-popover-action " style="z-index:9999999">
         <section class="modal-content clearfix bgff">
             <section class="modal-header text-center pb0" >分享给好友</div>
             <section class="modal-body mt20">

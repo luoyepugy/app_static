@@ -2,6 +2,7 @@
 <link href="/css/pages/activitie_mark.css" rel="stylesheet">
 <!-- 订阅 -->
 <div>
+  <div><img style="width:100%;" src="/img/others/subscribe-banner.png" alt="banner图"></div>
    <section class="pd pt10  bgff ddf_pooxd_a">
         <p class="zd fz16 pm5 pl10 mb10" ng-click="industry.show=!industry.show">行业
           <span class="fz24 green">
@@ -18,7 +19,7 @@
           <p class="zd fz14 pm5 pl10 tltle_p">{{item.name}}<span class="ls">+</span></p>
           <section class="pomhhgf_we">
             <section class="pokjhiT_a" ng-repeat="child in item.child_list">
-                <a class="activitie_label fz14 yj4 j-selectLabel" ng-bind="child.label_name" data-id="{{child.id}}"></a>
+                <a class="activitie_label fz14 yj4 j-selectLabel dashLabel" ng-bind="child.label_name" data-id="{{child.id}}"></a>
             </section>
           </section>
           <p class="qc"></p>

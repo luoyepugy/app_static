@@ -55,13 +55,21 @@
           
                
            </section>
-           <p class="pt10  btm mt10 tr">
-              <a ng-if="list.tip.open==true" class="sponsorship_details yj4 fz12 mui-col-xs-4 mr10"  ui-sref="activity_reward_detail({id:list.id,type:1})">打赏名单</a>
-              <a ng-if="type_p==2" class="sponsorship_details yj4 fz12 mr10"  ui-sref="ticket_user_detail({id:list.id})" > 报名详情</a>
-              <a ng-if="type_p==1" class="sponsorship_details yj4 fz12" data-href="http://www.apptown.cn/activity/short_view/{{list.order_id}}"> 
+           <p class="pt10  btm mt10 tr" ng-if="type_p==1">
+             <!-- <a ng-if="list.tip.open==true" class="sponsorship_details yj4 fz12 mui-col-xs-4 mr10"  ui-sref="activity_reward_detail({id:list.id,type:1})">打赏名单</a>
+              <a ng-if="type_p==2" class="sponsorship_details yj4 fz12 mr10"  ui-sref="ticket_user_detail({id:list.id})" > 报名详情</a>-->
+              
+              <a  class="sponsorship_details yj4 fz12" data-href="http://www.apptown.cn/activity/short_view/{{list.order_id}}"> 
               票卷详情
              </a>
           </p>
+          <section class="pt10  btm mt10" ng-if="type_p==2">
+             <p class="fl">报名：125</p>
+             <p class="fl ml10">打赏：245</p>
+             <p class="fl ml10">留言：1336</p>
+             <p class="fr  more_ma yj4"  ui-sref="activity_more_manage({activity_id:list.id, switchEnroll: list.apply_switch})">更多管理</p>                    
+             <p class="qc"></p>
+          </section>
                     </li>
         </ul>
     </section> 

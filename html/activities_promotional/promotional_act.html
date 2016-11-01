@@ -4,7 +4,7 @@
 <section ng-controller="promotional_act_controller" class="dfd_pooui_a">
 	<!--发起活动基本设置start-->
 	    <section class="activity_base_setting">
-	      <p class="fz12 zc pd pt10">
+	      <p class="fz12 zc pd pt10 pm10">
 	    		  下载APP可以选择收费、报名表单设置，进行会议、活动直播、打赏取现等功能，快到APP上去发布吧
 	    		 <span class="ls down_span_a yj4"  onclick="down_app()">
 	    		  	  下载app
@@ -98,18 +98,54 @@
 		      	  活动详情
 		      	
 		      </p>
-		        <p class="pr">
-		      	  <textarea class="act_poiiu_tr" placeholder="请输入活动详情" id="details" rows="6"></textarea>
+		        <section class="pr pd bgff">
+		      	 <!--  <textarea class="act_poiiu_tr" placeholder="请输入活动详情" id="details" rows="6"></textarea> -->
+		             <section id="details"  class="particulars_wer bgff  pt10 pm10 fz14">
+		             
+		             </section>
+		             <section class="btm pt10 pm10 ssd_pooiu zc" data-role="editor-toolbar"
+        data-target="#details"> 
+		                <i class="fa fa-bold rich_text" data-edit="bold" ng-click="rich_text.blod_a($event)"></i>
+		                <i class="fa fa-underline rich_text" data-edit="underline" ng-click="rich_text.blod_a($event)"></i> 
+		                <section class="fa fa-font pr" ng-click="rich_text.blod_a($event,2)">
+		                   <section class="yj4 po_pooi_s po_pooi_s_wr">
+		                    	<p data-edit="forecolor  #C10000" class="rich_text" style="background: #C10000"></p>
+		                    	<p data-edit="forecolor  #FF4C40" class="rich_text" style="background: #FF4C40"></p>
+		                    	<p data-edit="forecolor  #920783" class="rich_text" style="background: #920783"></p>
+		                    	<p data-edit="forecolor  #FF9C00" class="rich_text" style="background: #FF9C00"></p>
+		                     	<p data-edit="forecolor  #407600" class="rich_text" style="background: #407600"></p>
+		                    	<p data-edit="forecolor  #408080" class="rich_text" style="background: #408080"></p>
+		                    	<p data-edit="forecolor  #0070C1" class="rich_text" style="background: #0070C1"></p>
+		                    	<p data-edit="forecolor  #004080" class="rich_text" style="background: #004080"></p>
+		                    	<p data-edit="forecolor  #808080" class="rich_text" style="background: #808080"></p>
+		                    	<p data-edit="forecolor  #000000" class="rich_text" style="background: #000000"></p>
+		                  </section>
+		                 
+		                </section>
+		                <section class="fa fa-text-width pr" ng-click="rich_text.blod_a($event,2)">
+		                <p class="yj4 po_pooi_s">
+		                    	 <a data-edit="fontSize 7" class="rich_text">大</a>
+		                  	 <a data-edit="fontSize 3" class="rich_text">中</a>
+		                   	 <a data-edit="fontSize 2" class="rich_text">小</a>
+		                  </p>
+		                
+		                </section>
+		             </section>
+		             
 		      
-		      	</p>
-		      	
-		      	<p class="bgff more_set pr" ng-click="activityBaseSetting()">
+		      	</section> 
+		      	<p class="bgff more_set pr mt10 " ng-click="activityBaseSetting()">
 					<a  class="mui-navigate-right" >高级设置</a>
 				</p>
-				  <p class="mt60 pd cen zd">
-       					<a class="mui-btn register_button fz16" ng-click="promotional.initiate()">立即发布</a>
-    			</p>
-    			
+				<section class="mt60">
+				  <p class=" pd cen zd  mui-col-xs-6 fl">
+				  
+       					<a class="mui-btn register_button fz16" ng-click="promotional.initiate(0)">发布</a>
+    				</p>
+    				 <p class=" pd cen zd  mui-col-xs-6 fl">
+       				<a class="mui-btn register_button fz16 bgyellow" ng-click="promotional.initiate(1)">保存浏览</a>
+    				</p>
+    			</section>
 	    </section>
 	<!--发起活动基本设置end-->
 	
