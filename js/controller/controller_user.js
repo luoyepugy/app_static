@@ -1637,10 +1637,19 @@ angular.module('user', ['activity_servrt','directive_mml', 'common', 'request', 
 				});
 			 }
 	    }
+	    $scope.awardAll.awardBase(getUrl);
+		httpService.getDatas('GET', 'draw/get_draw_level?activity_id='+$scope.activity_id).then(function(data) {//获取奖项名称
+			if(data.code!=0){
+				mui.alert(data.msg)
+				return
+			}			
+			$scope.awardNameArray=data.info;
+		});
+
 
 	}).controller('activityMoreManageCtrl', function($scope, httpService, messageService, $stateParams) { //个人中心更多管理
 		// 0关闭， 1开启
-		status = $stateParams.switchEnroll;
+		var status = $stateParams.switchEnroll;
 		// 活动id
 		$scope.id = $stateParams.activity_id;
 		// 关闭开启报名
@@ -1653,16 +1662,7 @@ angular.module('user', ['activity_servrt','directive_mml', 'common', 'request', 
 				messageService.show(tip, 'toast');
 		  	});
 		}
-
-	    // $scope.awardAll.awardBase(getUrl);
-		httpService.getDatas('GET', 'draw/get_draw_level?activity_id='+$scope.activity_id).then(function(data) {//获取奖项名称
-			if(data.code!=0){
-				mui.alert(data.msg)
-				return
-			}			
-			$scope.awardNameArray=data.info;
-		});
-
+	    
 	    $scope.dismiss_pup=function(){
 	    	$('.downApp_pup').css('display','none')
 	    }

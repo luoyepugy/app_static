@@ -34,11 +34,11 @@ angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.rou
 		
 	// 判断是否登录
     $scope.mySignin = function(state, params, flag) {
-    	params = params || {};
+    	params = (params) ? params : {};
     	httpService.getDatas('GET', '/user/verifyUserLogin').then(function(data) {
 			if(data.code!=0&&data.code!=-1){
 				if(flag) {
-					messageService.show('请先登录');
+					messageService.show('您还未登录');
 				}
 				$state.go("signin");
 				return false;
@@ -861,13 +861,16 @@ angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.rou
 		});
 	};
 	// 获取行业数据
-	httpService.getDatas('GET', '/system/queryIndustryAll').then(function(data) {
-		$scope.industry.list = data.info;
-	});
+	var industryDatas = function() {
+		httpService.getDatas('GET', '/system/queryIndustryAll').then(function(data) {
+			$scope.industry.list = data.info;
+			getSubscribeDatas();
+		});
+	}
 	// 获取标签数据
 	httpService.getDatas('GET', '/label/group').then(function(data) {
 		$scope.labelList = data;
-		getSubscribeDatas();
+		industryDatas();	
 	});
 
 	// 行业
@@ -889,7 +892,11 @@ angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.rou
 		}
 	}
 	// 选择订阅标签
-	$('body').on('click', '.j-selectLabel', function() {
+	$('body').off('click').on('click', '.j-selectLabel', function(e) {
+		if($scope.subscribArray.length >= 5 && !$(this).hasClass('mainBtn')) {
+			messageService.show('最多订阅5个', 'toast');
+			return false;
+		}
 		$(this).toggleClass('mui-btn-green mainBtn');
 		if($(this).hasClass('mainBtn')) {
 			$scope.subscribArray.push($(this).data('id'));
@@ -898,11 +905,10 @@ angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.rou
 			$scope.subscribArray.splice(index, 1);
 		}
 	});
+	
 	// 提交订阅数据
 	$scope.submit = function() {
-		if($scope.subscribArray.length > 5) {
-			messageService.show('最多订阅5个', 'toast');
-		} else if($scope.subscribArray.length == 0) {
+		if($scope.subscribArray.length == 0) {
 			messageService.show('请至少订阅1个', 'toast');
 		} else {
 			httpService.getDatas('GET', '/user_center/subscribe', {labels: $scope.subscribArray.toString(), industryId: $scope.industry.id}).then(function(data) {

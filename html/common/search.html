@@ -14,12 +14,11 @@
         <!-- /暂时屏蔽赞助 -->
     	</ul>
     	<p class="searchInput">
-    		<i class="iconfont icon-search"></i>
-    		<input type="text" name="searchName" placeholder="请输入关键字" eliminate />
+    		<input type="text" name="searchName" placeholder="请输入关键字" />
+            <i class="iconfont icon-search" ng-click="searchResult()"></i>
     	</p>
-    	<button type="button" class="mui-btn mui-btn-green searchBtn " ng-click="searchResult()">搜索</button>
     </div>
-    <p class="pl5 mb10" ng-click="mySignin('subscribe')">订阅&gt;&gt;</p>
+    <p class="pl5 mb10" ng-click="mySignin('subscribe', '', true)">订阅&gt;&gt;</p>
     <!-- 活动标签 -->
     <div ng-controller="activitie_demand">
        <section class="pd pt10  bgff ddf_pooxd_a">

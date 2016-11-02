@@ -12,14 +12,14 @@
           <a class="activitie_label fz14 yj4 mainBtn mui-btn-green fr tc" style="width: 23.3%;" ng-show="industry.id>0">{{industry.array['name']}}</a>
         </p>
         <section class="pokjhiT_a" ng-repeat="item in industry.list" ng-class="{'none': !industry.show, 'db': industry.show}">
-            <a class="activitie_label fz14 yj4" ng-class="{'mui-btn-green mainBtn':industry.array[$index]}" ng-bind="item.name" ng-click="industry.choice($index)"></a>
+            <a class="activitie_label fz14 yj4 " ng-class="{'mui-btn-green mainBtn':industry.array[$index]}" ng-bind="item.name" ng-click="industry.choice($index)"></a>
         </section>
         <p class="zd fz16 pm5 pl10 mt10">我喜欢*</p>
         <section  ng-repeat="item in labelList" class="deh_list" finish>
           <p class="zd fz14 pm5 pl10 tltle_p">{{item.name}}<span class="ls">+</span></p>
           <section class="pomhhgf_we">
             <section class="pokjhiT_a" ng-repeat="child in item.child_list">
-                <a class="activitie_label fz14 yj4 j-selectLabel dashLabel" ng-bind="child.label_name" data-id="{{child.id}}"></a>
+                <a class="activitie_label fz14 yj4 dashLabel j-selectLabel" ng-bind="child.label_name" data-id="{{child.id}}"></a>
             </section>
           </section>
           <p class="qc"></p>
