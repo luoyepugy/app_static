@@ -128,9 +128,7 @@
 }
 .ddf_pooxd_a a {
     padding: 3px 8px;
-    padding: 3px 8px;
-    border: 1px solid #F5F5F5;
-    background: #F5F5F5;
+    border: 1px dashed #4EA45D;
     color: #575757;
 }
 .ddf_pooxd_a .active {
@@ -145,5 +143,10 @@
 	max-width: 100%;
 	width: 100%;
 }
-
+.act_left{
+	display: block;
+	width: 80px;
+	float: left;
+	font-size: 14px;
+}
 

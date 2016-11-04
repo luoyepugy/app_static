@@ -27,7 +27,7 @@ angular.module('common')
             } else if (type == 'toast' && tips) {
                 $('body').append('<div class="messageBox">' + tips +'</div>').fadeIn();
                 $timeout(function(){
-                    $('.messageBox').fadeOut();
+                    $('.messageBox').remove().fadeOut();
                 }, 2500);
             }
         };

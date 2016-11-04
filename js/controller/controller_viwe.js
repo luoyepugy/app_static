@@ -843,14 +843,14 @@ angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.rou
 	// 获取订阅数据
 	var getSubscribeDatas =	function() {
 		httpService.getDatas('GET', '/user_center/get_subscribe').then(function(data) {
-			if(data.info.industryId) {
+			if(data.info && data.info.industryId) {
 				var id = data.info.industryId;
 				$scope.industry.id = id;
 				$scope.industry.oldIndex = id - 1;
 				$scope.industry.array['name'] = $scope.industry.list[id - 1]['name'];
 				$scope.industry.array[id - 1] = true;
 			}
-			if(data.info.labels) {
+			if(data.info && data.info.labels) {
 				$scope.subscribArray = data.info.labels;
 				$('.j-selectLabel').each(function() {
 					if($scope.subscribArray.indexOf($(this).data('id')) != -1) {
@@ -1034,6 +1034,7 @@ angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.rou
     		   httpService.getDatas('GET', '/activity/exec_attention',resources).then(function(data) {
     			   if(data.code!=0){
     				   $state.go("signin");
+    					messageService.show('没有登录！', 'toast');
     			   }
     			   $scope.ge_type[index].is_attention="bgdiso";
     	           $scope.ge_type[index].lkoi="已关注";

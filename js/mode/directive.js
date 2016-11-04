@@ -12,7 +12,8 @@
 		$(".menu_pup,.filiuyt_o").removeClass("show_a");
 		$(".return_top").addClass("mui-hidden");
 		$(".bg_loading").remove()
-		
+		$(".header_mml").show()
+		$(".aas_muijh").empty()
         /* 
          * 张晗
          * 顶部导航搜索图标显示隐藏
@@ -21,20 +22,13 @@
         $rootScope.previousParams = fromParams;
         $rootScope.currentState = to.name;
         if($location.path() == '/index') {
-            $('.j-navSearchIcon').show();
+            $('.j-navIcon').show();
            
         } else {
-          $('.j-navSearchIcon').hide();
+          $('.j-navIcon').hide();
       	  $(".ds_poiu_a").removeClass("show_a");
     	  $(".retreat_icon").removeClass("none");
-        }
-        if($location.path().indexOf("/awardList")!=-1) {//判断获奖列表
-        	
-            $('.header_mml').addClass("none")
-           
-        } else {
-          $('.header_mml').removeClass("none")
-        }
+        }       
     
         
         
@@ -47,12 +41,19 @@
              } 
         }
         $(".mml_bottom").show().css({"opacity":"1"}); 
-        var head_e="issue_success"
-        if(path_p.indexOf(head_e)>0){
-        	$(".header_mml").hide()
-        }else{
-        	$(".header_mml").show()
-        }	
+        var head_e=[]
+        head_e.push("issue_success");
+        head_e.push("awardList");
+        head_e.push("ticket_user_detail");
+        for(var kj in head_e){
+        	  if(path_p.indexOf(head_e[kj])>0){
+              	$(".header_mml").hide()
+              	return
+              }else{
+              	$(".header_mml").show()
+              }
+        }
+      	
 	 });
 
     // 获取用户登录状态

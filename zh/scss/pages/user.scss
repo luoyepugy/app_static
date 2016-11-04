@@ -93,31 +93,26 @@
 		}
 	}
 	.searchInput {
-		width: 57%;
+		width: 75%;
 		position: relative;
 		vertical-align: top;
 		height: 41px;
 		input {
-			padding-left: 25px;
+			padding-left: 0;
+			padding-right: 35px;
 		}
-	}
-	.searchBtn {
-		width: 18%;
-		height: 40px;
 	}
 	.itemFirst {
 		order: 1;
 	}
 	.icon-search {
-		@include position-basic(absolute, left, 10px, top, 7px);
+		@include position-basic(absolute, right, 0px, top, 0px);
 		color: $text-light;
-		width: 15px;
+		width: 35px;
+	    height: 38px;
+	    text-align: center;
+	    line-height: 36px;
 	}
-	.mui-icon-clear {
-		position: absolute;
-    	right: 5px;
-    	top: 10px;
-	} 
 }
 // 2行省略
 .ellipsisText2 {

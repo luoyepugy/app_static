@@ -1,22 +1,42 @@
 <!-- 票卷详情 -->
 <meta charset="UTF-8">
-
+    <header class="header_award pr pt10 pm10 cf cen ">
+           <a class="f_i retreat_icon j-backBtn" back></a>
+      	 <a class="cf fz16 ds_poiu_a" ng-href="/html/common/common.html" >
+     			  {{city_name}}
+        		 <i class="f_i index_select"></i>
+    		 </a>
+            <i class="f_i logo_icon"></i>
+            <img class="icon-search j-navSearchIcon" src="/img/icon-search.png" ui-sref="search" alt="搜索图标" style="display: none;">
+            <span class="side_menu_award fz16" ng-click="mode.the_menu()">筛选</span>
+          
+          <section class="filiuyt_o" ng-click="mode.the_menu()">
+          
+          </section>
+     <ul class="bgff yj4 menu_pup">
+        
+        <i class="f_i joiuyr_icon_a" ></i> 
+           <li ng-click="volume_details.selectSign('')"><a>全部</a></li> 
+            <li ng-click="volume_details.selectSign(1)"><a>已签到</a></li> 
+             <li ng-click="volume_details.selectSign(2)"><a>未签到</a></li> 
+     </ul>   
+	</header>
   <section class="box pd pt10 pm10 bgff">
       <p class="box_a fz16">
-           已报名：<span ng-bind="volume_details.dat_po.results+'人'"></span>
+           已报名：<span ng-bind="results+'人'"></span>
          </p>
          <p class="box_a fz16 cen">
-           已验票：<span ng-bind="volume_details.dat_po.already_sign+'人'"></span>
+           已验票：<span ng-bind="already_sign+'人'"></span>
          </p>
          <p class="box_a fz16 tr">
-           未验票：<span ng-bind="volume_details.dat_po.not_sign+'人'"></span>
+           未验票：<span ng-bind="not_sign+'人'"></span>
          </p>
     </section>
     
-    <section class=" bgff">
+    <section>
          <section class="bgff pd pt10 pm10 box pr ov user_li_s mt10"     ng-repeat="list in volume_details.data_p" >
-            <section class="box_a pl10">
-                <img ng-src="{{list.user_icon}}" class="yj user_icon_p fl">
+            <!--<section class="box_a pl10">
+                <img ng-src="{{list.user_icon}}" class="yj user_icon_p fl  mt10">
                 <p class="ov mt5 pl10">
                   <span class="zd fz16" ng-bind="list.name"></span><br>
                     <span ng-bind="list.tel"></span>
@@ -36,7 +56,28 @@
              <span class="d_dian_a d_dian_d yj"></span>
              <span class="d_dian_a d_dian_e yj"></span>
              <span class="d_dian_a d_dian_f yj"></span>
+            <span class="d_dian_a d_dian_g yj"></span>-->
+            <section style="width:100%">
+                <img width="28" height="28" class="award_img fl ml15"  ng-src="{{list.user_icon}}"/>
+                <section class="fl ml10 mt5">
+                	<p class="zd" ng-bind="list.name"></p>
+                	<p class="c57" ng-bind="list.tel"></p>
+                </section>
+                <section class="fr">
+                	 <p>
+                      		￥<span class="hs" ng-bind="list.price"></span>|<span ng-bind="list.ticket_name"></span>
+                    </p>
+                	 <p class="tr" ng-bind="list.sign_status"></p>
+                </section>
+                
+             <span class="d_dian_a yj"></span>
+              <span class="d_dian_a d_dian_b yj"></span>
+              <span class="d_dian_a d_dian_c yj"></span>
+             <span class="d_dian_a d_dian_d yj"></span>
+             <span class="d_dian_a d_dian_e yj"></span>
+             <span class="d_dian_a d_dian_f yj"></span>
             <span class="d_dian_a d_dian_g yj"></span>
+        </section>
         </section>
     
     </section>

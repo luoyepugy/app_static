@@ -36,7 +36,7 @@ angular.module('act_details', [ "directive_mml","activity_servrt","ui.router","p
 		    		    	$('.collection_p').attr('data-x','1')
 		    		    }
 		    		    if($scope.detail.detail_date.status==1){
-		    		    	$(".header_mml ").append('<span class=" cf mui-btn-blue mui-btn-link mui-pull-right fz16 aas_muijh" ng-click="release_a()">发布</span>')  
+		    		    	$(".header_mml ").append('<span class=" cf mui-btn-blue mui-btn-link mui-pull-right fz16 aas_muijh">发布</span>')  
 				    		  
 		    		    }
 		    			  $scope.detail.detail_date.act_id=$scope.id
@@ -206,7 +206,6 @@ angular.module('act_details', [ "directive_mml","activity_servrt","ui.router","p
 	    }
 	  }
 	 $("body").on("click",".aas_muijh",function(){
-		
 		  var r_dada={}
 		  r_dada.activity={"id":$scope.id,"status":0}
 		  activity_data.getDatas('post', '/activity/release_activity',r_dada)
@@ -216,6 +215,7 @@ angular.module('act_details', [ "directive_mml","activity_servrt","ui.router","p
 				  $state.go("signin");
 				 } 
 			   $scope.date_poi=data.info
+			   location.reload();
 		  }); 
 	 })
 	

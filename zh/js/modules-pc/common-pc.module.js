@@ -17,13 +17,17 @@ angular.module('common',[])
             'show': show
         };
         return messages;
-        
-        function show(tips, type) {
-            $('body').append('<div class="messageBox alert alert-error">' + tips +'</div>').fadeIn();
-            $timeout(function(){
-                $('.messageBox').fadeOut();
-            }, 2500);
-        };
+    
+        function show(tips, type, title) {
+            title = title || '';
+            type = type || 'error';
+            switch(type) {
+                case 'info': toastr.info(title,tips); break;
+                case 'error': toastr.error(title,tips); break;
+                case 'success': toastr.success(title,tips); break;
+                case 'warning': toastr.warning(title,tips); break;
+            }
+        }
     }
 
 

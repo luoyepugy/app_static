@@ -47,6 +47,9 @@ function query_activity_list(data){
 	}
 
 	this.now_money=data.now_money==null?0:data.now_money;//已筹金额
+	this.activity_number=data.activity_number;//报名人数
+	this.message_count=data.message_count;//留言人数
+	this.tip_count=data.tip_count;//打赏人数
 }
 /*首页热门活动*/
 function preferential(getActivityHot){

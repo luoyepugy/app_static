@@ -1358,8 +1358,8 @@ section.ulact_p.ulact_p_sp {
 
 /*注册*/
 .user_icon_p{
-   width: 57px;
-    height: 57px;
+   width: 28px;
+    height: 29px;
 }
 .right_arrow{
     position: absolute;
@@ -2131,16 +2131,18 @@ img.yj.user_zz_p {
     height: 60px;
 }
 .icon-search {
-    float: right;
-    position: relative;
-    right: 50px;
+    position: absolute;
+    right: 42px;
     width: 22px;
     height: 22px;
-    top: 2px;
+    top: 12px;
+}
+.icon-subscribe {
+    right: 75px;
 }
 .ddf_pooxd_a .dashLabel{
     background: #fff;
-    border: 1px dashed #575757;
+    border: 1px dashed #878787;
 }
 .mainBtn.mui-btn-block {
     width: 90%;
@@ -2162,6 +2164,7 @@ img.yj.user_zz_p {
 /* 消息提示 */
 .messageBox {
     position: fixed;
+    z-index: 100;
     bottom: 15%;
     left: 50%;
     background: rgba(0,0,0,.6);

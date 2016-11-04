@@ -1265,11 +1265,12 @@ angular.module('user', ['activity_servrt','directive_mml', 'common', 'request', 
 		    		}, function error() {
 						console.log("查看票卷数据失败");
 		    });
-		},"ticket_volume":function(evt){//查看过期票卷
+		},"ticket_volume":function(evt){//查.看过期票卷
 			 $(".volume_button").hide();
 	         $(".expired_ticket_volume").show();
 	         parameter_a.filter=3
-	          $scope.volume_list.TicketList(parameter_a);
+	         $scope.volume_list.TicketList(parameter_a);
+	         $(".ssd_poio_eert ").remove()
 		}
 		
 		}
@@ -1282,20 +1283,26 @@ angular.module('user', ['activity_servrt','directive_mml', 'common', 'request', 
 
 	// ========================= 我的票券详情 =======================
 	/* @ngInject */
-	.controller('ticket_user_detailCtrl', function($scope,activity_data,$location,$stateParams) { 
+	.controller('ticket_user_detailCtrl', function($scope,activity_data,$location,$stateParams) {
+		var onOFF=true;
 	     $scope.volume_details={
 	    		   "data_p":[],
-	    		  "dat_po":{}, 
-	    		    "details_a":function(data_p){
-	            	 activity_data.query_consumption_user_list(data_p).then(
+	    		  "dat_po":{"pageIndex":1,"activity_id":$stateParams.id,"pageSize":"500","is_sign":""}, 
+	    		    "details_a":function(dat_po){
+	    		    	$scope.volume_details.data_p=[];
+	            	 activity_data.query_consumption_user_list(dat_po).then(
 	     		    		function success(data){    		
 	     		    			  if(data.code!=0){
 	     		    				  mui.alert(data.msg, 'E场景活动');
 	     		    				  return;
 	     		    			  }
-	     		    			 $scope.volume_details.dat_po.results=data.results//已报名
-	     		    			 $scope.volume_details.dat_po.already_sign=data.otherinfo.already_sign//已签到
-	     		    			 $scope.volume_details.dat_po.not_sign=data.otherinfo.not_sign//未签到
+	     		    			 if(onOFF){
+	     		    			 	$scope.results=data.results//已报名
+	     		    			 	$scope.already_sign=data.otherinfo.already_sign//已签到
+	     		    			 	$scope.not_sign=data.otherinfo.not_sign//未签到
+	     		    			  	onOFF=false;
+	     		    			 }
+	     		    			 
 	     		    			
 	     		    			  $(data.rows).map(function(){
 	     		    				  var da_th=new query_consumption_user_list(this);
@@ -1305,10 +1312,14 @@ angular.module('user', ['activity_servrt','directive_mml', 'common', 'request', 
 	     		    		}, function error() {
 	     						console.log("获取活动详情失败");
 	     		    });  
-	             }		 
+	             },"selectSign":function(type){
+	             	 $(".menu_pup,.filiuyt_o").toggleClass("show_a")
+	             	$scope.volume_details.dat_po.is_sign=type;
+	             	$scope.volume_details.details_a($scope.volume_details.dat_po)
+	             }
 	     }
 
-	     $scope.volume_details.details_a({"pageIndex":1,"activity_id":$stateParams.id,"pageSize":"500"})
+	     $scope.volume_details.details_a($scope.volume_details.dat_po)
 	})
 	
 	// ========================= 主办方 =======================
@@ -1631,8 +1642,17 @@ angular.module('user', ['activity_servrt','directive_mml', 'common', 'request', 
 						return
 					}
 					$scope.awardArray=data.info;
-					$scope.awardArray_length=data.info.length;//已获奖人数
-					$scope.awardSum=data.msg;//总参加人数
+					if(data.code==0&&data.msg!=null){
+						$scope.awardArray_length=data.info.length;//已获奖人数
+					    $scope.awardSum=data.msg;//总参加人数
+					}
+					else{
+						$('.side_menu_award ').off('click')
+						$scope.awardArray_length=0;
+						$scope.awardSum=0;
+					}
+					
+					
 			
 				});
 			 }
@@ -1687,6 +1707,10 @@ angular.module('user', ['activity_servrt','directive_mml', 'common', 'request', 
 		    }
 		}
 	    
+	    httpService.getDatas('GET',  '/activity/my_activity_manage?activity_id='+$scope.id).then(function(data) {
+				$scope.moreStatus=data.info;
+				
+		});
 	})
 
 })();

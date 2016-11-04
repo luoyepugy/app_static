@@ -438,7 +438,7 @@ input,textarea {
 	text-indent:24px
 }
 .cf {
-	color:#fff
+	color:#fff  !important
 }
 .cls {
 	color:#0F6BAA

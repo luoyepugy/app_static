@@ -64,10 +64,10 @@
              </a>
           </p>
           <section class="pt10  btm mt10" ng-if="type_p==2">
-             <p class="fl">报名：125</p>
-             <p class="fl ml10">打赏：245</p>
-             <p class="fl ml10">留言：1336</p>
-             <p class="fr  more_ma yj4"  ui-sref="activity_more_manage({activity_id:list.id, switchEnroll: list.apply_switch})">更多管理</p>                    
+             <p class="fl  fz12">报名：{{list.activity_number}}</p>
+             <p class="fl ml10  fz12">打赏：{{list.tip_count}}</p>
+             <p class="fl ml10  fz12">留言：{{list.message_count}}</p>
+             <p class="fr  more_ma yj4  fz12"  ui-sref="activity_more_manage({activity_id:list.id, switchEnroll: list.apply_switch})">更多管理</p>                    
              <p class="qc"></p>
           </section>
                     </li>

@@ -46,8 +46,8 @@ angular.module('sponsor', ["directive_mml","activity_servrt","ui.router", "commo
 	 	    			});
 	    		    	 $state.go("issue_success",{"id":data.msg,"teile":$("#name").val(),"text":$("#details").text()});
 	 	    			 
-	    		     }else{
-	    		    	 $state.go("activity_detail",{id:data.msg});
+	    		     }else{ 
+	    		    	 window.location.href="/index.html#/activity_detail/"+data.msg
 	    		     }
 
 	    		}, function error() {
@@ -129,7 +129,24 @@ angular.module('sponsor', ["directive_mml","activity_servrt","ui.router", "commo
      	var industry_val=$("#industry").val();//行业内容
      	var contact_way=$("#contact_way").val();//联系方式
 	     var sponsor=$("#sponsor").val();//主办方  
-     	
+     	if(!form_mm.isnull(sponsor)){
+		mui.alert('请输入主办方', 'E场景活动',function(){
+			$("#sponsor").focus();
+		});
+		return
+	    }
+     	if(!form_mm.isnull(contact_way)){
+		mui.alert('联系电话不能为空', 'E场景活动',function(){
+			$("#contact_way").focus();
+		});
+		return
+	}	
+	if(!form_mm.tel(contact_way)){
+		mui.alert('联系电话格式错误', 'E场景活动',function(){
+			$("#contact_way").focus();
+		});
+		return
+	}	
      	if(!form_mm.isnull(type)){
 		mui.alert('请选择类型', 'E场景活动',function(){
 			$("#industry").focus();
@@ -144,18 +161,8 @@ angular.module('sponsor', ["directive_mml","activity_servrt","ui.router", "commo
 		return
 	}	
 		
-	if(!form_mm.isnull(contact_way)){
-		mui.alert('请输入联系方式', 'E场景活动',function(){
-			$("#contact_way").focus();
-		});
-		return
-	}	
-	if(!form_mm.isnull(sponsor)){
-		mui.alert('请输入主办方', 'E场景活动',function(){
-			$("#sponsor").focus();
-		});
-		return
-	}
+	
+	
      
      	$(".activity_base_setting,.header_mml").show();
      	$(".activity_more_setting").hide()
@@ -173,10 +180,32 @@ angular.module('sponsor', ["directive_mml","activity_servrt","ui.router", "commo
 	 httpService.getDatas('GET', '/label/group').then(function(data) {//获取活动标签
 		$scope.ge_type=data
 	});
-	
-	$("body").on("click",".activitie_label ",function(){
+	$scope.select_lab=function($event){
+		
+		var thi=$event.target
+			 arrLabel=[]
+		 	 $scope.arrLabel_p="";
+		 if($(".activitie_label.active").length<5){
+		 	$(thi).toggleClass("active");
+		 }else{
+		 	$(thi).removeClass("active");
+		 }
+		 $(".activitie_label").map(function(){
+		 	if($(this).hasClass("active")&&arrLabel.length<5){
+		 		arrLabel.push($(this).attr("data-y"))
+		 		$scope.arrLabel_p+=($(this).text()+"  ")
+		 	}
+		 }) 
+	     if( $scope.arrLabel_p.length>5){
+	     	$('.se_label_tip').hide()
+	     }else{
+	     	$('.se_label_tip').show()
+	     }
+		
+	}
+/*	$("body").on("click",".activitie_label ",function(){
 		 arrLabel=[]
-		 
+		 $scope.arrLabel_p=""
 		 if($(".activitie_label.active").length<5){
 		 	$(this).toggleClass("active");
 		 }else{
@@ -187,8 +216,11 @@ angular.module('sponsor', ["directive_mml","activity_servrt","ui.router", "commo
 		 		arrLabel.push($(this).attr("data-y"))
 		 	}
 		 }) 
+		 $(arrLabel).map(function(){
+		 	$scope.arrLabel_p+=this+"  "
+		 })
 		
-		
+		console.log($scope.arrLabel_p)*/
 		 
 		/*
 		for(var i=0;i<arrLabel.length;i++){
@@ -204,7 +236,8 @@ angular.module('sponsor', ["directive_mml","activity_servrt","ui.router", "commo
 		    arrLabel.push($(this).attr("data-y"))
 		}
 	console.log(arrLabel)
-	*/})
+	*/
+/*	})*/
 	 
 }).controller('mapCtrl',function($scope,$stateParams) { //地图
 	 $("html,body").animate({scrollTop:0},200);
@@ -275,14 +308,27 @@ angular.module('sponsor', ["directive_mml","activity_servrt","ui.router", "commo
 	 })
 	 
 	
-}).controller('issue_successCtrl',function($scope,messageService,validateService,httpService,$state,$stateParams) { //活动发布成功
+}).controller('issue_successCtrl',function($scope,messageService,validateService,httpService,$state,$stateParams,activity_data) { //活动发布成功
+	$scope.act_id=$stateParams.id
 	$scope.circle_friends=function(){
 		$(".oiuyt_fmnb_as").toggleClass("show_a")
 	}
 	$scope.sharep_a=new share_p($stateParams.id,$stateParams.teile,$stateParams.text)
-	$("body").on("click",".mui-pull-right",function(){
-		 $state.go("activity_detail",{"id":$stateParams.id});
-	})
+
+	$scope.yqh_po=function(){
+
+    	activity_data.getDatas('get', '/shareImage/get_share_image_url?activityId='+$stateParams.id+"&type=4")
+    	.then(function(data) { 
+    		wx.previewImage({
+			      current: data.msg,
+			      urls: [
+			        data.msg
+			      ]
+			    });
+
+    		});
+		
+	}
 })
 // =================== 发布赞助 begin by zh =================
 .controller('sponsorship_controller',function($scope,messageService,validateService,httpService,$state) { //发起赞助
@@ -434,9 +480,33 @@ function da_input(x){
 		});
 		return
 	}
+	if(!form_mm.isnull(sponsor)){
+		mui.alert('在高级设置中请输入主办方名称', 'E场景活动',function(){
+			
+		});
+		return
+	}
+	if(!form_mm.isnull(contact_way)){
+		mui.alert('在高级设置中请输入联系电话', 'E场景活动',function(){
+			
+		});
+		return
+	}
+	if(!form_mm.tel(contact_way)){
+		mui.alert('联系电话格式错误', 'E场景活动',function(){
+			
+		});
+		return
+	}	
 		if(!form_mm.isnull(type)){
-		mui.alert('请选择高级设置中的类型', 'E场景活动',function(){
-			$("#industry").focus();
+		mui.alert('在高级设置中请选择活动的类型', 'E场景活动',function(){
+			
+		});
+		return
+	}
+		if(!form_mm.isnull(industry)){
+		mui.alert('在高级设置中请选择活动的行业', 'E场景活动',function(){
+			
 		});
 		return
 	}

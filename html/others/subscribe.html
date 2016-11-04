@@ -14,7 +14,7 @@
         <section class="pokjhiT_a" ng-repeat="item in industry.list" ng-class="{'none': !industry.show, 'db': industry.show}">
             <a class="activitie_label fz14 yj4 " ng-class="{'mui-btn-green mainBtn':industry.array[$index]}" ng-bind="item.name" ng-click="industry.choice($index)"></a>
         </section>
-        <p class="zd fz16 pm5 pl10 mt10">我喜欢*</p>
+        <p class="zd fz16 pm5 pl10 mt10" style="clear:both;">我喜欢*</p>
         <section  ng-repeat="item in labelList" class="deh_list" finish>
           <p class="zd fz14 pm5 pl10 tltle_p">{{item.name}}<span class="ls">+</span></p>
           <section class="pomhhgf_we">
