@@ -188,7 +188,12 @@ angular.module('sponsor', ["directive_mml","activity_servrt","ui.router", "commo
 		 if($(".activitie_label.active").length<5){
 		 	$(thi).toggleClass("active");
 		 }else{
-		 	$(thi).removeClass("active");
+		 	if($(thi).hasClass('active')){$(thi).removeClass("active");	}
+		 	else{
+		 		mui.alert('活动标签最多只能选择5个', 'E场景活动',function(){
+						});
+		 	}
+		 				 	
 		 }
 		 $(".activitie_label").map(function(){
 		 	if($(this).hasClass("active")&&arrLabel.length<5){
@@ -201,7 +206,6 @@ angular.module('sponsor', ["directive_mml","activity_servrt","ui.router", "commo
 	     }else{
 	     	$('.se_label_tip').show()
 	     }
-		
 	}
 /*	$("body").on("click",".activitie_label ",function(){
 		 arrLabel=[]

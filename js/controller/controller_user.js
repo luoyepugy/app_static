@@ -741,7 +741,8 @@ angular.module('user', ['activity_servrt','directive_mml', 'common', 'request', 
 	    			if(data.code!=0&&data.code!=-1){
 	    				  $scope.pe_er.user_icon_o = {
 	    				  	'user_name': '未登录',
-	    				  	'user_icon': '/img/userIcon.jpg'
+	    				  	'user_icon': '/img/userIcon.jpg',
+	    				  	'Individuality_signaturedata': '个性签名：'
 	    				  }
 	    				  return
 	    			}

@@ -50,7 +50,7 @@ angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.rou
 
 })
 // ===============================  首页 ==============================
-.controller('index_controller',["$scope","activity_data", "$state", function($scope,activity_data, $state,httpService) {//首页
+.controller('index_controller', function($scope,activity_data, $state,httpService) {//首页
 	$(".mml_bottom a").removeClass("bottom_act");
 	$(".mml_bottom a").eq(0).addClass("bottom_act");
 	$(".ds_poiu_a").addClass("show_a")
@@ -173,28 +173,28 @@ angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.rou
 			console.log("获取热门活动失败")
 	});
     $scope.load_l=true;//判断热门活动是否还有数据
+
+    // 热门活动
     $scope.query_activity=function(data){
-    	 activity_data.myLaunchActivity(data).then(
- 	    		function success(data){
- 	    			if(data.code!=0){
- 	    				alert(data.msg);
- 	    				return 
- 	    			}
- 	    			$(data.rows).map(function(){
- 	    				 var hoti=new preferential(this)
- 						 $scope.act_index.activity_hot.push(hoti);
- 	    			})
- 	    			if(data.rows.length<10){
- 	    				 $scope.load_l=false;//判断热门活动是否还有数据
- 	    			}
- 	    			$(".sys-loading").removeClass("show_a")
- 	    		}, function error() {
- 					console.log("获取活动列表数据失败");
- 	    });
+    	data.channel = 1;
+    	httpService.getDatas('GET','/activity/query_activity_list', data).then(function(data) {
+    		if(data.code!=0){
+				alert(data.msg);
+				return;
+			}
+			$(data.rows).map(function(){
+				 var hoti=new preferential(this)
+				 $scope.act_index.activity_hot.push(hoti);
+			})
+			if(data.rows.length<10){
+				 $scope.load_l=false;//判断热门活动是否还有数据
+			}
+			$(".sys-loading").removeClass("show_a")
+    	});
     }
     $scope.Hot_load=function(){//热门活动分页
-    	  cty_date.pageIndex++;
-    	  $scope.query_activity(cty_date);//添加热门活动
+    	cty_date.pageIndex++;
+    	$scope.query_activity(cty_date);//添加热门活动
     }
 
 
@@ -208,7 +208,7 @@ angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.rou
 
     
 
-}]).controller('activities_list',function($scope,activity_data,$stateParams, httpService) {//活动列表
+}).controller('activities_list',function($scope,activity_data,$stateParams, httpService) {//活动列表
 	  $(".mml_bottom ").show()
 	$(".mml_bottom a").removeClass("bottom_act");
 	$(".mml_bottom a").eq(0).addClass("bottom_act");
@@ -488,24 +488,34 @@ angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.rou
 		  };
 		  
 
-}]).controller('activity_hotr',["$scope","activity_data","$location","$stateParams",function($scope,activity_data,$location,$stateParams) { //推荐活动
-	$scope.dte=[]
+}]).controller('activity_hotr', function($scope,activity_data,$location,$stateParams, httpService, messageService) { //推荐活动
+	$scope.dte=[];
+	var index = 1;
 	/*热门活动*/
-    activity_data.getActivityHot().then(
-			function success(data) {
-				if(data.code!=0){
-					mui.alert(data.msg, 'E场景活动');
-					return;
-				}
+	var init = function(more) {
+		httpService.getDatas('GET', '/activity/get_activity_hot', {'start': index, 'limit': 5, 'activityId': $stateParams.id}).then(function(data) {
+			if(data.code!=0){
+				mui.alert(data.msg, 'E场景活动');
+				return;
+			}
+			if(data.info.length == 0) {
+				messageService.show('没有更多数据了', 'toast');
+			} else {
 				$(data.info).map(function(){
 					var hoti=new preferential(this)
 					$scope.dte.push(hoti)
-				})
-		}, function error() {
-			console.log("获取热门活动失败");
-	});
+				});
+			}
+	    });
+	}
+    init();
+	// 推荐更多活动
+    $scope.recommendMore = function() {
+    	index++;
+		init(index, true);
+    }
 
-}]).controller('activity_show_ticket',["$scope","activity_data","$location","$stateParams",function($scope,activity_data,$location,$stateParams) { //票卷详情
+}).controller('activity_show_ticket',["$scope","activity_data","$location","$stateParams",function($scope,activity_data,$location,$stateParams) { //票卷详情
 	  var data_p={"id":3};//投票ID
 	  $scope.type_p;//投票单选多选
 	   $scope.is_vote;//0未投票 1已投票

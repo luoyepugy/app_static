@@ -35,9 +35,9 @@ angular.module('act_details', [ "directive_mml","activity_servrt","ui.router","p
 		    		    }else{
 		    		    	$('.collection_p').attr('data-x','1')
 		    		    }
+		    		  
 		    		    if($scope.detail.detail_date.status==1){
-		    		    	$(".header_mml ").append('<span class=" cf mui-btn-blue mui-btn-link mui-pull-right fz16 aas_muijh">发布</span>')  
-				    		  
+		    		    	  $scope.pjuyt="show_a"
 		    		    }
 		    			  $scope.detail.detail_date.act_id=$scope.id
 		    		    act_date.set_act_date($scope.detail.detail_date)
@@ -143,7 +143,9 @@ angular.module('act_details', [ "directive_mml","activity_servrt","ui.router","p
 	    },"sign_up_p":function(a,x,y){ 
 	    	if(y==1){
 	    	
-	    		mui.alert("该活动还未发布，不能报名，请点击右上角发布按钮！")
+	    		mui.alert("该活动还未发布，不能报名，请点击右上角发布按钮！","",function(){
+	    			 $("html,body").animate({scrollTop:0},200);
+	    		})
 	    		return
 	    	}
 	    	if(x==2){//活动已结束
@@ -205,19 +207,18 @@ angular.module('act_details', [ "directive_mml","activity_servrt","ui.router","p
 	    	}
 	    }
 	  }
-	 $("body").on("click",".aas_muijh",function(){
+	 $scope.fabu=function(){
 		  var r_dada={}
 		  r_dada.activity={"id":$scope.id,"status":0}
 		  activity_data.getDatas('post', '/activity/release_activity',r_dada)
 		  .then(function(data) {
-			  $(".aas_muijh").remove()
 			  if(data.code==-10){
 				  $state.go("signin");
 				 } 
 			   $scope.date_poi=data.info
-			   location.reload();
+			   $state.go("issue_success",{"id":$scope.id,"teile":$scope.detail.detail_date.title,"text":$("#detail_date_o").text().substring(0,50).trim()})
 		  }); 
-	 })
+	 }
 	
 		
 	  $scope.streaming_poo=function(broadcast,mki){//broadcast=真为正在直播

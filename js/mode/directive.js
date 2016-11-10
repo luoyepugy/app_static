@@ -13,7 +13,6 @@
 		$(".return_top").addClass("mui-hidden");
 		$(".bg_loading").remove()
 		$(".header_mml").show()
-		$(".aas_muijh").empty()
         /* 
          * 张晗
          * 顶部导航搜索图标显示隐藏

@@ -1,6 +1,8 @@
 <!-- 活动详情 -->
 <meta charset="UTF-8">
 <section ng-controller="activity_detail_c" class="activity_detail_c">
+<span class="cf mui-btn-blue mui-btn-link mui-pull-right fz16 aas_muijh" ng-class="pjuyt" ng-click="fabu()">发布</span>
+
 <section class="particulars_none">
 <section class="banner_top_a act_banner_top_a ">
 	    <section class="swiper-container banner_top_b banner_top_b_banner" >
@@ -122,9 +124,12 @@
         </section>
         <section class="qc"></section>
     </section>
-    <section class="box mt10">
-    	<p class="de_auth box_a">已认证活动号</p>
-    	<div class="box_a" style="width:21.3%">
+    <section class="mt10">
+    	<p class="fl de_auth">已认证活动号 </p>
+    	<p class="fr yj4 contract_de2 ml5" style="width:32%">
+    		<a ng-href="tel:{{detail.detail_date.contact_way}}">联系TA</a>
+    	</p>  
+    	<div class="fr" style="width:34%">
     		<p  class="yj4 detail_jus {{detail.detail_date.attent_class}} ml10" ng-click="detail.collectionSponsor()" data-x="{{detail.detail_date.dataX}}">
     		
     		<span class="contract_dr3" ng-bind="detail.detail_date.attent_text"></span>
@@ -132,9 +137,10 @@
     	</p>
     	</div>
     	
-    	<p class="box_a yj4 contract_de2 ml5">
-    		<a ng-href="tel:{{detail.detail_date.contact_way}}">联系TA</a>
-    	</p>  
+    	
+    	<div class="qc">
+    		
+    	</div>
     </section>
     <span class="mui-icon mui-icon-arrowright right_icon zc right_icon_p"></span>
 </section>
