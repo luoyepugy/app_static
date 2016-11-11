@@ -59,7 +59,7 @@
 	<!-- 嘉宾号结果 -->
 	<div id="guestList" class="searchResutWrap" pulllist callback="sponsorMore()" ng-if="type==21">
 	  <ul class="mui-table-view" style="margin-top:0;">
-	      <li class="mui-table-view-cell mui-media" ng-repeat="item in guestList">
+	    <li class="mui-table-view-cell mui-media" ng-repeat="item in guestList" ui-sref="guest_detail({id:item.user_id})">
 	          <img class="mui-media-object mui-pull-left sponsorImg" ng-src="{{item.sponsor_icon}}">
 	          <div class="mui-media-body" style="padding-right: 75px;">
 	              <p class="mui-ellipsis sponsorTitle">{{item.name}}</p>

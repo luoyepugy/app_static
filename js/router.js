@@ -85,7 +85,7 @@
 	    	url: '/activity_machine_apply', 
 	    	templateUrl: '/html/activity/activity_machine_apply.html'
 	    }).state('activity_streaming',{
-	    	url: '/activity_streaming/:ac_id/:count',  //活动直播
+	    	url: '/activity_streaming/:ac_id/:count?live_status?back_url',  //活动直播
 	    	templateUrl: '/html/activity/activity_streaming.html',
 	    	controller: 'activity_streamingCtrl'
 	    }).state('activity_streaming.activity_reward_detail',{
@@ -282,7 +282,13 @@
             url: '/demand_list?data',   // 活动号查询
             templateUrl: '/html/authentication/demand_list.html',
             controller: 'demand_list_ctl'	
+        }).state('guest_detail',{
+            url: '/guest_detail/:id',   				// 嘉宾号详情
+            templateUrl: '/html/authentication/guest_detail.html',
+            controller: 'guest_detailCtrl'	
         })
+
+
         .state('b_map',{
             url: '/b_map/:city',   // 地图
             templateUrl: '/html/map.html',

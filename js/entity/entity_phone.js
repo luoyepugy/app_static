@@ -341,6 +341,8 @@ function ticket_volume_list(data){
 		  this.join_count=info.join_count;//活动详情参与人数
 		  this.industry_id=info.industry_id;//活动详情行情ID
 		  this.address=info.city_name+" "+info.address;//活动详情地址
+		  this.back_url=info.live_url 
+		  
 		  if(info.type==10){
 			  this.address=info.address;//活动详情地址
 		  }
@@ -356,8 +358,8 @@ function ticket_volume_list(data){
 		  }else{
 			  clkj_show="/img/live.png";
 		  }
-		  if(info.play_status=="disconnected"){//disconnected断开直播    connected：直播中
-			  broadcast=false
+		  if(info.play_status=="disconnected"){//disconnected录播    connected：直播 
+			  this.back_url=info.back_url;
 		  }
 		  this.broadcast=broadcast;
           this.mnbv=info.live_status;

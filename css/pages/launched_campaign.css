@@ -127,13 +127,13 @@
     height: 37px;
 }
 .ddf_pooxd_a a {
-    padding: 3px 8px;
     border: 1px dashed #4EA45D;
     color: #575757;
+    display: block;
+    width:90%;
 }
 .ddf_pooxd_a .active {
-    padding: 3px 8px;
-    padding: 3px 8px;
+
     border: 1px solid #4EA45D;
     background: #fff;
     color: #4EA45D;

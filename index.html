@@ -35,7 +35,8 @@
             <i class="f_i logo_icon"></i>
             <img class="icon-search j-navIcon" src="/img/icon-search.png" ui-sref="search" alt="搜索图标" style="display: none;">
             <img class="icon-search icon-subscribe j-navIcon" src="/img/index/icon-subscribe.png" ng-click="mySignin('subscribe')" alt="订阅图标" style="display: none;">
-            <i class="f_i  side_menu_icon" ng-click="mode.the_menu()"></i>
+            <i class="f_i  side_menu_icon j-navSideIcon" ng-click="mode.the_menu()"></i>
+            <span class="fz14 fr mr10 j-navUserIcon" style="display:none;" ng-click="mySignin('subscribe')">订阅</span>
           
           <section class="filiuyt_o" ng-click="mode.the_menu()">
           
@@ -51,8 +52,8 @@
           <li ui-sref="personal_center"><a>我的</a></li>
           <li ui-sref="activity_user({type: 2})"><a>发起的</a></li>
           <li ui-sref="activity_user({type: 1})"><a>参与的</a></li>
-            <li data-href="/html/page/attention.html"><a>关注e场景</a></li>
-                      <li onclick="down_app()"><a>下载app</a></li> 
+          <li data-href="/html/page/attention.html"><a>关注e场景</a></li>
+          <li onclick="down_app()"><a>下载app</a></li> 
           <!-- 暂时屏蔽赞助和白条 -->
           <!-- <li ui-sref="activity_loan"><a>活动白条</a></li> -->
           <!-- /暂时屏蔽赞助和白条 -->

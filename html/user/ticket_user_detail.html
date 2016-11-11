@@ -17,19 +17,19 @@
         
         <i class="f_i joiuyr_icon_a" ></i> 
            <li ng-click="volume_details.selectSign('')"><a>全部</a></li> 
-            <li ng-click="volume_details.selectSign(1)"><a>已签到</a></li> 
-             <li ng-click="volume_details.selectSign(2)"><a>未签到</a></li> 
+            <li ng-click="volume_details.selectSign(2)"><a>已签到</a></li> 
+             <li ng-click="volume_details.selectSign(1)"><a>未签到</a></li> 
      </ul>   
 	</header>
   <section class="box pd pt10 pm10 bgff">
-      <p class="box_a fz16">
-           已报名：<span ng-bind="results+'人'"></span>
+      <p class="box_a fz16 adjust_fo">
+           已报名：<span  ng-bind="results+'人'"></span>
          </p>
-         <p class="box_a fz16 cen">
-           已验票：<span ng-bind="already_sign+'人'"></span>
+         <p class="box_a fz16 cen adjust_fo">
+           已验票：<span  ng-bind="already_sign+'人'"></span>
          </p>
-         <p class="box_a fz16 tr">
-           未验票：<span ng-bind="not_sign+'人'"></span>
+         <p class="box_a fz16 tr adjust_fo">
+           未验票：<span  ng-bind="not_sign+'人'"></span>
          </p>
     </section>
     

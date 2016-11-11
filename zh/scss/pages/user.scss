@@ -4,6 +4,33 @@
 @import "activity";
 
 
+// 个人中心图标
+.icons {
+	background: url('/img/icon-users.png') no-repeat;
+	@include size(35px);
+	overflow: hidden;
+	display: inline-block;
+}
+.icon-message {
+	background-position: 0 0;
+}
+.icon-wallet {
+	background-position: 0 -54px;
+}
+.icon-attention {
+	background-position: 0 -108px;
+}
+.icon-gift {
+	background-position: 0 -163px;
+}
+.icon-aboutUs {
+	background-position: 0 -217px;
+}
+.icon-feedback {
+	background-position: 0 -272px;
+}
+
+
 // ============= 我的钱包 ===============
 .redpacket {
 	background: url("/img/bg_red_packet.jpg") no-repeat;

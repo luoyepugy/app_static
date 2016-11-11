@@ -741,12 +741,12 @@ angular.module('user', ['activity_servrt','directive_mml', 'common', 'request', 
 	    			if(data.code!=0&&data.code!=-1){
 	    				  $scope.pe_er.user_icon_o = {
 	    				  	'user_name': '未登录',
-	    				  	'user_icon': '/img/userIcon.jpg',
-	    				  	'Individuality_signaturedata': '个性签名：'
+	    				  	'user_icon': '/img/userIcon.jpg'
 	    				  }
 	    				  return
 	    			}
-	    			$scope.pe_er.user_icon_o=new user_info(data.info)
+	    			$scope.pe_er.user_icon_o=new user_info(data.info);
+	    			$scope.pe_er.user_icon_o.user_phone = data.info.user_phone;
 	    		}, function error() {
 					console.log("获取用户信息失败");
 	    });
@@ -754,6 +754,17 @@ angular.module('user', ['activity_servrt','directive_mml', 'common', 'request', 
 	 	// 获取是否有新消息
 	    httpService.getDatas('GET', '/inform/unRead').then(function(data) {
 	    	$scope.messageItems = data.info;
+	    });
+	    // 获取我的活动数据
+	    httpService.getDatas('GET', '/user/myactivity').then(function(data) {
+	    	$scope.userActivity = data.info;
+	    	if(data.code == -10) {
+	    		$scope.userActivity = {
+	    			'activity_count': 0,   
+			        'attention_count': 0,   
+			        'join_count': 0   
+	    		}
+	    	}
 	    });
 
 	})
@@ -1288,7 +1299,7 @@ angular.module('user', ['activity_servrt','directive_mml', 'common', 'request', 
 		var onOFF=true;
 	     $scope.volume_details={
 	    		   "data_p":[],
-	    		  "dat_po":{"pageIndex":1,"activity_id":$stateParams.id,"pageSize":"500","is_sign":""}, 
+	    		  "dat_po":{"pageIndex":1,"activity_id":$stateParams.id,"pageSize":"500","code_use":""}, 
 	    		    "details_a":function(dat_po){
 	    		    	$scope.volume_details.data_p=[];
 	            	 activity_data.query_consumption_user_list(dat_po).then(
@@ -1315,7 +1326,7 @@ angular.module('user', ['activity_servrt','directive_mml', 'common', 'request', 
 	     		    });  
 	             },"selectSign":function(type){
 	             	 $(".menu_pup,.filiuyt_o").toggleClass("show_a")
-	             	$scope.volume_details.dat_po.is_sign=type;
+	             	$scope.volume_details.dat_po.code_use=type;
 	             	$scope.volume_details.details_a($scope.volume_details.dat_po)
 	             }
 	     }
@@ -1530,7 +1541,48 @@ angular.module('user', ['activity_servrt','directive_mml', 'common', 'request', 
 	    
 	    
 	})
-
+	// ========================= 嘉宾详情 =======================
+	/* @ngInject */
+	.controller('guest_detailCtrl', function($scope,$stateParams, $state, httpService, $rootScope, messageService) { 
+		var id = $stateParams.id;
+		httpService.getDatas('GET', '/sponsor/sponsorapply_info', {user_id: id, typeId: 1}).then(function(data) {
+			$scope.guest = data.info;
+		});
+		var sendInvite = function(tip) {
+			mui.confirm(tip,'','',function(e){
+			   if(e.index == 1){
+			   	  $scope.guest.is_invitation++;
+			   	  httpService.getDatas('GET', '/sponsor/invitation', {id: id}).then(function(data) {
+					if(data.code == -10) {
+						messageService.show('您还未登录！', 'toast');
+						$state.go('signin');
+					} else {
+						messageService.show(data.msg, 'toast');
+					}
+				});
+			   }
+			});
+		}
+		$scope.event = {
+			attention: function() {
+				httpService.getDatas('GET', '/activity/exec_attention', {resources_id: id, type: 7}).then(function(data) {
+					if(data.code == -10) {
+						messageService.show('您还未登录！', 'toast');
+						$state.go('signin');
+					} else {
+						$scope.guest.attention_sponsor = 1;
+					}
+				});
+			},
+			invite: function() {
+				switch($scope.guest.is_invitation) {
+					case 0: sendInvite('您确定向这位嘉宾发送邀请吗？'); break;
+					case 1: sendInvite('您已经发出过1次邀请，确定再次发送邀请吗？'); break;
+					case 2: sendInvite('您已经发出过2次邀请，确定再次发送邀请吗？'); break;
+				}
+			}
+		}
+	})
 	// ========================= 用户消息 =======================
 	/* @ngInject */
 	.controller('message_userCtrl', function($scope,$stateParams, httpService, $rootScope, messageService) { 
@@ -1689,6 +1741,11 @@ angular.module('user', ['activity_servrt','directive_mml', 'common', 'request', 
 	    }
 	    $('.onOffApp').on('click',function(){
 	    	$('.downApp_pup').css('display','block')
+	    })
+	    $('.republish_pup').on('click',function(){
+	    	 mui.alert('请在PC端重新发布活动，www.apptown.cn', 'E场景活动', function() {
+					    	
+					     });
 	    })
 			$scope.down_app=function(){
 			var _agent=navigator.userAgent;

@@ -7,8 +7,8 @@
     	<div class="searchType iconfont j-searchType" ng-click="selectType()">活动</div>
     	<ul class="searchTypeList j-searchTypeList" style="display: none;">
     		<li>活动号</li>
-            <!-- <li>嘉宾号</li>
-            <li>媒体号</li> -->
+            <li>嘉宾号</li>
+            <li>媒体号</li>
         <!-- 暂时屏蔽赞助 -->
     		<!-- <li>赞助</li> -->
         <!-- /暂时屏蔽赞助 -->
@@ -19,10 +19,10 @@
     	</p>
     </div>
     <!-- 活动标签 -->
-    <div ng-controller="activitie_demand">
+    <div ng-controller="activitie_demand" class="j-activityLabel">
        <section class="pd pt10  bgff ddf_pooxd_a">
             <section  ng-repeat="item in ge_type" class="deh_list" finish>
-              <p class="zd fz16 pm5 pl10 tltle_p">{{item.name}}<span class="ls">+</span></p>
+              <p class="zd fz16 pm5 pl10 tltle_p">{{item.name}}<span style="font-weight: bold; position: relative; top: 3px; left: 5px; opacity: 1; font-size: 24px;" class="ls">+</span></p>
               <section class="pomhhgf_we">
                 <section class="pokjhiT_a" ng-repeat="child in item.child_list">
                     <a class="activitie_label fz14 yj4" ng-bind="child.label_name" ng-click="searchActivity(child.id)"></a>

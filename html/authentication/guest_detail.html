@@ -1,0 +1,31 @@
+
+
+<section class="bgff">
+	<img class="person_host_bg"  src="/img/user/bg-guest.png"/>
+	<section class="person_host_detail">
+		<img class="person_host_detail_l yj fl" width="60" height="60" ng-src="{{guest.sponsor_icon}}" />
+		<section class="person_host_detail_r ov pl10 pt10">
+			<section>
+				<p class="cf fz18"  style="display: inline-block;" ng-bind="guest.name"></p>
+			</section>
+			<p class="cf mt5">
+				<span class="mr20" ng-bind="guest.contacter"></span>
+				<span ng-bind="guest.sign_sum"></span>场参会
+			</p>
+		</section>
+		<section class="qc">
+			
+		</section>
+	</section>
+</section>
+<section class="box pl10 cen pd pt10 pm10 bgff">
+	<p class="box_a bgls cf yj4 fz16 pt5 pm5 pr attent_change" ng-style="guest.attention_sponsor==1 && {'background': '#a9a9a9'}">
+		<span ng-if="guest.attention_sponsor==0" class="attent_text" ng-click="event.attention()">关注TA</span>
+		<span ng-if="guest.attention_sponsor==1">已关注</span>
+	</p>
+	<p class="box_a bgls cf yj4 ml10 fz16 pt5 pm5" ng-style="guest.is_invitation==3 && {'background': '#a9a9a9'}">
+		<span ng-if="guest.is_invitation<3" ng-click="event.invite()">邀请TA</span>
+		<span ng-if="guest.is_invitation==3">已邀请</span>
+	</p>
+</section>
+<div class="mt10 pd pm10 pt10 bgff">个人简介：{{guest.introduction}}</div>

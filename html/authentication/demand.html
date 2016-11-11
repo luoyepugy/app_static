@@ -3,7 +3,7 @@
  <link href="/css/pages/activitie_mark.css?v=17" rel="stylesheet">
 <section class="pd pt10  bgff ddf_pooxd_a">
            <section  ng-repeat="ty in ge_type" class="deh_list" finish>
-             	 <p  class="zd fz16 pm5 pl10 tltle_p">{{ty.name}}<span class="ls">+</span></p>
+             	 <p  class="zd fz16 pm5 pl10 tltle_p">{{ty.name}}<span style="font-weight:bold;position:relative;top:3px;left:5px;" class="ls">+</span></p>
                  <section class="pomhhgf_we">
              	 <section class="pokjhiT_a" ng-repeat="tuiou in ty.child_list">
              		<a class="activitie_label fz14 yj4"   ng-bind="tuiou.label_name" ng-click="gp_list(tuiou.id)">
@@ -25,7 +25,7 @@
 4、可以有您的活动群聊等等。<br>
 未来还有很多服务等着您，快加入平台活动号吧！
       </p>
-        <p class="df_renzs pr tc pr10 green pt10 mt10"  style="border-top: 1px solid #e0e0e0;"  ng-click="isLogin('activity_auth')"> 认证活动号</p> 
+        <p class="df_renzs pr tc pr10  pt10 mt10"  style="border-top: 1px solid #e0e0e0;color:#fff;background:#4ea45d;padding-bottom:10px"  ng-click="isLogin('activity_auth')"> 认证活动号</p> 
          <p class="qc"></p>
 		</section> 
 		

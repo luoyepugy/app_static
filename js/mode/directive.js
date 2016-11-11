@@ -27,12 +27,21 @@
           $('.j-navIcon').hide();
       	  $(".ds_poiu_a").removeClass("show_a");
     	  $(".retreat_icon").removeClass("none");
-        }       
-    
+        }
+
+        // 个人中心订阅图标显示隐藏
+        if($location.path() == '/personal_center') {
+            $('.j-navUserIcon').show();
+            $('.j-navSideIcon').hide();
+           
+        } else {
+            $('.j-navUserIcon').hide();
+            $('.j-navSideIcon').show();
+        }
         
         
         var path_p=$location.path();
-        var arr_p=["activity_streaming","activity_detail","activity_charge","b_map"];
+        var arr_p=["activity_streaming","activity_detail","activity_charge","b_map","promotional_act"];
         for(var i in arr_p){
         	if(path_p.indexOf(arr_p[i])>0) {
              	$(".mml_bottom").hide();

@@ -20,10 +20,11 @@ angular.module('common')
         };
         return messages;
         
-        function show(tips, type) {
-            var type = type || 'alert';
+        function show(tips, type, cb) {
+            type = type || 'alert';
+            cb = cb || function() {};
             if(type == 'alert') {
-                mui.alert(tips, 'E场景活动');
+                mui.alert(tips, 'E场景活动', cb);
             } else if (type == 'toast' && tips) {
                 $('body').append('<div class="messageBox">' + tips +'</div>').fadeIn();
                 $timeout(function(){

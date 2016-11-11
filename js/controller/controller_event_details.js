@@ -2,7 +2,10 @@
  * 活动详情and赞助详情 
  */
 angular.module('act_details', [ "directive_mml","activity_servrt","ui.router","pay","sponsor"])
-.controller('activity_detail_c',function($scope,activity_data,$location,$stateParams,act_date,$state,httpService) { //活动详情 
+.controller('activity_detail_c',function($scope,activity_data,$location,$stateParams,act_date,$state,httpService) { //活动详情
+		if(isPC()) {//判断如果是PC端访问H5端则自动跳转到PC端
+		window.location.href = 'http://www.apptown.cn/activity/57809'+$stateParams.id+'57809.httl';
+	}
 	  $scope.id=$stateParams.id
 	  $scope.id_a=$stateParams.id
 	  var hjgf=true;//设置取消和收藏关注
@@ -29,7 +32,7 @@ angular.module('act_details', [ "directive_mml","activity_servrt","ui.router","p
 		    		   
 
 		    		    $scope.detail.detail_date=new activity_detail(data.info);
-		    		    console.log(data.info);
+
 		    		    if(data.info.is_collect==0){
 		    		    	$('.collection_p').attr('data-x','0')
 		    		    }else{
@@ -50,7 +53,7 @@ angular.module('act_details', [ "directive_mml","activity_servrt","ui.router","p
 				        try{
 				        	fx_text='【'+$scope.classify[0].maker_title[$scope.detail.detail_date.type].text+'】 '+$scope.detail.detail_date.title;
 				        }catch(e){
-				        	fx_text='【其他】 '+$scope.detail.detail_date.title;
+				        	fx_text=$scope.detail.detail_date.title;
 				        }
 				        sh_a.title=fx_text
 				        sh_a.desc=hg_p;
@@ -58,7 +61,7 @@ angular.module('act_details', [ "directive_mml","activity_servrt","ui.router","p
 				        sh_a.imgUrl="http://m.apptown.cn/img/activity/share/share_activity1.jpg";
 				        wx_share(sh_a,function(){ 
 			    			$("#qrcode").on("click",function(){
-				        	activity_data.getDatas('get', '/shareImage/get_share_image_url?activityId='+id)
+				        	activity_data.getDatas('get', '/shareImage/get_share_image_url?activityId='+id+"&type=1")
 				        	.then(function(data) { 
 				        		wx.previewImage({
 				    			      current: data.msg,
@@ -76,8 +79,13 @@ angular.module('act_details', [ "directive_mml","activity_servrt","ui.router","p
 						console.log("活动详情获取失败");
 		    }); 
 	    },"collectionActivity":function(){//收藏或关注活动
-	    	
-	    	var date_po={}
+	    	httpService.getDatas('GET', '/user/verifyUserLogin').then(function(data) {
+			if(data.code!=0&&data.code!=-1){
+				
+				 $location.path("signin")
+				
+			}else{
+				var date_po={}
 	    	date_po.resources_id=$scope.id
 	    	date_po.type=1;
 	    	
@@ -137,10 +145,14 @@ angular.module('act_details', [ "directive_mml","activity_servrt","ui.router","p
 								console.log("请求收藏接口失败");
 				    }); 
 	    		
-	    	}
+	    		}
+			}
+		});
+	    	
 	    	
 	    
-	    },"sign_up_p":function(a,x,y){ 
+	    },"sign_up_p":function(a,x,y){
+	    
 	    	if(y==1){
 	    	
 	    		mui.alert("该活动还未发布，不能报名，请点击右上角发布按钮！","",function(){
@@ -175,7 +187,12 @@ angular.module('act_details', [ "directive_mml","activity_servrt","ui.router","p
 	    
 	    },"activities_oi":function(){
 	    	if(screen.availWidth>1000){
+	    		if($scope.detail.detail_date.mnbv==1){
+	    			sessionStorage.url_src=$scope.detail.detail_date.back_url
+	    		}
 	    		window.location.href='/html/big_machine/according_sign.html?id='+$scope.id+"&type="+$scope.detail.detail_date.mnbv
+	    		sessionStorage.type_mkj=$scope.detail.detail_date.mnbv
+	    	
 	    		return;
 	    	}
 	    	$(".pup_soou_p").css({"left":"0"})
@@ -406,6 +423,9 @@ $(".dd_pooo").hide()
 		   return
 	}
 	$scope.form_p=$scope.act_d.detail_config;//获取传过来的表单
+	$scope.form_p[0].val_p=sessionStorage.form_name
+	$scope.form_p[1].val_p=sessionStorage.form_phone
+		
 	$scope.id=$scope.act_d.act_id;//获取活动id
 	$scope.img_p=$scope.act_d.images_po[0]
 	$scope.title=$scope.act_d.title
@@ -427,6 +447,10 @@ $(".dd_pooo").hide()
 		 }  
 		 date_f.name=$(".form_po_ipnut").eq(0).val()
 		 date_f.tel=$(".form_po_ipnut").eq(1).val()
+		 
+		 sessionStorage.form_name=date_f.name
+	     sessionStorage.form_phone=date_f.tel
+	
 		 $(".form_po_ipnut").map(function(x){
 			 if(x>1){
 				 var map_p=$(this).attr("data-yu")
@@ -460,30 +484,26 @@ $(".dd_pooo").hide()
 		    }); 
 	}		
 }	
-	
-	 activity_data.verifyUserLogin().then(
-	    		function success(data){
-	    			if(data.code!=0){
-	       				return
-	       			}
-	    			$(".form_po_ipnut").eq(0).val(data.info.user_name)
-	    			$(".form_po_ipnut").eq(1).val(data.info.user_phone) 
-	    		}, function error() {
-					console.log("验证失败");
-	    });
+
+
 }]).controller('activity_charge_p',["$scope","activity_data","$location","$stateParams","act_date","$state",function($scope,activity_data,$location,$stateParams,act_date,$state) { //收费活动报名
-  console.log(act_date.date)
    $scope.ticket=1;//票种初始化
    $scope.act_d=act_date.date;//初始化活动详情数据
    $scope.form_p= $scope.act_d.detail_config;
-   if($scope.act_d.the_price==0){
+   
+
+   if($scope.act_d.the_price==0||$scope.act_d==0){
 	   window.history.back();
 	   return
    }
-   if($scope.act_d==0){
+   try{
+		$scope.form_p[0].val_p=sessionStorage.form_name
+		$scope.form_p[1].val_p=sessionStorage.form_phone
+   }catch(e){
 	   window.history.back();
 	   return
    }
+
    
    $scope.charge={
 	"the_price":0,	
@@ -547,6 +567,8 @@ $(".dd_pooo").hide()
 			 }  
 			 date_f.name=$(".form_po_ipnut").eq(0).val()
 			 date_f.tel=$(".form_po_ipnut").eq(1).val()
+			 sessionStorage.form_name=date_f.name
+		     sessionStorage.form_phone=date_f.tel
 			 $(".form_po_ipnut").map(function(x){
 				 if(x>1){
 					 var map_p=$(this).attr("data-yu")
@@ -564,6 +586,10 @@ $(".dd_pooo").hide()
 			 parameter_e.the_price=$scope.charge.the_price;//活动价格
 			 parameter_e.date=datePiu;//表单数据
 			 parameter_e.play=this.play//支付类型
+			 
+
+		     
+		     
 			 if(this.play==0){//e币支付
 				 parameter_e.type="e币支付" 
 				 act_date.set_act_date(parameter_e)
@@ -598,17 +624,7 @@ $(".dd_pooo").hide()
    		}
    }
    
-   activity_data.verifyUserLogin().then(
-   		function success(data){
-   			if(data.code!=0){
-   				return
-   			}
-   			$(".form_po_ipnut").eq(0).val(data.info.user_name)
-   			$(".form_po_ipnut").eq(1).val(data.info.user_phone) 
-   		}, function error() {
-				console.log("验证失败");
-   });
-   
+
    $("html,body").animate({scrollTop:0},200);//滚回顶部 
 
 }]).controller('sp_details',["$scope","activity_data","$location","$stateParams","act_date","anchorScroll",'$sce',function($scope,activity_data,$location,$stateParams,act_date,anchorScroll,$sce) { //赞助单页--赞助详情
