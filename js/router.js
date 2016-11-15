@@ -43,7 +43,8 @@
 	    	templateUrl: '/html/activity/activity_registration_number.html'	
 	    }).state('activity_detail.activity_message',{
 	    	url: '/activity_message',  //活动详情留言
-	    	templateUrl: '/html/activity/activity_message.html'
+	    	templateUrl: '/html/activity/activity_message.html',
+	      	controller: 'activity_message'
 	    }).state('activity_sign_ree',{
 	    	url: '/activity_sign_ree',  //免费报名表单 
 	    	templateUrl: '/html/activity/activity_sign_ree.html'
@@ -169,8 +170,13 @@
 	    	url: '/ticket_user', 				// 我的票券列表
 	    	templateUrl: '/html/user/ticket_user.html',
 	    	controller: 'ticket_userCtrl'
-	    }).state('ticket_user_detail',{
-	    	url: '/ticket_user_detail/:id',  	// 我的票券详情
+	    }).state('ticket_detail',{
+	    	url: '/ticket_detail/:order_id/:activity_id', 				// 首页我的票劵详情
+	    	templateUrl: '/html/user/ticket_detail.html',
+	    	controller: 'ticket_detailCtrl'
+	    })
+	    .state('ticket_user_detail',{
+	    	url: '/ticket_user_detail/:id',  	// 个人中心我的票券详情
 	    	templateUrl: '/html/user/ticket_user_detail.html',
 	    	controller: 'ticket_user_detailCtrl'
 	    }).state('personal_host',{
@@ -282,6 +288,10 @@
             url: '/demand_list?data',   // 活动号查询
             templateUrl: '/html/authentication/demand_list.html',
             controller: 'demand_list_ctl'	
+        }).state('attention_dynamics',{
+            url: '/attention_dynamics',   // 活动动态
+            templateUrl: '/html/authentication/attention_dynamics.html',
+            controller: 'attention_dynamicsctl'	
         }).state('guest_detail',{
             url: '/guest_detail/:id',   				// 嘉宾号详情
             templateUrl: '/html/authentication/guest_detail.html',
@@ -305,7 +315,23 @@
             url: '/activity_more_manage/:activity_id?switchEnroll',   // 个人中心发起活动更多管理
             templateUrl: '/html/user/activity_more_manage.html',
             controller: 'activityMoreManageCtrl'
-        })
+        }).state('photo_album',{
+            url: '/photo_album?act_id',   // 个人中心活动相册
+            templateUrl: '/html/user/photo_album.html',
+            controller: 'photo_albumCtrl'
+        }).state('photo_album.binding_activity',{
+            url: '/binding_activity',   // 个人中心活动绑定
+            templateUrl: '/html/user/binding_activity.html',
+            controller: 'binding_activityCtrl'
+        }).state('generalize',{
+            url: '/generalize',   // 推广运营
+            templateUrl: '/html/activity/generalize.html',
+            controller: 'generalizeCtrl'
+        }).state('generalize.activity_message',{
+	    	url: '/activity_message',  //推广运营留言
+	    	templateUrl: '/html/activity/activity_message.html',
+	      	controller: 'generalize_message'
+	    })
         
       
 }])

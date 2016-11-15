@@ -1,0 +1,17 @@
+<!-- 活动相册绑定活动 -->
+<meta charset="UTF-8">
+<section class="act_bangding">
+ <ul class="act_poiuuy_e">
+       <li class="pd bgff"  ng-repeat="r in rows" data-id="{{r.id}}">
+	       <i class="fa fa-circle-thin fz24  zc fl mt20"></i>
+	      <section class="pd   bgff ov">
+		<img ng-src="{{r.activity_first_face}}" class="act_let_icon fl">
+		<p class="ov pl10 zd fz16 diansan " ng-bind="r.activity_title"></p>
+		<p class="qc"></p>
+	</section>
+      
+	      </li>
+	      
+	     
+	  </ul>
+	   </section>

@@ -1,7 +1,7 @@
 
 <meta charset="UTF-8">
 <!-- 活动留言 -->
-<section ng-controller="activity_message">
+
 
 <ul class="mui-table-view">
 <li class="mui-table-view-cell tr fz14 mess_list_a pt20 zc" ng-click="leave_message.message(0)">
@@ -39,10 +39,13 @@
                        <a class="mui-icon mui-icon-close fr cf" href="#message"></a>
                      
                     </p>
-                    <textarea class="me_text_area" maxlength="140" placeholder="发表新的评论"   ng-model="leave_message.me_txt_length">
+                    <p class="pd">
+                         <textarea class="me_text_area" maxlength="140" placeholder="发表新的评论"   ng-model="leave_message.me_txt_length">
                      
                      
                     </textarea>
+                    </p>
+               
                     
                     <p class="tr pd pm20">
                        <span class="mr10 poiuu_oo">{{140-leave_message.me_txt_length.length}}</span>
@@ -52,4 +55,3 @@
                     
                   </section>
             </section>
-</section>

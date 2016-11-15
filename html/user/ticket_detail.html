@@ -1,0 +1,59 @@
+<!--  票券详情 -->
+<meta charset="UTF-8">
+<section class="ticket_wrap">
+	<section class="pr" ui-sref="activity_detail({id:activity_id})"> 		
+		<span class="fa fa-angle-right tick_right"></span>
+		<p class="ticket_d_t zd pt10 pl10 fz16 pr20" ng-bind="moreStatus.activity_name">		
+		</p>
+		<p class="ticket_d_host fz14 c57 pl10 mt10 pr20">
+			主办方：<span ng-bind="moreStatus.sponsor_name"></span>
+		</p>
+		<section class="ticket_d_type pl10 pr20">
+			<p class="fl c57">
+				<span ng-if="moreStatus.entrycode_array[0].ticket_price!=null">{{moreStatus.entrycode_array[0].ticket_price}}元/</span>{{moreStatus.entrycode_array[0].ticket_name}}
+			</p>
+			<a ng-href="tel:{{moreStatus.contacter_phone}}" class="fr ticket_d_con fz14">
+				联系TA
+			</a>
+			<div class="qc">
+				
+			</div>
+		</section>
+	</section>		
+	<img class="ticket_detail_bar mt10" src="/img/ticket_detail_bar.png"/>
+	<section class="qr_code_wrap pr" ng-repeat="x in moreStatus.entrycode_array">
+		<img class="qr_code_a" src="" width="126" height="126"/ ng-src="http://www.2d-code.cn/2dcode/api.php?key=c_e170d93zzNkfW4eEg0KMr0oYZvO8ZIkR47oRRwUkt4&text={{x.entry_code}}">
+		
+		<p class="cen  fz16 zd">
+			票号：<span ng-bind="x.entry_code"></span>
+		</p>
+		<p class="cen  fz14" style="padding-bottom: 10px;color:#878787;">
+			请截图保存此页，扫描或票号签到
+		</p>
+		<img ng-if="x.use==2" class="ticket_use" width="61" height="61" src="/img/ticket_use.png"  />
+	</section>
+	<section class="ticket_name">
+		<p class="fz16 zd " ng-bind="moreStatus.name"></p>
+		<p class="fz16 zd " ng-bind="moreStatus.phone"></p>
+	</section>
+	<p class="ticket_time">
+		时间：<span>{{moreStatus.activity_start_time|date:'MM/dd HH:mm'}}-{{moreStatus.activity_end_time|date:'MM/dd HH:mm'}}</span>
+	</p>
+	<p class="ticket_adress pr" data-x="{{moreStatus.activity_address}}" data-href="http://map.baidu.com/mobile/webapp/search/search/qt=s&wd={{moreStatus.activity_address}}">
+		<span class="fa fa-angle-right address_right"></span>
+		地点：<span  ng-bind="moreStatus.activity_address" ></span>
+	</p>
+	<section>
+      <ul class="mui-table-view"> 
+        <li class="mui-table-view-cell mui-collapse bgff" style="padding-left: 13px;">
+            <a class="mui-navigate-right" href="#">电子票使用说明</a>
+            <section class="mui-collapse-content" style="padding-bottom:40px;">
+                <p class="pm20">1、本次活动凭票参加，一人一票一次性，请勿复制或 转赠他人；<br>
+                    2、请保存电子票到手机或打印携带，保持条码清晰完 整；<br>
+                    3、本次活动有【e场景活动】提供票券服务；如有任何疑问，请拨打热线<a class="green_new" href="tel:400046-1388">400-046-1388</a></p>
+            </section>
+        </li>
+       
+    </ul>
+    </section>
+</section>

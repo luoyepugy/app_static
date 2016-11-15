@@ -12,13 +12,45 @@
 	</p>
 	<p class="qc"></p>
 	
-	<p class="ssd_poi mt10">
+	<p class="ssd_poi mt10 pt5">
+	  <a class="ls">合作酒店</a>
 	  <a>酒店</a>
 	   <a>场馆</a>
 	    <a>大厦</a>
 	     <a>其他</a>
 	<p>
 	
-	<section id="r-result" class="mt20"></section>
+	<section id="r-result" class="mt20">
+	 
+	</section>
+	
+	
+	<section class="ssdouy_s"> 
+	     <div style="font-style: normal; font-variant-caps: normal; font-variant-ligatures: normal; font-variant-numeric: normal; font-weight: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: arial, sans-serif; ">
+   <div style="background: rgb(255, 255, 255);">
+    <ol style="list-style: none; padding: 0px; margin: 0px;">
+     <li style="margin: 2px 0px; padding: 0px 5px 5px 0px; cursor: pointer; overflow: hidden; line-height: 17px;"   ng-repeat="mj in map_jiudian" ng-click="addckjh_s(mj.address)">
+
+      <div style="zoom: 1; overflow: hidden; padding: 0px 5px; background-color: rgb(240, 240, 240);">
+       <div style="line-height:20px;font-size:12px;">
+        <span style="color:#00c;" ng-bind="mj.name"></span>
+        <a target="_blank"  style="margin-left:5px;font-size:12px;color:#3d6dcc;font-weight:normal;text-decoration:none;">详情&raquo;</a>
+       </div>
+       <div style="padding:2px 0;line-height:18px;*zoom:1;overflow:hidden;">
+        <b style="float:left;font-weight:bold;*zoom:1;overflow:hidden;padding-right:5px;*margin-right:-3px;">地址:</b>
+        <span style="color:#666;display:block;zoom:1;overflow:hidden;" ng-bind="mj.address"></span>
+       </div>
+       <div style="padding:2px 0;line-height:18px;*zoom:1;overflow:hidden;">
+        <b style="float:left;font-weight:bold;*zoom:1;overflow:hidden;padding-right:5px;*margin-right:-3px;">电话:</b>
+        <span style="color:#666;" ng-bind="mj.contacter_phone"></span>
+       </div>
+      </div>
+      </li>
+      
+       
+    </ol>
+   </div>
+  </div> 
+	</section>
 </section>
 	

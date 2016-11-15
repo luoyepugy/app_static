@@ -12,7 +12,7 @@
     
 	<!--下拉刷新容器-->
 	<section class="ssd_poio">
-	 <section class="volume_list bgff mt10"  ng-repeat="v_data in volume_list.v_data" data-href="http://www.apptown.cn/activity/short_view/{{v_data.order_id}}">
+	 <section class="volume_list bgff mt10"  ng-repeat="v_data in volume_list.v_data" ui-sref="ticket_detail({order_id:v_data.order_id,activity_id:v_data.activity_id})" >
          <section class="pd bbm" >
              <p class="dian zd pt5 pm5 poioiuyt_ad fl">
                  <i class="f_i poiu_icon"></i>

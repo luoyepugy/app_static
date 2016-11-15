@@ -243,7 +243,7 @@ angular.module('sponsor', ["directive_mml","activity_servrt","ui.router", "commo
 	*/
 /*	})*/
 	 
-}).controller('mapCtrl',function($scope,$stateParams) { //地图
+}).controller('mapCtrl',function($scope,$stateParams,httpService) { //地图
 	 $("html,body").animate({scrollTop:0},200);
 	// 百度地图API功能
 	var map = new BMap.Map("allmap");
@@ -288,6 +288,14 @@ angular.module('sponsor', ["directive_mml","activity_servrt","ui.router", "commo
 	 $(".ssd_poi a").on("click",function(){
 		 $(".ssd_poi a").removeClass("ls")
 		 $(this).addClass("ls")
+		 if($(this).index()==0){
+			 $("#r-result").hide()
+			 $(".ssdouy_s").show()
+			 return;
+		 }
+		 $("#r-result").show()
+		 	 $(".ssdouy_s").hide()
+
 		 local.search($stateParams.city+$(".orientation input").val()+$(this).text()); 
 		 kkj_q=$(this).text()
 	 })
@@ -310,6 +318,15 @@ angular.module('sponsor', ["directive_mml","activity_servrt","ui.router", "commo
 		 console.log(k_adds);
 		 $(".orientation input").val(k_adds)
 	 })
+	 
+	 $scope.addckjh_s=function(add){
+		 $("#r-result").hide();
+		  local.search(add); 
+	 }
+
+	 httpService.getDatas('GET', '/hotel/list?pageIndex=1&pageSize=100').then(function(data) {//获取合作酒店
+			$scope.map_jiudian=data.rows
+	  });
 	 
 	
 }).controller('issue_successCtrl',function($scope,messageService,validateService,httpService,$state,$stateParams,activity_data) { //活动发布成功

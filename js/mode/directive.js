@@ -53,6 +53,10 @@
         head_e.push("issue_success");
         head_e.push("awardList");
         head_e.push("ticket_user_detail");
+        head_e.push("attention_dynamics");
+        head_e.push("demand_list");
+        head_e.push("generalize");
+        
         for(var kj in head_e){
         	  if(path_p.indexOf(head_e[kj])>0){
               	$(".header_mml").hide()
@@ -232,8 +236,15 @@
                   }
                   
         	    $(".schedule_p").css({"width":0}) 
+        	    var tyuy=$("#iconFile").attr("data-type");
+        	    if(tyuy==2){//等于二为个人中心活动相册
+        	    	var iconFile=$("#iconFile").parent();
+        	    	$(iconFile).before('<section class="mui-col-xs-4 mui-col-sm-3 fl df_poiu_xer">   <section class="wid_kljh_a pr">    <img src="'+data.msg+'" class="w100">  <i class="mui-icon mui-icon-close"></i>  </section>  </section>')
+        	    	return
+        	    }
         	    $("#iconFile .webuploader-pick").css({"background":"url("+data.msg+")","background-size":"100% 100%"})
         	    $("#iconFile").attr("data-url",data.msg);
+        	 
                 var el = $('#iconFile').next('input[type="hidden"]');
                 if(el.length > 0) { 
                     el.val(data.msg);

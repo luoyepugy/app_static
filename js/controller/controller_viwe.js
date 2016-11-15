@@ -1085,6 +1085,31 @@ angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.rou
     	$scope.sel_name=name;
 		$scope.getdate_a(apply);
     }
+}).controller('attention_dynamicsctl', function($scope,httpService, messageService,$state,$stateParams) {//关注动态
+	$scope.dyn_info=[]
+	function dynamic_list(data_a) {
+		httpService.getDatas('GET', '/dynamic/dynamic_list',data_a).then(function(data) {
+			if(data.code!=0){
+				mui.alert(data.msg);
+				return;
+			}
+			$(data.info).map(function(){
+				var dj_row=new dync_list(this);
+				$scope.dyn_info.push(dj_row);
+			})
+		
+		})
+	}
+	var dataiy_d={};
+	dataiy_d.pageIndex=1;
+	dynamic_list(dataiy_d);
+	$scope.viewImage=function(data) {
+		wx.previewImage({
+		      current: data,
+		      urls: data
+		    });
+	}
+	
 })
 
 

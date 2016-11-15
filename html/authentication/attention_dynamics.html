@@ -1,0 +1,41 @@
+<!-- 关注动态 -->
+<meta charset="UTF-8">
+<link href="/css/pages/photo_album.css?v=8" rel="stylesheet">
+
+<header class="mui-bar mui-bar-nav">
+   <a class="f_i retreat_icon j-backBtn" back=""></a>
+    <section class="mui-title ohhfftba">
+        	<p class="mui-col-xs-6 fl act" ui-sref="attention_dynamics">动态</p>
+    	<p class="mui-col-xs-6 fl " ui-sref="demand_list">关注</p>
+    </section>
+</header>
+
+<div class="mui-content  " >
+<section class="oiuytrr_ew">
+<section class="nitialize" id="test" pulllist >
+ <ul class="circle_friends">
+	     <li class="pd bgff pt10 pm10" ng-repeat="ifo in dyn_info">
+	         <img ng-src="{{ifo.user_icon}}" class="user_icon_poe fl">
+	         <section class="ov pl10">
+	             <p class="ls">{{ifo.user_name}}</p>
+	             <p class="xishuomuy_a zd pt5">
+	                 {{ifo.remark}}  </p>
+	             <section class="mt5 opoiy_oi" ng-class="ifo.reclass" ng-click="viewImage(ifo.photo)">
+	                 <img ng-repeat="photo in ifo.photo" ng-src="{{photo}}">
+	             </section>
+	             <section class="share_video_link " ui-sref="activity_detail({id:ifo.activity_id})" ng-if="ifo.title!=null">
+	                 <img  src="/img/activity/share/share_activity1.jpg" class="fl">
+	                 <p class="ov pl10 pt5 dianer">
+	                    {{ifo.title}}
+	                 </p>
+	                 
+	                 <p class="qc"></p>
+	                 
+	             </section>
+	         </section>
+	         <p class="qc"></p>
+	     </li>        
+	 </ul>
+	 </section>
+	 </section>
+	 </div>

@@ -12,8 +12,30 @@
 <link href="/css/common/base.css" rel="stylesheet">  
 <link href="/css/common/font-awesome.css" rel="stylesheet">  
 <link href="/css/big_machine/big_machine.css" rel="stylesheet"/>
+<style>
+.commentWrap {
+  width: 680px;
+  height: 480px;
+  background: rgba(255,255,255,.25);
+  padding: 25px;
+  color: #fff;
+} 
+.commentWrap li img {
+  width: 50px;
+  height: 50px;
+  border: 2px solid #CC91A8;
+  border-radius: 50%;
+}
+.mess_poiou li {
+  border-bottom: 1px solid #cacaca;
+  padding: 25px 0;
+}
+.color-yellow {
+  color: #c1c520;
+}
+</style>
 </head>
-<body ng-controller="big_machine_controller">
+<body ng-controller="big_commentCtrl">
 <section class="swiper-container big_switch">
   <section class="swiper-wrapper">
     <section class="swiper-slide"     ng-repeat="bg_b in big_sign.banner" >
@@ -59,14 +81,38 @@
              </section>
          </section>
          
-          <section class="mui-col-sm-8 ov  dff_poiu">
-             <section class="sddf_poiou fl"  ng-repeat="si in MyData.collection track by $index">
-                 <section class="user_pooi big_uswer_s yj ov ml20 pr">
-                 		<input type="hidden" ng-model="si.id" />
-                      <img ng-src="{{si.icon}}">
-                     <p class="cen fz20 dsd_poiui cf pt10 pm10 dian" ng-bind="si.name"></p>
-                 </section>
-             </section>
+          <section id="demo" class="mui-col-sm-8 ov commentWrap">
+            <div id="demo1">
+             <ul class="mess_poiou">
+                <li  ng-repeat="item in commentList">
+                  <div>
+                     <img ng-src="{{item.user_icon}}" class="user_icon_q fl yj">
+                     <div class="ov pl20">
+                       <div class="fz16">
+                           <span class="fl zq"><a class="color-yellow">{{item.user_name}}</a></span> 
+                           <span class="fr" ng-bind="item.create_time|getDateDiff:''"></span>
+                           <p class="qc"></p>
+                       </div>
+                       <p class="dian mt10 poiu_poou" style="color:#fff;" ng-bind="item.comment_content"></p>
+                    </div>
+                    <div ng-repeat="child in item.childsComment" class="mt15">
+                         <img ng-src="{{child.user_icon}}" class="user_icon_q fl yj">
+                           <div class="ov pl20">
+                             <div class="fz16">
+                                 <span class="fl zq"><a class="color-yellow">{{child.user_name}}</a> 回复 {{item.user_name}}</span> 
+                                 <span class="fr" ng-bind="child.create_time|getDateDiff:''"></span>
+                                 <p class="qc"></p>
+                             </div>
+                             <p class="dian mt5 poiu_poou"  style="color:#fff;" ng-bind="child.comment_content"></p>
+                            </div>
+                         </div>
+                   </div> 
+                </div>
+                </li>
+            </ul>
+            </div>
+            <div id="demo2"></div>
+          </section>
          
 
                 
@@ -88,11 +134,11 @@
 </section>
 
 <footer class="box bottm_poi">
-     <section class="box_a cen act" data-href="/html/big_machine/according_sign.html?id={{acid}}">
+     <section class="box_a cen" data-href="/html/big_machine/according_sign.html?id={{acid}}">
          <i class="fa fa-home fz62"></i>
          <p class="fz30">签到</p>
      </section>
-     <section class="box_a cen"  data-href="/html/big_machine/comment.html?id={{acid}}">
+     <section class="box_a cen act"  data-href="/html/big_machine/comment.html?id={{acid}}">
          <i class="fa fa-comments  fz62"></i>
          <p class="fz30">留言</p>
      </section>
@@ -127,6 +173,12 @@
  <audio style="width:1px;height:1px;display:none" id="player_q" >
   <source src="http://resource.apptown.cn/share/activity_welcome.mp3" type="audio/mp3" />
 </audio>
+
+<script>
+   demo2.innerHTML=demo1.innerHTML;
+</script>
+
+
 <script src="/js/common/jquery-1.11.3.min.js"></script>
 <script src="/js/common/swiper3.07.min.js"></script>
 <script src="/js/common/angular.min.js?v=9"></script>
@@ -138,5 +190,6 @@
 <script src="/js/service/service_activity.js?v=11?v=9"></script> 
 <script src="/js/entity/entity_phone.js?v=12"></script>
 <script src="/js/controller/controller_big_machine.js"></script>
+
 </body>
 </html>

@@ -960,8 +960,46 @@ $(".dd_pooo").hide()
 			   player.play();
 			   $(".syuytrt_as").hide()
 		   }
-}).controller('test_listCtrl',function($scope,activity_data,$location,$stateParams,act_date){
+}).controller('generalizeCtrl',function($scope,activity_data,$location,$stateParams,act_date){
+	var genera=[];
+	genera.push({"text":"作为主办方、活动号，您想要哪些服务？<br>您是服务提供商，与我们平台合作？欢迎留言"});
+	genera.push({"text":"需要小e为您提供哪些便利？小主请说话~"});
+	genera.push({"text":"作为主办方、活动号，您想要哪些服务？<br>您是服务提供商，与我们平台合作？欢迎留言."});
+	$scope.text_oio=genera[0].text
+	$(".nav_caidan p").on("click",function(){
+		$(".nav_caidan p").removeClass("ls")
+		$(this).addClass("ls")
+		$scope.text_oio=genera[$(this).index()].text 
+		$(".simply_r").html($scope.text_oio);
+	})
 	
+}).controller('generalize_message',function($scope,activity_data,$location,$stateParams,act_date){
+	var message_i={}//留言参过去的参数
+	message_i.pageIndex=1;
+	message_i.pageSize=100
+	message_i.source_id=8859
+	$scope.leave_message={
+		"message_date":[],
+		"message":function(id){
+			  $scope.me_id=id
+		      mui('#message').popover('toggle');
+			  $(".me_text_area").focus();
+		  }
+	}
+	  activity_data.comment_list(message_i).then(
+	    		function success(data){    		
+	    		    if(data.code!=0){
+	    		    	 mui.alert(data.msg, 'E场景活动');
+	    		    	 return
+	    		    }
+	    		    $(data.rows).map(function(){
+	    		    	var thg=new comment_list_f(this)
+	    		    	$scope.leave_message.message_date.push(thg)
+	    		    })
+	    		   
+	    		}, function error() {
+					console.log("获取报名数据失败");
+	    }); 
 })
 
 

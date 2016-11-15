@@ -622,3 +622,26 @@ function ticket_volume_list(data){
 		this.is_attention=jkmnb;
 		this.lkoi=lkoi
 	}
+	
+	
+	
+	/*活动分享动态*/
+	function  dync_list(data) {
+		this.create_time=data.create_time;//发布时间
+		this.activity_id=data.activity_id;//活动id 
+		try{
+			this.photo=JSON.parse(data.photo);//分享的图片
+		}catch(e){
+			this.photo=[]//分享的图片
+		}
+		
+		this.remark=data.remark;//分享内容
+		this.user_icon=data.user_icon;//用户头像
+		this.user_name=data.user_name;//用户名称
+		this.user_id=data.user_id;//用户id
+		this.reclass="koiut_one";
+		this.title=data.title;//活动标题
+		if(this.photo.length>1){
+			this.reclass="koiut_two"
+		}	
+	}

@@ -1,0 +1,46 @@
+<!-- 活动相册 -->
+<meta charset="UTF-8">
+<link href="/css/pages/photo_album.css" rel="stylesheet">
+	   <section class="pd bgff cadee_pioiis">
+	       <textarea placeholder="晒一晒活动现场的图片吧！" rows="4" class="fz16" ng-model="bask_sun"></textarea>
+	       
+	       <section class="mt10">
+	            <section class="mui-col-xs-4 mui-col-sm-3 fl" >
+	               <section class="wid_kljh_a pr" upimg data-type="2">
+	                   <img src="/img/upload_auth.png" class="w100">
+	                   
+	               </section>
+	           </section>
+	       </section>
+	       <p class="qc"></p>
+	   </section>
+	   
+	   <section class="mt10 bgff pd"  ng-click="binding()">
+	       <p class="zd pt10 pm10 fz16">
+	           绑定活动链接
+	           <i class="mui-icon mui-icon-arrowright fr">
+	               
+	           </i>
+	       </p>
+	   </section>
+	   
+	   <p class="pd mt30">
+	       <a class="mui-btn register_button fz16" ng-click="albums_submit()">发送</a>
+	   </p>
+	     
+	   
+<section class="act_bangding">
+ <ul class="act_poiuuy_e">
+       <li class="pd bgff"  ng-repeat="r in rows" data-id="{{r.id}}">
+	       <i class="fa fa-circle-thin fz24  zc fl mt20"></i>
+	      <section class="pd   bgff ov">
+		<img ng-src="{{r.activity_first_face}}" class="act_let_icon fl">
+		<p class="ov pl10 zd fz16 diansan " ng-bind="r.activity_title"></p>
+		<p class="qc"></p>
+	</section>
+      
+	      </li>
+	      
+	     
+	  </ul>
+	   </section>

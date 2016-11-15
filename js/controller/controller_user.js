@@ -4,7 +4,6 @@
  * 我的账号
  * 用户模块
  */
-
 angular.module('user', ['activity_servrt','directive_mml', 'common', 'request', 'ui.router'])
 	// ======================= 登录 ==============================
 	/* @ngInject */
@@ -1769,6 +1768,67 @@ angular.module('user', ['activity_servrt','directive_mml', 'common', 'request', 
 				$scope.moreStatus=data.info;
 				
 		});
+	}).controller('ticket_detailCtrl', function($scope, httpService, messageService, $stateParams) { //个人中心更多管理
+			$scope.order_id=$stateParams.order_id;//票劵ID
+			$scope.activity_id=$stateParams.activity_id;//活动ID
+			  httpService.getDatas('GET',  '/consumption/get_buy_ticket_info?order_id='+$scope.order_id).then(function(data) {
+				$scope.moreStatus=data.info;	
+			});
+			$('.ticket_d_con').on('click',function(event){
+				  event.stopPropagation();
+			})
+	}).controller('photo_albumCtrl', function($scope, httpService, messageService, $stateParams,$state) { //个人中心活动相册
+	     $scope.albums_submit=function(){
+	    	 if(!form_mm.isnull($scope.bask_sun)){
+	    		 mui.alert("请输入分享内容！")
+	    		return
+	    	 }
+	    	 var data_po={},photo_list=[]
+	    	 data_po.remark=$scope.bask_sun
+	    	 data_po.activity_id=$scope.act_id
+	    	 $(".df_poiu_xer").map(function(){
+	    		 photo_list.push($(this).find("img").attr("src"))
+	    	 })
+	    	data_po.photo_list=photo_list
+	    	httpService.getDatas('POST', '/dynamic/my_activity_dynamic',data_po).then(function(data) {
+	    	     if(data.code!=0){
+	    	    	 mui.alert(data.msg)
+	    	     }
+	    	     $state.go("attention_dynamics")
+	    	  });
+         }
+	     $scope.binding=function(){
+	        $(".act_bangding").addClass("show_a")
+	     }
+	     $("body").on("click",".cadee_pioiis .mui-col-xs-4 i",function(){
+	    	 $(this).parents(".mui-col-xs-4 ").remove()
+	     })
+	     
+	     
+	     
+	    /* 活动列表*/
+	     var data_yiu={}
+			data_yiu.flag=1
+			data_yiu.pageIndex=1
+			data_yiu.pageSize=50
+			data_yiu.time_status=0
+			data_yiu.type=0;
+			httpService.getDatas('GET', '/activity/query_activity_list',data_yiu).then(function(data) {
+		    	$scope.rows=data.rows;
+		    	$scope.show_poi="show_a";
+		    });
+			$("body").on("click",".act_poiuuy_e li",function(){
+				$(".act_poiuuy_e li i").removeClass("fa-check-circle").addClass("fa-circle-thin")
+				$(this).find("i").addClass("fa-check-circle").removeClass("fa-circle-thin")
+				$scope.act_id=$(this).attr("data-id")
+				$(".act_bangding").removeClass("show_a")
+			})
+		
+		
 	})
+		
+	
+	
+	
 
 })();
