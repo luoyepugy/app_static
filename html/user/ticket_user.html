@@ -30,7 +30,7 @@
                  
                     主办方：<span ng-bind="v_data.sponsor"></span><br>
                    开始时间:<span ng-bind="v_data.start_time|date:'MM/dd EEE HH:mm:ss'"></span><br>
-                   票种：<span ng-bind="v_data.ticket_name"></span><br>
+                   票种：<span ng-bind="v_data.ticket_name==undefined?'免费':v_data.ticket_name"></span><br>
                    总价：<span class="hs" ng-bind="'￥'+v_data.price"></span>
                    <span class="ml20">张数：<i ng-bind="v_data.count"></i> 张</span>
                   

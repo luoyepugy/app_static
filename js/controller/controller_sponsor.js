@@ -322,6 +322,7 @@ angular.module('sponsor', ["directive_mml","activity_servrt","ui.router", "commo
 	 $scope.addckjh_s=function(add){
 		 $("#r-result").hide();
 		  local.search(add); 
+		  $(".orientation input").val(add)
 	 }
 
 	 httpService.getDatas('GET', '/hotel/list?pageIndex=1&pageSize=100').then(function(data) {//获取合作酒店

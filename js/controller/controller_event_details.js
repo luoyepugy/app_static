@@ -960,46 +960,97 @@ $(".dd_pooo").hide()
 			   player.play();
 			   $(".syuytrt_as").hide()
 		   }
-}).controller('generalizeCtrl',function($scope,activity_data,$location,$stateParams,act_date){
-	var genera=[];
-	genera.push({"text":"作为主办方、活动号，您想要哪些服务？<br>您是服务提供商，与我们平台合作？欢迎留言"});
-	genera.push({"text":"需要小e为您提供哪些便利？小主请说话~"});
-	genera.push({"text":"作为主办方、活动号，您想要哪些服务？<br>您是服务提供商，与我们平台合作？欢迎留言."});
-	$scope.text_oio=genera[0].text
-	$(".nav_caidan p").on("click",function(){
-		$(".nav_caidan p").removeClass("ls")
-		$(this).addClass("ls")
-		$scope.text_oio=genera[$(this).index()].text 
-		$(".simply_r").html($scope.text_oio);
-	})
+}).controller('generalizeCtrl',function($scope,activity_data,$location,$stateParams,act_date,httpService){
+	$scope.type_p=1;//1主办方,2参会者,3推广中
+	$scope.genera=[]; 
+	$scope.genera.push({"text":"作为主办方、活动号，您想要哪些服务？<br>您是服务提供商，与我们平台合作？欢迎留言"});
+	$scope.genera.push({"text":"需要小e为您提供哪些便利？小主请说话~"});
+	$scope.genera.push({"text":"作为主办方、活动号，您想要哪些服务？<br>您是服务提供商，与我们平台合作？欢迎留言."});
+	$scope.text_oio=$scope.genera[0].text
+	$(".mml_bottom").hide();
 	
-}).controller('generalize_message',function($scope,activity_data,$location,$stateParams,act_date){
+	
+}).controller('generalize_message',function($scope,activity_data,$location,$stateParams,act_date,httpService){
 	var message_i={}//留言参过去的参数
 	message_i.pageIndex=1;
 	message_i.pageSize=100
-	message_i.source_id=8859
-	$scope.leave_message={
+	message_i.source_id=8859	
+	$scope.leave_message={ 
 		"message_date":[],
 		"message":function(id){
 			  $scope.me_id=id
 		      mui('#message').popover('toggle');
 			  $(".me_text_area").focus();
+		  },
+		  "comment":function(){ 
+			  if(!form_mm.isnull($scope.leave_message.me_txt_length)){
+					mui.alert('留言不能为空', 'E场景活动',function(){
+						$(".me_text_area").focus()
+					});
+					return
+				}
+			   var data_p={}
+			     if($scope.me_id==0){
+			   	  	data_p.type=$scope.type_p
+			   	  	data_p.content=$scope.leave_message.me_txt_length
+			   	  	leave_message(data_p) 
+			     }else{
+			    	 	data_p.parent_id=$scope.me_id;
+			    		data_p.type=$scope.type_p;
+				   	  	data_p.content=$scope.leave_message.me_txt_length;
+				   	  	leave_message(data_p);
+			     }
+			   location.reload();
+			
+			 
 		  }
 	}
-	  activity_data.comment_list(message_i).then(
-	    		function success(data){    		
-	    		    if(data.code!=0){
-	    		    	 mui.alert(data.msg, 'E场景活动');
-	    		    	 return
-	    		    }
-	    		    $(data.rows).map(function(){
-	    		    	var thg=new comment_list_f(this)
-	    		    	$scope.leave_message.message_date.push(thg)
-	    		    })
-	    		   
-	    		}, function error() {
-					console.log("获取报名数据失败");
-	    }); 
+	
+	var data_oi={};//留言列表传过去的数据
+	data_oi.pageIndex=1
+	data_oi.pageSize=10
+	data_oi.type=1
+	$(".nav_caidan p").on("click",function(){//头部分类点击事件
+		$scope.leave_message.message_date=[];
+		$(".nav_caidan p").removeClass("ls");
+		$(this).addClass("ls");
+		$scope.text_oio=$scope.genera[$(this).index()].text;
+		$scope.type_p=($(this).index()+1)
+		$(".simply_r").html($scope.text_oio);
+		data_oi.pageIndex=1;//初始化留言列表分页
+		data_oi.type=$(this).index()+1;
+		message_list(data_oi) ;
+	})
+	$scope.page_mes=function(){//查看更多留言
+		data_oi.pageIndex++;
+		message_list(data_oi); 
+	}
+	
+		function message_list(data_p) {//留言列表
+		 httpService.getDatas('GET', '/official_message/list',data_p).then(function(data) {
+			 if(data.code!=0){
+		    	 mui.alert(data.msg, 'E场景活动');
+		    	 return 
+		    }
+			if(data.rows.length>=10){
+				 $scope.mkj_o="show_a"
+			}
+		    $(data.rows).map(function(){
+		    	var thg=new comment_list_f(this)
+		    	$scope.leave_message.message_date.push(thg)
+		    })
+		 })
+	}
+	
+	message_list(data_oi);//初始化留言列表 
+	   function leave_message(data_p) {//添加留言
+			  httpService.getDatas('post', '/official_message/add',data_p).then(function(data) {
+			 		if(data.code!=0){
+			 			mui.alert(data.msg)
+			 		}
+			 	    mui('#message').popover('toggle');
+			  })
+	   }
 })
 
 

@@ -1341,7 +1341,6 @@ angular.module('user', ['activity_servrt','directive_mml', 'common', 'request', 
 		$(".person_host_tab").removeClass("act_poi")
 	    $(".person_host_tab").eq(0).addClass("act_poi") 
 		$scope.sponsor_user_id=$stateParams.sponsor_user_id;//用户ID
-		
 		activity_data.person_detail_info({"user_id":$scope.sponsor_user_id}).then(//主办方详情
 				function success(data) {
                          $scope.perDeta= new secrchH(data.info);
@@ -1367,14 +1366,14 @@ angular.module('user', ['activity_servrt','directive_mml', 'common', 'request', 
 		});
 		
 		
-		var data_inistale={};
-		data_inistale.sponsor_id=$scope.sponsor_user_id;	
-		data_inistale.time_status=2;//1：未结束 2:已结束
-		data_inistale.pageIndex=1;//页码
-		data_inistale.pageSize=20;//行数
-		activity_data.person_li(data_inistale).then(
+		$scope.data_inistale={};
+		$scope.data_inistale.sponsor_id=$scope.sponsor_user_id;	
+		$scope.data_inistale.time_status=2;//1：未结束 2:已结束
+		$scope.data_inistale.pageIndex=1;//页码
+		$scope.data_inistale.pageSize=20;//行数
+		activity_data.person_li($scope.data_inistale).then(
 	    		function success(data){  	    			
-	    		   $scope.overResult=data.results  
+	    		   $scope.overResult=data.results;
 	    		}, function error() {
 					console.log("获取报名数据失败");
 	    }); 
@@ -1385,10 +1384,10 @@ angular.module('user', ['activity_servrt','directive_mml', 'common', 'request', 
 		
 		
 		
-	    var message_i={}//留言参过去的参数
-		message_i.pageIndex=1;
-		message_i.pageSize=100;
-		message_i.source_id=$scope.sponsor_user_id;
+	    $scope.message_i={}//留言参过去的参数
+		$scope.message_i.pageIndex=1;
+		$scope.message_i.pageSize=100;
+		$scope.message_i.source_id=$scope.sponsor_user_id;
 		$scope.id=$scope.sponsor_user_id;//获取活动id
 		$scope.p_resu;
 		$scope.leave_message={ 
@@ -1412,17 +1411,17 @@ angular.module('user', ['activity_servrt','directive_mml', 'common', 'request', 
 			  
 		  }
 	}
-	$scope.leave_message.message_p(message_i)
+	$scope.leave_message.message_p($scope.message_i)
 	
     //主办方发起的活动开始
 	
-	var data_per={};
-	data_per.sponsor_id=$scope.sponsor_user_id;	
-	data_per.time_status=1;//1：未结束 2:已结束
-	data_per.pageIndex=1;//页码
-	data_per.pageSize=20;//行数
+	$scope.data_per={};
+	$scope.data_per.sponsor_id=$scope.sponsor_user_id;	
+	$scope.data_per.time_status=1;//1：未结束 2:已结束
+	$scope.data_per.pageIndex=1;//页码
+	$scope.data_per.pageSize=20;//行数
 	$scope.perList=[];//获得数据的数组
-	activity_data.person_li(data_per).then(
+	activity_data.person_li($scope.data_per).then(
     		function success(data){    		
     		    if(data.code!=0){
     		    	 mui.alert(data.msg, 'E场景活动');
@@ -1437,16 +1436,16 @@ angular.module('user', ['activity_servrt','directive_mml', 'common', 'request', 
     }); 
 	
 	//主办方发起的过期活动
-	var data_overActivity={};
-	data_overActivity.sponsor_id=$scope.sponsor_user_id;	
-	data_overActivity.time_status=2;//1：未结束 2:已结束
-	data_overActivity.pageIndex=0;//页码
-	data_overActivity.pageSize=4;//行数
+	$scope.data_overActivity={};
+	$scope.data_overActivity.sponsor_id=$scope.sponsor_user_id;	
+	$scope.data_overActivity.time_status=2;//1：未结束 2:已结束
+	$scope.data_overActivity.pageIndex=0;//页码
+	$scope.data_overActivity.pageSize=4;//行数
 	$scope.overDateList=[];//获得数据的数组
 	$scope.checkoverdue=function(){	
-		data_overActivity.pageIndex++;
+		$scope.data_overActivity.pageIndex++;
 
-		activity_data.person_li(data_overActivity).then(
+		activity_data.person_li($scope.data_overActivity).then(
 	    		function success(data){    		
 	    		    if(data.code!=0){
 	    		    	 mui.alert(data.msg, 'E场景活动');
@@ -1455,7 +1454,10 @@ angular.module('user', ['activity_servrt','directive_mml', 'common', 'request', 
 	    		    $(data.rows).map(function(){
 	    		    	var arr_over=new person_list(this)
 	    		    	$scope.overDateList.push(arr_over)
-	    		    })			    		 
+	    		    })		
+	    		    if(data.results<=($scope.data_overActivity.pageSize-1)){
+	    		    	$('.check_acti').hide()
+	    		    }
 	    		}, function error() {
 					console.log("获取报名数据失败");
 	    }); 
@@ -1494,6 +1496,13 @@ angular.module('user', ['activity_servrt','directive_mml', 'common', 'request', 
 		$(".person_host_tab").removeClass("act_poi")
 		$(".person_host_tab").eq(0).addClass("act_poi")
 	    $(".person_progress_of").css({"left":'0'});//进度条点击过度效果
+	    activity_data.person_detail_info({"user_id":$scope.sponsor_user_id}).then(//主办方详情
+				function success(data) {
+                         $scope.perDeta= new secrchH(data.info);                       
+                         $scope.overDate_num=data.info.stale_activity_count                   
+				}, function error() {
+					console.log("获取主办方详情失败")
+		});
 	}).controller('personal_host_message', function($scope,activity_data,$location,$stateParams,anchorScroll) { //主办方留言
 		
 		
@@ -1573,11 +1582,22 @@ angular.module('user', ['activity_servrt','directive_mml', 'common', 'request', 
 					}
 				});
 			},
+			cancelAttention: function() {
+				httpService.getDatas('GET', '/activity/cancel_attention', {resources_id: id, type: 7}).then(function(data) {
+					if(data.code == -10) {
+						messageService.show('您还未登录！', 'toast');
+						$state.go('signin');
+					} else {
+						$scope.guest.attention_sponsor = 0;
+					}
+				});
+			},
 			invite: function() {
 				switch($scope.guest.is_invitation) {
 					case 0: sendInvite('您确定向这位嘉宾发送邀请吗？'); break;
 					case 1: sendInvite('您已经发出过1次邀请，确定再次发送邀请吗？'); break;
 					case 2: sendInvite('您已经发出过2次邀请，确定再次发送邀请吗？'); break;
+					default: messageService.show('您已邀请3次，请耐心等待！', 'toast');
 				}
 			}
 		}
@@ -1768,7 +1788,7 @@ angular.module('user', ['activity_servrt','directive_mml', 'common', 'request', 
 				$scope.moreStatus=data.info;
 				
 		});
-	}).controller('ticket_detailCtrl', function($scope, httpService, messageService, $stateParams) { //个人中心更多管理
+	}).controller('ticket_detailCtrl', function($scope, httpService, messageService, $stateParams) { 
 			$scope.order_id=$stateParams.order_id;//票劵ID
 			$scope.activity_id=$stateParams.activity_id;//活动ID
 			  httpService.getDatas('GET',  '/consumption/get_buy_ticket_info?order_id='+$scope.order_id).then(function(data) {
@@ -1778,18 +1798,16 @@ angular.module('user', ['activity_servrt','directive_mml', 'common', 'request', 
 				  event.stopPropagation();
 			})
 	}).controller('photo_albumCtrl', function($scope, httpService, messageService, $stateParams,$state) { //个人中心活动相册
-	     $scope.albums_submit=function(){
-	    	 if(!form_mm.isnull($scope.bask_sun)){
-	    		 mui.alert("请输入分享内容！")
-	    		return
-	    	 }
+		$scope.act_id=$stateParams.act_id
+		$scope.albums_submit=function(){
+	  
 	    	 var data_po={},photo_list=[]
-	    	 data_po.remark=$scope.bask_sun
-	    	 data_po.activity_id=$scope.act_id
+	    	 data_po.remark=$scope.bask_sun;//分享内容
+	    	 data_po.activity_id=$scope.act_id;//活动绑定id
 	    	 $(".df_poiu_xer").map(function(){
 	    		 photo_list.push($(this).find("img").attr("src"))
 	    	 })
-	    	data_po.photo_list=photo_list
+	    	data_po.photo_list=photo_list;//相片
 	    	httpService.getDatas('POST', '/dynamic/my_activity_dynamic',data_po).then(function(data) {
 	    	     if(data.code!=0){
 	    	    	 mui.alert(data.msg)

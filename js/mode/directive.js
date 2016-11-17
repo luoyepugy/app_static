@@ -9,6 +9,7 @@
 		 
 	 }} 
 	 $rootScope.$on('$stateChangeSuccess', function(ev, to, toParams, from, fromParams){//路由跳转触发
+		
 		$(".menu_pup,.filiuyt_o").removeClass("show_a");
 		$(".return_top").addClass("mui-hidden");
 		$(".bg_loading").remove()
@@ -28,7 +29,7 @@
       	  $(".ds_poiu_a").removeClass("show_a");
     	  $(".retreat_icon").removeClass("none");
         }
-
+    
         // 个人中心订阅图标显示隐藏
         if($location.path() == '/personal_center') {
             $('.j-navUserIcon').show();
@@ -39,16 +40,18 @@
             $('.j-navSideIcon').show();
         }
         
-        
+        $(".mml_bottom").show().css({"opacity":"1"}); 
         var path_p=$location.path();
         var arr_p=["activity_streaming","activity_detail","activity_charge","b_map","promotional_act"];
+        var nav_tr=true
         for(var i in arr_p){
-        	if(path_p.indexOf(arr_p[i])>0) {
+        	if(path_p.indexOf(arr_p[i])>0&&nav_tr) {
              	$(".mml_bottom").hide();
-             	return
+             	nav_tr=false;
              } 
         }
-        $(".mml_bottom").show().css({"opacity":"1"}); 
+  
+
         var head_e=[]
         head_e.push("issue_success");
         head_e.push("awardList");
@@ -56,8 +59,11 @@
         head_e.push("attention_dynamics");
         head_e.push("demand_list");
         head_e.push("generalize");
-        
+        head_e.push("promotional_act");
+        console.log(head_e[kj]);
+      
         for(var kj in head_e){
+        	
         	  if(path_p.indexOf(head_e[kj])>0){
               	$(".header_mml").hide()
               	return
@@ -231,16 +237,20 @@
         	// 文件上传成功，给item添加成功class, 用样式标记上传成功。
         	uploader.on( 'uploadSuccess', function( file,data ) {  //data后台返回的数据
         	      if($(".image_ad").attr("data-type")==1){
-                  	$("#re_img").attr("src",data.msg)
-                  	return 
+                  	$("#re_img").attr("src",data.msg);
+                  	return;
                   }
                   
         	    $(".schedule_p").css({"width":0}) 
         	    var tyuy=$("#iconFile").attr("data-type");
         	    if(tyuy==2){//等于二为个人中心活动相册
+        	    	
+        	    	if($(".df_poiu_xer").length>8){
+        	    		mui.alert("图片最多上传9张")
+        	    	}
         	    	var iconFile=$("#iconFile").parent();
-        	    	$(iconFile).before('<section class="mui-col-xs-4 mui-col-sm-3 fl df_poiu_xer">   <section class="wid_kljh_a pr">    <img src="'+data.msg+'" class="w100">  <i class="mui-icon mui-icon-close"></i>  </section>  </section>')
-        	    	return
+        	    	$(iconFile).before('<section class="mui-col-xs-4 mui-col-sm-3 fl df_poiu_xer">   <section class="wid_kljh_a pr">    <img src="'+data.msg+'" class="w100">  <i class="fa fa-times-circle fz20 zd"></i>  </section>  </section>')
+        	    	return;
         	    }
         	    $("#iconFile .webuploader-pick").css({"background":"url("+data.msg+")","background-size":"100% 100%"})
         	    $("#iconFile").attr("data-url",data.msg);

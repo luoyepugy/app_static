@@ -232,6 +232,9 @@ em {
 .pr10 {
 	padding-right:10px
 }
+.pr20 {
+	padding-right:20px
+}
 .pr0 {
 	padding-right:0!important
 }
@@ -359,7 +362,7 @@ em {
 	padding:100px 0
 }
 .pt10 {
-	padding-top:10px
+	padding-top:10px  !important
 }
 .pt5 {
 	padding-top:5px

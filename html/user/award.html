@@ -2,7 +2,7 @@
 <meta charset="UTF-8">
 	<section class="pd bgff pr mt10"  ng-repeat="p_e in info_prize">
          <i class="mui-icon mui-icon-arrowright fz16 ssd_iconhg"> </i>
-		    <p class="pt5 pm5 zd pr tutke_sdf dian bbm">
+		    <p class="pt5 pm5 zd pr tutke_sdf dian bbm"  ui-sref="activity_detail({id:p_e.activity_id})">
 		        <i class="f_i libao_icon"></i>
 		        <span ng-bind="p_e.activity_name"></span>
 		       

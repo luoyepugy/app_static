@@ -529,6 +529,22 @@ function ticket_volume_list(data){
 		 this.user_name=rows.user_name;  //用户名
 		 this.user_icon=rows.user_icon;  //用户头像
 	  }
+	  
+	  /*推广留言*/
+	  function comment_list_f(rows){
+		 this.id= rows.id;  //评论编号
+		
+		 $(rows.child_officialMessage).map(function(){
+			 this.comment_content=this.content
+		 })
+		 this.childsComment= rows.child_officialMessage;  //二级留言
+		 this.user_id= rows.user_id;  //评论者
+		 this.comment_content= rows.content; //评论内容
+		 this.create_time= rows.create_time; // 创建时间 
+		 this.user_name=rows.user_name;  //用户名
+		 this.user_icon=rows.user_icon;  //用户头像
+	  }
+	  
 	
 	/*投票详情*/
 	function query_vote(data){

@@ -134,7 +134,7 @@
                 
                     </li>
         </ul>
-        <p class="bgff green cen" ng-click="checkoverdue()" style="line-height:30px;">
+        <p ng-if="overResult>0" class="bgff green cen check_acti" ng-click="checkoverdue()" style="line-height:30px;">
 			查看过期活动({{overDate_num}})
 		</p>
 		

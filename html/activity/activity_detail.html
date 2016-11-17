@@ -119,21 +119,19 @@
     <section class="mui-col-xs-11" ui-sref="personal_host({sponsor_user_id:detail.detail_date.sponsor_user_id})">  
         <img ng-src="{{detail.detail_date.sponsor_head}}" class="sponsor_act_icon fl"/>
         <section class="ov  pl20">
-            <p class="ls dian mui-col-xs-8" ng-bind="detail.detail_date.sponsor_name"></p>
+            <p class="ls dian">{{detail.detail_date.sponsor_name}}<span class="ml5 mr5 zd">主办</span><span class="auth-icon">已认证</span></p>
             <p class="dianer" ng-bind="detail.detail_date.sponsor_intro" ></p>
         </section>
         <section class="qc"></section>
     </section>
     <section class="mt10">
-    	<p class="fl de_auth">已认证活动号 </p>
+    	
     	<p class="fr yj4 contract_de2 ml5" style="width:32%">
     		<a ng-href="tel:{{detail.detail_date.contact_way}}">联系TA</a>
     	</p>  
     	<div class="fr" style="width:34%">
     		<p  class="yj4 detail_jus {{detail.detail_date.attent_class}} ml10" ng-click="detail.collectionSponsor()" data-x="{{detail.detail_date.dataX}}">
-    		
     		<span class="contract_dr3" ng-bind="detail.detail_date.attent_text"></span>
-    		
     	</p>
     	</div>
     	

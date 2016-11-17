@@ -1,0 +1,24 @@
+.nav_caidan p{
+    font-size: 16px;
+    border-right: 1px solid #e0e0e0;
+    color: #141414
+    
+}
+.nav_caidan p:last-child{
+    border: 0px;
+}
+.simply_r{
+    min-height: 80px;
+}
+.cassdr_Poo_r{
+    padding-bottom: 100px;
+}
+.cassdr_Poo .mess_list_a{
+    padding-top: 10px
+}
+.cassdr_Poo  .mui-table-view{
+    margin-top: 10px
+}
+.d_poiu_e{
+	display:none
+}

@@ -17,8 +17,7 @@
     
     <p class="pt10 pm10 bgff pd act_use_p mt10">
           <a class="cat_poo" ng-click="my_activities.category(0)">全部</a>
-          <a ng-if="type_p==1" class="ml20 " ng-click="my_activities.category(1)">待参与</a> 
-          <a ng-if="type_p==2" class="ml20 " ng-click="my_activities.category(4)">未结束</a>      
+          <a  class="ml20 " ng-click="my_activities.category(4)">未结束</a>      
           <a class="ml20" ng-click="my_activities.category(3)">已结束</a>
     </p>
  
@@ -59,8 +58,8 @@
              <!-- <a ng-if="list.tip.open==true" class="sponsorship_details yj4 fz12 mui-col-xs-4 mr10"  ui-sref="activity_reward_detail({id:list.id,type:1})">打赏名单</a>
               <a ng-if="type_p==2" class="sponsorship_details yj4 fz12 mr10"  ui-sref="ticket_user_detail({id:list.id})" > 报名详情</a>-->
               
-              <a  class="sponsorship_details yj4 fz12" data-href="http://www.apptown.cn/activity/short_view/{{list.order_id}}"> 
-              票卷详情
+              <a  class="sponsorship_details yj4 fz12" ui-sref="ticket_detail({order_id:list.order_id,activity_id:list.id})"> 
+              票券详情
              </a>
           </p>
           <section class="pt10  btm mt10" ng-if="type_p==2">

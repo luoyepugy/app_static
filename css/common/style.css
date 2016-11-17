@@ -660,7 +660,7 @@ section#pullrefresh {
     top: 76px;
     width: 100%;
     height: 100%;
-    z-index: 999;
+    z-index: 10;
     background: #fff;
 
 }
@@ -670,7 +670,7 @@ section#pullrefresh {
 }
 .nitialize {
     top: 46px;
-    height: 88%;
+    height: 88% !important;
 }
 #wrapper{
    position: absolute;
@@ -2122,6 +2122,14 @@ img.yj.user_zz_p {
 .text-normal {
     color: #575757;
 }
+.auth-icon {
+    background: #c5edcc;
+    border-radius: 4px;
+    color: #545454;
+    padding: 0 6px;
+    display: inline-block;
+    font-size: 12px;
+}
 .icon100 {
     width: 100px;
     height: 100px;
@@ -2773,8 +2781,8 @@ footer#mml_bottom a {
 	border:1px solid #f8f8f8 !important;
 }
 .ssd_poi a{
-	margin-right:20px;
-	font-size:16px;
+	margin-right:16px;
+	font-size:15px;
 	color:#575757
 }
 
@@ -2902,6 +2910,11 @@ p.yj4.po_pooi_s a {
 .more_tick {
 	background-position: -269px -749px;
 }
+.more_tick_eer {
+    background-position: -323px -689px;
+    position: relative;
+    bottom: 3px;
+}
 
 .weingf_a{
     width: 37px;
@@ -2993,7 +3006,17 @@ p.yj4.po_pooi_s a {
 }
 
 
+
+
 @media only screen and (min-width:340px ) {
+    textarea{
+        border: 0px;
+        text-indent: 0;
+        font-size: 14px;
+        margin: 0px;
+        padding-left: 0
+        
+    }
 	.adjust_fo {
 		font-size: 16px !important;
 	}
@@ -3002,4 +3025,71 @@ p.yj4.po_pooi_s a {
 	.adjust_fo {
 		font-size: 14px !important;
 	}
+}
+
+/*票劵详情*/
+.ticket_wrap {
+	width:94%;
+	margin: 3% auto;
+	background:#fff;
+}
+.ticket_d_t{	
+	 overflow: hidden; 
+	 display: -webkit-box; 
+	 -webkit-line-clamp: 2; 
+	 -webkit-box-orient: vertical; 
+} 
+.ticket_d_con {
+	border: 1px solid #4ea45d;
+	padding: 0px 10px;
+	border-radius: 4px;
+	color: #4EA45D;
+	margin-top: -2px;
+}
+.ticket_detail_bar {
+	width:100%;
+}
+.qr_code_wrap {
+	
+}
+.qr_code_a {
+	width: 126px;
+	height: 126px;
+	margin: 10px auto;
+	display: block;
+}
+.ticket_use {
+	position: absolute;
+	right:20px;
+	top:30px;
+}
+.ticket_name {
+	border: 1px solid #f1f1f1;
+	padding:5px 0 5px 10px;
+}
+.ticket_adress{
+	border-top: 1px solid #f1f1f1;
+	padding:5px 0 5px 10px;
+}
+.ticket_time{
+	padding:5px 0 5px 10px;
+}
+.ticket_d_host {
+	white-space: nowrap;
+ 	text-overflow: ellipsis;
+ 	overflow: hidden;
+}
+.tick_right {
+	position:absolute;
+	right:5px;
+	top:30px;
+	font-size:24px !important;
+	color: #bbb;
+}
+.address_right {
+	position:absolute;
+	right:5px;
+	top:12px;
+	font-size:24px !important;
+	color: #bbb;
 }

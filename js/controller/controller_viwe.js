@@ -597,7 +597,7 @@ angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.rou
 		$('.j-searchTypeList').slideToggle();
 	}
 	$('.j-searchTypeList li').click(function() {
-		if($(this).text() == '活动'){
+		if($(this).text() == '活动' || $(this).text() == '活动号'){
 			$('.j-activityLabel').show();
 		} else {
 			$('.j-activityLabel').hide();
@@ -618,25 +618,28 @@ angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.rou
 			case '媒体号': type = 22; break;
 			case '赞助': type = 30; break;
 		}
-		// console.log(name);
 		$state.go('search_result', {'type': type, 'name': name});
 	}
 
 	$scope.searchActivity = function(labelId) {
-		$state.go('search_result', {'type': 11, 'name': labelId});
+		if(typeText == '活动') {
+			$state.go('search_result', {'type': 11, 'name': labelId});
+		} else {
+			$state.go('demand_list', {'data': labelId});
+		}
 	}
 })
 // ======================= 搜索结果 ============================
 /* @ngInject */
 .controller('search_resultCtrl', function($scope,httpService, messageService, $stateParams) {
-	var params = {'pageIndex': 1, 'pageSize': 10, 'name': name},
-		list = 'hostList';
+	var list = 'hostList';
 		// 活动号0、嘉宾号1、媒体号2 (传递给后端参数)
 		typeId = 0,	
 		// 搜索类型(活动10、活动标签11、活动号20、嘉宾号21、媒体号22、赞助30),前端判断使用
 		type = Number($stateParams.type),	
 		name = $stateParams.name,	// 搜索的关键字
 		labelId = '',				// 活动标签
+		params = {'pageIndex': 1, 'pageSize': 10, 'name': name};
 
 	$scope.type = type;	
 	$scope.supportList = [];
@@ -652,7 +655,6 @@ angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.rou
 						messageService.show('没有更多数据了', 'toast');
 					}
 				} else {
-					// console.log(array);
 					$scope[array] = data.rows;
 					if(data.rows.length == 0) {
 						messageService.show('暂无搜索结果', 'toast');
@@ -670,7 +672,7 @@ angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.rou
 		host: function(more) {
 			var data = params;
 				data.type_id = typeId;
-			search.request('/sponsor/sponsor_search_page', data, list, more);
+			search.request('/sponsor/sponsor_search_page', data, list, more);	
 		},
 		support: function(more) {
 			var data = params;
@@ -1018,10 +1020,16 @@ angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.rou
 				mui.alert(data.msg);
 				return;
 			}
-			$(data.rows).map(function(){
-				var date_poi=new getSponsorApply(this);
-				$scope.ge_type.push(date_poi);
-			})
+			console.log('dfa');
+			if(data.rows.length == 0) {
+				messageService.show('暂时没有搜索结果', 'toast');
+			} else{
+				$(data.rows).map(function(){
+					var date_poi=new getSponsorApply(this);
+					$scope.ge_type.push(date_poi);
+				})
+			}
+			
 			
 		
 		});
@@ -1108,6 +1116,10 @@ angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.rou
 		      current: data,
 		      urls: data
 		    });
+	}
+	$scope.paging=function(){
+		dataiy_d.pageIndex++;
+		dynamic_list(dataiy_d);
 	}
 	
 })
