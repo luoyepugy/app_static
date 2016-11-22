@@ -905,10 +905,10 @@ angular.module('ticket_volume_list', [ "directive_mml","activity_servrt","ui.rou
 	}
 	// 选择订阅标签
 	$('body').off('click').on('click', '.j-selectLabel', function(e) {
-		if($scope.subscribArray.length >= 5 && !$(this).hasClass('mainBtn')) {
-			messageService.show('最多订阅5个', 'toast');
-			return false;
-		}
+		// if($scope.subscribArray.length >= 5 && !$(this).hasClass('mainBtn')) {
+		// 	messageService.show('最多订阅5个', 'toast');
+		// 	return false;
+		// }
 		$(this).toggleClass('mui-btn-green mainBtn');
 		if($(this).hasClass('mainBtn')) {
 			$scope.subscribArray.push($(this).data('id'));

@@ -42,7 +42,14 @@
         
         $(".mml_bottom").show().css({"opacity":"1"}); 
         var path_p=$location.path();
-        var arr_p=["activity_streaming","activity_detail","activity_charge","b_map","promotional_act"];
+        var arr_p=[];
+        arr_p.push("activity_streaming");
+        arr_p.push("activity_detail");
+        arr_p.push("activity_charge");
+        arr_p.push("b_map");
+        arr_p.push("promotional_act");
+        arr_p.push("add_img");
+        
         var nav_tr=true
         for(var i in arr_p){
         	if(path_p.indexOf(arr_p[i])>0&&nav_tr) {
@@ -60,7 +67,6 @@
         head_e.push("demand_list");
         head_e.push("generalize");
         head_e.push("promotional_act");
-        console.log(head_e[kj]);
       
         for(var kj in head_e){
         	
@@ -199,12 +205,17 @@
     return {
         restrict: 'AECM',
         scope: {
-        	br: '@banner'
+        	br: '@banner',
+        	tyk: '@genre'
         }, 
         transclude:true,
         template: ' <div id="iconFile" class="f_q"><p class="schedule_p"></p></div>',
         replace: true,
         controller:function($scope,httpService){
+        	var kmh="iconFile"
+        	if($scope.tyk==3){
+        		kmh="choose_poster"
+        	}
         	var uploader = WebUploader.create({
         	    // 选完文件后，是否自动上传。
         	    auto: true,
@@ -217,7 +228,7 @@
         	    fileVal:"iconFile",
         	    // 选择文件的按钮。可选。
         	    // 内部根据当前运行是创建，可能是input元素，也可能是flash.
-        	    pick: '#iconFile',
+        	    pick: '#'+kmh,
 
         	    // 只允许选择图片文件。
         	    accept: {
@@ -228,6 +239,10 @@
         	});
         	// 文件上传过程中创建进度条实时显示。
         	uploader.on( 'uploadProgress', function( file, percentage ) {
+        		if($scope.tyk==3){
+        			return;
+        		}
+        		
         		if($(".image_ad").attr("data-type")==1){
         			return
         		}
@@ -236,6 +251,12 @@
 
         	// 文件上传成功，给item添加成功class, 用样式标记上传成功。
         	uploader.on( 'uploadSuccess', function( file,data ) {  //data后台返回的数据
+        		if($scope.tyk==3){
+        			sessionStorage.sponsor_img=data.msg;
+        			  window.history.back();
+        			return
+        		}
+        	
         	      if($(".image_ad").attr("data-type")==1){
                   	$("#re_img").attr("src",data.msg);
                   	return;
@@ -247,6 +268,7 @@
         	    	
         	    	if($(".df_poiu_xer").length>8){
         	    		mui.alert("图片最多上传9张")
+        	    		return 
         	    	}
         	    	var iconFile=$("#iconFile").parent();
         	    	$(iconFile).before('<section class="mui-col-xs-4 mui-col-sm-3 fl df_poiu_xer">   <section class="wid_kljh_a pr">    <img src="'+data.msg+'" class="w100">  <i class="fa fa-times-circle fz20 zd"></i>  </section>  </section>')

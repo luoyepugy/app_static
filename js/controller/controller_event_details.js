@@ -30,8 +30,11 @@ angular.module('act_details', [ "directive_mml","activity_servrt","ui.router","p
 		    		    	 $scope.rewardShow = data.info.tip.open;
 		    		    }catch(e){}
 		    		   
+						// 判断是否是自己发布的活动
+						$scope.is_me_launch = data.info.is_me_launch;
 
 		    		    $scope.detail.detail_date=new activity_detail(data.info);
+
 
 		    		    if(data.info.is_collect==0){
 		    		    	$('.collection_p').attr('data-x','0')
@@ -49,12 +52,7 @@ angular.module('act_details', [ "directive_mml","activity_servrt","ui.router","p
 		    			var reg = new RegExp("\n", 'g'); // 创建正则RegExp对象
 				        var hg_p=removeHTMLTag($scope.detail.detail_date.details).replace(reg,"").substring(0,100)
 				        var sh_a={},fx_text=""
-				        
-				        try{
-				        	fx_text='【'+$scope.classify[0].maker_title[$scope.detail.detail_date.type].text+'】 '+$scope.detail.detail_date.title;
-				        }catch(e){
 				        	fx_text=$scope.detail.detail_date.title;
-				        }
 				        sh_a.title=fx_text
 				        sh_a.desc=hg_p;
 				        sh_a.link=window.location.href;
@@ -1036,7 +1034,7 @@ $(".dd_pooo").hide()
 				 $scope.mkj_o="show_a"
 			}
 		    $(data.rows).map(function(){
-		    	var thg=new comment_list_f(this)
+		    	var thg=new promote_message(this)
 		    	$scope.leave_message.message_date.push(thg)
 		    })
 		 })

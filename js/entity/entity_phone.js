@@ -531,7 +531,7 @@ function ticket_volume_list(data){
 	  }
 	  
 	  /*推广留言*/
-	  function comment_list_f(rows){
+	  function promote_message(rows){
 		 this.id= rows.id;  //评论编号
 		
 		 $(rows.child_officialMessage).map(function(){

@@ -115,9 +115,8 @@ angular.module('sponsor', ["directive_mml","activity_servrt","ui.router", "commo
 	 
      $scope.activityBaseSetting=function(){
      	$(".activity_base_setting").hide();
-     	$(".activity_more_setting").show();
+     	$(".activity_more_setting,.header_mml").show();
      	history.pushState(0, null, '');
-     	
      	
      }
    	$(".retreat_icon").on("tap",function(){
@@ -164,9 +163,12 @@ angular.module('sponsor', ["directive_mml","activity_servrt","ui.router", "commo
 	
 	
      
-     	$(".activity_base_setting,.header_mml").show();
-     	$(".activity_more_setting").hide()
+     	$(".activity_base_setting").show();
+     	$(".activity_more_setting,.header_mml").hide()
      }
+     $('.j-backBtn').on('click',function(){
+     	$('.header_mml').hide()
+     })
 	 $scope.labelSwitch=function(){
 	 	if($(".ddf_pooxd_a").attr("data-x")==1){
 	 		$(".ddf_pooxd_a").show();
@@ -207,6 +209,9 @@ angular.module('sponsor', ["directive_mml","activity_servrt","ui.router", "commo
 	     	$('.se_label_tip').show()
 	     }
 	}
+	
+	$scope.sp_img=sessionStorage.sponsor_img==undefined?'http://172.16.2.81/image/423ac0a4-3184-468b-a24a-5e16aa8d811a.jpg':sessionStorage.sponsor_img
+	
 /*	$("body").on("click",".activitie_label ",function(){
 		 arrLabel=[]
 		 $scope.arrLabel_p=""
@@ -243,6 +248,31 @@ angular.module('sponsor', ["directive_mml","activity_servrt","ui.router", "commo
 	*/
 /*	})*/
 	 
+}).controller('add_imgCtr',function($scope,$stateParams,httpService) { //添加图片
+	
+	 var data_p={};//传到后台的数据  分页
+	 data_p.pageIndex=1
+	 data_p.pageSize=10
+	 $scope.allurl_d=[]
+	 function allurl(data_p) {//获取活动封面
+		 httpService.getDatas('GET', '/picture/allurl',data_p).then(function(data) {//获取合作酒店
+		      for(var i in data){
+		    	  $scope.allurl_d.push(data[i])
+		      }	
+		 });
+	}
+	 $scope.paging=function(){//下拉刷新执行
+		 data_p.pageIndex++
+		 allurl(data_p)
+	 }
+	 allurl(data_p);//初始化一次
+	 
+	/* 上传图片点击事件*/
+	 $scope.up_oiu_img=function(url){
+		 sessionStorage.sponsor_img=url;
+		  window.history.back();
+	 }
+	
 }).controller('mapCtrl',function($scope,$stateParams,httpService) { //地图
 	 $("html,body").animate({scrollTop:0},200);
 	// 百度地图API功能

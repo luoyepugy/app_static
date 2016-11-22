@@ -4,28 +4,37 @@
 <section ng-controller="promotional_act_controller" class="dfd_pooui_a">
 	<!--发起活动基本设置start-->
 	    <section class="activity_base_setting">
-	      <p class="fz12 zc pd pt10 pm10 fz14" style="    line-height: 1.6">
+	     <!--  <p class="fz12 zc pd pt10 pm10 fz14" style="    line-height: 1.6">
 	    		  下载APP可以选择收费、报名表单设置，进行会议、活动直播、打赏取现等功能.
 	    		 <span class="ls down_span_a yj4 fr fz12"  onclick="down_app()">
 	    		  	  下载app
 	    		 </span>
-	      </p>
+	      </ p>
 	    
 	    
 	    	<section class="cen">
 	    		<img id="re_img" src=""  />
+	    	</section> -->
+	    	<section class="act_banner_top_a pr">
+	    	   <section class="banner_top_b">
+	    	      
+	    	      <img ng-src="{{sp_img}}" id="re_img">
+	    	   </section>
+	    	   <p class="pro_nav_icon">
+	    	     <i class="f_e block_op" back></i>
+	    	     <i class="f_e add_img_icon" ui-sref="add_img"></i>
+	    	   </p>
 	    	</section>
-	    	
-		     <ul class="mui-table-view" style="margin-top:0 ;"> 
+		     <ul class="mui-table-view mt10" > 
 		          <li class="mui-table-view-cell">
 		                <span class="act_left fz16 fl"><span class="green">*</span>活动名称：</span>
 		                <p class="ov fl">
 		                  <input style="width:auto;" type="text" class="max_klabel_a te_0" placeholder="请填写活动名称" id="name" maxlength="30"/>                 
 		                </p>
-		                <div class="ov up_load_wrap fr">
-		                  	<!-- <span class="up_load_face ml5 mt5"></span> -->
+		             <!--    <div class="ov up_load_wrap fr">
+		                  	<span class="up_load_face ml5 mt5"></span>
 		                  	<div upimg  data-type="1" class="image_ad"></div>
-		                  </div>
+		                  </div> -->
 		                
 		          </li>
 		         </ul>
@@ -103,7 +112,7 @@
 		             <section id="details"  class="particulars_wer bgff  pt10 pm10 fz14">
 		             
 		             </section>
-		             <section class="btm pt10 pm10 ssd_pooiu zc" data-role="editor-toolbar"
+		       <!--       <section class="btm pt10 pm10 ssd_pooiu zc" data-role="editor-toolbar"
         data-target="#details"> 
 		                <i class="fa fa-bold rich_text" data-edit="bold" ng-click="rich_text.blod_a($event)"></i>
 		                <i class="fa fa-underline rich_text" data-edit="underline" ng-click="rich_text.blod_a($event)"></i> 
@@ -131,7 +140,7 @@
 		                
 		                </section>
 		             </section>
-		             
+		              -->
 		      
 		      	</section> 
 		      	<p class="bgff more_set pr mt10 " ng-click="activityBaseSetting()">
@@ -232,6 +241,8 @@
           </li>
           
          </ul> -->
+         
+ 
       
 </section>
 

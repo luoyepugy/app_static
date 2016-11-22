@@ -2,7 +2,7 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" href="/css/pages/user.css">
 <section>
-     <section class="user_top bgff pt10 pm10 pd pr"  ng-click="mySignin('userInfo')">
+     <section class="user_top bgff pt10 pm10 pd pr bbm"  ng-click="mySignin('userInfo')">
         <img class="fl user_icon_p yj4" style="width: 55px;height:55px;" ng-src="{{pe_er.user_icon_o.user_icon}}" >
          <section class="ov pl10">
             <p class="fz16 zd mt5" ng-bind="pe_er.user_icon_o.user_name"></p>
@@ -13,9 +13,8 @@
        <section class="qc"></section>
     </section>
     
-     <section class="mt10 btm bbm pt10 bgff">
+     <section class="mt15 btm bbm pt10 bgff">
          <p class="bbm pd pr pt10" ng-click="mySignin('activity_user', {type: 1})">
-            <!-- <i class="f_i logo_icon_a"></i> -->
              <span class="ml10 title_p">我的活动</span>
              <span class="fr pr" style="right: 20px; bottom: 8px;">查看全部活动</span>
                 <i class="f_i right_arrow right_arrow_p"></i>

@@ -57,6 +57,10 @@
 	    }).state('promotional_act',{
 	    	url: '/promotional_act',  //发起活动
 	    	templateUrl: '/html/activities_promotional/promotional_act.html'	
+	    }).state('add_img',{
+	    	url: '/add_img',  //发起活动_添加图片
+	    	templateUrl: '/html/activities_promotional/add_img.html',
+	    	controller: 'add_imgCtr'
 	    }).state('custom_form',{
 	    	url: '/custom_form',  //发起活动-自定义表单
 	    	templateUrl: '/html/activities_promotional/custom_form.html'	
@@ -214,8 +218,7 @@
 	    .state('wallet',{
 	    	url: '/wallet',  				// 我的钱包
 	    	templateUrl: '/html/user_wallet/wallet.html',
-	    	controller: 'walletCtrl',
-	    	controllerAs: 'wallet'
+	    	controller: 'walletCtrl'
 	    }).state('ecoin',{
 	    	url: '/ecoin',  				// 我的e币
 	    	templateUrl: '/html/user_wallet/ecoin.html',

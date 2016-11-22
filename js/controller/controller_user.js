@@ -635,12 +635,12 @@ angular.module('user', ['activity_servrt','directive_mml', 'common', 'request', 
 	// ==================== 我的钱包 ==========================
 	/* @ngInject */
 	.controller('walletCtrl', function($scope, httpService) {
-		var wallet = this;
+		$scope.wallet = {};
 		httpService.getDatas('POST', '/eCoin/get_user_ecoin').then(function(data) {
-			wallet.account = data.info;
+			$scope.wallet.account = data.info;
 		});
 		httpService.getDatas('GET', '/bankAccount/query').then(function(data) {
-			wallet.cardNum = data.info.length;
+			$scope.wallet.cardNum = data.info.length;
 		});
 	})
 	// ===================== e币充值 ============================
@@ -770,7 +770,7 @@ angular.module('user', ['activity_servrt','directive_mml', 'common', 'request', 
 
 	// ========================= 我的反馈 =======================
 	/* @ngInject */
-	.controller('feedbackCtrl', function($scope,activity_data,$location,act_date) { 
+	.controller('feedbackCtrl', function($scope,activity_data,$location,act_date, messageService) { 
 		$scope.pe_er = {};
 		$scope.pe_er.feedback = function(){
 			var suggestion_feedback=$(".suggestion_feedback").val().trim();//获取意见反馈信息
@@ -784,12 +784,12 @@ angular.module('user', ['activity_servrt','directive_mml', 'common', 'request', 
 		    		function success(data){
 		    			if(data.code!=0){
 		    				mui.alert('意见反馈提交失败', 'E场景活动');
+		    				$location.path('/signin')
 		    				  return;
 		    			}
-		    			mui.alert('意见反馈提交成功', 'E场景活动',function(){
-		    				  $location.path('/signin')
-		    			});
-		    			 $location.path('/signin')
+		    			$location.path('/personal_center')
+		    			messageService.show('意见反馈提交成功', 'toast');
+		    			 
 		    			
 		    		}, function error() {
 						console.log("意见反馈提交失败");
@@ -1692,7 +1692,11 @@ angular.module('user', ['activity_servrt','directive_mml', 'common', 'request', 
 				mui.alert(data.msg)
 				return
 			}
-			$scope.info_prize=data.info
+			if(data.info.length == 0) {
+				messageService.show('暂时没有奖品包', 'toast');
+			} else {
+				$scope.info_prize=data.info
+			}
 		});
 	}).controller('awardListCtrl', function($scope, httpService, messageService,$stateParams) { //获奖名单列表
 		$scope.awardArray=[];//获奖名单数据
